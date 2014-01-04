@@ -82,7 +82,32 @@ class Question_Stats(object):
 		self.b += 1
 		self.t += 1
 
-	#def advice(self):
+	def advice(self):
+		correct_p = percent(self.c / self.t)
+		missed_p = percent(self.m / self.t)
+		blank_p = percent(self.b / self.t)
+
+		f = self.c / self.t
+
+		#Advice Check
+		if (f) < 0.4:
+			#poor
+			advice = random_choice(negative)
+		elif (f) < 0.7:
+			#average
+			advice = random_choice(average)
+		else:
+			#good
+			advice = random_choice(positive)
+
+		#Guess Check
+
+		if self.m > self.b:
+			#poor
+			advice += random_choice(guess)
+
+		return advice
+
 
 		
 
@@ -99,5 +124,7 @@ class Question_Stats(object):
 		output += " | "
 		output += "B: "
 		output += str(self.b)
+		output += endl
+		output += self.advice()
 		output += endl
 		return output

@@ -2,59 +2,89 @@ Name: Nicole
 
 ----------------------------------------------------------------------------------------------------
 Scores:
-Average Total Score: 980/2400
-Average Writing Score: 305/800
-Average Reading Score: 405/800
-Average Math Score: 270/800
+Average Total Score: 856/2400
+Average Writing Score: 273/800
+Average Reading Score: 336/800
+Average Math Score: 246/800
 Average Essay Score: ??/12
 
-Tests Taken: 2
+Tests Taken: 3
 ----------------------------------------------------------------------------------------------------
 Section Analysis:
 Type: Total Questions | Questions Correct | Questions Missed | Questions Blank
 
 Wrting Analytics:
-Type1: T: 20 | C: 2 | M: 7 | B: 11
-Type2: T: 26 | C: 3 | M: 10 | B: 13
-Type3: T: 20 | C: 6 | M: 4 | B: 10
-Type4: T: 16 | C: 3 | M: 4 | B: 9
-Type5: T: 16 | C: 1 | M: 7 | B: 8
+Type1: T: 30 | C: 2 | M: 7 | B: 21
+Here is a great place to improve and score higher.
+Type2: T: 39 | C: 3 | M: 10 | B: 26
+Unfortunately, you are not as strong in this area.
+Type3: T: 30 | C: 6 | M: 4 | B: 20
+You need some improvement here.
+Type4: T: 24 | C: 3 | M: 4 | B: 17
+Uh oh, you need some work in this category.
+Type5: T: 24 | C: 1 | M: 7 | B: 16
+You need some improvement here.
 
 Math Analytics:
-Type1: T: 22 | C: 2 | M: 9 | B: 11
-Type2: T: 34 | C: 4 | M: 11 | B: 19
-Type3: T: 24 | C: 0 | M: 12 | B: 12
-Type4: T: 22 | C: 0 | M: 6 | B: 16
-Type5: T: 4 | C: 0 | M: 2 | B: 2
-Type6: T: 2 | C: 0 | M: 1 | B: 1
+Type1: T: 33 | C: 2 | M: 9 | B: 22
+Here is a great place to improve and score higher.
+Type2: T: 51 | C: 4 | M: 11 | B: 36
+You need some improvement here.
+Type3: T: 36 | C: 0 | M: 12 | B: 24
+You need some improvement here.
+Type4: T: 33 | C: 0 | M: 6 | B: 27
+Try focussing more in this area to increase your score.
+Type5: T: 6 | C: 0 | M: 2 | B: 4
+Here is a great place to improve and score higher.
+Type6: T: 3 | C: 0 | M: 1 | B: 2
+Uh oh, you need some work in this category.
 
 Reading Analytics:
-Type1: T: 24 | C: 7 | M: 8 | B: 9
-Type2: T: 42 | C: 9 | M: 17 | B: 16
-Type3: T: 36 | C: 8 | M: 16 | B: 12
-Type4: T: 32 | C: 8 | M: 12 | B: 12
+Type1: T: 36 | C: 7 | M: 8 | B: 21
+You need some improvement here.
+Type2: T: 63 | C: 9 | M: 17 | B: 37
+Here is a great place to improve and score higher.
+Type3: T: 54 | C: 8 | M: 16 | B: 30
+Here is a great place to improve and score higher.
+Type4: T: 48 | C: 8 | M: 12 | B: 28
+You need some improvement here.
 
 ----------------------------------------------------------------------------------------------------
 Difficulty Analytics:
 
 Writing:
-Level 1: T: 22 | C: 4 | M: 7 | B: 11
-Level 2: T: 22 | C: 2 | M: 9 | B: 11
-Level 3: T: 30 | C: 5 | M: 9 | B: 16
-Level 4: T: 16 | C: 2 | M: 5 | B: 9
-Level 5: T: 8 | C: 2 | M: 2 | B: 4
+Level 1: T: 33 | C: 4 | M: 7 | B: 22
+Here is a great place to improve and score higher.
+Level 2: T: 33 | C: 2 | M: 9 | B: 22
+Try focussing more in this area to increase your score.
+Level 3: T: 45 | C: 5 | M: 9 | B: 31
+You need some improvement here.
+Level 4: T: 24 | C: 2 | M: 5 | B: 17
+Unfortunately, you are not as strong in this area.
+Level 5: T: 12 | C: 2 | M: 2 | B: 8
+Try focussing more in this area to increase your score.
 
 Math:
-Level 1: T: 22 | C: 2 | M: 8 | B: 12
-Level 2: T: 22 | C: 0 | M: 9 | B: 13
-Level 3: T: 34 | C: 4 | M: 11 | B: 19
-Level 4: T: 20 | C: 0 | M: 8 | B: 12
-Level 5: T: 10 | C: 0 | M: 5 | B: 5
+Level 1: T: 33 | C: 2 | M: 8 | B: 23
+Here is a great place to improve and score higher.
+Level 2: T: 33 | C: 0 | M: 9 | B: 24
+Uh oh, you need some work in this category.
+Level 3: T: 51 | C: 4 | M: 11 | B: 36
+Here is a great place to improve and score higher.
+Level 4: T: 30 | C: 0 | M: 8 | B: 22
+Unfortunately, you are not as strong in this area.
+Level 5: T: 15 | C: 0 | M: 5 | B: 10
+Unfortunately, you are not as strong in this area.
 
 Reading:
-Level 1: T: 16 | C: 6 | M: 5 | B: 5
-Level 2: T: 24 | C: 7 | M: 10 | B: 7
-Level 3: T: 50 | C: 10 | M: 21 | B: 19
-Level 4: T: 30 | C: 5 | M: 11 | B: 14
-Level 5: T: 14 | C: 4 | M: 6 | B: 4
+Level 1: T: 24 | C: 6 | M: 5 | B: 13
+Here is a great place to improve and score higher.
+Level 2: T: 36 | C: 7 | M: 10 | B: 19
+You need some improvement here.
+Level 3: T: 75 | C: 10 | M: 21 | B: 44
+You need some improvement here.
+Level 4: T: 45 | C: 5 | M: 11 | B: 29
+Try focussing more in this area to increase your score.
+Level 5: T: 21 | C: 4 | M: 6 | B: 11
+Here is a great place to improve and score higher.
 

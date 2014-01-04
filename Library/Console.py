@@ -35,11 +35,11 @@ class Console(object):
 		if cmd == "clear":
 			if (len(cmd_vector) == 2 and is_int(cmd_vector[1])):
 				for i in range (0, int(cmd_vector[1])):
-					print ">>>"
+					print PROMPT
 				return True
 			elif (len(cmd_vector) == 1):
 				for i in range (0, 10):
-					print ">>>"
+					print PROMPT
 				return True
 			else:
 				print "Error: Invalid use of clear command."

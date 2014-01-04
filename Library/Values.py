@@ -1,5 +1,6 @@
 import os
 import shutil
+import random
 
 #Question Value
 PARSED_ARRAY_SIZE = 5
@@ -95,6 +96,40 @@ READING_TYPE_2 = "R2"
 READING_TYPE_3 = "R3"
 READING_TYPE_4 = "R4"
 
+#Advice
+
+#positive
+pa1 = "Good Job!"
+pa2 = "Fantastic! Well done."
+pa3 = "You are performing well."
+pa4 = "Great work."
+pa5 = "You've been improving a lot."
+positive = [pa1, pa2, pa3, pa4, pa5]
+
+#average
+aa1 = "Your performance here is okay. Focus on other weaker areas first."
+aa2 = "Your scores in this category are average."
+aa3 = "Improve in these areas once you have finished working on your more poor areas."
+average = [aa1, aa2, aa3]
+
+#negative
+na1 = "Uh oh, you need some work in this category."
+na2 = "Unfortunately, you are not as strong in this area."
+na3 = "You need some improvement here."
+na4 = "Here is a great place to improve and score higher."
+na5 = "Try focussing more in this area to increase your score."
+negative = [na1, na2, na3, na4, na5]
+
+#guessing
+ga1 = "Your guesses in this category are often wrong. Consider leaving them blank."
+ga2 = "Leave more questions in these catgories blank. You are losing 1/4th a point for each one you miss."
+ga3 = "Instead of guessing, leave these questions blank."
+ga4 = "Guessing in this category is a much better option and will improve your score."
+guess = [ga1, ga2, ga3, ga4]
+
+def random_choice(array):
+  return array[(int(random.random() * 100)% len(array))]
+
 def get_section_type_size(section_type):
   if section_type == WRITING_TYPE:
     return ("W", WRITING_TYPES)
@@ -113,14 +148,17 @@ LEVEL_3 = "L3"
 LEVEL_4 = "L4"
 LEVEL_5 = "L5"
 
-def round(f, n):
+"""def round_dec(f, n):
   if isinstance(f, int):
     return f
   f = f * pow(10,n)
   f = f - f%1
   f = f / pow(10,n)
-  return f
+  return f"""
 
+def percent(decimal):
+  decimal = int(decimal * 100)
+  return str(decimal) + "%"
 
 
 #round the questions missed deduction down
