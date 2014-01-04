@@ -81,6 +81,11 @@ WRITING_TYPE_4 = "W4"
 WRITING_TYPE_5 = "W5"
 
 WRITING_TYPE_DICT = {}
+WRITING_TYPE_DICT[WRITING_TYPE_1] = "Verb Tense Agreement"
+WRITING_TYPE_DICT[WRITING_TYPE_2] = "Prepositional Phrases"
+WRITING_TYPE_DICT[WRITING_TYPE_3] = "Noun Pronoun Agreement"
+WRITING_TYPE_DICT[WRITING_TYPE_4] = "Punctuation and Purpose"
+WRITING_TYPE_DICT[WRITING_TYPE_5] = "Correct Sentences"
 
 
 #MATH
@@ -92,12 +97,28 @@ MATH_TYPE_4 = "M4"
 MATH_TYPE_5 = "M5"
 MATH_TYPE_6 = "M6"
 
+MATH_TYPE_DICT = {}
+MATH_TYPE_DICT[MATH_TYPE_1] = "Geometry (Triangles and Circles)"
+MATH_TYPE_DICT[MATH_TYPE_2] = "Trigonometry and Angles"
+MATH_TYPE_DICT[MATH_TYPE_3] = "Probability and Statistics"
+MATH_TYPE_DICT[MATH_TYPE_4] = "Algebra"
+MATH_TYPE_DICT[MATH_TYPE_5] = "Arithmetic"
+MATH_TYPE_DICT[MATH_TYPE_6] = "Numbers and Operations"
+
+
 #READING
 READING_TYPES = 4
 READING_TYPE_1 = "R1"
 READING_TYPE_2 = "R2"
 READING_TYPE_3 = "R3"
 READING_TYPE_4 = "R4"
+
+READING_TYPE_DICT = {}
+READING_TYPE_DICT[READING_TYPE_1] = "Vocabulary"
+READING_TYPE_DICT[READING_TYPE_2] = "Reasoning and Deduction"
+READING_TYPE_DICT[READING_TYPE_3] = "Literal Comprehension"
+READING_TYPE_DICT[READING_TYPE_4] = "Passage Comparison"
+
 
 #Advice
 

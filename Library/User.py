@@ -179,24 +179,27 @@ class User(object):
 
 		#Section Analysis
 		lines.append(endl)
-		lines.append("Section Analysis:" + endl)
+		lines.append("Section Performance Analysis:" + endl)
 		lines.append("Type: Total Questions | Questions Correct | Questions Missed | Questions Blank" + endl)
 		lines.append(endl)
+		lines.append( "_______" + endl + endl)
 		
-		lines.append("Wrting Analytics:" + endl)
+		lines.append("Writing Analytics:" + endl)
 		for i in range(1, WRITING_TYPES + 1):
-			lines.append("Type" + str(i) + ": " + str(self.data.data[WRITING_TYPE].stats["W"+str(i)]))
-		lines.append(endl)		
+			lines.append(WRITING_TYPE_DICT["W" + str(i)] + ": " + str(self.data.data[WRITING_TYPE].stats["W"+str(i)]))
+			lines.append(endl)
+		lines.append( "_______" + endl + endl)		
 
 		lines.append("Math Analytics:" + endl)
 		for i in range(1, MATH_TYPES + 1):
-			lines.append("Type" + str(i) + ": " + str(self.data.data[MATH_TYPE].stats["M"+str(i)]))
-		lines.append(endl)
+			lines.append(MATH_TYPE_DICT["M" + str(i)] + ": " + str(self.data.data[MATH_TYPE].stats["M"+str(i)]))
+			lines.append(endl)
+		lines.append( "_______" + endl + endl)
 		
 		lines.append("Reading Analytics:" + endl)
 		for i in range(1, READING_TYPES + 1):
-			lines.append("Type" + str(i) + ": " + str(self.data.data[READING_TYPE].stats["R"+str(i)]))
-		lines.append(endl)
+			lines.append(READING_TYPE_DICT["R" + str(i)] + ": " + str(self.data.data[READING_TYPE].stats["R"+str(i)]))
+			lines.append(endl)
 
 		lines.append(SECTION_SEP)
 
@@ -205,27 +208,23 @@ class User(object):
 		lines.append("Difficulty Analytics:" + endl)
 		lines.append(endl)
 		lines.append("Writing:" + endl)
-		lines.append("Level 1: " + str(self.data.data[WRITING_TYPE].stats["L1"]))
-		lines.append("Level 2: " + str(self.data.data[WRITING_TYPE].stats["L2"]))
-		lines.append("Level 3: " + str(self.data.data[WRITING_TYPE].stats["L3"]))
-		lines.append("Level 4: " + str(self.data.data[WRITING_TYPE].stats["L4"]))
-		lines.append("Level 5: " + str(self.data.data[WRITING_TYPE].stats["L5"]))
+		for i in range(1,6):
+			lines.append("Level " + str(i) + ": " + str(self.data.data[WRITING_TYPE].stats["L" + str(i)]))
+			lines.append(endl)
+		lines.append( "_______" + endl + endl)
 
 		lines.append(endl)
 		lines.append("Math:" + endl)
-		lines.append("Level 1: " + str(self.data.data[MATH_TYPE].stats["L1"]))
-		lines.append("Level 2: " + str(self.data.data[MATH_TYPE].stats["L2"]))
-		lines.append("Level 3: " + str(self.data.data[MATH_TYPE].stats["L3"]))
-		lines.append("Level 4: " + str(self.data.data[MATH_TYPE].stats["L4"]))
-		lines.append("Level 5: " + str(self.data.data[MATH_TYPE].stats["L5"]))
+		for i in range(1,6):
+			lines.append("Level " + str(i) + ": " + str(self.data.data[MATH_TYPE].stats["L" + str(i)]))
+			lines.append(endl)
+		lines.append( "_______" + endl + endl)
 
 		lines.append(endl)
 		lines.append("Reading:" + endl)
-		lines.append("Level 1: " + str(self.data.data[READING_TYPE].stats["L1"]))
-		lines.append("Level 2: " + str(self.data.data[READING_TYPE].stats["L2"]))
-		lines.append("Level 3: " + str(self.data.data[READING_TYPE].stats["L3"]))
-		lines.append("Level 4: " + str(self.data.data[READING_TYPE].stats["L4"]))
-		lines.append("Level 5: " + str(self.data.data[READING_TYPE].stats["L5"]))
+		for i in range(1,6):
+			lines.append("Level " + str(i) + ": " + str(self.data.data[READING_TYPE].stats["L" + str(i)]))
+			lines.append(endl)
 
 		lines.append(endl)
 
