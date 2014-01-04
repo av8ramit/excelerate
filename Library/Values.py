@@ -1,0 +1,218 @@
+import os
+import shutil
+
+#Question Value
+PARSED_ARRAY_SIZE = 5
+
+NUMBER_INDEX = 0
+ANSWER_INDEX = 1
+DIFFICULTY_INDEX = 2
+RANGE_INDEX = 3
+TYPE_INDEX = 4
+
+#Section Value
+ESSAY_SECTION_INDEX = 1
+LABEL_VECTOR = ['Number', 'Answer', 'Difficulty', 'Range', 'Type']
+READING_TYPE = 0
+WRITING_TYPE = 1
+MATH_TYPE = 2
+ESSAY_TYPE = 3
+TRIAL_TYPE = 4
+SECTION_COUNT = 10
+READING_SIZE = 67
+MATH_SIZE = 54
+WRITING_SIZE = 49
+
+#Grading Value
+GRADED_ARRAY_SIZE = 5
+SECTION_ID_INDEX = 0
+CA_INDEX = 1
+IA_INDEX = 2
+DIFF_INDEX = 3
+QTYPE_INDEX = 4
+
+#ID Value
+FIELD_SEP = '_'
+
+#Report Value
+SECTION_SEP = "----------------------------------------------------------------------------------------------------"
+
+#File Extensions
+CSV = ".csv"
+TXT = ".txt"
+
+endl = "\n"
+
+#Directory Values
+DIR_SEP = "/"
+PAR_DIR = ".."
+
+#File Value
+KEY_VECTOR = ['Section:', 'Type:', 'Size:']
+KEYFILE = "key.csv"
+SCOREFILE = "score.csv"
+KEY_TYPE = 1
+KEY_SIZE = 2
+ANSWER_VECTOR = ['Number:', 'Answer:']
+SCORE_VECTOR = ['Raw Score:', 'Writing', 'Math', 'Reading']
+
+#CHARACTER VALUES
+SPACE = ' '
+
+#CONSOLE VALUES
+COMMAND_INDEX = 0
+LAUNCH_STATE = 0
+LOAD_STATE = 1
+PROMPT = ">>> "
+
+
+TYPE_ARRAY = [WRITING_TYPE, MATH_TYPE, READING_TYPE]
+
+
+#QUESTION TYPE VALUES
+
+#WRITING
+WRITING_TYPES = 5
+WRITING_TYPE_1 = "W1"
+WRITING_TYPE_2 = "W2"
+WRITING_TYPE_3 = "W3"
+WRITING_TYPE_4 = "W4"
+WRITING_TYPE_5 = "W5"
+
+#MATH
+MATH_TYPES = 6
+MATH_TYPE_1 = "M1"
+MATH_TYPE_2 = "M2"
+MATH_TYPE_3 = "M3"
+MATH_TYPE_4 = "M4"
+MATH_TYPE_5 = "M5"
+MATH_TYPE_6 = "M6"
+
+#READING
+READING_TYPES = 4
+READING_TYPE_1 = "R1"
+READING_TYPE_2 = "R2"
+READING_TYPE_3 = "R3"
+READING_TYPE_4 = "R4"
+
+def get_section_type_size(section_type):
+  if section_type == WRITING_TYPE:
+    return ("W", WRITING_TYPES)
+  elif section_type == MATH_TYPE:
+    return ("M", MATH_TYPES)
+  elif section_type == READING_TYPE:
+    return ("R", READING_TYPES)
+  else:
+    print ("Error: You are looking for data to an invalid section.")
+    return None
+
+#LEVEL TYPES
+LEVEL_1 = "L1"
+LEVEL_2 = "L2"
+LEVEL_3 = "L3"
+LEVEL_4 = "L4"
+LEVEL_5 = "L5"
+
+def round(f, n):
+  f = f * pow(10,n)
+  f = f - 1
+
+
+
+#round the questions missed deduction down
+def round_rem(dec):
+	if dec % 1 > 0.5:
+		return 1
+	return 0
+
+def string_to_array(data):
+ 	data = data[1:-1]
+ 	array = []
+  	data = data.replace(' ', "")
+  	data = data.replace('(', "")
+  	data = data.replace(')', "")
+  	data = data.replace("'", "")
+ 	data = data.split(',')
+ 	i = 0
+ 	for entry in data:
+ 		if i % 2 == 0:
+ 			q_id = entry
+ 		if i % 2 == 1:
+ 			array.append((q_id, entry))
+ 		i+=1
+ 	return array
+
+def is_int(s):
+    try:
+        int(s)
+        return True
+    except ValueError:
+        return False
+
+def empty(s):
+	if isinstance(s, list):
+		return s == []
+	if isinstance(s, str):
+		return s == ""
+
+def file_exists(filename):
+	return os.path.exists(filename)
+
+def user_directory(name):
+  return "Users" + DIR_SEP + name 
+
+def user_filename(name):
+  return "Users" + DIR_SEP + name + DIR_SEP + name + TXT
+
+def valid_test_id(test_id):
+  if file_exists(test_id):
+    array = test_id.split('_')
+    if len(array) == 2:
+      if is_int(array[0]) and is_int(array[1]):
+        return True
+  return False
+
+def mkdir(dir_name):
+  os.mkdir(dir_name)
+
+def rmdir(dir_name):
+  shutil.rmtree(dir_name)
+
+def parse_missed(array):
+  blank = 0
+  incorrect = 0
+  for question in array:
+    if question[1] == '?':
+      blank += 1
+    else:
+      incorrect+=1
+  return (blank, incorrect)
+
+def is_null(n):
+  return n == None
+
+def section_size(section_type):
+  if section_type == MATH_TYPE:
+    return MATH_SIZE
+  elif section_type == WRITING_TYPE:
+    return WRITING_SIZE
+  elif section_type == READING_TYPE:
+    return READING_SIZE
+  else:
+    print ("Error invalid section type.")
+    return 0
+
+def section_name(section_type):
+  if section_type == MATH_TYPE:
+    return "Math"
+  elif section_type == WRITING_TYPE:
+    return "Writing"
+  elif section_type == READING_TYPE:
+    return "Reading"
+  else:
+    print ("Error invalid section type.")
+    return 0
+
+def index_exists(dictionary, key):
+  return key in dictionary.keys()
+

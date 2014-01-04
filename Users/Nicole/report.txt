@@ -1,0 +1,60 @@
+Name: Nicole
+
+----------------------------------------------------------------------------------------------------
+Scores:
+Average Total Score: 980/2400
+Average Writing Score: 305/800
+Average Reading Score: 405/800
+Average Math Score: 270/800
+Average Essay Score: ??/12
+
+Tests Taken: 2
+----------------------------------------------------------------------------------------------------
+Section Analysis:
+Type: Total Questions | Questions Correct | Questions Missed | Questions Blank
+
+Wrting Analytics:
+Type1: T: 20 | C: 2 | M: 7 | B: 11
+Type2: T: 26 | C: 3 | M: 10 | B: 13
+Type3: T: 20 | C: 6 | M: 4 | B: 10
+Type4: T: 16 | C: 3 | M: 4 | B: 9
+Type5: T: 16 | C: 1 | M: 7 | B: 8
+
+Math Analytics:
+Type1: T: 22 | C: 2 | M: 9 | B: 11
+Type2: T: 34 | C: 4 | M: 11 | B: 19
+Type3: T: 24 | C: 0 | M: 12 | B: 12
+Type4: T: 22 | C: 0 | M: 6 | B: 16
+Type5: T: 4 | C: 0 | M: 2 | B: 2
+Type6: T: 2 | C: 0 | M: 1 | B: 1
+
+Reading Analytics:
+Type1: T: 24 | C: 7 | M: 8 | B: 9
+Type2: T: 42 | C: 9 | M: 17 | B: 16
+Type3: T: 36 | C: 8 | M: 16 | B: 12
+Type4: T: 32 | C: 8 | M: 12 | B: 12
+
+----------------------------------------------------------------------------------------------------
+Difficulty Analytics:
+
+Writing:
+Level 1: T: 22 | C: 4 | M: 7 | B: 11
+Level 2: T: 22 | C: 2 | M: 9 | B: 11
+Level 3: T: 30 | C: 5 | M: 9 | B: 16
+Level 4: T: 16 | C: 2 | M: 5 | B: 9
+Level 5: T: 8 | C: 2 | M: 2 | B: 4
+
+Math:
+Level 1: T: 22 | C: 2 | M: 8 | B: 12
+Level 2: T: 22 | C: 0 | M: 9 | B: 13
+Level 3: T: 34 | C: 4 | M: 11 | B: 19
+Level 4: T: 20 | C: 0 | M: 8 | B: 12
+Level 5: T: 10 | C: 0 | M: 5 | B: 5
+
+Reading:
+Level 1: T: 16 | C: 6 | M: 5 | B: 5
+Level 2: T: 24 | C: 7 | M: 10 | B: 7
+Level 3: T: 50 | C: 10 | M: 21 | B: 19
+Level 4: T: 30 | C: 5 | M: 11 | B: 14
+Level 5: T: 14 | C: 4 | M: 6 | B: 4
+
