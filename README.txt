@@ -22,6 +22,8 @@ Users
 Amit's Status:
 Make reports more interactive with built in advice along with performance analysis.
 
+BUG: All percentages are 0
+
 
 Fixed Bugs:
 (Complete)Fix the bug that does not report level of difficulty statistics as soon as a test is read.

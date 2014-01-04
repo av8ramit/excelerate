@@ -15,76 +15,76 @@ Type: Total Questions | Questions Correct | Questions Missed | Questions Blank
 
 Wrting Analytics:
 Type1: T: 30 | C: 2 | M: 7 | B: 21
-Here is a great place to improve and score higher.
+Here is a great place to improve and score higher. You have missed 23% of the total questions in this category.
 Type2: T: 39 | C: 3 | M: 10 | B: 26
-Unfortunately, you are not as strong in this area.
+Uh oh, you need some work in this category. You have missed 25% of the total questions in this category.Guess balance is okay.
 Type3: T: 30 | C: 6 | M: 4 | B: 20
-You need some improvement here.
+Uh oh, you need some work in this category. You have missed 13% of the total questions in this category.
 Type4: T: 24 | C: 3 | M: 4 | B: 17
-Uh oh, you need some work in this category.
+Unfortunately, you are not as strong in this area. You have missed 16% of the total questions in this category.
 Type5: T: 24 | C: 1 | M: 7 | B: 16
-You need some improvement here.
+You need some improvement here. You have missed 29% of the total questions in this category.Guess balance is okay.
 
 Math Analytics:
 Type1: T: 33 | C: 2 | M: 9 | B: 22
-Here is a great place to improve and score higher.
+Try focussing more in this area to increase your score. You have missed 27% of the total questions in this category.Guess balance is okay.
 Type2: T: 51 | C: 4 | M: 11 | B: 36
-You need some improvement here.
+Here is a great place to improve and score higher. You have missed 21% of the total questions in this category.
 Type3: T: 36 | C: 0 | M: 12 | B: 24
-You need some improvement here.
+Unfortunately, you are not as strong in this area. You have missed 33% of the total questions in this category.
 Type4: T: 33 | C: 0 | M: 6 | B: 27
-Try focussing more in this area to increase your score.
+Try focussing more in this area to increase your score. You have missed 18% of the total questions in this category.Guess balance is okay.
 Type5: T: 6 | C: 0 | M: 2 | B: 4
-Here is a great place to improve and score higher.
+You need some improvement here. You have missed 33% of the total questions in this category.
 Type6: T: 3 | C: 0 | M: 1 | B: 2
-Uh oh, you need some work in this category.
+You need some improvement here. You have missed 33% of the total questions in this category.Guess balance is okay.
 
 Reading Analytics:
 Type1: T: 36 | C: 7 | M: 8 | B: 21
-You need some improvement here.
+Unfortunately, you are not as strong in this area. You have missed 22% of the total questions in this category.
 Type2: T: 63 | C: 9 | M: 17 | B: 37
-Here is a great place to improve and score higher.
+Uh oh, you need some work in this category. You have missed 26% of the total questions in this category.
 Type3: T: 54 | C: 8 | M: 16 | B: 30
-Here is a great place to improve and score higher.
+Here is a great place to improve and score higher. You have missed 29% of the total questions in this category.Guess balance is okay.
 Type4: T: 48 | C: 8 | M: 12 | B: 28
-You need some improvement here.
+You need some improvement here. You have missed 25% of the total questions in this category.
 
 ----------------------------------------------------------------------------------------------------
 Difficulty Analytics:
 
 Writing:
 Level 1: T: 33 | C: 4 | M: 7 | B: 22
-Here is a great place to improve and score higher.
+Unfortunately, you are not as strong in this area. You have missed 21% of the total questions in this category.
 Level 2: T: 33 | C: 2 | M: 9 | B: 22
-Try focussing more in this area to increase your score.
+Unfortunately, you are not as strong in this area. You have missed 27% of the total questions in this category.
 Level 3: T: 45 | C: 5 | M: 9 | B: 31
-You need some improvement here.
+Here is a great place to improve and score higher. You have missed 20% of the total questions in this category.Guess balance is okay.
 Level 4: T: 24 | C: 2 | M: 5 | B: 17
-Unfortunately, you are not as strong in this area.
+You need some improvement here. You have missed 20% of the total questions in this category.Guess balance is okay.
 Level 5: T: 12 | C: 2 | M: 2 | B: 8
-Try focussing more in this area to increase your score.
+Here is a great place to improve and score higher. You have missed 16% of the total questions in this category.
 
 Math:
 Level 1: T: 33 | C: 2 | M: 8 | B: 23
-Here is a great place to improve and score higher.
+Here is a great place to improve and score higher. You have missed 24% of the total questions in this category.Guess balance is okay.
 Level 2: T: 33 | C: 0 | M: 9 | B: 24
-Uh oh, you need some work in this category.
+You need some improvement here. You have missed 27% of the total questions in this category.Guess balance is okay.
 Level 3: T: 51 | C: 4 | M: 11 | B: 36
-Here is a great place to improve and score higher.
+You need some improvement here. You have missed 21% of the total questions in this category.Guess balance is okay.
 Level 4: T: 30 | C: 0 | M: 8 | B: 22
-Unfortunately, you are not as strong in this area.
+Here is a great place to improve and score higher. You have missed 26% of the total questions in this category.Guess balance is okay.
 Level 5: T: 15 | C: 0 | M: 5 | B: 10
-Unfortunately, you are not as strong in this area.
+Here is a great place to improve and score higher. You have missed 33% of the total questions in this category.
 
 Reading:
 Level 1: T: 24 | C: 6 | M: 5 | B: 13
-Here is a great place to improve and score higher.
+Uh oh, you need some work in this category. You have missed 20% of the total questions in this category.
 Level 2: T: 36 | C: 7 | M: 10 | B: 19
-You need some improvement here.
+You need some improvement here. You have missed 27% of the total questions in this category.
 Level 3: T: 75 | C: 10 | M: 21 | B: 44
-You need some improvement here.
+Here is a great place to improve and score higher. You have missed 28% of the total questions in this category.
 Level 4: T: 45 | C: 5 | M: 11 | B: 29
-Try focussing more in this area to increase your score.
+Here is a great place to improve and score higher. You have missed 24% of the total questions in this category.
 Level 5: T: 21 | C: 4 | M: 6 | B: 11
-Here is a great place to improve and score higher.
+Unfortunately, you are not as strong in this area. You have missed 28% of the total questions in this category.Guess balance is okay.
 

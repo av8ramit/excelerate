@@ -83,28 +83,39 @@ class Question_Stats(object):
 		self.t += 1
 
 	def advice(self):
-		correct_p = percent(self.c / self.t)
-		missed_p = percent(self.m / self.t)
-		blank_p = percent(self.b / self.t)
+		cp = div(self.c, self.t)
+		mp = div(self.m, self.t)
+		bp = div(self.b, self.t)
 
-		f = self.c / self.t
+		correct_p = percentage(cp)
+		missed_p = percentage(mp)
+		blank_p = percentage(bp)
+
+		f = cp
 
 		#Advice Check
-		if (f) < 0.4:
+		if (f) < a_thresh:
 			#poor
 			advice = random_choice(negative)
-		elif (f) < 0.7:
+			advice += " You have missed " + missed_p + " of the total questions in this category."
+		elif (f) < p_thresh:
 			#average
 			advice = random_choice(average)
+			advice += " You have gotten " + correct_p + " correct which is acceptable but could use improvement."
 		else:
 			#good
 			advice = random_choice(positive)
+			advice += " You have gotten " + correct_p + " of the questions in this category correct."
 
 		#Guess Check
 
 		if self.m > self.b:
 			#poor
 			advice += random_choice(guess)
+		else:
+			#pick line at random to comment.
+			if random_number(3) == 0:
+				advice += "Guess balance is okay."
 
 		return advice
 

@@ -7,7 +7,8 @@ from Console import *
 c = Console()
 #print c.user
 #print c.state
-#c.process_commands("print_report")
+c.process_commands("load_user Nicole")
+c.process_commands("print_report")
 
 while True:
 	line = raw_input(PROMPT)
