@@ -114,33 +114,37 @@ LEVEL_4 = "L4"
 LEVEL_5 = "L5"
 
 def round(f, n):
+  if isinstance(f, int):
+    return f
   f = f * pow(10,n)
-  f = f - 1
+  f = f - f%1
+  f = f / pow(10,n)
+  return f
 
 
 
 #round the questions missed deduction down
 def round_rem(dec):
-	if dec % 1 > 0.5:
-		return 1
-	return 0
+  if dec % 1 > 0.5:
+    return 1
+  return 0
 
 def string_to_array(data):
- 	data = data[1:-1]
- 	array = []
-  	data = data.replace(' ', "")
-  	data = data.replace('(', "")
-  	data = data.replace(')', "")
-  	data = data.replace("'", "")
- 	data = data.split(',')
- 	i = 0
- 	for entry in data:
- 		if i % 2 == 0:
- 			q_id = entry
- 		if i % 2 == 1:
- 			array.append((q_id, entry))
- 		i+=1
- 	return array
+  data = data[1:-1]
+  array = []
+  data = data.replace(' ', "")
+  data = data.replace('(', "")
+  data = data.replace(')', "")
+  data = data.replace("'", "")
+  data = data.split(',')
+  i = 0
+  for entry in data:
+    if i % 2 == 0:
+      q_id = entry
+    if i % 2 == 1:
+      array.append((q_id, entry))
+    i+=1
+  return array
 
 def is_int(s):
     try:
@@ -150,13 +154,13 @@ def is_int(s):
         return False
 
 def empty(s):
-	if isinstance(s, list):
-		return s == []
-	if isinstance(s, str):
-		return s == ""
+  if isinstance(s, list):
+    return s == []
+  if isinstance(s, str):
+    return s == ""
 
 def file_exists(filename):
-	return os.path.exists(filename)
+  return os.path.exists(filename)
 
 def user_directory(name):
   return "Users" + DIR_SEP + name 
