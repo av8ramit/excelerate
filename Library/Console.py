@@ -151,6 +151,8 @@ class Console(object):
 			print ""
 			print '"new_user [name]": Creates a new account for a user with the specified name. '
 			print ""
+			print '"load_user [name]": Loads the account for the user with the specified name.'
+			print ""
 			print '"save": Saves the tests that were taken in this session as the overall progress of the user.'
 			print ""
 			print '"reset": Resets the tests taken by a user and allows them to start over.'
@@ -159,7 +161,9 @@ class Console(object):
 			print ""
 			print '"grade [filename]": Grades the given csv filename that was originally created by answer_sheet.'
 			print ""
-			print '"print_report": Prints the analytics report for a given user.'
+			print '"simple_report": Prints the basic report for a given user.'
+			print ""
+			print '"advance_report": Prints the advanced detailed report for a given user.'
 			print ""
 
 		#Invalid command		
