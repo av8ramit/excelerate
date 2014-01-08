@@ -57,10 +57,11 @@ class Score_Summary(object):
 
 	#String override method.
 	def __str__(self):
-		output = "Total Score: " + str(self.total_score()) + endl
-		output += "Writing Score: " + str(self.section_scores[WRITING_TYPE]) + endl
-		output += "Reading Score: " + str(self.section_scores[READING_TYPE]) + endl
-		output += "Math Score: " + str(self.section_scores[MATH_TYPE]) + endl
+		output = "Test ID: " + str(self.id) + endl
+		output += "Total: " + str(self.total_score()) + endl
+		output += "Writing: " + str(self.section_scores[WRITING_TYPE]) + endl
+		output += "Reading: " + str(self.section_scores[READING_TYPE]) + endl
+		output += "Math: " + str(self.section_scores[MATH_TYPE]) + endl
 		return output
 
 

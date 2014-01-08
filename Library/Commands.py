@@ -95,8 +95,8 @@ def parse_answers(filename):
 	test.add_section(current_section)
 	return test
 
-def print_report(u):
-	u.print_report()
+def simple_report(u):
+	u.simple_report()
 
 
 #def valid_test(filename):

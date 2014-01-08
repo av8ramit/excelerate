@@ -151,10 +151,42 @@ class User(object):
 		self.save_user()
 
 
+	def simple_report(self):
+		FILE = open(self.directory() + DIR_SEP + "simple_report" + ".txt", "w")
+		lines = []
+
+		#Name
+		line = "Name: " + self.name  + endl
+		lines.append(line)
+		lines.append(endl)
+		lines.append(SECTION_SEP)
+
+		#Scores
+		scores = self.average_scores()
+		lines.append(endl)
+		lines.append("Scores:" + endl)
+		lines.append("Average Total Score: " + str(scores[0]) + "/2400" + endl)
+		lines.append("Average Writing Score: " + str(scores[2]) + "/800" + endl)
+		lines.append("Average Reading Score: " + str(scores[1]) + "/800" + endl)
+		lines.append("Average Math Score: " + str(scores[3]) + "/800" + endl)
+		lines.append("Average Essay Score: " + "??/12" + endl)
+		lines.append(endl)
+		lines.append("Tests Taken: " + str(len(self.tests_taken)))
+		lines.append(endl)
+		lines.append(SECTION_SEP)
+		lines.append(endl + endl)
+
+		for test in self.tests_taken:
+			lines.append(str(test.score_summary))
+			lines.append(endl)
+
+		FILE.writelines(lines)
+		FILE.close()
+
 
 	    	#COMPLETE TOMORROW AND MAKE HELPER FUNCTION
-	def print_report(self):
-		FILE = open(self.directory() + DIR_SEP + "report" + ".txt", "w")
+	def advanced_report(self):
+		FILE = open(self.directory() + DIR_SEP + "advanced_report" + ".txt", "w")
 		lines = []
 
 		#Name
