@@ -6,6 +6,8 @@ Console Command Instructions:
 
 "new_user [name]": Creates a new account for a user with the specified name. 
 
+"load_user [name]": Loads the account for the user with the specified name.
+
 "save": Saves the tests that were taken in this session as the overall progress of the user.
 
 "reset": Resets the tests taken by a user and allows them to start over.
@@ -16,4 +18,6 @@ Console Command Instructions:
 
 "grade [filename]": Grades the given csv filename that was originally created by answer_sheet.
 
-"print_report": Prints the report for a given user.
+"simple_report": Prints the basic report for a given user.
+
+"advance_report": Prints the advanced detailed report for a given user.

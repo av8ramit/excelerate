@@ -20,12 +20,13 @@ Users
 	2. Each directory contains a user.txt file and possible answer tests
 
 Amit's Status:
-Make reports more interactive with built in advice along with performance analysis.
+Make two separate reports one advanced and one simple.
 
-BUG: All percentages are 0
 
 
 Fixed Bugs:
 (Complete)Fix the bug that does not report level of difficulty statistics as soon as a test is read.
 
 (Complete)Finished the type casting and reporting per section.
+
+(Complete) All percentages are 0
