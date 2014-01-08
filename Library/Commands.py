@@ -98,6 +98,9 @@ def parse_answers(filename):
 def simple_report(u):
 	u.simple_report()
 
+def advanced_report(u):
+	u.advanced_report()
+
 
 #def valid_test(filename):
 	

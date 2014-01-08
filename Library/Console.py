@@ -125,7 +125,7 @@ class Console(object):
 				print "Error: Invalid use of grade command."
 				return False
 
-		#Print Report
+		#Print Simple Report
 		if cmd == "simple_report":
 			if self.state == LAUNCH_STATE:
 				print "Error: Please load or create a user before grading tests."
@@ -135,6 +135,21 @@ class Console(object):
 				return False
 			elif self.state == LOAD_STATE and self.user != None:
 				 simple_report(self.user)
+				 return True
+			else:
+				print "Error: Invalid use of grade command."
+				return False
+
+		#Print Advanced Report
+		if cmd == "advanced_report":
+			if self.state == LAUNCH_STATE:
+				print "Error: Please load or create a user before grading tests."
+				return False
+			elif self.user.tests_taken == []:
+				print "Error: Please take tests and grade them before printing reports."
+				return False
+			elif self.state == LOAD_STATE and self.user != None:
+				 advanced_report(self.user)
 				 return True
 			else:
 				print "Error: Invalid use of grade command."
