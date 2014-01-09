@@ -10,7 +10,7 @@ c = Console()
 c.process_commands("load_user Nicole")
 c.process_commands("simple_report")
 
-while True:
+while False:
 	line = raw_input(PROMPT)
 	if line == "exit":
 		break

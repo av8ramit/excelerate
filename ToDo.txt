@@ -3,3 +3,5 @@ TODO:
 2. List the tests that a user can pull.
 3. Help function that allows user to see command options.
 4. Graded answer sheets don't crash program.
+(Completed)Make simple and advanced reports instead of just one.
+6. Make reports in html that are clean and fancy.

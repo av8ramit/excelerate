@@ -190,6 +190,20 @@ def percentage(decimal):
   output = str(int(decimal)) + "%"
   return output
 
+average_bound1 = 500
+average_bound2 = 600
+
+def qualitative(score):
+  if score < average_bound1:
+    return "Poor"
+  elif score > average_bound2:
+    return "Proficient"
+  else:
+    return "Average"
+
+def overall_qualitative(score):
+  return qualitative(score / 3)
+
 
 #round the questions missed deduction down
 def round_rem(dec):

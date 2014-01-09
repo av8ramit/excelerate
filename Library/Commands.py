@@ -96,7 +96,7 @@ def parse_answers(filename):
 	return test
 
 def simple_report(u):
-	u.simple_report()
+	u.simple_HTML()
 
 def advanced_report(u):
 	u.advanced_report()

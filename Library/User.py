@@ -150,6 +150,82 @@ class User(object):
 		self.data = Data_Holder()
 		self.save_user()
 
+	def simple_HTML(self):
+		FILE = open(self.directory() + DIR_SEP + "simple_report" + ".html", "w")
+		lines = []
+
+		scores = self.average_scores()
+
+		#HTML opener
+		lines.append('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">' + endl)
+		lines.append('<html xmlns="http://www.w3.org/1999/xhtml">' + endl)
+		lines.append('<head>')
+		lines.append('<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />' + endl)
+		lines.append('<link rel="stylesheet" type="text/css" href="../../HTML/style.css" />' + endl)
+		lines.append('<title>Score Report</title>' + endl)
+		lines.append('</head>' + endl)
+		lines.append('<body>' + endl)
+		lines.append('<div id="page">' + endl)
+		lines.append('<div id="header">' + endl)
+		lines.append('<img src="../../HTML/Mini Logo.png" width="35%" alt="Excelerate" />' + endl)
+		lines.append('</div>' + endl)
+		lines.append('</div>' + endl)
+		lines.append('<div id="content">' + endl)
+		lines.append('<div id="container">' + endl)
+		lines.append('<div id="main">' + endl)
+		lines.append('<div id="menu">' + endl)
+		lines.append('<h2 style="text-align:center;">Simple Report: ' + self.name + '</h2>' + endl)
+		lines.append('</div>' + endl)
+		lines.append('<div id="text">' + endl)
+		
+
+		#Qualitative Performance
+		lines.append('<h1>Qualitative Performance</h1>' + endl)
+		lines.append('<p><b>Overall Aptitude:</b> ' + overall_qualitative(scores[0]) + '</p>' + endl)
+		lines.append('<p><b>Writing Performance:</b> ' + qualitative(scores[2]) + '</p>' + endl)
+		lines.append('<p><b>Reading Performance:</b> ' + qualitative(scores[1]) + '</p>' + endl)
+		lines.append('<p><b>Math Performance:</b> ' + qualitative(scores[3]) + '</p>' + endl)
+		lines.append('<p><b>Essay Performance:</b> Unknown</p>' + endl)
+		lines.append('<p><i>Here are the details regarding the scores. Average scores are between 500 to 600. All scores above average are recorded as proficient and all scores below are noted as poor. Unknown scores have no records.</i></p>' + endl)
+		
+
+		#Average Results
+		lines.append('<h1>Average Results</h1>' + endl)
+		lines.append('<p><b>Total Score:</b>  ' + str(scores[0]) + '/2400</p>' + endl)
+		lines.append('<p><b>Average Writing Score:</b>  ' + str(scores[2]) + '/800</p>' + endl)
+		lines.append('<p><b>Average Reading Score:</b>  ' + str(scores[1]) + '/800</p>' + endl)
+		lines.append('<p><b>Average Math Score:</b>  ' + str(scores[3]) + '/800</p>' + endl)
+		lines.append('<p><b>Average Essay Score:</b> ??/12</p>' + endl)
+		lines.append('<p><b>Tests Taken:</b> 3</p>' + endl)
+
+		#Previous Test History
+		lines.append('<h1>Previous Test History</h1>' + endl)
+		for test in self.tests_taken:
+			lines.append('<p><b>Test ID:</b> ' + test.test_id + '</p>' + endl)
+			lines.append('<p><b>Total:</b> ' + str(test.score_summary.total_score())+'</p>' + endl)
+			lines.append('<p><b>Writing:</b> ' + str(test.score_summary.section_scores[WRITING_TYPE]) +'</p>' + endl)
+			lines.append('<p><b>Reading:</b> ' + str(test.score_summary.section_scores[READING_TYPE]) +'</p>' + endl)
+			lines.append('<p><b>Math:</b> ' + str(test.score_summary.section_scores[MATH_TYPE]) +'</p>' + endl)
+			lines.append('<br>' + endl)
+
+		#Footer
+		lines.append('<br>' + endl)
+		lines.append('</div>' + endl)
+		lines.append('</div>' + endl)
+		lines.append('</div>' + endl)
+		lines.append('<div class="clear"></div>' + endl)
+		lines.append('<div id="footer">' + endl)
+		lines.append('<p><a>Nicole Kidman Simple Report</a></p>' + endl)
+		lines.append('</div>' + endl)
+		lines.append('</div>' + endl)
+		lines.append('</body>' + endl)
+		lines.append('</html>' + endl)
+		lines.append(endl)
+
+		FILE.writelines(lines)
+		FILE.close()
+
+
 
 	def simple_report(self):
 		FILE = open(self.directory() + DIR_SEP + "simple_report" + ".txt", "w")
@@ -184,7 +260,6 @@ class User(object):
 		FILE.close()
 
 
-	    	#COMPLETE TOMORROW AND MAKE HELPER FUNCTION
 	def advanced_report(self):
 		FILE = open(self.directory() + DIR_SEP + "advanced_report" + ".txt", "w")
 		lines = []
