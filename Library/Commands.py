@@ -99,7 +99,7 @@ def simple_report(u):
 	u.simple_HTML()
 
 def advanced_report(u):
-	u.advanced_report()
+	u.advanced_HTML()
 
 
 #def valid_test(filename):

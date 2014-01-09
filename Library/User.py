@@ -162,7 +162,7 @@ class User(object):
 		lines.append('<head>')
 		lines.append('<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />' + endl)
 		lines.append('<link rel="stylesheet" type="text/css" href="../../HTML/style.css" />' + endl)
-		lines.append('<title>Score Report</title>' + endl)
+		lines.append('<title>Simple Score Report</title>' + endl)
 		lines.append('</head>' + endl)
 		lines.append('<body>' + endl)
 		lines.append('<div id="page">' + endl)
@@ -187,7 +187,7 @@ class User(object):
 		lines.append('<p><b>Math Performance:</b> ' + qualitative(scores[3]) + '</p>' + endl)
 		lines.append('<p><b>Essay Performance:</b> Unknown</p>' + endl)
 		lines.append('<p><i>Here are the details regarding the scores. Average scores are between 500 to 600. All scores above average are recorded as proficient and all scores below are noted as poor. Unknown scores have no records.</i></p>' + endl)
-		
+		lines.append('<hr color="#BBBBBB" size="2" width="100%">' + endl)
 
 		#Average Results
 		lines.append('<h1>Average Results</h1>' + endl)
@@ -197,6 +197,7 @@ class User(object):
 		lines.append('<p><b>Average Math Score:</b>  ' + str(scores[3]) + '/800</p>' + endl)
 		lines.append('<p><b>Average Essay Score:</b> ??/12</p>' + endl)
 		lines.append('<p><b>Tests Taken:</b> 3</p>' + endl)
+		lines.append('<hr color="#BBBBBB" size="2" width="100%">' + endl)
 
 		#Previous Test History
 		lines.append('<h1>Previous Test History</h1>' + endl)
@@ -207,6 +208,7 @@ class User(object):
 			lines.append('<p><b>Reading:</b> ' + str(test.score_summary.section_scores[READING_TYPE]) +'</p>' + endl)
 			lines.append('<p><b>Math:</b> ' + str(test.score_summary.section_scores[MATH_TYPE]) +'</p>' + endl)
 			lines.append('<br>' + endl)
+		lines.append('<hr color="#BBBBBB" size="2" width="100%">' + endl)
 
 		#Footer
 		lines.append('<br>' + endl)
@@ -224,6 +226,94 @@ class User(object):
 
 		FILE.writelines(lines)
 		FILE.close()
+
+	def advanced_HTML(self):
+
+		FILE = open(self.directory() + DIR_SEP + "advanced_report" + ".html", "w")
+		lines = []
+
+		scores = self.average_scores()
+
+		#HTML opener
+		lines.append('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">' + endl)
+		lines.append('<html xmlns="http://www.w3.org/1999/xhtml">' + endl)
+		lines.append('<head>')
+		lines.append('<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />' + endl)
+		lines.append('<link rel="stylesheet" type="text/css" href="../../HTML/style.css" />' + endl)
+		lines.append('<title>Advanced Score Report</title>' + endl)
+		lines.append('</head>' + endl)
+		lines.append('<body>' + endl)
+		lines.append('<div id="page">' + endl)
+		lines.append('<div id="header">' + endl)
+		lines.append('<img src="../../HTML/Mini Logo.png" width="35%" alt="Excelerate" />' + endl)
+		lines.append('</div>' + endl)
+		lines.append('</div>' + endl)
+		lines.append('<div id="content">' + endl)
+		lines.append('<div id="container">' + endl)
+		lines.append('<div id="main">' + endl)
+		lines.append('<div id="menu">' + endl)
+		lines.append('<h2 style="text-align:center;">Advanced Report: ' + self.name + '</h2>' + endl)
+		lines.append('</div>' + endl)
+		lines.append('<div id="text">' + endl)
+			
+
+		#Average Results
+		lines.append('<h1>Average Results</h1>' + endl)
+		lines.append('<p><b>Total Score:</b>  ' + str(scores[0]) + '/2400</p>' + endl)
+		lines.append('<p><b>Average Writing Score:</b>  ' + str(scores[2]) + '/800</p>' + endl)
+		lines.append('<p><b>Average Reading Score:</b>  ' + str(scores[1]) + '/800</p>' + endl)
+		lines.append('<p><b>Average Math Score:</b>  ' + str(scores[3]) + '/800</p>' + endl)
+		lines.append('<p><b>Average Essay Score:</b> ??/12</p>' + endl)
+		lines.append('<p><b>Tests Taken:</b> ' + str(len(self.tests_taken)) + '</p>' + endl)
+		lines.append('<hr color="#BBBBBB" size="2" width="100%">' + endl)
+
+		#Section Analysis
+		lines.append(endl)
+		lines.append("<h1>Section Performance Analysis</h1>" + endl)
+		lines.append("<p>Type: Total Questions | Questions Correct | Questions Missed | Questions Blank</p><br>" + endl)
+		lines.append(endl)
+
+		#Writing Analytics
+		lines.append("<h3><i>Writing Analytics:</i></h3>" + endl)
+		for i in range(1, WRITING_TYPES + 1):
+			lines.append('<p><b><font color = "' + self.data.data[WRITING_TYPE].stats["W"+str(i)].color() +'">' + WRITING_TYPE_DICT["W" + str(i)] + ":</font></b> " + str(self.data.data[WRITING_TYPE].stats["W"+str(i)]) + '</p>')
+			lines.append(endl)
+		lines.append('<hr color="#4169EF" size="1" width="90%">' + endl)
+		lines.append("<br>" + endl)		
+
+		#Reading Analytics
+		lines.append("<h3><i>Reading Analytics:</i></h3>" + endl)
+		for i in range(1, READING_TYPES + 1):
+			lines.append('<p><b><font color = "' + self.data.data[READING_TYPE].stats["R"+str(i)].color() +'">' + READING_TYPE_DICT["R" + str(i)] + ":</font></b> " + str(self.data.data[READING_TYPE].stats["R"+str(i)]) + '</p>')
+			lines.append(endl)	
+		lines.append('<hr color="#4169EF" size="1" width="90%">' + endl)
+		lines.append("<br>" + endl)
+
+		#Math Analytics
+		lines.append("<h3><i>Math Analytics:</i></h3>" + endl)
+		for i in range(1, MATH_TYPES + 1):
+			lines.append('<p><b><font color = "' + self.data.data[MATH_TYPE].stats["M"+str(i)].color() +'">' + MATH_TYPE_DICT["M" + str(i)] + ":</font></b> " + str(self.data.data[MATH_TYPE].stats["M"+str(i)]) + '</p>')
+			lines.append(endl)	
+		lines.append("<br>" + endl)	
+		lines.append('<hr color="#BBBBBB" size="2" width="100%">' + endl)
+
+		#Footer
+		lines.append('<br>' + endl)
+		lines.append('</div>' + endl)
+		lines.append('</div>' + endl)
+		lines.append('</div>' + endl)
+		lines.append('<div class="clear"></div>' + endl)
+		lines.append('<div id="footer">' + endl)
+		lines.append('<p><a>' + self.name + ' Advanced Report</a></p>' + endl)
+		lines.append('</div>' + endl)
+		lines.append('</div>' + endl)
+		lines.append('</body>' + endl)
+		lines.append('</html>' + endl)
+		lines.append(endl)
+
+		FILE.writelines(lines)
+		FILE.close()
+
 
 
 

@@ -82,6 +82,29 @@ class Question_Stats(object):
 		self.b += 1
 		self.t += 1
 
+	def color(self):
+		cp = div(self.c, self.t)
+		mp = div(self.m, self.t)
+		bp = div(self.b, self.t)
+
+		correct_p = percentage(cp)
+		missed_p = percentage(mp)
+		blank_p = percentage(bp)
+
+		f = cp
+
+		#Color Check
+		if (f) < a_thresh:
+			#poor
+			return RED
+		elif (f) < p_thresh:
+			#average
+			return YELLOW
+		else:
+			#good
+			return GREEN
+
+
 	def advice(self):
 		cp = div(self.c, self.t)
 		mp = div(self.m, self.t)

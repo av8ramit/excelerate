@@ -122,6 +122,11 @@ READING_TYPE_DICT[READING_TYPE_4] = "Passage Comparison"
 
 #Advice
 
+#Colors
+RED = "b22222"
+YELLOW = "ffd700"
+GREEN = "2e8b57"
+
 #positive
 pa1 = "Good Job!"
 pa2 = "Fantastic! Well done."
@@ -157,7 +162,7 @@ def div(x, y):
   return float(x) / float(y)
 
 def random_choice(array):
-  return array[(int(random.random() * 100)% len(array))]
+  return array[(int(random.random() * 100) % len(array))]
 
 def get_section_type_size(section_type):
   if section_type == WRITING_TYPE:
@@ -200,6 +205,7 @@ def qualitative(score):
     return "Proficient"
   else:
     return "Average"
+
 
 def overall_qualitative(score):
   return qualitative(score / 3)
