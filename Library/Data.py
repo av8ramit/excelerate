@@ -158,6 +158,7 @@ class Question_Stats(object):
         output += " | "
         output += "B: "
         output += str(self.b)
+        output += "</font></p><p>"
         output += endl
         output += self.advice()
         output += endl

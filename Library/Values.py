@@ -123,9 +123,9 @@ READING_TYPE_DICT[READING_TYPE_4] = "Passage Comparison"
 #Advice
 
 #Colors
-RED = "b22222"
-YELLOW = "ffd700"
-GREEN = "2e8b57"
+RED = "red"
+YELLOW = "blue"
+GREEN = "00CC00"
 
 #positive
 pa1 = "Good Job!"
@@ -198,6 +198,14 @@ def percentage(decimal):
 average_bound1 = 500
 average_bound2 = 600
 
+def qualitative_color(score):
+  if score < average_bound1:
+    return RED
+  elif score > average_bound2:
+    return GREEN
+  else:
+    return YELLOW
+
 def qualitative(score):
   if score < average_bound1:
     return "Poor"
@@ -206,6 +214,8 @@ def qualitative(score):
   else:
     return "Average"
 
+def overall_qualitative_color(score):
+  return qualitative_color(score / 3)
 
 def overall_qualitative(score):
   return qualitative(score / 3)

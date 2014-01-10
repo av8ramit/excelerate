@@ -259,10 +259,10 @@ class User(object):
 
         #Average Results
         lines.append('<h1>Average Results</h1>' + endl)
-        lines.append('<p><b>Total Score:</b>  ' + str(scores[0]) + '/2400</p>' + endl)
-        lines.append('<p><b>Average Writing Score:</b>  ' + str(scores[2]) + '/800</p>' + endl)
-        lines.append('<p><b>Average Reading Score:</b>  ' + str(scores[1]) + '/800</p>' + endl)
-        lines.append('<p><b>Average Math Score:</b>  ' + str(scores[3]) + '/800</p>' + endl)
+        lines.append('<p><b>Total Score:</b><font color = "' + overall_qualitative_color(scores[0]) + '">  ' + str(scores[0]) + '/2400</font></p>' + endl)
+        lines.append('<p><b>Average Writing Score:</b><font color = "' + qualitative_color(scores[2]) + '">  ' + str(scores[2]) + '/800</font></p>' + endl)
+        lines.append('<p><b>Average Reading Score:</b><font color = "' + qualitative_color(scores[1]) + '">  ' + str(scores[1]) + '/800</font></p>' + endl)
+        lines.append('<p><b>Average Math Score:</b><font color = "' + qualitative_color(scores[3]) + '">  ' + str(scores[3]) + '/800</font></p>' + endl)
         lines.append('<p><b>Average Essay Score:</b> ??/12</p>' + endl)
         lines.append('<p><b>Tests Taken:</b> ' + str(len(self.tests_taken)) + '</p>' + endl)
         lines.append('<hr color="#BBBBBB" size="2" width="100%">' + endl)
@@ -270,13 +270,13 @@ class User(object):
         #Section Analysis
         lines.append(endl)
         lines.append("<h1>Section Performance Analysis</h1>" + endl)
-        lines.append("<p>Type: Total Questions | Questions Correct | Questions Missed | Questions Blank</p><br>" + endl)
+        lines.append('<p><font color = "#093175">Type: Total Questions | Questions Correct | Questions Missed | Questions Blank</font></p><br>' + endl)
         lines.append(endl)
 
         #Writing Analytics
         lines.append("<h3><i>Writing Analytics:</i></h3>" + endl)
         for i in range(1, WRITING_TYPES + 1):
-            lines.append('<p><b><font color = "' + self.data.data[WRITING_TYPE].stats["W"+str(i)].color() +'">' + WRITING_TYPE_DICT["W" + str(i)] + ":</font></b> " + str(self.data.data[WRITING_TYPE].stats["W"+str(i)]) + '</p>')
+            lines.append('<p><b><font color = "' + self.data.data[WRITING_TYPE].stats["W"+str(i)].color() +'">' + WRITING_TYPE_DICT["W" + str(i)] + '</b> ' + str(self.data.data[WRITING_TYPE].stats["W"+str(i)]) + '</p>')
             lines.append(endl)
         lines.append('<hr color="#4169EF" size="1" width="90%">' + endl)
         lines.append("<br>" + endl)     
@@ -284,7 +284,7 @@ class User(object):
         #Reading Analytics
         lines.append("<h3><i>Reading Analytics:</i></h3>" + endl)
         for i in range(1, READING_TYPES + 1):
-            lines.append('<p><b><font color = "' + self.data.data[READING_TYPE].stats["R"+str(i)].color() +'">' + READING_TYPE_DICT["R" + str(i)] + ":</font></b> " + str(self.data.data[READING_TYPE].stats["R"+str(i)]) + '</p>')
+            lines.append('<p><b><font color = "' + self.data.data[READING_TYPE].stats["R"+str(i)].color() +'">' + READING_TYPE_DICT["R" + str(i)] + "</b> " + str(self.data.data[READING_TYPE].stats["R"+str(i)]) + '</p>')
             lines.append(endl)  
         lines.append('<hr color="#4169EF" size="1" width="90%">' + endl)
         lines.append("<br>" + endl)
@@ -292,7 +292,7 @@ class User(object):
         #Math Analytics
         lines.append("<h3><i>Math Analytics:</i></h3>" + endl)
         for i in range(1, MATH_TYPES + 1):
-            lines.append('<p><b><font color = "' + self.data.data[MATH_TYPE].stats["M"+str(i)].color() +'">' + MATH_TYPE_DICT["M" + str(i)] + ":</font></b> " + str(self.data.data[MATH_TYPE].stats["M"+str(i)]) + '</p>')
+            lines.append('<p><b><font color = "' + self.data.data[MATH_TYPE].stats["M"+str(i)].color() +'">' + MATH_TYPE_DICT["M" + str(i)] + "</b> " + str(self.data.data[MATH_TYPE].stats["M"+str(i)]) + '</p>')
             lines.append(endl)  
         lines.append("<br>" + endl) 
         lines.append('<hr color="#BBBBBB" size="2" width="100%">' + endl)
