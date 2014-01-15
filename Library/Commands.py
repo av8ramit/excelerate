@@ -100,6 +100,9 @@ def simple_report(u):
 def advanced_report(u):
     u.advanced_HTML()
 
+def graph_report(u):
+    u.graph_HTML()
+
 
 #def valid_test(filename):
     

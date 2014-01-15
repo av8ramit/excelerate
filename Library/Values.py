@@ -126,6 +126,9 @@ READING_TYPE_DICT[READING_TYPE_4] = "Passage Comparison"
 RED = "red"
 YELLOW = "blue"
 GREEN = "00CC00"
+#RED = "purple"
+#YELLOW = "blue"
+#GREEN = "pink"
 
 #positive
 pa1 = "Good Job!"
