@@ -18,15 +18,3 @@ Templates
 Users
 	1. Directory of users that have been created by the program
 	2. Each directory contains a user.txt file and possible answer tests
-
-Amit's Status:
-Make two separate reports one advanced and one simple.
-
-
-
-Fixed Bugs:
-(Complete)Fix the bug that does not report level of difficulty statistics as soon as a test is read.
-
-(Complete)Finished the type casting and reporting per section.
-
-(Complete) All percentages are 0

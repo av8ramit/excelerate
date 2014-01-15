@@ -103,10 +103,10 @@ def advanced_report(u):
 def graph_report(u):
     u.graph_HTML()
 
-def type_report(u):
-    u.type_HTML(WRITING_TYPE)
-    u.type_HTML(READING_TYPE)
-    u.type_HTML(MATH_TYPE)
+def section_report(u):
+    u.section_HTML(WRITING_TYPE)
+    u.section_HTML(READING_TYPE)
+    u.section_HTML(MATH_TYPE)
 
 
 

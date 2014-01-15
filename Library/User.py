@@ -248,7 +248,7 @@ class User(object):
         FILE.writelines(lines)
         FILE.close()
 
-    def type_HTML(self, section_type):
+    def section_HTML(self, section_type):
         section_type_name = section_name(section_type)
         FILE = open(self.directory() + DIR_SEP + section_type_name.lower() + "_report" + ".html", "w")
         lines = []

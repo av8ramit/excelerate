@@ -19,3 +19,7 @@ Console Command Instructions:
 "simple_report": Prints the basic report for a given user.
 
 "advance_report": Prints the advanced detailed report for a given user.
+
+"graph_report": Prints the graphs for each section.
+
+"section_report": Prints the advanced type report for each section.
