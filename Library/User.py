@@ -120,14 +120,20 @@ class User(object):
                     if attempt == '?':
                         self.data.data[section_type].stats["L" + str(difficulty)].add_blank()
                         self.data.data[section_type].stats[qtype].add_blank()
+                        test.data.data[section_type].stats["L" + str(difficulty)].add_blank()
+                        test.data.data[section_type].stats[qtype].add_blank()
                         #complete data processing
                         #add the level and type blanks
                     else:
                         self.data.data[section_type].stats["L" + str(difficulty)].add_miss()
                         self.data.data[section_type].stats[qtype].add_miss()
+                        test.data.data[section_type].stats["L" + str(difficulty)].add_miss()
+                        test.data.data[section_type].stats[qtype].add_miss()
                 else:
                     self.data.data[section_type].stats["L" + str(difficulty)].add_correct()
                     self.data.data[section_type].stats[qtype].add_correct()
+                    test.data.data[section_type].stats["L" + str(difficulty)].add_correct()
+                    test.data.data[section_type].stats[qtype].add_correct()
 
         ifile.close()
 
@@ -155,7 +161,16 @@ class User(object):
         FILE = open(self.directory() + DIR_SEP + "simple_report" + ".html", "w")
         lines = []
 
+        index = 1
         scores = self.average_scores()
+        s1 = []
+        #calculate all scores
+        for test in self.tests_taken:
+            s1.append([index,test.score_summary.total_score()])
+            index += 1
+
+        #graph js
+        g = Graph("Overall Score Performance", 1, s1)
 
         #HTML opener
         lines.append('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">' + endl)
@@ -164,6 +179,7 @@ class User(object):
         lines.append('<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />' + endl)
         lines.append('<link rel="stylesheet" type="text/css" href="../../HTML/style.css" />' + endl)
         lines.append('<title>Simple Score Report</title>' + endl)
+        lines += g.head()
         lines.append('</head>' + endl)
         lines.append('<body>' + endl)
         lines.append('<div id="page">' + endl)
@@ -182,26 +198,26 @@ class User(object):
 
         #Qualitative Performance
         lines.append('<h1>Qualitative Performance</h1>' + endl)
-        lines.append('<p><b>Overall Aptitude:</b> ' + overall_qualitative(scores[0]) + '</p>' + endl)
-        lines.append('<p><b>Writing Performance:</b> ' + qualitative(scores[2]) + '</p>' + endl)
-        lines.append('<p><b>Reading Performance:</b> ' + qualitative(scores[1]) + '</p>' + endl)
-        lines.append('<p><b>Math Performance:</b> ' + qualitative(scores[3]) + '</p>' + endl)
+        lines.append('<p><b>Overall Aptitude:</b><font color = "' + overall_qualitative_color(scores[0]) + '"> ' + overall_qualitative(scores[0]) + '</font></p>' + endl)
+        lines.append('<p><b>Writing Performance:</b><font color = "' + qualitative_color(scores[2]) + '"> ' + qualitative(scores[2]) + '</font></p>' + endl)
+        lines.append('<p><b>Reading Performance:</b><font color = "' + qualitative_color(scores[1]) + '"> ' + qualitative(scores[1]) + '</font></p>' + endl)
+        lines.append('<p><b>Math Performance:</b><font color = "' + qualitative_color(scores[3]) + '"> ' + qualitative(scores[3]) + '</font></p>' + endl)
         lines.append('<p><b>Essay Performance:</b> Unknown</p>' + endl)
         lines.append('<p><i>Here are the details regarding the scores. Average scores are between 500 to 600. All scores above average are recorded as proficient and all scores below are noted as poor. Unknown scores have no records.</i></p>' + endl)
         lines.append('<hr color="#BBBBBB" size="2" width="100%">' + endl)
 
         #Average Results
         lines.append('<h1>Average Results</h1>' + endl)
-        lines.append('<p><b>Total Score:</b>  ' + str(scores[0]) + '/2400</p>' + endl)
-        lines.append('<p><b>Average Writing Score:</b>  ' + str(scores[2]) + '/800</p>' + endl)
-        lines.append('<p><b>Average Reading Score:</b>  ' + str(scores[1]) + '/800</p>' + endl)
-        lines.append('<p><b>Average Math Score:</b>  ' + str(scores[3]) + '/800</p>' + endl)
+        lines.append('<p><b>Total Score:</b><font color = "' + overall_qualitative_color(scores[0]) + '">  ' + str(scores[0]) + '/2400</font></p>' + endl)
+        lines.append('<p><b>Average Writing Score:</b><font color = "' + qualitative_color(scores[2]) + '">  ' + str(scores[2]) + '/800</font></p>' + endl)
+        lines.append('<p><b>Average Reading Score:</b><font color = "' + qualitative_color(scores[1]) + '">  ' + str(scores[1]) + '/800</font></p>' + endl)
+        lines.append('<p><b>Average Math Score:</b><font color = "' + qualitative_color(scores[3]) + '">  ' + str(scores[3]) + '/800</font></p>' + endl)
         lines.append('<p><b>Average Essay Score:</b> ??/12</p>' + endl)
-        lines.append('<p><b>Tests Taken:</b> 3</p>' + endl)
+        lines.append('<p><b>Tests Taken:</b> ' + str(len(self.tests_taken)) + '</p>' + endl)
         lines.append('<hr color="#BBBBBB" size="2" width="100%">' + endl)
 
         #Previous Test History
-        lines.append('<h1>Previous Test History</h1>' + endl)
+        """lines.append('<h1>Previous Test History</h1>' + endl)
         for test in self.tests_taken:
             lines.append('<p><b>Test ID:</b> ' + test.test_id + '</p>' + endl)
             lines.append('<p><b>Total:</b> ' + str(test.score_summary.total_score())+'</p>' + endl)
@@ -209,7 +225,10 @@ class User(object):
             lines.append('<p><b>Reading:</b> ' + str(test.score_summary.section_scores[READING_TYPE]) +'</p>' + endl)
             lines.append('<p><b>Math:</b> ' + str(test.score_summary.section_scores[MATH_TYPE]) +'</p>' + endl)
             lines.append('<br>' + endl)
-        lines.append('<hr color="#BBBBBB" size="2" width="100%">' + endl)
+        lines.append('<hr color="#BBBBBB" size="2" width="100%">' + endl)"""
+
+        #Overall Graph
+        lines += g.html()
 
         #Footer
         lines.append('<br>' + endl)
@@ -218,15 +237,114 @@ class User(object):
         lines.append('</div>' + endl)
         lines.append('<div class="clear"></div>' + endl)
         lines.append('<div id="footer">' + endl)
-        lines.append('<p><a>Nicole Kidman Simple Report</a></p>' + endl)
+        lines.append('<p><a>' + self.name + ' Simple Report</a></p>' + endl)
         lines.append('</div>' + endl)
         lines.append('</div>' + endl)
+        lines += g.body()
         lines.append('</body>' + endl)
         lines.append('</html>' + endl)
         lines.append(endl)
 
         FILE.writelines(lines)
         FILE.close()
+
+    def type_HTML(self, section_type):
+        section_type_name = section_name(section_type)
+        FILE = open(self.directory() + DIR_SEP + section_type_name.lower() + "_report" + ".html", "w")
+        lines = []
+
+        index = 1
+        graph_index = 1
+        scores = self.average_scores()
+        s1 = []
+        graphs = []
+        #calculate all scores
+        for test in self.tests_taken:
+            s1.append([index,test.score_summary.total_score()])
+            index += 1
+        
+        g = Graph(section_type_name + " Score Performance", graph_index, s1)
+        type_dict = section_type_dict(section_type)
+
+        for i in range(1, len(type_dict)):
+            key = section_type_name[0] + str(i)
+            data = []
+            graph_index += 1
+            for test in self.tests_taken:
+                data.append(test.data.data[section_type].stats[key].c)
+
+            graphs.append(Graph(type_dict[key], graph_index, data))
+
+
+
+
+        #HTML opener
+        lines.append('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">' + endl)
+        lines.append('<html xmlns="http://www.w3.org/1999/xhtml">' + endl)
+        lines.append('<head>')
+        lines.append('<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />' + endl)
+        lines.append('<link rel="stylesheet" type="text/css" href="../../HTML/style.css" />' + endl)
+        lines.append('<title>' + section_type_name + ' Score Report</title>' + endl)
+        lines += g.head()
+        lines.append('</head>' + endl)
+        lines.append('<body>' + endl)
+        lines.append('<div id="page">' + endl)
+        lines.append('<div id="header">' + endl)
+        lines.append('<img src="../../HTML/Mini Logo.png" width="35%" alt="Excelerate" />' + endl)
+        lines.append('</div>' + endl)
+        lines.append('</div>' + endl)
+        lines.append('<div id="content">' + endl)
+        lines.append('<div id="container">' + endl)
+        lines.append('<div id="main">' + endl)
+        lines.append('<div id="menu">' + endl)
+        lines.append('<h2 style="text-align:center;">' + section_type_name + SPACE + 'Analytics Report: ' + self.name + '</h2>' + endl)
+        lines.append('</div>' + endl)
+        lines.append('<div id="text">' + endl)
+        
+
+
+        #Average Results
+        lines.append('<h1>' + section_type_name + ' Analytics</h1>' + endl)
+        lines.append('<hr color="#BBBBBB" size="2" width="100%">' + endl)
+
+
+        #Overall Graph
+        lines += g.html()
+        lines.append("<p>This is your performance in the " + section_type_name + " section of the last " + str(len(self.tests_taken)) + " tests you have taken. The more comprehensive analysis of questions correct in each type is found below.</p>")
+
+
+        #Average Results
+        lines.append('<h1>Question Type Analytics</h1>' + endl)
+        lines.append('<hr color="#BBBBBB" size="2" width="100%">' + endl)
+
+        #Print the type analysis as well
+        i = 1
+        for graph in graphs:
+            lines += graph.html()
+            lines.append('<p><b><font color = "' + self.data.data[section_type].stats[section_type_name[0] + str(i)].color() +'">' + type_dict[section_type_name[0] + str(i)] + "</b> " + str(self.data.data[section_type].stats[section_type_name[0]+str(i)]) + '</p>')
+            i+=1 
+            lines.append('<hr color="#4169EF" size="1" width="90%">' + endl)
+            #lines.append("<br>" + endl)
+
+        #Footer
+        lines.append('<br>' + endl)
+        lines.append('</div>' + endl)
+        lines.append('</div>' + endl)
+        lines.append('</div>' + endl)
+        lines.append('<div class="clear"></div>' + endl)
+        lines.append('<div id="footer">' + endl)
+        lines.append('<p><a>' + self.name + SPACE + section_type_name + SPACE +' Report</a></p>' + endl)
+        lines.append('</div>' + endl)
+        lines.append('</div>' + endl)
+        lines += g.body()
+        lines.append('</body>' + endl)
+        lines.append('</html>' + endl)
+        lines.append(endl)
+
+        FILE.writelines(lines)
+        FILE.close()
+
+
 
     def advanced_HTML(self):
 
@@ -242,7 +360,6 @@ class User(object):
         lines.append('<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />' + endl)
         lines.append('<link rel="stylesheet" type="text/css" href="../../HTML/style.css" />' + endl)
         lines.append('<title>Advanced Score Report</title>' + endl)
-        lines.append
         lines.append('</head>' + endl)
         lines.append('<body>' + endl)
         lines.append('<div id="page">' + endl)
@@ -383,12 +500,13 @@ class User(object):
             
 
         #Average Results
-        lines.append('<h1>Average Results</h1>' + endl)
+        lines.append('<h1>Score Graphs</h1>' + endl)
         lines.append('<hr color="#BBBBBB" size="2" width="100%">' + endl)
 
         #Graph js
         for graph in graphs:
             lines += graph.html()
+            lines.append('<br><hr color="#4169EF" size="1" width="90%">' + endl)
             lines.append(endl)
 
 

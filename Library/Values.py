@@ -119,6 +119,16 @@ READING_TYPE_DICT[READING_TYPE_2] = "Reasoning and Deduction"
 READING_TYPE_DICT[READING_TYPE_3] = "Literal Comprehension"
 READING_TYPE_DICT[READING_TYPE_4] = "Passage Comparison"
 
+def section_type_dict(section_type):
+  if section_type == WRITING_TYPE:
+    return WRITING_TYPE_DICT
+  elif section_type == READING_TYPE:
+    return READING_TYPE_DICT
+  elif section_type == MATH_TYPE:
+    return MATH_TYPE_DICT
+  else:
+    return {}
+
 
 #Advice
 

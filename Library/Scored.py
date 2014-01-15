@@ -11,6 +11,7 @@
 import csv
 from Values import *
 from Key import *
+from Data import *
 
 class Scored_Test(object):
 
@@ -25,6 +26,7 @@ class Scored_Test(object):
         self.missed_questions[READING_TYPE] = []
         self.test_summary = None
         self.score_summary = None
+        self.data = Data_Holder()
 
     #This sets the test summary upon creation and recreation.
     def set_summary(self, s):
