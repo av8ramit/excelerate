@@ -1,0 +1,9 @@
+TODO:
+(Completed) Edge case where a user creates an account of someone who already exists.
+2. List the tests that a user can pull.
+(Completed) Help function that allows user to see command options.
+4. Graded answer sheets don't crash program.
+(Completed)Make simple and advanced reports instead of just one.
+(Completed) Make reports in html that are clean and fancy.
+(Completed) Add graphs in all reports.
+(Completed) We will provide the tests, don't need to write make_tests.
