@@ -286,7 +286,7 @@ def user_filename(name):
   return "Users" + DIR_SEP + name + DIR_SEP + name + TXT
 
 def valid_test_id(test_id):
-  if file_exists(test_id):
+  if file_exists(test_directory(test_id)):
     array = test_id.split('_')
     if len(array) == 2:
       if is_int(array[0]) and is_int(array[1]):

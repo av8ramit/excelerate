@@ -37,6 +37,13 @@ def grade(u, filename):
     pa = parse_answers(filename)
     u.grade(pa)
 
+def list_tests():
+    a = os.listdir(test_directory(''))
+    print "Here are the available test_ids:"
+    for i in a:
+        if valid_test_id(i):
+            print (i)
+
 def make_answer_sheet(u, test_id):
     filename = test_id
     lines = []
@@ -107,6 +114,7 @@ def section_report(u):
     u.section_HTML(WRITING_TYPE)
     u.section_HTML(READING_TYPE)
     u.section_HTML(MATH_TYPE)
+
 
 
 

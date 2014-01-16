@@ -92,6 +92,16 @@ class Console(object):
                 print ("Error: Invalid use of load_user command.")
                 return False
 
+        #Load User
+        if cmd == "list_tests":
+            if len(cmd_vector) == 1:
+                list_tests()
+                return True
+            else:
+                print ("Error: Invalid use of list_tests command.")
+                return False
+
+
         #Print Answer Sheet
         if cmd == "answer_sheet":
             if self.state != LOAD_STATE:
@@ -116,8 +126,12 @@ class Console(object):
             elif len(cmd_vector) == 2 and not empty(cmd_vector[1]):
                 path = self.user.directory() + DIR_SEP + cmd_vector[1]
                 if file_exists(path):
-                    grade(self.user, path)
-                    return True
+                    try:
+                        grade(self.user, path)
+                        return True
+                    except:
+                        print("Error: The answer sheet has been corrupted. Run the answer_sheet command and then input your answers in that file.")
+                        return False
                 else:
                     print ("Error: Could not find " + cmd_vector[1] + " in " + self.user.name + " directory.")
                     return False

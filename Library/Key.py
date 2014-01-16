@@ -102,6 +102,23 @@ class Test(object):
                     report.get_summary(current_type).incorrect_questions.append((answer_key.get_question(j).get_id(),attempt))
                 elif attempt == answer:
                     report.get_summary(current_type).add_answered()
+                #range answer
+                elif '(' in answer and ')' in answer:
+                    answer = answer.replace(' ','')
+                    answer = answer.replace('(','')
+                    answer = answer.replace(')','')
+                    lower_limit = float(answer.split(',')[0])
+                    upper_limit = float(answer.split(',')[1])
+                    try:
+                        a = float(attempt)
+                        if a <= upper_limit and a >= lower_limit:
+                            report.get_summary(current_type).add_answered()
+                        else:
+                            report.get_summary(current_type).add_miss()
+                            report.get_summary(current_type).incorrect_questions.append((answer_key.get_question(j).get_id(),attempt))
+                    except:
+                        report.get_summary(current_type).add_miss()
+                        report.get_summary(current_type).incorrect_questions.append((answer_key.get_question(j).get_id(),attempt))
                 else:
                     report.get_summary(current_type).add_miss()
                     report.get_summary(current_type).incorrect_questions.append((answer_key.get_question(j).get_id(),attempt))
