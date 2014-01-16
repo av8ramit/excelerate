@@ -90,7 +90,7 @@ class Scored_Test(object):
         key = {}
         #key[index] = (section_type, size)
         #read from keyfile and create section shells for scored test based on type and index
-        with open(self.test_id + DIR_SEP + KEYFILE, 'rU') as f:
+        with open(test_directory(self.test_id) + DIR_SEP + KEYFILE, 'rU') as f:
             reader = csv.reader(f)
             for row in reader:
                 if row != KEY_VECTOR or row[0] == '':
@@ -228,7 +228,7 @@ class Scored_Question(object):
         test_id = array[0] + '_' + array[1]
         filename = test_id + DIR_SEP + "Section " + array[2] + ".csv"
         number = array[3]
-        with open(filename, 'rU') as f:
+        with open(test_directory(filename), 'rU') as f:
             reader = csv.reader(f)
             for row in reader:
                 if row[NUMBER_INDEX] == number:

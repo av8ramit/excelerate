@@ -279,6 +279,9 @@ def file_exists(filename):
 def user_directory(name):
   return "Users" + DIR_SEP + name 
 
+def test_directory(test_id):
+  return "Tests" + DIR_SEP + test_id
+
 def user_filename(name):
   return "Users" + DIR_SEP + name + DIR_SEP + name + TXT
 

@@ -18,7 +18,7 @@ class Test(object):
     #This is the default constructor takes an id and constructs the test from a valid folder.
     def __init__(self, test_id):
 
-        assert(file_exists(test_id))
+        assert(file_exists(test_directory(test_id)))
 
         t = test_id.split("_")
         self.month = t[0]
@@ -26,7 +26,7 @@ class Test(object):
         self.sections = {}
 
         key = {}
-        with open(test_id + DIR_SEP + KEYFILE, 'rU') as f:
+        with open(test_directory(test_id) + DIR_SEP + KEYFILE, 'rU') as f:
             reader = csv.reader(f)
             for row in reader:
                 if row != KEY_VECTOR:
@@ -40,7 +40,7 @@ class Test(object):
                 self.add_section(ts)
             else: #real
                 s = Section(self, int(number), int(key[number][0]))
-                s.parse_questions(test_id + DIR_SEP + "Section " + number + ".csv")
+                s.parse_questions(test_directory(test_id) + DIR_SEP + "Section " + number + ".csv")
                 self.add_section(s)
 
     #This returns the selected section.
@@ -60,7 +60,7 @@ class Test(object):
         return str(self.month) + FIELD_SEP + str(self.year)
 
     #This prints an answer sheet that corresponds to the test_id given.
-    def make_answer_sheet(test_id):
+    """def make_answer_sheet(test_id):
         filename = test_id
         lines = []
 
@@ -68,7 +68,7 @@ class Test(object):
         lines.append(test_id + " Answer Sheet\n\n")
         lines.append(label_vector)
 
-        with open(filename + DIR_SEP + KEYFILE, 'rU') as f:
+        with open(test_directory(test_id) + DIR_SEP + KEYFILE, 'rU') as f:
             reader = csv.reader(f)
             for row in reader:
                 if row != KEY_VECTOR:
@@ -80,7 +80,8 @@ class Test(object):
 
         FILE = open(test_id + ".csv", "w")
         FILE.writelines(lines)
-        FILE.close() 
+        FILE.close()"""
+        #moved to Commands
 
     #This grades a given answer sheet against the test.
     def grade(self, answered_test):

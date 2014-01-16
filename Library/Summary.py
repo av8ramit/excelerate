@@ -36,7 +36,7 @@ class Score_Summary(object):
         scores[MATH_TYPE] = 200
         scores[WRITING_TYPE] = 200
         scores[READING_TYPE] = 200
-        with open(self.id + DIR_SEP + SCOREFILE, 'rU') as f:
+        with open(test_directory(self.id) + DIR_SEP + SCOREFILE, 'rU') as f:
             reader = csv.reader(f)
             for row in reader:
                 if row != SCORE_VECTOR and not empty(row):

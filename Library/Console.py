@@ -185,6 +185,15 @@ class Console(object):
                 print ("Error: Invalid use of grade command.")
                 return False
 
+        if cmd == "make_test":
+            if self.state != LAUNCH_STATE:
+                print ("Error: You can only create tests at launch time.")
+                return False
+            else:
+                make_test()
+                return True
+
+
         #Help
         if cmd == "help":
             print ("")

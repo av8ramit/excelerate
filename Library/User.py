@@ -90,7 +90,7 @@ class User(object):
 
 
     def stats_from_test(self, test):
-        with open(test.test_id + DIR_SEP + KEYFILE, 'rU') as f:
+        with open(test_directory(test.test_id) + DIR_SEP + KEYFILE, 'rU') as f:
             reader = csv.reader(f)
             key = {}
             for row in reader:
@@ -105,9 +105,9 @@ class User(object):
 
     def stats_from_file(self, test, key, index):
         section_type = key[index][0]
-        if not file_exists(test.test_id + DIR_SEP + "Section " + str(index) + CSV):
+        if not file_exists(test_directory(test.test_id) + DIR_SEP + "Section " + str(index) + CSV):
             return
-        ifile  = open(test.test_id + DIR_SEP + "Section " + str(index) + CSV, "rU")
+        ifile  = open(test_directory(test.test_id) + DIR_SEP + "Section " + str(index) + CSV, "rU")
         reader = csv.reader(ifile)
 
         for row in reader:
