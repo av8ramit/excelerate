@@ -52,7 +52,7 @@ def make_answer_sheet(u, test_id):
     lines.append(test_id + " Answer Sheet\n\n")
     lines.append(label_vector)
 
-    with open(filename + DIR_SEP + KEYFILE, 'rU') as f:
+    with open(test_directory(filename) + DIR_SEP + KEYFILE, 'rU') as f:
         reader = csv.reader(f)
         for row in reader:
             if row != KEY_VECTOR:
