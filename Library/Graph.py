@@ -27,7 +27,7 @@ class Graph(object):
         return lines
 
 
-    def html(self):
+    def html(self, percent=False):
         lines = []
         lines.append('<br>')
         lines.append('<div id="chart' + str(self.index) + '" style="height:300px; width:500px;"></div>' + endl)
@@ -42,6 +42,10 @@ class Graph(object):
         lines.append('},' + endl)
         lines.append('axes:{' + endl)
         lines.append('xaxis:{min:0},' + endl)
+        if percent:
+            lines.append("yaxis:{" + 'label:' + "'Percent Correct'," + 'labelRenderer: $.jqplot.CanvasAxisLabelRenderer,' + "tickOptions: {formatString: " +  '"' +'%' + "'d" + '%"' + '}}' + endl)
+        else:
+            lines.append("yaxis:{" + 'label:' + "'Score'," + 'labelRenderer: $.jqplot.CanvasAxisLabelRenderer,' + '}' + endl)
         lines.append('},' + endl)
         lines.append("series:[{lineWidth:3}]" + endl)
         lines.append('});' + endl)
@@ -60,6 +64,8 @@ class Graph(object):
         lines.append('<script class="include" language="javascript" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.categoryAxisRenderer.min.js"></script>' + endl)
         lines.append('<script class="include" language="javascript" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.pointLabels.min.js"></script>' + endl)
         lines.append('<script class="include" language="javascript" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.dateAxisRenderer.min.js"></script>' + endl)
+        lines.append('<script class="include" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.canvasTextRenderer.min.js"></script>' + endl)
+        lines.append('<script class="include" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>' + endl)
 
         return lines
 

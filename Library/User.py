@@ -260,7 +260,7 @@ class User(object):
         graphs = []
         #calculate all scores
         for test in self.tests_taken:
-            s1.append([index,test.score_summary.total_score()])
+            s1.append([index,test.score_summary.section_scores[section_type]])
             index += 1
         
         g = Graph(section_type_name + " Score Performance", graph_index, s1)
@@ -271,7 +271,7 @@ class User(object):
             data = []
             graph_index += 1
             for test in self.tests_taken:
-                data.append(test.data.data[section_type].stats[key].c)
+                data.append(div(test.data.data[section_type].stats[key].c, test.data.data[section_type].stats[key].t) * 100)
 
             graphs.append(Graph(type_dict[key], graph_index, data))
 
@@ -320,7 +320,7 @@ class User(object):
         #Print the type analysis as well
         i = 1
         for graph in graphs:
-            lines += graph.html()
+            lines += graph.html(True)
             lines.append('<p><b><font color = "' + self.data.data[section_type].stats[section_type_name[0] + str(i)].color() +'">' + type_dict[section_type_name[0] + str(i)] + "</b> " + str(self.data.data[section_type].stats[section_type_name[0]+str(i)]) + '</p>')
             i+=1 
             lines.append('<hr color="#4169EF" size="1" width="90%">' + endl)
