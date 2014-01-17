@@ -39,7 +39,7 @@ def grade(u, filename):
 
 def list_tests():
     a = os.listdir(test_directory(''))
-    print "Here are the available test_ids:"
+    print ("Here are the available test_ids:")
     for i in a:
         if valid_test_id(i):
             print (i)
