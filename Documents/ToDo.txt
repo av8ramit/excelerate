@@ -1,12 +1,32 @@
 TODO:
-(Completed) Edge case where a user creates an account of someone who already exists.
-(Completed) List the tests that a user can pull.
-(Completed) Help function that allows user to see command options.
-(Completed) Graded answer sheets don't crash program.
-(Completed) Make simple and advanced reports instead of just one.
-(Completed) Make reports in html that are clean and fancy.
-(Completed) Add graphs in all reports.
-(Completed) We will provide the tests, don't need to write make_tests.
-(Completed) Fix the grading for range.
+Revision 1.0 ToDo
+(Completed-Amit) Edge case where a user creates an account of someone who already exists.
+(Completed-Amit) List the tests that a user can pull.
+(Completed-Amit) Help function that allows user to see command options.
+(Completed-Amit) Graded answer sheets don't crash program.
+(Completed-Amit) Make simple and advanced reports instead of just one.
+(Completed-Amit) Make reports in html that are clean and fancy.
+(Completed-Amit) Add graphs in all reports.
+(Completed-Amit) We will provide the tests, don't need to write make_tests.
+(Completed-Amit) Fix the grading for range.
 
--Amit Out
+Revision 1.1 ToDo
+1. Create folders in User directory for tests and reports.
+2. Create a report homepage that accesses others and eliminate report commands.
+3. Basic GUI for the main functions.
+4. Trial version date trigger.
+
+Revision 2.0 ToDo
+1. Tooltip for the points on a graph.
+2. Date feature for every test taken.
+3. Add test_ids taken.
+
+Business ToDo
+1. (Amit) Make the powerpoint up to date on business end.
+2. (Amit) Add screenshots to powerpoint.
+3. Make the graphs cleaner and positive correlation on website.
+4. Make the github private.
+5. Redraft the NDA and change the font work.
+6. Cold call test centers in Fremont and find out how they work.
+7. Make a list of features that companies are interested in.
+8. Partner up with a school and sell product to 100 students for free.
