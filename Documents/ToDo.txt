@@ -1,4 +1,26 @@
 TODO:
+
+GUI 1.0 ToDO
+(Completed-Neel) Can now open files from file menu after load/new/user
+(Completed-Neel) Grade no longer takes text input, instead can now click file from file window
+(Completed-Neel) Create Answer Sheet works 
+
+GUI 1.0 ToDo
+1. Fix terminal output when cancel is hit on file menu
+2. Make python function that returns current loaded user name
+3. Figure out how to output error messages to user(pop up windows/text in widget)
+4. Fix layout of buttons
+5. Add save functionality
+6. Add reset functionality
+7. Add simple_report "
+8.  "  advance_report "
+9. "  graph_report "
+10. " section_report "
+11. (Maybe) add clear functionality
+12. Hide terminal
+
+
+
 Revision 1.0 ToDo
 (Completed-Amit) Edge case where a user creates an account of someone who already exists.
 (Completed-Amit) List the tests that a user can pull.
