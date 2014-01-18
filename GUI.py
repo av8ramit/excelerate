@@ -33,7 +33,7 @@ root.geometry("700x700")
 #set window title
 root.title("Excelerate")
 
-root.configure(background = 'cadet blue')
+root.configure(background = 'powder blue')
 #terminal frame
 #termframe = Frame(root, height = 400, width = 450)
 #termframe.grid(row=7)
@@ -42,7 +42,7 @@ root.configure(background = 'cadet blue')
 
 ### Display Logo
 
-photo = PhotoImage(file = "logo.ppm")
+photo = PhotoImage(file = "./GUI/logo.ppm")
 
 
 
@@ -55,19 +55,26 @@ def get_new_user():
     if(name != None):
         c.process_commands('new_user ' + name)
         # option below opens new user's folder       
-        tkinter.filedialog.askopenfilename( initialdir = './Users' + '/' + name)
-
+        file_name = tkinter.filedialog.askopenfilename( initialdir = './Users' + '/' + name)
+        os.system('open ' + file_name)
 def get_load_user():
     name = tkinter.simpledialog.askstring( 'Load User', 'Enter Username')
     if(name != None):
         c.process_commands('load_user ' + name)
          # option below opens loaded user's folder       
-        tkinter.filedialog.askopenfilename( initialdir = './Users' + '/' + name)
+        file_name = tkinter.filedialog.askopenfilename( initialdir = './Users' + '/' + name)
+        if(file_name != None):
+            os.system('open ' + file_name)
 def get_test_name():
-    name = tkinter.simpledialog.askstring( 'Grade Test', 'Enter Filename To Grade')
-    if(name != None):
-        c.process_commands('grade_test ' + name)
-
+    #name = tkinter.simpledialog.askstring( 'Grade Test', 'Enter Filename To Grade')
+    #if(name != None):
+        #test = tkinter.filedialog.askopenfilename( initialdir = './Users' + '/' + name)
+    
+    file_path = tkinter.filedialog.askopenfilename( initialdir = './Users' )
+    #extract filename from pathing stored in file_path
+    file_name = os.path.basename(file_path)
+    if (file_name != None):
+        c.process_commands('grade ' + file_name)
 def get_test_id():
     name = tkinter.simpledialog.askstring( 'Create Answer Sheet', 'Enter Test ID')
     if(name != None):
