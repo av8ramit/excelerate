@@ -7,7 +7,7 @@ GUI 1.0 ToDO
 
 GUI 1.0 ToDo
 1. Fix terminal output when cancel is hit on file menu
-2. Make python function that returns current loaded user name
+2. Make python function that returns current loaded user name 
 3. Figure out how to output error messages to user(pop up windows/text in widget)
 4. Fix layout of buttons
 5. Add save functionality
@@ -18,8 +18,10 @@ GUI 1.0 ToDo
 10. " section_report "
 11. (Maybe) add clear functionality
 12. Hide terminal
-
-
+13. Display current user
+14. Make "pretty"
+15. Make comprehensive  GUI test plan
+16. (Maybe) Create a GUI help/instructions menu
 
 Revision 1.0 ToDo
 (Completed-Amit) Edge case where a user creates an account of someone who already exists.
