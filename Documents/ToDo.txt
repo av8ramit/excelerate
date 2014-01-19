@@ -45,6 +45,7 @@ Revision 2.0 ToDo
 1. Tooltip for the points on a graph.
 2. Date feature for every test taken.
 3. Add test_ids taken.
+4. Add goal school functionality (dictionary[school:Avg Score]) each student can specify X schools to chart progress towards 
 
 Business ToDo
 1. (Amit) Make the powerpoint up to date on business end.
