@@ -44,8 +44,11 @@ root.configure(background = 'powder blue')
 
 photo = PhotoImage(file = "./GUI/logo.ppm")
 
+# tkinter variable to hold current user name 
 
 
+
+ 
 
 # data capture functions; *name* to be passed to console functions
 
@@ -85,8 +88,17 @@ def get_new_user():
     if(name != None):
         c.process_commands('new_user ' + name)
         # option below opens new user's folder       
-        file_name = tkinter.filedialog.askopenfilename( initialdir = './Users' + DIR_SEP + name)
-        os.system('open ' + file_name)
+        #file_name = tkinter.filedialog.askopenfilename( initialdir = './Users' + DIR_SEP + name)
+        #os.system('open ' + file_name)
+        var = StringVar()
+        if(c.state == LOAD_STATE):
+            UserName = c.user.name
+            var.set(UserName)
+            if(UserName != None):
+                cu = Label(group, text = 'Current User:', pady = 2, background = 'cadet blue')
+                nm = Label(group, textvariable =  var, pady = 2, background = 'cadet blue')
+                cu.grid(row = 35)
+                nm.grid(row = 35, column = 1, rowspan = 5, sticky = (W))
 def get_load_user():
     name = tkinter.simpledialog.askstring( 'Load User', 'Enter Username')
     if(name != None):
@@ -95,6 +107,16 @@ def get_load_user():
         #file_name = tkinter.filedialog.askopenfilename( initialdir = './Users' + '/' + name)
         #if(file_name != None):
         #    os.system('open ' + file_name)
+        var = StringVar()
+        if(c.state == LOAD_STATE):
+            UserName = c.user.name
+            var.set(UserName)
+            if(UserName != None):
+                cu = Label(group, text = 'Current User:', pady = 2, background = 'cadet blue')
+                nm = Label(group, textvariable =  var, pady = 2, background = 'cadet blue')
+                cu.grid(row = 35)
+                nm.grid(row = 35, column = 1, rowspan = 5, sticky = (W))
+
 def get_test_name():
     #name = tkinter.simpledialog.askstring( 'Grade Test', 'Enter Filename To Grade')
     #if(name != None):
@@ -145,8 +167,8 @@ menu_view.add_command(label= 'Grade A Test', command = get_test_name)
 menu_file.add_command(label = 'Reset Tests')
 
 menu_view.add_command(label = 'Create Answer Sheet', command = get_test_id)
-menu_view.add_command(label = 'Print Simple Report')
-menu_view.add_command(label = 'Print Detailed Report')
+menu_view.add_command(label = 'Print Simple Report', command = simple_report)
+menu_view.add_command(label = 'Print Advanced Report', command = advance_report)
 #display the menu
 root.config(menu=menubar)
 
@@ -171,9 +193,9 @@ Label(root, image = photo, pady= 5).grid(row=0)#, rowspan = 5)
 #entry = Entry(root) 
 #entry.grid(row = 0, column = 1)
 
-group = LabelFrame(root, text="Menu", padx = 5, pady = 5, width = 200, height = 300, background='cadet blue')#, rowspan = 20, columnspan = 5)
+group = LabelFrame(root, text="Menu", padx = 5, pady = 5, background='cadet blue')#, rowspan = 20, columnspan = 5)
 
-group.grid(column = 0)
+group.grid(row = 8)
 
 Button( group , text = "Create New User", pady = 0,  foreground = "red", command= get_new_user).grid( row = 1, columnspan = 3, rowspan = 2, sticky = (W))
 
@@ -186,7 +208,7 @@ Button( group, text = "Grade Tests",  pady = 0,  foreground = 'SteelBlue3', comm
 Button( group, text = "Create Answer Sheet", pady = 0,  foreground = 'SteelBlue4', command = get_test_id).grid( row = 15,columnspan = 3, rowspan = 2,sticky = W)
 
 mb = Menubutton( group, text = "Reports", relief = SUNKEN )
-mb.grid(row = 20, columnspan = 3, rowspan = 10, sticky = (W,E))
+mb.grid(row = 20, columnspan = 3, rowspan = 5, sticky = (W,E))
 mb.menu = Menu(mb)
 mb["menu"] = mb.menu
 mb.menu.add_checkbutton(label = "Simple Report", command = simple_report)
