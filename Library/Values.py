@@ -2,6 +2,12 @@ import os
 import shutil
 import random
 
+#License Information
+USER_LIMIT = 25
+#Year/Month/Day
+EXPIRATION_DATE = '2014/02/01'
+date_of_expiration = '02/01/2014'
+
 #Question Value
 PARSED_ARRAY_SIZE = 5
 

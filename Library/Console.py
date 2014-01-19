@@ -10,6 +10,7 @@
 
 from Commands import *
 from Values import *
+from License import *
 import subprocess
 
 class Console(object):
@@ -27,6 +28,12 @@ class Console(object):
     def process_commands(self, user_input):
         if (empty(user_input)):
             return True
+
+        #date license check
+        if not (check_date_license()):
+            print ("Error: This license of Excelerate has expired on " + date_of_expiration + ".")
+            return True
+
         cmd_vector = self.parse_command(user_input)
 
         cmd = cmd_vector[COMMAND_INDEX] 
@@ -51,9 +58,13 @@ class Console(object):
                 if file_exists(user_directory(cmd_vector[1])):
                     print ("User record already exists. Please try again with a new name.")
                 else:
-                    self.user = new_user(cmd_vector[1])
-                    self.state = LOAD_STATE
-                return True
+                    if (user_limit_license()):
+                        self.user = new_user(cmd_vector[1])
+                        self.state = LOAD_STATE
+                        return True
+                    else:
+                        print ("Error: You have exceeded the number of users purchased.")
+                        return True
             else:
                 print ("Error: Invalid use of new_user command.")
                 return False
