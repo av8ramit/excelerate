@@ -35,8 +35,6 @@ class Section_Stats(object):
                 self.questions[question_index] = (difficulty, question_type)
 
 
-
-
     #This returns the scored section id.
     def get_id(self):
         return self.scored_test.get_id() + FIELD_SEP + str(self.index)
