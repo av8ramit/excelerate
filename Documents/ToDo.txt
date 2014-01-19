@@ -12,10 +12,11 @@ GUI 1.0 ToDo
 4. Fix layout of buttons
 5. Add save functionality
 6. Add reset functionality
-7. Add simple_report "
-8.  "  advance_report "
-9. "  graph_report "
-10. " section_report "
+  Report Drop Down Menu
+  7. Add simple_report  "
+  8.  "  advance_report "
+  9.  "  graph_report   "
+  10. "  section_report "
 11. (Maybe) add clear functionality
 12. Hide terminal
 13. Display current user
@@ -37,7 +38,7 @@ Revision 1.0 ToDo
 Revision 1.1 ToDo
 1. Create folders in User directory for tests and reports.
 2. Create a report homepage that accesses others and eliminate report commands.
-3. Basic GUI for the main functions.
+3. (Neel) Basic GUI for the main functions.
 4. Trial version date trigger.
 
 Revision 2.0 ToDo
