@@ -28,7 +28,7 @@ c = Console()
 root = Tk()
 
 #set window size
-root.geometry("700x700")
+root.geometry("570x700")
 
 #set window title
 root.title("Excelerate")
@@ -49,22 +49,52 @@ photo = PhotoImage(file = "./GUI/logo.ppm")
 
 # data capture functions; *name* to be passed to console functions
 
+def simple_report():
+    c.process_commands('simple_report')
+    name = c.user.name 
+    dirc = user_directory(name) 
+    fname = os.path.basename(dirc)
+    if (dirc != None):
+        os.system('open ' + dirc + DIR_SEP + 'simple_report.html' ) 
+def advance_report():
+    c.process_commands('advanced_report')
+    name = c.user.name 
+    dirc = user_directory(name) 
+    fname = os.path.basename(dirc)
+    if (dirc != None):
+        os.system('open ' + dirc + DIR_SEP + 'advanced_report.html' )
+def graph_report():
+    c.process_commands('graph_report')
+    name = c.user.name 
+    dirc = user_directory(name) 
+    fname = os.path.basename(dirc)
+    if (dirc != None):
+        os.system('open ' + dirc + DIR_SEP + 'graph_report.html' )
+def section_report():
+    c.process_commands('section_report')
+    name = c.user.name 
+    dirc = user_directory(name) 
+    fname = os.path.basename(dirc)
+    if (dirc != None):
+        os.system('open ' + dirc + DIR_SEP + 'math_report.html' )
+        os.system('open ' + dirc + DIR_SEP + 'reading_report.html' )
+        os.system('open ' + dirc + DIR_SEP + 'writing_report.html' )
 
 def get_new_user():
     name = tkinter.simpledialog.askstring( 'New User', 'Enter New Username')
     if(name != None):
         c.process_commands('new_user ' + name)
         # option below opens new user's folder       
-        file_name = tkinter.filedialog.askopenfilename( initialdir = './Users' + '/' + name)
+        file_name = tkinter.filedialog.askopenfilename( initialdir = './Users' + DIR_SEP + name)
         os.system('open ' + file_name)
 def get_load_user():
     name = tkinter.simpledialog.askstring( 'Load User', 'Enter Username')
     if(name != None):
         c.process_commands('load_user ' + name)
          # option below opens loaded user's folder       
-        file_name = tkinter.filedialog.askopenfilename( initialdir = './Users' + '/' + name)
-        if(file_name != None):
-            os.system('open ' + file_name)
+        #file_name = tkinter.filedialog.askopenfilename( initialdir = './Users' + '/' + name)
+        #if(file_name != None):
+        #    os.system('open ' + file_name)
 def get_test_name():
     #name = tkinter.simpledialog.askstring( 'Grade Test', 'Enter Filename To Grade')
     #if(name != None):
@@ -124,7 +154,7 @@ root.config(menu=menubar)
 #buttons w/ user entry
 #nw_usr = LabelFrame(root, text = "New User", padx = 5, pady = 5)#grid(column = 2, row = 2, sticky=(W,E))
 
-Label(root, image = photo, pady= 5).grid(row=0, rowspan = 8)
+Label(root, image = photo, pady= 5).grid(row=0)#, rowspan = 5)
 
 
 #Label(root, text = "New User:", pady = 5, background = "LightSkyBlue2").grid(row=10, sticky = W)
@@ -141,15 +171,28 @@ Label(root, image = photo, pady= 5).grid(row=0, rowspan = 8)
 #entry = Entry(root) 
 #entry.grid(row = 0, column = 1)
 
-Button( root , text = "Create New User", pady = 5, foreground = "red", command= get_new_user).grid( row = 10, columnspan = 3, sticky = (W))
+group = LabelFrame(root, text="Menu", padx = 5, pady = 5, width = 200, height = 300, background='cadet blue')#, rowspan = 20, columnspan = 5)
 
-Button( root, text = "Load User", pady = 5, foreground = 'SteelBlue2', command = get_load_user).grid(row = 12, columnspan = 3,sticky = W)
+group.grid(column = 0)
+
+Button( group , text = "Create New User", pady = 0,  foreground = "red", command= get_new_user).grid( row = 1, columnspan = 3, rowspan = 2, sticky = (W))
+
+Button( group, text = "Load User", pady = 0, foreground = 'SteelBlue2', command = get_load_user).grid(row = 5, columnspan = 3, rowspan = 2,sticky = W)
 
 
-Button( root, text = "Grade Tests",  pady = 5, foreground = 'SteelBlue3', command = get_test_name ).grid( row = 14,columnspan = 3, sticky = W)
+Button( group, text = "Grade Tests",  pady = 0,  foreground = 'SteelBlue3', command = get_test_name ).grid( row = 10,columnspan = 3, rowspan = 2,sticky = W)
  
 
-Button( root, text = "Create Answer Sheet", pady = 5,  foreground = 'SteelBlue4', command = get_test_id).grid( row = 16,columnspan = 3, sticky = W)
+Button( group, text = "Create Answer Sheet", pady = 0,  foreground = 'SteelBlue4', command = get_test_id).grid( row = 15,columnspan = 3, rowspan = 2,sticky = W)
+
+mb = Menubutton( group, text = "Reports", relief = SUNKEN )
+mb.grid(row = 20, columnspan = 3, rowspan = 10, sticky = (W,E))
+mb.menu = Menu(mb)
+mb["menu"] = mb.menu
+mb.menu.add_checkbutton(label = "Simple Report", command = simple_report)
+mb.menu.add_checkbutton(label ="Advanced Report", command = advance_report)
+mb.menu.add_checkbutton(label ="Graphs Report", command = graph_report)
+mb.menu.add_checkbutton(label ="Section Report", command = section_report)
 #for child in root.winfo_children(): child.grid_configure(padx=5, pady=5)
 
 # Tk enters its event loop
