@@ -1,10 +1,5 @@
 TODO:
 
-GUI 1.0 ToDO
-(Completed-Neel) Can now open files from file menu after load/new/user
-(Completed-Neel) Grade no longer takes text input, instead can now click file from file window
-(Completed-Neel) Create Answer Sheet works 
-
 GUI 1.0 ToDo
 1. Fix terminal output when cancel is hit on file menu
 2. Make python function that returns current loaded user name 
@@ -23,6 +18,9 @@ GUI 1.0 ToDo
 14. Make "pretty"
 15. Make comprehensive  GUI test plan
 16. (Maybe) Create a GUI help/instructions menu
+(Completed-Neel) Can now open files from file menu after load/new/user
+(Completed-Neel) Grade no longer takes text input, instead can now click file from file window
+(Completed-Neel) Create Answer Sheet works 
 
 Revision 1.0 ToDo
 (Completed-Amit) Edge case where a user creates an account of someone who already exists.
