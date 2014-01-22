@@ -21,8 +21,9 @@ def clear(n):
 
 def new_user(name):
     directory = "Users" + DIR_SEP + name
-    if (file_exists(directory)):
-        rmdir(directory)
+    #disable deleting old directory to make a new one
+    #if (file_exists(directory)):
+    #    rmdir(directory)
     u = User(name)
     u.build()
     return u
@@ -32,6 +33,10 @@ def load_user(name, filename):
     u.name = name
     u.recreate_user(filename)
     return u
+
+def delete_user(name):
+    rmdir(name)
+
 
 def grade(u, filename):
     pa = parse_answers(filename)

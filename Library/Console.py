@@ -103,7 +103,23 @@ class Console(object):
                 print ("Error: Invalid use of load_user command.")
                 return False
 
-        #Load User
+        #Delete User
+        if cmd == "delete_user":
+            if (len(cmd_vector) == 2 and not empty(cmd_vector[1])):
+                name = cmd_vector[1]
+                directory = user_directory(name)
+                if (file_exists(directory)):
+                    rmdir(directory)
+                    self.state = LAUNCH_STATE
+                    return True
+                else:
+                    print ("Error: No records found of given user.")
+                    return False
+            else:
+                print ("Error: Invalid use of delete_user command.")
+                return False
+
+        #List Tests
         if cmd == "list_tests":
             if len(cmd_vector) == 1:
                 list_tests()
@@ -111,7 +127,6 @@ class Console(object):
             else:
                 print ("Error: Invalid use of list_tests command.")
                 return False
-
 
         #Print Answer Sheet
         if cmd == "answer_sheet":
