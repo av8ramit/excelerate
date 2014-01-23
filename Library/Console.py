@@ -53,7 +53,7 @@ class Console(object):
                 return False
 
         #New User
-        if cmd == "new_user":
+        if cmd == "new_student":
             if (len(cmd_vector) == 2 and not empty(cmd_vector[1])):
                 if file_exists(user_directory(cmd_vector[1])):
                     print ("User record already exists. Please try again with a new name.")
@@ -66,7 +66,7 @@ class Console(object):
                         print ("Error: You have exceeded the number of users purchased.")
                         return True
             else:
-                print ("Error: Invalid use of new_user command.")
+                print ("Error: Invalid use of new_student command.")
                 return False
 
         #Save Progress
@@ -88,7 +88,7 @@ class Console(object):
                 return False
 
         #Load User
-        if cmd == "load_user":
+        if cmd == "load_student":
             if (len(cmd_vector) == 2 and not empty(cmd_vector[1])):
                 name = cmd_vector[1]
                 filename = user_filename(name)
@@ -100,11 +100,11 @@ class Console(object):
                     print ("Error: No records found of given user.")
                     return False
             else:
-                print ("Error: Invalid use of load_user command.")
+                print ("Error: Invalid use of load_student command.")
                 return False
 
         #Delete User
-        if cmd == "delete_user":
+        if cmd == "delete_student":
             if (len(cmd_vector) == 2 and not empty(cmd_vector[1])):
                 name = cmd_vector[1]
                 directory = user_directory(name)
@@ -116,7 +116,7 @@ class Console(object):
                     print ("Error: No records found of given user.")
                     return False
             else:
-                print ("Error: Invalid use of delete_user command.")
+                print ("Error: Invalid use of delete_student command.")
                 return False
 
         #List Tests
@@ -243,9 +243,11 @@ class Console(object):
             print ("")
             print ('"clear (n)": Clears a line from the screen and if an input number of lines is given it clears the screen for n many lines.')
             print ("")
-            print ('"new_user [name]": Creates a new account for a user with the specified name. ')
+            print ('"new_student [name]": Creates a new account for a user with the specified name. ')
             print ("")
-            print ('"load_user [name]": Loads the account for the user with the specified name.')
+            print ('"load_student [name]": Loads the account for the user with the specified name.')
+            print ("")
+            print ('"delete_student [name]": Deletes the account for the user with the specified name.')
             print ("")
             print ('"save": Saves the tests that were taken in this session as the overall progress of the user.')
             print ("")

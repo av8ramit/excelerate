@@ -8,6 +8,8 @@ Console Command Instructions:
 
 "load_user [name]": Loads the account for the user with the specified name.
 
+"delete_student [name]": Deletes the account for the user with the specified name.
+
 "save": Saves the tests that were taken in this session as the overall progress of the user.
 
 "reset": Resets the tests taken by a user and allows them to start over.
