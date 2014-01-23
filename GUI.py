@@ -33,7 +33,7 @@ root.geometry("1060x650")
 #set window title
 root.title("Excelerate")
 
-root.configure(background = 'powder blue')
+root.configure(background = 'RoyalBlue4')
 #terminal frame
 #termframe = Frame(root, height = 400, width = 450)
 #termframe.grid(row=7)
@@ -42,7 +42,7 @@ root.configure(background = 'powder blue')
 
 ####################### Load Images ######################
 
-photo = PhotoImage(file = "./GUI/logo.ppm")
+photo = PhotoImage(file = "./GUI/E.gif")
 NUimg = PhotoImage(file = "./GUI/NewStdntButton.gif")
 LUimg = PhotoImage(file = "./GUI/LoadStdntButton.gif")
 Gimg = PhotoImage(file = "./GUI/GradeButton.gif")
@@ -102,8 +102,8 @@ def get_new_user():
             UserName = c.user.name
             var.set(UserName)
             if(UserName != None):
-                cu = Label(group, text = 'Current User:', pady = 2, background = 'cadet blue')
-                nm = Label(group, textvariable =  var, pady = 2, background = 'cadet blue')
+                cu = Label(root, text = 'Current User:', pady = 2, background = 'cadet blue')
+                nm = Label(root, textvariable =  var, pady = 2, background = 'cadet blue')
                 cu.grid(row = 35)
                 nm.grid(row = 35, column = 1, rowspan = 5, sticky = (W))
 def get_load_user():
@@ -119,8 +119,8 @@ def get_load_user():
             UserName = c.user.name
             var.set(UserName)
             if(UserName != None):
-                cu = Label(group, text = 'Current Student:', pady = 1, background = 'cadet blue')
-                nm = Label(group, textvariable =  var, pady = 1, background = 'cadet blue')
+                cu = Label(root, text = 'Current Student:', pady = 1, background = 'cadet blue')
+                nm = Label(root, textvariable =  var, pady = 1, background = 'cadet blue')
                 cu.grid(row = 10, column = 10, sticky = E)
                 nm.grid(row = 10, column = 11, sticky = (W))
 
@@ -183,7 +183,7 @@ root.config(menu=menubar)
 #buttons w/ user entry
 #nw_usr = LabelFrame(root, text = "New User", padx = 5, pady = 5)#grid(column = 2, row = 2, sticky=(W,E))
 
-Label(root, image = photo, pady= 5).grid(row=0)#, rowspan = 5)
+Label(root, image = photo, background = 'black', width = 250).grid(row=0, column = 2) #, rowspan = 5)
 
 
 #Label(root, text = "New User:", pady = 5, background = "LightSkyBlue2").grid(row=10, sticky = W)
@@ -200,25 +200,25 @@ Label(root, image = photo, pady= 5).grid(row=0)#, rowspan = 5)
 #entry = Entry(root) 
 #entry.grid(row = 0, column = 1)
 
-group = LabelFrame(root, text="Menu", padx = 10, pady = 5, background='powder blue')#, rowspan = 20, columnspan = 5)
+#group = LabelFrame(root, text="Menu", padx = 10, pady = 5, background='powder blue')#, rowspan = 20, columnspan = 5)
 
-group.grid(row = 8)
+#group.grid(row = 8)
 
-Button( group, image = NUimg, width = 250, height = 250, pady = 0,  command= get_new_user).grid( row = 1, column = 0 ,columnspan = 3, rowspan = 2, sticky = (W))
+Button( root, image = NUimg, width = 250, height = 250, pady = 0,  command= get_new_user).grid( row = 1, column = 0 ,columnspan = 2, rowspan = 2, sticky = (W))
 
-Button( group, image = LUimg , width = 250, height = 250, pady = 0, command = get_load_user).grid(row = 1, column = 3, columnspan = 3, rowspan = 2,sticky = W)
+Button( root, image = LUimg , width = 250, height = 250, pady = 0, command = get_load_user).grid(row = 1, column = 2, columnspan = 2, rowspan = 2,sticky = W)
 
 
-Button( group, image = Gimg, width = 250, height = 250,  pady = 0,  command = get_test_name ).grid( row = 10,column = 0, columnspan = 3, rowspan = 2,sticky = W)
+Button( root, image = Gimg, width = 250, height = 250,  pady = 0,  command = get_test_name ).grid( row = 10,column = 0, columnspan = 2, rowspan = 2,sticky = W)
  
 
-Button( group, image = CASimg,  width = 250, height = 250, pady = 0 , command = get_test_id).grid( row = 10, column = 3, columnspan = 3, rowspan = 2,sticky = W)
+Button( root, image = CASimg,  width = 250, height = 250, pady = 0 , command = get_test_id).grid( row = 10, column = 2, columnspan = 2, rowspan = 2,sticky = W)
 
-Button( group, image = Rstimg,  width = 250, height = 250, pady = 0 ).grid( row = 9, column = 6, columnspan = 3, rowspan = 2,sticky = W)
+Button( root, image = Rstimg,  width = 250, height = 250, pady = 0 ).grid( row = 9, column = 6, columnspan = 2, rowspan = 2,sticky = W)
 
-Button( group, image = Svimg,  width = 250, height = 250, pady = 0 ).grid( row = 1, column = 6, columnspan = 3, rowspan = 2,sticky = W)
+Button( root, image = Svimg,  width = 250, height = 250, pady = 0 ).grid( row = 1, column = 6, columnspan = 2, rowspan = 2,sticky = W)
 
-mb = Menubutton( group, image = Rptimg, width = 250, height = 250 )
+mb = Menubutton( root, image = Rptimg, width = 260, height = 255 )
 mb.grid(row = 1, column = 9, columnspan = 3, rowspan = 2, sticky = (W))
 mb.menu = Menu(mb)
 mb["menu"] = mb.menu
