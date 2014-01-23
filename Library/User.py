@@ -36,7 +36,9 @@ class User(object):
         t = Test(answers.id)
         ts = t.grade(answers)
         ss = Score_Summary(ts)
-        print (ss)
+        #disable printing in console
+        #print (ss)
+        self.grade_HTML(ts, ss)
         sections = {}
         sections[WRITING_TYPE] = ts.reports[WRITING_TYPE].incorrect_questions
         sections[MATH_TYPE] = ts.reports[MATH_TYPE].incorrect_questions
@@ -534,6 +536,82 @@ class User(object):
         FILE.writelines(lines)
         FILE.close()
 
+    def grade_HTML(self, ts, ss):
+        graphs = []
+        s1 = []
+        writing_scores = []
+        reading_scores = []
+        math_scores = []
+        graph_index = 1
+        index = 1
+
+        #calculate all scores
+        for test in self.tests_taken:
+            s1.append([index,test.score_summary.total_score()])
+            writing_scores.append([index, test.score_summary.section_scores[WRITING_TYPE]])
+            reading_scores.append([index, test.score_summary.section_scores[READING_TYPE]])
+            math_scores.append([index, test.score_summary.section_scores[MATH_TYPE]])
+            index += 1
+
+
+
+        FILE = open(self.directory() + DIR_SEP + "grade" + ".html", "w")
+        lines = []
+
+        scores = self.average_scores()
+
+        #HTML opener
+        lines.append('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">' + endl)
+        lines.append('<html xmlns="http://www.w3.org/1999/xhtml">' + endl)
+        lines.append('<head>')
+        lines.append('<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />' + endl)
+        lines.append('<link rel="stylesheet" type="text/css" href="../../HTML/style.css" />' + endl)
+        lines.append('<title>Test Report</title>' + endl)
+        lines.append('</head>' + endl)
+        lines.append('<body>' + endl)
+        lines.append('<div id="page">' + endl)
+        lines.append('<div id="header">' + endl)
+        lines.append('<img src="../../HTML/Mini Logo.png" width="35%" alt="Excelerate" />' + endl)
+        lines.append('</div>' + endl)
+        lines.append('</div>' + endl)
+        lines.append('<div id="content">' + endl)
+        lines.append('<div id="container">' + endl)
+        lines.append('<div id="main">' + endl)
+        lines.append('<div id="menu">' + endl)
+        lines.append('<h2 style="text-align:center;">Test Report: ' + self.name + '</h2>' + endl)
+        lines.append('</div>' + endl)
+        lines.append('<div id="text">' + endl)
+            
+
+        #Average Results
+        lines.append('<h1>Graded Test Report</h1>' + endl)
+        lines.append(str(ss))
+        lines.append('<hr color="#BBBBBB" size="2" width="100%">' + endl)
+        lines.append('<h1>Section Breakdown</h1>' + endl)
+        lines.append(str(ts))
+
+
+
+
+        #Footer
+        lines.append('<br>' + endl)
+        lines.append('</div>' + endl)
+        lines.append('</div>' + endl)
+        lines.append('</div>' + endl)
+        lines.append('<div class="clear"></div>' + endl)
+        lines.append('<div id="footer">' + endl)
+        lines.append('<p><a>' + self.name + ' Test Report</a></p>' + endl)
+        lines.append('</div>' + endl)
+        lines.append('</div>' + endl)
+
+
+
+        lines.append('</body>' + endl)
+        lines.append('</html>' + endl)
+        lines.append(endl)
+
+        FILE.writelines(lines)
+        FILE.close()
 
     def simple_report(self):
         FILE = open(self.directory() + DIR_SEP + "simple_report" + ".txt", "w")

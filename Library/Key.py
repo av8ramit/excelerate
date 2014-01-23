@@ -122,7 +122,8 @@ class Test(object):
                 else:
                     report.get_summary(current_type).add_miss()
                     report.get_summary(current_type).incorrect_questions.append((answer_key.get_question(j).get_id(),attempt))
-        print (report)
+        #disable printing report
+        #print (report)
         return report
 
 class Section(object):

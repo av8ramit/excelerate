@@ -135,6 +135,10 @@ def section_type_dict(section_type):
   else:
     return {}
 
+#HTML
+paropen = '<p>'
+parclose = '</p>'
+
 
 #Advice
 

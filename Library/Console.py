@@ -157,7 +157,8 @@ class Console(object):
                         grade(self.user, path)
                         return True
                     except:
-                        print("Error: The answer sheet has been corrupted. Run the answer_sheet command and then input your answers in that file.")
+                        #CHANGE ERROR FUNCTION
+                        print ("Error: The answer sheet has been corrupted. Run the answer_sheet command and then input your answers in that file.")
                         return False
                 else:
                     self.error = ("Error: Could not find " + cmd_vector[1] + " in " + self.user.name + " directory.")

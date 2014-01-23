@@ -57,11 +57,11 @@ class Score_Summary(object):
 
     #String override method.
     def __str__(self):
-        output = "Test ID: " + str(self.id) + endl
-        output += "Total: " + str(self.total_score()) + endl
-        output += "Writing: " + str(self.section_scores[WRITING_TYPE]) + endl
-        output += "Reading: " + str(self.section_scores[READING_TYPE]) + endl
-        output += "Math: " + str(self.section_scores[MATH_TYPE]) + endl
+        output = '<h3>' + "Test ID: " + str(self.id) + '</h3>' + endl
+        output += paropen + "Total: " + str(self.total_score()) + parclose + endl
+        output += paropen + "Writing: " + str(self.section_scores[WRITING_TYPE]) + parclose + endl
+        output +=  paropen + "Reading: " + str(self.section_scores[READING_TYPE]) + parclose + endl
+        output += paropen + "Math: " + str(self.section_scores[MATH_TYPE]) + parclose + endl
         return output
 
 
@@ -80,13 +80,15 @@ class Test_Summary(object):
         return self.reports[section_type]
 
     def __str__(self):
-        output = ("\nWRITING:" + endl)
+        output = ("<h3>WRITING</h3>" + endl)
         current_type = WRITING_TYPE
         output += str(self.get_summary(current_type))
-        output += ("\nMATH:" + endl)
+        output += ('<br><hr color="#4169EF" size="1" width="90%"><br>' + endl)
+        output += ("<h3>MATH</h3>" + endl)
         current_type = MATH_TYPE
         output += str(self.get_summary(current_type))
-        output += ("\nREADING:" + endl)
+        output += ('<br><hr color="#4169EF" size="1" width="90%"><br>' + endl)
+        output += ("<h3>READING</h3>" + endl)
         current_type = READING_TYPE
         output += str(self.get_summary(current_type))
         return output
@@ -119,9 +121,9 @@ class Section_Summary(object):
         self.qa += 1
 
     def __str__(self):
-        output = ("QA: " + str(self.qa) + endl)
-        output += ("QM: " + str(self.qm) + endl)
-        output += ("QB: " + str(self.qb) + endl)
-        output += ("Raw Score: " + str(self.raw_score()) + endl)
-        output += ("Missed Questions:" + str(self.incorrect_questions) + endl)
+        output = (paropen + '<font color = ' + GREEN + ">Questions Answered: " + str(self.qa) + '</font>' + parclose + endl)
+        output += (paropen + '<font color = ' + RED + ">Questions Missed: " + str(self.qm) + '</font>' + parclose + endl)
+        output += (paropen + '<font color = ' + YELLOW + ">Questions Blank: " + str(self.qb) + '</font>' + parclose + endl)
+        output += (paropen + "Raw Score: " + str(self.raw_score()) + parclose + endl)
+        output += (paropen + "Missed Questions:" + str(self.incorrect_questions) + parclose + endl)
         return output
