@@ -19,6 +19,7 @@ class Console(object):
     def __init__(self):
         self.user = None
         self.state = LAUNCH_STATE
+        self.error = None
 
     def parse_command(self, user_input):
         if empty(user_input):
@@ -31,8 +32,8 @@ class Console(object):
 
         #date license check
         if not (check_date_license()):
-            print ("Error: This license of Excelerate has expired on " + date_of_expiration + ".")
-            return True
+            self.error = ("Error: This license of Excelerate has expired on " + date_of_expiration + ".")
+            return False
 
         cmd_vector = self.parse_command(user_input)
 
@@ -49,24 +50,24 @@ class Console(object):
                     print (PROMPT)
                 return True
             else:
-                print ("Error: Invalid use of clear command.")
+                self.error = ("Error: Invalid use of clear command.")
                 return False
 
         #New User
         if cmd == "new_student":
             if (len(cmd_vector) == 2 and not empty(cmd_vector[1])):
                 if file_exists(user_directory(cmd_vector[1])):
-                    print ("User record already exists. Please try again with a new name.")
+                    self.error = ("User record already exists. Please try again with a new name.")
                 else:
                     if (user_limit_license()):
                         self.user = new_user(cmd_vector[1])
                         self.state = LOAD_STATE
                         return True
                     else:
-                        print ("Error: You have exceeded the number of users purchased.")
-                        return True
+                        self.error = ("Error: You have exceeded the number of users purchased.")
+                        return False
             else:
-                print ("Error: Invalid use of new_student command.")
+                self.error = ("Error: Invalid use of new_student command.")
                 return False
 
         #Save Progress
@@ -75,7 +76,7 @@ class Console(object):
                 self.user.save_user()
                 return True
             else:
-                print ("Error: Invalid use of save command.")
+                self.error = ("Error: Invalid use of save command.")
                 return False
 
         #Reset Account
@@ -84,7 +85,7 @@ class Console(object):
                 self.user.reset_account()
                 return True
             else:
-                print ("Error: Invalid use of reset command.")
+                self.error = ("Error: Invalid use of reset command.")
                 return False
 
         #Load User
@@ -97,10 +98,10 @@ class Console(object):
                     self.state = LOAD_STATE
                     return True
                 else:
-                    print ("Error: No records found of given user.")
+                    self.error = ("Error: No records found of given user.")
                     return False
             else:
-                print ("Error: Invalid use of load_student command.")
+                self.error = ("Error: Invalid use of load_student command.")
                 return False
 
         #Delete User
@@ -113,10 +114,10 @@ class Console(object):
                     self.state = LAUNCH_STATE
                     return True
                 else:
-                    print ("Error: No records found of given user.")
+                    self.error = ("Error: No records found of given user.")
                     return False
             else:
-                print ("Error: Invalid use of delete_student command.")
+                self.error = ("Error: Invalid use of delete_student command.")
                 return False
 
         #List Tests
@@ -125,29 +126,29 @@ class Console(object):
                 list_tests()
                 return True
             else:
-                print ("Error: Invalid use of list_tests command.")
+                self.error = ("Error: Invalid use of list_tests command.")
                 return False
 
         #Print Answer Sheet
         if cmd == "answer_sheet":
             if self.state != LOAD_STATE:
-                print ("Error: Please load or create a user before creating answer sheets.")
+                self.error = ("Error: Please load or create a user before creating answer sheets.")
                 return False
             elif (len(cmd_vector) == 2 and not empty(cmd_vector[1])):
                 if valid_test_id(cmd_vector[1]):
                     make_answer_sheet(self.user, cmd_vector[1])
                     return True
                 else:
-                    print ("Error: Not a valid supported test_id.")
+                    self.error = ("Error: Not a valid supported test_id.")
                     return False
             else:
-                print ("Error: Invalid use of answer_sheet command.")
+                self.error = ("Error: Invalid use of answer_sheet command.")
                 return False
 
         #Grade
         if cmd == "grade":
             if self.state != LOAD_STATE:
-                print ("Error: Please load or create a user before grading tests.")
+                self.error = ("Error: Please load or create a user before grading tests.")
                 return False            
             elif len(cmd_vector) == 2 and not empty(cmd_vector[1]):
                 path = self.user.directory() + DIR_SEP + cmd_vector[1]
@@ -159,75 +160,75 @@ class Console(object):
                         print("Error: The answer sheet has been corrupted. Run the answer_sheet command and then input your answers in that file.")
                         return False
                 else:
-                    print ("Error: Could not find " + cmd_vector[1] + " in " + self.user.name + " directory.")
+                    self.error = ("Error: Could not find " + cmd_vector[1] + " in " + self.user.name + " directory.")
                     return False
             else:
-                print ("Error: Invalid use of grade command.")
+                self.error = ("Error: Invalid use of grade command.")
                 return False
 
         #Print Simple Report
         if cmd == "simple_report":
             if self.state == LAUNCH_STATE:
-                print ("Error: Please load or create a user before grading tests.")
+                self.error = ("Error: Please load or create a user before grading tests.")
                 return False
             elif self.user.tests_taken == []:
-                print ("Error: Please take tests and grade them before printing reports.")
+                self.error = ("Error: Please take tests and grade them before printing reports.")
                 return False
             elif self.state == LOAD_STATE and self.user != None:
                  simple_report(self.user)
                  return True
             else:
-                print ("Error: Invalid use of grade command.")
+                self.error = ("Error: Invalid use of grade command.")
                 return False
 
         #Print Advanced Report
         if cmd == "advanced_report":
             if self.state == LAUNCH_STATE:
-                print ("Error: Please load or create a user before grading tests.")
+                self.error = ("Error: Please load or create a user before grading tests.")
                 return False
             elif self.user.tests_taken == []:
-                print ("Error: Please take tests and grade them before printing reports.")
+                self.error = ("Error: Please take tests and grade them before printing reports.")
                 return False
             elif self.state == LOAD_STATE and self.user != None:
                  advanced_report(self.user)
                  return True
             else:
-                print ("Error: Invalid use of grade command.")
+                self.error = ("Error: Invalid use of grade command.")
                 return False
 
         #Print Graph Report
         if cmd == "graph_report":
             if self.state == LAUNCH_STATE:
-                print ("Error: Please load or create a user before grading tests.")
+                self.error = ("Error: Please load or create a user before grading tests.")
                 return False
             elif self.user.tests_taken == []:
-                print ("Error: Please take tests and grade them before printing reports.")
+                self.error = ("Error: Please take tests and grade them before printing reports.")
                 return False
             elif self.state == LOAD_STATE and self.user != None:
                  graph_report(self.user)
                  return True
             else:
-                print ("Error: Invalid use of grade command.")
+                self.error = ("Error: Invalid use of grade command.")
                 return False
 
         #Print Section Reports
         if cmd == "section_report":
             if self.state == LAUNCH_STATE:
-                print ("Error: Please load or create a user before grading tests.")
+                self.error = ("Error: Please load or create a user before grading tests.")
                 return False
             elif self.user.tests_taken == []:
-                print ("Error: Please take tests and grade them before printing reports.")
+                self.error = ("Error: Please take tests and grade them before printing reports.")
                 return False
             elif self.state == LOAD_STATE and self.user != None:
                  section_report(self.user)
                  return True
             else:
-                print ("Error: Invalid use of grade command.")
+                self.error = ("Error: Invalid use of grade command.")
                 return False
 
         if cmd == "make_test":
             if self.state != LAUNCH_STATE:
-                print ("Error: You can only create tests at launch time.")
+                self.error = ("Error: You can only create tests at launch time.")
                 return False
             else:
                 make_test()
@@ -268,7 +269,7 @@ class Console(object):
 
         #Invalid command        
         else:
-            print ("Error: Command " + cmd + " not recognized.")
+            self.error = ("Error: Command " + cmd + " not recognized.")
             return False
 
 
