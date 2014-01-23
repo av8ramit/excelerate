@@ -158,7 +158,7 @@ class Console(object):
                         return True
                     except:
                         #CHANGE ERROR FUNCTION
-                        print ("Error: The answer sheet has been corrupted. Run the answer_sheet command and then input your answers in that file.")
+                        self.error ("Error: The answer sheet has been corrupted. Run the answer_sheet command and then input your answers in that file.")
                         return False
                 else:
                     self.error = ("Error: Could not find " + cmd_vector[1] + " in " + self.user.name + " directory.")
