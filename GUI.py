@@ -28,7 +28,7 @@ c = Console()
 root = Tk()
 
 #set window size
-root.geometry("570x700")
+root.geometry("1060x650")
 
 #set window title
 root.title("Excelerate")
@@ -40,9 +40,16 @@ root.configure(background = 'powder blue')
 #w_id = termframe.winfo_id()
 #os.system('konsole -into %d - geometry 400x200 -e /root/.bashrc&' % w_id)
 
-### Display Logo
+####################### Load Images ######################
 
 photo = PhotoImage(file = "./GUI/logo.ppm")
+NUimg = PhotoImage(file = "./GUI/NewStdntButton.gif")
+LUimg = PhotoImage(file = "./GUI/LoadStdntButton.gif")
+Gimg = PhotoImage(file = "./GUI/GradeButton.gif")
+CASimg = PhotoImage(file = "./GUI/CreateAnsButton.gif")
+Rptimg = PhotoImage(file = "./GUI/ReportsButton.gif")
+Rstimg = PhotoImage(file = "./GUI/ResetButton.gif")
+Svimg = PhotoImage(file = "./GUI/SaveButton.gif")
 
 # tkinter variable to hold current user name 
 
@@ -112,10 +119,10 @@ def get_load_user():
             UserName = c.user.name
             var.set(UserName)
             if(UserName != None):
-                cu = Label(group, text = 'Current User:', pady = 2, background = 'cadet blue')
-                nm = Label(group, textvariable =  var, pady = 2, background = 'cadet blue')
-                cu.grid(row = 35)
-                nm.grid(row = 35, column = 1, rowspan = 5, sticky = (W))
+                cu = Label(group, text = 'Current Student:', pady = 1, background = 'cadet blue')
+                nm = Label(group, textvariable =  var, pady = 1, background = 'cadet blue')
+                cu.grid(row = 10, column = 10, sticky = E)
+                nm.grid(row = 10, column = 11, sticky = (W))
 
 def get_test_name():
     #name = tkinter.simpledialog.askstring( 'Grade Test', 'Enter Filename To Grade')
@@ -193,22 +200,26 @@ Label(root, image = photo, pady= 5).grid(row=0)#, rowspan = 5)
 #entry = Entry(root) 
 #entry.grid(row = 0, column = 1)
 
-group = LabelFrame(root, text="Menu", padx = 5, pady = 5, background='cadet blue')#, rowspan = 20, columnspan = 5)
+group = LabelFrame(root, text="Menu", padx = 10, pady = 5, background='powder blue')#, rowspan = 20, columnspan = 5)
 
 group.grid(row = 8)
 
-Button( group , text = "Create New User", pady = 0,  foreground = "red", command= get_new_user).grid( row = 1, columnspan = 3, rowspan = 2, sticky = (W))
+Button( group, image = NUimg, width = 250, height = 250, pady = 0,  command= get_new_user).grid( row = 1, column = 0 ,columnspan = 3, rowspan = 2, sticky = (W))
 
-Button( group, text = "Load User", pady = 0, foreground = 'SteelBlue2', command = get_load_user).grid(row = 5, columnspan = 3, rowspan = 2,sticky = W)
+Button( group, image = LUimg , width = 250, height = 250, pady = 0, command = get_load_user).grid(row = 1, column = 3, columnspan = 3, rowspan = 2,sticky = W)
 
 
-Button( group, text = "Grade Tests",  pady = 0,  foreground = 'SteelBlue3', command = get_test_name ).grid( row = 10,columnspan = 3, rowspan = 2,sticky = W)
+Button( group, image = Gimg, width = 250, height = 250,  pady = 0,  command = get_test_name ).grid( row = 10,column = 0, columnspan = 3, rowspan = 2,sticky = W)
  
 
-Button( group, text = "Create Answer Sheet", pady = 0,  foreground = 'SteelBlue4', command = get_test_id).grid( row = 15,columnspan = 3, rowspan = 2,sticky = W)
+Button( group, image = CASimg,  width = 250, height = 250, pady = 0 , command = get_test_id).grid( row = 10, column = 3, columnspan = 3, rowspan = 2,sticky = W)
 
-mb = Menubutton( group, text = "Reports", relief = SUNKEN )
-mb.grid(row = 20, columnspan = 3, rowspan = 5, sticky = (W,E))
+Button( group, image = Rstimg,  width = 250, height = 250, pady = 0 ).grid( row = 9, column = 6, columnspan = 3, rowspan = 2,sticky = W)
+
+Button( group, image = Svimg,  width = 250, height = 250, pady = 0 ).grid( row = 1, column = 6, columnspan = 3, rowspan = 2,sticky = W)
+
+mb = Menubutton( group, image = Rptimg, width = 250, height = 250 )
+mb.grid(row = 1, column = 9, columnspan = 3, rowspan = 2, sticky = (W))
 mb.menu = Menu(mb)
 mb["menu"] = mb.menu
 mb.menu.add_checkbutton(label = "Simple Report", command = simple_report)
