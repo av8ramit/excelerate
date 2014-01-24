@@ -28,7 +28,7 @@ c = Console()
 root = Tk()
 
 #set window size
-root.geometry("1060x650")
+root.geometry("1035x650")
 
 #set window title
 root.title("Excelerate")
@@ -91,9 +91,9 @@ def section_report():
         os.system('open ' + dirc + DIR_SEP + 'writing_report.html' )
 
 def get_new_user():
-    name = tkinter.simpledialog.askstring( 'New User', 'Enter New Username')
+    name = tkinter.simpledialog.askstring( 'New Student', 'Enter New Username')
     if(name != None):
-        c.process_commands('new_user ' + name)
+        c.process_commands('new_student ' + name)
         # option below opens new user's folder       
         #file_name = tkinter.filedialog.askopenfilename( initialdir = './Users' + DIR_SEP + name)
         #os.system('open ' + file_name)
@@ -107,9 +107,9 @@ def get_new_user():
                 cu.grid(row = 35)
                 nm.grid(row = 35, column = 1, rowspan = 5, sticky = (W))
 def get_load_user():
-    name = tkinter.simpledialog.askstring( 'Load User', 'Enter Username')
+    name = tkinter.simpledialog.askstring( 'Load Student', 'Enter Username')
     if(name != None):
-        c.process_commands('load_user ' + name)
+        c.process_commands('load_student ' + name)
          # option below opens loaded user's folder       
         #file_name = tkinter.filedialog.askopenfilename( initialdir = './Users' + '/' + name)
         #if(file_name != None):
