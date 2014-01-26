@@ -92,8 +92,7 @@ class Console(object):
         if cmd == "load_student":
             if (len(cmd_vector) == 2 and not empty(cmd_vector[1])):
                 name = cmd_vector[1]
-                filename = user_filename(name)
-                if (file_exists(filename)):
+                if (name in list_users()):
                     self.user = load_user(name, filename)
                     self.state = LOAD_STATE
                     return True
