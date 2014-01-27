@@ -38,7 +38,6 @@ class User(object):
         ss = Score_Summary(ts)
         #disable printing in console
         #print (ss)
-        self.grade_HTML(ts, ss)
         sections = {}
         sections[WRITING_TYPE] = ts.reports[WRITING_TYPE].incorrect_questions
         sections[MATH_TYPE] = ts.reports[MATH_TYPE].incorrect_questions
@@ -49,6 +48,7 @@ class User(object):
         self.tests_taken.append(st)
         #add this new test to data sections
         self.stats_from_test(st)
+        self.grade_HTML(ts, ss)
 
 
     def save_user(self):
@@ -158,6 +158,9 @@ class User(object):
         self.tests_taken = [] #array of scored tests for data analysis
         self.data = Data_Holder()
         self.save_user()
+
+    #def cram(self):
+        #complete this tomorrow
 
     def simple_HTML(self):
         FILE = open(self.directory() + DIR_SEP + "simple_report" + ".html", "w")
