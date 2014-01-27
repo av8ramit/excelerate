@@ -271,7 +271,7 @@ class User(object):
         g = Graph(section_type_name + " Score Performance", graph_index, s1)
         type_dict = section_type_dict(section_type)
 
-        for i in range(1, len(type_dict)):
+        for i in range(1, len(type_dict) + 1):
             key = section_type_name[0] + str(i)
             data = []
             graph_index += 1
