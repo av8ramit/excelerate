@@ -14,6 +14,7 @@ import tkinter.filedialog
 
 import sys
 
+from tkinter import messagebox
 #import image format support
 #from PIL import Image, ImageTk
 
@@ -28,12 +29,12 @@ c = Console()
 root = Tk()
 
 #set window size
-root.geometry("1035x650")
+root.geometry("1033x615")
 
 #set window title
 root.title("Excelerate")
 
-root.configure(background = 'RoyalBlue4')
+root.configure(background = 'blanched almond')
 #terminal frame
 #termframe = Frame(root, height = 400, width = 450)
 #termframe.grid(row=7)
@@ -50,94 +51,126 @@ CASimg = PhotoImage(file = "./GUI/CreateAnsButton.gif")
 Rptimg = PhotoImage(file = "./GUI/ReportsButton.gif")
 Rstimg = PhotoImage(file = "./GUI/ResetButton.gif")
 Svimg = PhotoImage(file = "./GUI/SaveButton.gif")
+AutoGrdr = PhotoImage(file = "./GUI/AutoGrdr.gif")
 
 # tkinter variable to hold current user name 
 
 
-
- 
-
 # data capture functions; *name* to be passed to console functions
 
+def save_user():
+    res = c.process_commands('save')
+    if (not res):
+            messagebox.showwarning("Error", c.error)
+
+def reset_user():
+    res = c.process_commands('reset')   
+    if (not res):
+            messagebox.showwarning("Error", c.error) 
+
+def delete_user():
+    res = c.process_commands('delete_student')
+    if (not res):
+            messagebox.showwarning("Error", c.error)
 def simple_report():
-    c.process_commands('simple_report')
-    name = c.user.name 
-    dirc = user_directory(name) 
-    fname = os.path.basename(dirc)
-    if (dirc != None):
-        os.system('open ' + dirc + DIR_SEP + 'simple_report.html' ) 
+    res = c.process_commands('simple_report')
+    if (not res):
+        messagebox.showwarning("Error", c.error)
+    else:     
+        name = c.user.name 
+        dirc = user_directory(name) 
+        fname = os.path.basename(dirc)
+        if (dirc != None):
+            os.system('open ' + dirc + DIR_SEP + 'simple_report.html' ) 
 def advance_report():
-    c.process_commands('advanced_report')
-    name = c.user.name 
-    dirc = user_directory(name) 
-    fname = os.path.basename(dirc)
-    if (dirc != None):
-        os.system('open ' + dirc + DIR_SEP + 'advanced_report.html' )
+    res = c.process_commands('advanced_report')
+    if (not res):
+        messagebox.showwarning("Error", c.error)
+    else:     
+        name = c.user.name 
+        dirc = user_directory(name) 
+        fname = os.path.basename(dirc)
+        if (dirc != None):
+            os.system('open ' + dirc + DIR_SEP + 'advanced_report.html' )
 def graph_report():
-    c.process_commands('graph_report')
-    name = c.user.name 
-    dirc = user_directory(name) 
-    fname = os.path.basename(dirc)
-    if (dirc != None):
-        os.system('open ' + dirc + DIR_SEP + 'graph_report.html' )
+    res = c.process_commands('graph_report')
+    if (not res):
+        messagebox.showwarning("Error", c.error)
+    else:     
+        name = c.user.name 
+        dirc = user_directory(name) 
+        fname = os.path.basename(dirc)
+        if (dirc != None):
+            os.system('open ' + dirc + DIR_SEP + 'graph_report.html' )
 def section_report():
-    c.process_commands('section_report')
-    name = c.user.name 
-    dirc = user_directory(name) 
-    fname = os.path.basename(dirc)
-    if (dirc != None):
-        os.system('open ' + dirc + DIR_SEP + 'math_report.html' )
-        os.system('open ' + dirc + DIR_SEP + 'reading_report.html' )
-        os.system('open ' + dirc + DIR_SEP + 'writing_report.html' )
+    res = c.process_commands('section_report')
+    if (not res):
+        messagebox.showwarning("Error", c.error)
+    else:    
+        name = c.user.name 
+        dirc = user_directory(name) 
+        fname = os.path.basename(dirc)
+        if (dirc != None):
+            os.system('open ' + dirc + DIR_SEP + 'math_report.html' )
+            os.system('open ' + dirc + DIR_SEP + 'reading_report.html' )
+            os.system('open ' + dirc + DIR_SEP + 'writing_report.html' )
 
 def get_new_user():
     name = tkinter.simpledialog.askstring( 'New Student', 'Enter New Username')
     if(name != None):
-        c.process_commands('new_student ' + name)
+        res = c.process_commands('new_student ' + name)
+        if (not res):
+            messagebox.showwarning("Error", c.error)
         # option below opens new user's folder       
         #file_name = tkinter.filedialog.askopenfilename( initialdir = './Users' + DIR_SEP + name)
         #os.system('open ' + file_name)
-        var = StringVar()
-        if(c.state == LOAD_STATE):
-            UserName = c.user.name
-            var.set(UserName)
-            if(UserName != None):
-                cu = Label(root, text = 'Current User:', pady = 2, background = 'cadet blue')
-                nm = Label(root, textvariable =  var, pady = 2, background = 'cadet blue')
-                cu.grid(row = 35)
-                nm.grid(row = 35, column = 1, rowspan = 5, sticky = (W))
+        else:     
+            var = StringVar()
+            if(c.state == LOAD_STATE):
+                UserName = c.user.name
+                var.set(UserName)
+                if(UserName != None):
+                    cu = Label(root, text = 'Current Student:', pady = 2, background = 'cadet blue')
+                    nm = Label(root, textvariable =  var, pady = 2, background = 'cadet blue')
+                    cu.grid(row = 0, column = 0, sticky = E)
+                    nm.grid(row = 0, column = 1, sticky = (W))
 def get_load_user():
     name = tkinter.simpledialog.askstring( 'Load Student', 'Enter Username')
     if(name != None):
-        c.process_commands('load_student ' + name)
-         # option below opens loaded user's folder       
-        #file_name = tkinter.filedialog.askopenfilename( initialdir = './Users' + '/' + name)
-        #if(file_name != None):
-        #    os.system('open ' + file_name)
-        var = StringVar()
-        if(c.state == LOAD_STATE):
-            UserName = c.user.name
-            var.set(UserName)
-            if(UserName != None):
-                cu = Label(root, text = 'Current Student:', pady = 1, background = 'cadet blue')
-                nm = Label(root, textvariable =  var, pady = 1, background = 'cadet blue')
-                cu.grid(row = 10, column = 10, sticky = E)
-                nm.grid(row = 10, column = 11, sticky = (W))
+        res = c.process_commands('load_student ' + name)
+        if (not res):
+            messagebox.showwarning("Error", c.error)
+     
+        else:     
+            var = StringVar()
+            if(c.state == LOAD_STATE):
+                UserName = c.user.name
+                var.set(UserName)
+                if(UserName != None):
+                    cu = Label(root, text = 'Current Student:', pady = 1, background = 'cadet blue')
+                    nm = Label(root, textvariable =  var, pady = 1, background = 'cadet blue')
+                    cu.grid(row = 0, column = 0, sticky = E)
+                    nm.grid(row = 0 , column= 1, sticky = (W))
 
 def get_test_name():
-    #name = tkinter.simpledialog.askstring( 'Grade Test', 'Enter Filename To Grade')
-    #if(name != None):
-        #test = tkinter.filedialog.askopenfilename( initialdir = './Users' + '/' + name)
-    
+   
+ 
     file_path = tkinter.filedialog.askopenfilename( initialdir = './Users' )
+    if (not file_path):
+        return
     #extract filename from pathing stored in file_path
     file_name = os.path.basename(file_path)
     if (file_name != None):
-        c.process_commands('grade ' + file_name)
+        res = c.process_commands('grade ' + file_name)
+        if (not res):
+            messagebox.showwarning("Error", c.error)
+
 def get_test_id():
     name = tkinter.simpledialog.askstring( 'Create Answer Sheet', 'Enter Test ID')
     if(name != None):
-        c.process_commands('answer_sheet ' + name)
+        res = c.process_commands('answer_sheet ' + name)
+        if (not res):
+            messagebox.showwarning("Error", c.error)
 
 
 #prevent menu items from being taken off the window
@@ -183,7 +216,7 @@ root.config(menu=menubar)
 #buttons w/ user entry
 #nw_usr = LabelFrame(root, text = "New User", padx = 5, pady = 5)#grid(column = 2, row = 2, sticky=(W,E))
 
-Label(root, image = photo, background = 'black', width = 250).grid(row=0, column = 2) #, rowspan = 5)
+Label(root, image = photo, background = 'blanched almond').grid(row=0, column = 2, columnspan = 3) #, rowspan = 5)
 
 
 #Label(root, text = "New User:", pady = 5, background = "LightSkyBlue2").grid(row=10, sticky = W)
@@ -209,17 +242,21 @@ Button( root, image = NUimg, width = 250, height = 250, pady = 0,  command= get_
 Button( root, image = LUimg , width = 250, height = 250, pady = 0, command = get_load_user).grid(row = 1, column = 2, columnspan = 2, rowspan = 2,sticky = W)
 
 
-Button( root, image = Gimg, width = 250, height = 250,  pady = 0,  command = get_test_name ).grid( row = 10,column = 0, columnspan = 2, rowspan = 2,sticky = W)
+Button( root, image = Gimg, width = 250, height = 250,  pady = 0,  command = get_test_name ).grid( row = 1,column = 10, columnspan = 2, rowspan = 2,sticky = W)
  
 
-Button( root, image = CASimg,  width = 250, height = 250, pady = 0 , command = get_test_id).grid( row = 10, column = 2, columnspan = 2, rowspan = 2,sticky = W)
+Button( root, image = CASimg,  width = 250, height = 250, pady = 0 , command = get_test_id).grid( row = 1, column = 4, columnspan = 2, rowspan = 2,sticky = W)
 
-Button( root, image = Rstimg,  width = 250, height = 250, pady = 0 ).grid( row = 9, column = 6, columnspan = 2, rowspan = 2,sticky = W)
+Button( root, image = Rstimg,  width = 250, height = 250, pady = 0, command = reset_user).grid( row = 9, column = 9, columnspan = 2, rowspan = 2,sticky = W)
 
-Button( root, image = Svimg,  width = 250, height = 250, pady = 0 ).grid( row = 1, column = 6, columnspan = 2, rowspan = 2,sticky = W)
+Button( root, image = Svimg,  width = 250, height = 250, pady = 0, command = save_user ).grid( row = 10, column = 2, columnspan = 2, rowspan = 2,sticky = W)
 
-mb = Menubutton( root, image = Rptimg, width = 260, height = 255 )
-mb.grid(row = 1, column = 9, columnspan = 3, rowspan = 2, sticky = (W))
+Button( root, image = AutoGrdr,  width = 250, height = 250, pady = 0).grid( row = 10, column = 4, columnspan = 2, rowspan = 2,sticky = W)
+
+
+
+mb = Menubutton( root, image = Rptimg, width = 254, height = 255)
+mb.grid(row = 10, column = 0, columnspan = 3, rowspan = 2, sticky = (W))
 mb.menu = Menu(mb)
 mb["menu"] = mb.menu
 mb.menu.add_checkbutton(label = "Simple Report", command = simple_report)
