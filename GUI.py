@@ -34,7 +34,7 @@ root.geometry("1033x615")
 #set window title
 root.title("Excelerate")
 
-root.configure(background = 'blanched almond')
+root.configure(background = 'steel blue')
 #terminal frame
 #termframe = Frame(root, height = 400, width = 450)
 #termframe.grid(row=7)
@@ -130,8 +130,8 @@ def get_new_user():
                 UserName = c.user.name
                 var.set(UserName)
                 if(UserName != None):
-                    cu = Label(root, text = 'Current Student:', pady = 2, background = 'cadet blue')
-                    nm = Label(root, textvariable =  var, pady = 2, background = 'cadet blue')
+                    cu = Label(root, text = 'Current Student:', pady = 2, background = 'light steel blue')
+                    nm = Label(root, textvariable =  var, pady = 2, background = 'light steel blue')
                     cu.grid(row = 0, column = 0, sticky = E)
                     nm.grid(row = 0, column = 1, sticky = (W))
 def get_load_user():
@@ -147,8 +147,8 @@ def get_load_user():
                 UserName = c.user.name
                 var.set(UserName)
                 if(UserName != None):
-                    cu = Label(root, text = 'Current Student:', pady = 1, background = 'cadet blue')
-                    nm = Label(root, textvariable =  var, pady = 1, background = 'cadet blue')
+                    cu = Label(root, text = 'Current Student:', pady = 1, background = 'light steel blue')
+                    nm = Label(root, textvariable =  var, pady = 1, background = 'light steel blue')
                     cu.grid(row = 0, column = 0, sticky = E)
                     nm.grid(row = 0 , column= 1, sticky = (W))
 
@@ -216,7 +216,7 @@ root.config(menu=menubar)
 #buttons w/ user entry
 #nw_usr = LabelFrame(root, text = "New User", padx = 5, pady = 5)#grid(column = 2, row = 2, sticky=(W,E))
 
-Label(root, image = photo, background = 'blanched almond').grid(row=0, column = 2, columnspan = 3) #, rowspan = 5)
+Label(root, image = photo, background = 'steel blue').grid(row=0, column = 2, columnspan = 3) #, rowspan = 5)
 
 
 #Label(root, text = "New User:", pady = 5, background = "LightSkyBlue2").grid(row=10, sticky = W)
