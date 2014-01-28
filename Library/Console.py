@@ -68,7 +68,7 @@ class Console(object):
                         self.error = ("Error: You have exceeded the number of users purchased.")
                         return False
             else:
-                self.error = ("Error: Invalid use of new_student command.")
+                self.error = ("Error: Invalid use of new student command.")
                 return False
 
         #Save Progress
@@ -102,7 +102,7 @@ class Console(object):
                     self.error = ("Error: No records found of given user.")
                     return False
             else:
-                self.error = ("Error: Invalid use of load_student command.")
+                self.error = ("Error: Invalid use of load student command.")
                 return False
 
         #Delete User
@@ -118,7 +118,7 @@ class Console(object):
                     self.error = ("Error: No records found of given user.")
                     return False
             else:
-                self.error = ("Error: Invalid use of delete_student command.")
+                self.error = ("Error: Invalid use of delete student command.")
                 return False
 
         #List Tests
@@ -127,7 +127,7 @@ class Console(object):
                 list_tests()
                 return True
             else:
-                self.error = ("Error: Invalid use of list_tests command.")
+                self.error = ("Error: Invalid use of list tests command.")
                 return False
 
         #Print Answer Sheet
@@ -143,7 +143,7 @@ class Console(object):
                     self.error = ("Error: Not a valid supported test_id.")
                     return False
             else:
-                self.error = ("Error: Invalid use of answer_sheet command.")
+                self.error = ("Error: Invalid use of answer sheet command.")
                 return False
 
         #Grade
