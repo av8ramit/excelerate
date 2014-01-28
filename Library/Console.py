@@ -58,6 +58,7 @@ class Console(object):
             if (len(cmd_vector) == 2 and not empty(cmd_vector[1])):
                 if file_exists(user_directory(cmd_vector[1])):
                     self.error = ("User record already exists. Please try again with a new name.")
+                    return False
                 else:
                     if (user_limit_license()):
                         self.user = new_user(cmd_vector[1])
