@@ -159,8 +159,32 @@ class User(object):
         self.data = Data_Holder()
         self.save_user()
 
-    #def cram(self):
-        #complete this tomorrow
+    def cram(self):
+        #returns a dictionary indexed by type and key as tuple of lowest type and level
+        #calculate lowest data has in terms of performance for each section
+        array = [WRITING_TYPE, READING_TYPE, MATH_TYPE]
+        output = {}
+        for section_type in array:
+            letter,size = get_section_type_size(section_type)
+            current_min = 1
+            for i in range (1, len(section_type_dict(section_type)) + 1):
+                code = letter + str(i)
+                qs = self.data.data[section_type].stats[code]
+                new_point = div(qs.c, qs.t)
+                if new_point < current_min:
+                    current_min = new_point
+                    current_code = code
+                    percent = percentage(new_point)
+            output[section_type] = (current_code, percent)
+        return output
+
+
+
+
+
+
+
+
 
     def simple_HTML(self):
         FILE = open(self.directory() + DIR_SEP + "simple_report" + ".html", "w")
@@ -233,7 +257,27 @@ class User(object):
         lines.append('<hr color="#BBBBBB" size="2" width="100%">' + endl)"""
 
         #Overall Graph
-        lines += g.html()
+        lines.append('<h1>Previous Test History</h1>' + endl)
+        lines += g.html(False, False)
+        lines.append('<br><hr color="#BBBBBB" size="2" width="100%">' + endl)
+
+
+        #Cram
+        cram = self.cram()
+        lines.append('<h1>Quick Advice</h1>' + endl)
+
+        lines.append("<h3><i>Reading Weakness:</i></h3>" + endl)
+        type_name = READING_TYPE_DICT[cram[READING_TYPE][0]]
+        lines.append(paropen + "Your weakest reading section is " + type_name + " as you are only scoring " + cram[READING_TYPE][1] + " in these questions.")
+
+        lines.append("<h3><i>Writing Weakness:</i></h3>" + endl)
+        type_name = WRITING_TYPE_DICT[cram[WRITING_TYPE][0]]
+        lines.append(paropen + "Your weakest writing section is " + type_name + " as you are only scoring " + cram[WRITING_TYPE][1] + " in these questions.")
+        
+        lines.append("<h3><i>Math Weakness:</i></h3>" + endl)
+        type_name = MATH_TYPE_DICT[cram[MATH_TYPE][0]]
+        lines.append(paropen + "Your weakest math section is " + type_name + " as you are only scoring " + cram[MATH_TYPE][1] + " in these questions.")
+
 
         #Footer
         lines.append('<br>' + endl)

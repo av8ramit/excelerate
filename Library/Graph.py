@@ -27,9 +27,10 @@ class Graph(object):
         return lines
 
 
-    def html(self, percent=False):
+    def html(self, percent=False, space = True):
         lines = []
-        lines.append('<br>')
+        if space:
+            lines.append('<br>')
         lines.append('<div id="chart' + str(self.index) + '" style="height:300px; width:500px;"></div>' + endl)
         lines.append('<script class="code" type="text/javascript">' + endl)
         lines.append('$(document).ready(function(){' + endl)
