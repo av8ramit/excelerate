@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cd Progs/Excelerate
+python3.3 GUI.py
