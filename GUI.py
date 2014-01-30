@@ -24,6 +24,8 @@ from Commands import *
 from Values import *
 c = Console()
 
+
+
 #initiate main window
 root = Tk()
 
@@ -39,6 +41,8 @@ root.configure(background = 'light steel blue')
 #termframe.grid(row=7)
 #w_id = termframe.winfo_id()
 #os.system('konsole -into %d - geometry 400x200 -e /root/.bashrc&' % w_id)
+
+ 
 
 ####################### Load Images ######################
 
@@ -124,6 +128,8 @@ def get_new_user():
                 UserName = c.user.name
                 var.set(UserName)
                 if(UserName != None):
+                    cu.grid_forget
+                    nm.gird_forget
                     cu = Label(root, text = 'Current Student:', pady = 2, background = 'steel blue')
                     nm = Label(root, textvariable =  var, pady = 2, background = 'steel blue')
                     cu.grid(row = 0, column = 0, sticky = E)
@@ -135,36 +141,50 @@ def get_load_user():
         if (not res):
             messagebox.showwarning("Error", c.error)
      
-        else:     
+        else:    
             var = StringVar()
             if(c.state == LOAD_STATE):
-                UserName = c.user.name
+                UserName = c.user.name 
                 var.set(UserName)
                 if(UserName != None):
                     cu = Label(root, text = 'Current Student:', pady = 1, background = 'steel blue')
                     nm = Label(root, textvariable =  var, pady = 1, background = 'steel blue')
+                    cu.grid_forget()
+                    nm.grid_forget()   
                     cu.grid(row = 0, column = 0, sticky = E)
                     nm.grid(row = 0 , column= 1, sticky = (W))
 
 def get_test_name():
    
- 
-    file_path = tkinter.filedialog.askopenfilename( initialdir = './Users' )
-    if (not file_path):
-        return
-    #extract filename from pathing stored in file_path
-    file_name = os.path.basename(file_path)
-    if (file_name != None):
-        res = c.process_commands('grade ' + file_name)
-        if (not res):
-            messagebox.showwarning("Error", c.error)
+     if(c.user is not None):
+        file_path = tkinter.filedialog.askopenfilename( initialdir = './Users' + DIR_SEP + c.user.name )
+        if (not file_path):
+            return
+        #extract filename from pathing stored in file_path
+        file_name = os.path.basename(file_path)
+        if (file_name != None):
+            res = c.process_commands('grade ' + file_name)
+            if (not res):
+                messagebox.showwarning("Error", c.error)
+            else:
+                name = c.user.name 
+                dirc = user_directory(name) 
+                fname = os.path.basename(dirc)
+                if (dirc != None):
+                    os.system('open ' + dirc + DIR_SEP + 'grade.html' )     
+     else:
+        messagebox.showwarning("Error", 'Please Load Or Create A Student First')           
 
 def get_test_id():
-    name = tkinter.simpledialog.askstring( 'Create Answer Sheet', 'Enter Test ID')
-    if(name != None):
-        res = c.process_commands('answer_sheet ' + name)
-        if (not res):
-            messagebox.showwarning("Error", c.error)
+    if(c.user is not None):
+        name = tkinter.simpledialog.askstring( 'Create Answer Sheet', 'Enter Test ID')
+        if(name != None):
+            res = c.process_commands('answer_sheet ' + name)
+            if (not res):
+                messagebox.showwarning("Error", c.error)
+    else:
+        messagebox.showwarning("Error", 'Please Load Or Create A Student First') 
+
 
 ######################################################################
 
@@ -235,7 +255,7 @@ mb.menu.add_checkbutton(label = "Simple Report", command = simple_report)
 mb.menu.add_checkbutton(label ="Advanced Report", command = advance_report)
 mb.menu.add_checkbutton(label ="Graphs Report", command = graph_report)
 mb.menu.add_checkbutton(label ="Section Report", command = section_report)
-#for child in root.winfo_children(): child.grid_configure(padx=5, pady=5)
+
 
 # Tk enters its event loop
 root.mainloop()
