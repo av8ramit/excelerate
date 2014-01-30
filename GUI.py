@@ -15,8 +15,7 @@ import tkinter.filedialog
 import sys
 
 from tkinter import messagebox
-#import image format support
-#from PIL import Image, ImageTk
+
 
 sys.path.append('Library')
 
@@ -34,7 +33,7 @@ root.geometry("1033x615")
 #set window title
 root.title("Excelerate")
 
-root.configure(background = 'steel blue')
+root.configure(background = 'light steel blue')
 #terminal frame
 #termframe = Frame(root, height = 400, width = 450)
 #termframe.grid(row=7)
@@ -53,10 +52,8 @@ Rstimg = PhotoImage(file = "./GUI/ResetButton.gif")
 Svimg = PhotoImage(file = "./GUI/SaveButton.gif")
 AutoGrdr = PhotoImage(file = "./GUI/AutoGrdr.gif")
 
-# tkinter variable to hold current user name 
 
-
-# data capture functions; *name* to be passed to console functions
+################### Functions ##########################
 
 def save_user():
     res = c.process_commands('save')
@@ -121,17 +118,14 @@ def get_new_user():
         res = c.process_commands('new_student ' + name)
         if (not res):
             messagebox.showwarning("Error", c.error)
-        # option below opens new user's folder       
-        #file_name = tkinter.filedialog.askopenfilename( initialdir = './Users' + DIR_SEP + name)
-        #os.system('open ' + file_name)
         else:     
             var = StringVar()
             if(c.state == LOAD_STATE):
                 UserName = c.user.name
                 var.set(UserName)
                 if(UserName != None):
-                    cu = Label(root, text = 'Current Student:', pady = 2, background = 'light steel blue')
-                    nm = Label(root, textvariable =  var, pady = 2, background = 'light steel blue')
+                    cu = Label(root, text = 'Current Student:', pady = 2, background = 'steel blue')
+                    nm = Label(root, textvariable =  var, pady = 2, background = 'steel blue')
                     cu.grid(row = 0, column = 0, sticky = E)
                     nm.grid(row = 0, column = 1, sticky = (W))
 def get_load_user():
@@ -147,8 +141,8 @@ def get_load_user():
                 UserName = c.user.name
                 var.set(UserName)
                 if(UserName != None):
-                    cu = Label(root, text = 'Current Student:', pady = 1, background = 'light steel blue')
-                    nm = Label(root, textvariable =  var, pady = 1, background = 'light steel blue')
+                    cu = Label(root, text = 'Current Student:', pady = 1, background = 'steel blue')
+                    nm = Label(root, textvariable =  var, pady = 1, background = 'steel blue')
                     cu.grid(row = 0, column = 0, sticky = E)
                     nm.grid(row = 0 , column= 1, sticky = (W))
 
@@ -172,70 +166,48 @@ def get_test_id():
         if (not res):
             messagebox.showwarning("Error", c.error)
 
+######################################################################
 
 #prevent menu items from being taken off the window
 root.option_add('*tearOff', FALSE)
 
-# main frame that will hold all the widgets
-#mainframe = Frame( root, relief = SUNKEN)
 
-#set up grid structure in main frame - sticky options for more precise widget placement
-#mainframe.grid(column = 0, row = 0, sticky =(N, W, E, S))
-
-# row and column expansion if main window is resized
-#mainframe.rowconfigure(0, weight = 1)
-#mainframe.columnconfigure(0, weight = 1)
-
-
-#### Menu
-
-
+################ Menu ##############
 menubar = Menu(root)
 menu_file = Menu(menubar)
 menu_edit = Menu(menubar)
 menu_view = Menu(menubar)
+menu_help = Menu(menubar)
 menubar.add_cascade(menu = menu_file, label = 'File')
 menubar.add_cascade(menu = menu_edit, label = 'Edit')
 menubar.add_cascade(menu = menu_view, label = 'View')
-
+menubar.add_cascade(menu = menu_help, label = 'Help')
 
 
 menu_file.add_command(label='New User', command = get_new_user)
 menu_file.add_command(label = 'Load User', command = get_load_user)
-menu_file.add_command(label = 'Save')
+menu_file.add_command(label = 'Save', command = save_user)
 menu_view.add_command(label= 'Grade A Test', command = get_test_name)
-menu_file.add_command(label = 'Reset Tests')
+menu_file.add_command(label = 'Reset Tests', command = reset_user)
 
 menu_view.add_command(label = 'Create Answer Sheet', command = get_test_id)
-menu_view.add_command(label = 'Print Simple Report', command = simple_report)
-menu_view.add_command(label = 'Print Advanced Report', command = advance_report)
+menu_view.add_command(label = 'Open Simple Report', command = simple_report)
+menu_view.add_command(label = 'Open Advanced Report', command = advance_report)
+menu_view.add_command(label = 'Open Section Reports', command = section_report)
+menu_view.add_command(label = 'Open Graph Report', command = graph_report)
+
+menu_help.add_command(label = 'FAQ') # , command = )
+menu_help.add_command(label = 'Usage') #   , command = )
 #display the menu
 root.config(menu=menubar)
+#######################################
 
 
-#buttons w/ user entry
-#nw_usr = LabelFrame(root, text = "New User", padx = 5, pady = 5)#grid(column = 2, row = 2, sticky=(W,E))
-
-Label(root, image = photo, background = 'steel blue').grid(row=0, column = 2, columnspan = 3) #, rowspan = 5)
+# Logo
+Label(root, image = photo, background = 'light steel blue').grid(row=0, column = 2, columnspan = 3) 
 
 
-#Label(root, text = "New User:", pady = 5, background = "LightSkyBlue2").grid(row=10, sticky = W)
-#separator1 = Frame(root, height=1, bd=1, relief=SUNKEN).grid(row = 1, columnspan = 2)
-#Label(root, text = "Load User:", pady = 5, background = "LightSkyBlue3").grid(row = 12, sticky = W)
- 
-#separator2 = Frame(root, height=1, bd=1, relief=SUNKEN).grid(row = 3, columnspan = 2)
-#Label(root, text = "Grade Test:",  pady = 5, background = "LightSkyBlue1").grid(row = 14, sticky =W)
- 
-#separator3 = Frame(root, height=1, bd=1, relief=SUNKEN).grid(row = 5, columnspan = 2)
-#Label(root, text = "Create Answer Sheet:", pady = 5, background = "LightSkyBlue4").grid(row = 16, sticky =W)
-
-
-#entry = Entry(root) 
-#entry.grid(row = 0, column = 1)
-
-#group = LabelFrame(root, text="Menu", padx = 10, pady = 5, background='powder blue')#, rowspan = 20, columnspan = 5)
-
-#group.grid(row = 8)
+####### MAIN COLORED GUI BUTTONS 
 
 Button( root, image = NUimg, width = 250, height = 250, pady = 0,  command= get_new_user).grid( row = 1, column = 0 ,columnspan = 2, rowspan = 2, sticky = (W))
 
@@ -253,7 +225,7 @@ Button( root, image = Svimg,  width = 250, height = 250, pady = 0, command = sav
 
 Button( root, image = AutoGrdr,  width = 250, height = 250, pady = 0).grid( row = 10, column = 4, columnspan = 2, rowspan = 2,sticky = W)
 
-
+## Reports Submenu Button
 
 mb = Menubutton( root, image = Rptimg, width = 254, height = 255)
 mb.grid(row = 10, column = 0, columnspan = 3, rowspan = 2, sticky = (W))
