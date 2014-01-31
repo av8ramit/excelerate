@@ -95,11 +95,15 @@ class Console(object):
                 name = cmd_vector[1]
                 if (name in list_users()):
                     filename = user_filename(name)
-                    self.user = load_user(name, filename)
-                    self.state = LOAD_STATE
-                    return True
+                    if file_exists(filename):
+                        self.user = load_user(name, filename)
+                        self.state = LOAD_STATE
+                        return True
+                    else:
+                        self.error = ("Error: No records found of given student " + name + ".")
+                        return False
                 else:
-                    self.error = ("Error: No records found of given user.")
+                    self.error = ("Error: No records found of given student " + name + ".")
                     return False
             else:
                 self.error = ("Error: Invalid use of load student command.")
@@ -115,7 +119,7 @@ class Console(object):
                     self.state = LAUNCH_STATE
                     return True
                 else:
-                    self.error = ("Error: No records found of given user.")
+                    self.error = ("Error: No records found of given student " + name + ".")
                     return False
             else:
                 self.error = ("Error: Invalid use of delete student command.")
