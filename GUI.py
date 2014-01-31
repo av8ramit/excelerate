@@ -58,6 +58,8 @@ AutoGrdr = PhotoImage(file = "./GUI/AutoGrdr.gif")
 
 
 ################### Functions ##########################
+def help_usage():
+    os.system('open ' + './Documents/Usage_v1.pdf' )
 
 def save_user():
     res = c.process_commands('save')
@@ -128,17 +130,12 @@ def get_new_user():
                 UserName = c.user.name
                 var.set(UserName)
                 if(UserName != None):
-                    cu.grid_forget
-                    nm.gird_forget
-                    cu = Label(root, text = 'Current Student:', pady = 2, background = 'steel blue')
-                    nm = Label(root, textvariable =  var, pady = 2, background = 'steel blue')
-                    cu.grid(row = 0, column = 0, sticky = E)
-                    nm.grid(row = 0, column = 1, sticky = (W))
+                     messagebox.showinfo('Current Student', 'Created Student ' + UserName)
 def get_load_user():
     name = tkinter.simpledialog.askstring( 'Load Student', 'Enter Username')
     if(name != None):
         res = c.process_commands('load_student ' + name)
-        if (not res):
+        if (not res and c.error is not None):
             messagebox.showwarning("Error", c.error)
      
         else:    
@@ -147,12 +144,8 @@ def get_load_user():
                 UserName = c.user.name 
                 var.set(UserName)
                 if(UserName != None):
-                    cu = Label(root, text = 'Current Student:', pady = 1, background = 'steel blue')
-                    nm = Label(root, textvariable =  var, pady = 1, background = 'steel blue')
-                    cu.grid_forget()
-                    nm.grid_forget()   
-                    cu.grid(row = 0, column = 0, sticky = E)
-                    nm.grid(row = 0 , column= 1, sticky = (W))
+                   
+                    messagebox.showinfo('Current Student', 'Loaded Student ' + UserName)
 
 def get_test_name():
    
@@ -167,10 +160,12 @@ def get_test_name():
             if (not res):
                 messagebox.showwarning("Error", c.error)
             else:
+
                 name = c.user.name 
                 dirc = user_directory(name) 
                 fname = os.path.basename(dirc)
-                if (dirc != None):
+                ans = messagebox.askyesno('Test Has Been Graded!', 'Would You Like To Open The Graded Test?')
+                if (dirc != None and ans is True):
                     os.system('open ' + dirc + DIR_SEP + 'grade.html' )     
      else:
         messagebox.showwarning("Error", 'Please Load Or Create A Student First')           
@@ -216,8 +211,7 @@ menu_view.add_command(label = 'Open Advanced Report', command = advance_report)
 menu_view.add_command(label = 'Open Section Reports', command = section_report)
 menu_view.add_command(label = 'Open Graph Report', command = graph_report)
 
-menu_help.add_command(label = 'FAQ') # , command = )
-menu_help.add_command(label = 'Usage') #   , command = )
+menu_help.add_command(label = 'Usage', command =  help_usage)
 #display the menu
 root.config(menu=menubar)
 #######################################
@@ -247,7 +241,7 @@ Button( root, image = AutoGrdr,  width = 250, height = 250, pady = 0).grid( row 
 
 ## Reports Submenu Button
 
-mb = Menubutton( root, image = Rptimg, width = 254, height = 255)
+mb = Menubutton( root, image = Rptimg, width = 254, height = 256)
 mb.grid(row = 10, column = 0, columnspan = 3, rowspan = 2, sticky = (W))
 mb.menu = Menu(mb)
 mb["menu"] = mb.menu
