@@ -28,14 +28,51 @@ class Analyze(object):
 	def setDebug(self, status):
 		self.debug = status
 
+	def printDebug(self, statement):
+		if self.debug:
+			print statement
+
 	def importData(self, data):
 		self.dataSet.append(data)
 
-	def runMissVariance():
-		
+	def runConsistencyCheck():
+		#Yet to implement
+
+
+	def calculateSD(self, dataPoints):
+		if type(dataPoints) is list:
+			runningSum = 0
+			total = 0
+			for point in dataPoints:
+				runningSum += point
+				total++
+			mean = runningSum/total
+			variance = 0
+			count = 0
+			for point in dataPoints:
+				variance += pow(mean - point, 2)
+				count++
+			variance = variance/count
+			standardDeviation = sqrt(variance)
+			return standardDeviation
+		else if type(dataPoints) is dict:
+			runningSum = 0
+			total = 0
+			for point in dataPoints.keys():
+				runningSum += dataPoints[point]
+				total++
+			mean = runningSum/total
+			variance = 0
+			count = 0
+			for point in dataPoints.keys():
+				variance += pow(mean - dataPoints[point], 2)
+				count++
+			variance = variance/count
+			standardDeviation = sqrt(variance)
+			return standardDeviation		
 
 	def missVariance(self, type):
-		dataDict = getSectionInfo(type):
+		dataDict = getSectionInfo(type, "Miss"):
 		meanDict = {}
 		totalMean = 0
 		for typeNum in dataDict.keys():
@@ -55,7 +92,16 @@ class Analyze(object):
 		#Unfinished
 	
 
-	def getSectionMissInfo(self, type):
+	def getSectionInfo(self, type, qStat):
+
+		if qStat == "Miss":
+			stat = 'm'
+		else if qStat == "Correct":
+			stat = 'c'
+		else if qStat == "Blank":
+			stat = 'b'
+		else if qStat == "Score":
+			stat = 's'
 
 		if type == WRITING_TYPE:
 			size = WRITING_TYPES
@@ -72,15 +118,23 @@ class Analyze(object):
 		for data in dataSet:
 			for i in range(1, size + 1):
 				fulltag = tag + str(i)
+				printDebug("Looking in " + fulltag)
 				questionStats = data[type].stats[fulltag]
-				numberMissed = questionStats.m
-				totalNumber = questionsStats.t 
+				if stat == 's':
+					number = scoreCalculate(questionStats.c, questionStats.m, questionStats.t)
+				else:
+					number = questionStats.qStat/questionStats.t
 				if fulltag is in outputDict.keys():
-					outputDict[fulltag].append(numberMissed/totalNumber)
+					outputDict[fulltag].append(number)
 				else:
 					intoDict = []
-					intoDict.append(numberMissed/totalNumber)
+					intoDict.append(number)
 					outputDict[fulltag] = intoDict
+
+	def scoreCalculate(correct, miss, total):
+		score = correct - miss/4
+		# This may have to be more extensively customized based upon subject test,
+		# section specific scoring, etc.
 
 
 
