@@ -17,11 +17,14 @@ import sys
 from tkinter import messagebox
 
 
-sys.path.append('Library')
 
+
+sys.path.append('Library')
+from Library import *
 from Console import *
 from Commands import *
 from Values import *
+import csv
 c = Console()
 
 
