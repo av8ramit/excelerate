@@ -16,7 +16,7 @@ from Data import *
 from Graph import *
 import csv
 
-#Base Section Class
+#Base User Class
 class User(object):
 
     #This is the default constructor with all variables defined.

@@ -57,6 +57,14 @@ def list_users():
             array.append(i)
     return str(array)
 
+def list_users_array():
+    array = []
+    a = os.listdir(user_directory(''))
+    for i in a:
+        if file_exists(user_filename(i)):
+            array.append(i)
+    return array
+
 def make_answer_sheet(u, test_id):
     filename = test_id
     lines = []
