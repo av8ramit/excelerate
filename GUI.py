@@ -179,7 +179,12 @@ def get_test_id():
                 messagebox.showwarning("Error", c.error)
     else:
         messagebox.showwarning("Error", 'Please Load Or Create A Student First') 
-
+def auto_gdr():
+    #dirc = tkinter.filedialog.askopenfilename()
+    dir_name = tkinter.filedialog.askdirectory()
+    if(dir_name is not None):
+        messagebox.showinfo( 'Pathname is: ', dir_name)
+   # messagebox.showinfo('Path name is:')
 
 ######################################################################
 
@@ -237,7 +242,7 @@ Button( root, image = Rstimg,  width = 250, height = 250, pady = 0, command = re
 
 Button( root, image = Svimg,  width = 250, height = 250, pady = 0, command = save_user ).grid( row = 10, column = 2, columnspan = 2, rowspan = 2,sticky = W)
 
-Button( root, image = AutoGrdr,  width = 250, height = 250, pady = 0).grid( row = 10, column = 4, columnspan = 2, rowspan = 2,sticky = W)
+Button( root, image = AutoGrdr,  width = 250, height = 250, pady = 0, command = auto_gdr ).grid( row = 10, column = 4, columnspan = 2, rowspan = 2,sticky = W)
 
 ## Reports Submenu Button
 
