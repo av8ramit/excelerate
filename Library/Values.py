@@ -5,8 +5,8 @@ import random
 #License Information
 USER_LIMIT = 25
 #Year/Month/Day
-EXPIRATION_DATE = '2014/03/01'
-date_of_expiration = '03/01/2014'
+EXPIRATION_DATE = '2014/06/01'
+date_of_expiration = '06/01/2014'
 
 #Question Value
 PARSED_ARRAY_SIZE = 5

@@ -30,14 +30,14 @@ class Analyze(object):
 
 	def printDebug(self, statement):
 		if self.debug:
-			print statement
+			print (statement)
 
 	def importData(self, data):
 		self.dataSet.append(data)
 
 	def runConsistencyCheck():
+		pass
 		#Yet to implement
-
 
 	def calculateSD(self, dataPoints):
 		if type(dataPoints) is list:
@@ -45,34 +45,34 @@ class Analyze(object):
 			total = 0
 			for point in dataPoints:
 				runningSum += point
-				total++
+				total += 1
 			mean = runningSum/total
 			variance = 0
 			count = 0
 			for point in dataPoints:
 				variance += pow(mean - point, 2)
-				count++
+				count += 1
 			variance = variance/count
-			standardDeviation = sqrt(variance)
+			standardDeviation = math.sqrt(variance)
 			return standardDeviation
-		else if type(dataPoints) is dict:
+		elif type(dataPoints) is dict:
 			runningSum = 0
 			total = 0
 			for point in dataPoints.keys():
 				runningSum += dataPoints[point]
-				total++
+				total += 1
 			mean = runningSum/total
 			variance = 0
 			count = 0
 			for point in dataPoints.keys():
 				variance += pow(mean - dataPoints[point], 2)
-				count++
+				count += 1
 			variance = variance/count
-			standardDeviation = sqrt(variance)
+			standardDeviation = math.sqrt(variance)
 			return standardDeviation		
 
 	def missVariance(self, type):
-		dataDict = getSectionInfo(type, "Miss"):
+		dataDict = getSectionInfo(type, "Miss")
 		meanDict = {}
 		totalMean = 0
 		for typeNum in dataDict.keys():
@@ -87,29 +87,28 @@ class Analyze(object):
 		for key in meanDict.keys():
 			var += pow(totalMean - meanDict[key], 2)
 		var = var/len(meanDict.keys())
-		standardDev = sqrt(var)
+		standardDev = math.sqrt(var)
 		# determine if any section types fall too far away from the standard deviation
 		#Unfinished
-	
 
 	def getSectionInfo(self, type, qStat):
 
 		if qStat == "Miss":
 			stat = 'm'
-		else if qStat == "Correct":
+		elif qStat == "Correct":
 			stat = 'c'
-		else if qStat == "Blank":
+		elif qStat == "Blank":
 			stat = 'b'
-		else if qStat == "Score":
+		elif qStat == "Score":
 			stat = 's'
 
 		if type == WRITING_TYPE:
 			size = WRITING_TYPES
 			tag = "W"
-		else if type == MATH_TYPE:
+		elif type == MATH_TYPE:
 			size == MATH_TYPES
 			tag = "M"
-		else if type == READING_TYPE
+		elif type == READING_TYPE:
 			size == READING_TYPES
 			tag = "R"
 
@@ -124,7 +123,7 @@ class Analyze(object):
 					number = scoreCalculate(questionStats.c, questionStats.m, questionStats.t)
 				else:
 					number = questionStats.qStat/questionStats.t
-				if fulltag is in outputDict.keys():
+				if fulltag in outputDict.keys():
 					outputDict[fulltag].append(number)
 				else:
 					intoDict = []

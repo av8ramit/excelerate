@@ -9,7 +9,6 @@
 #################################################################################################################################################### 
 
 import csv
-
 from Values import *
 from Key import *
 from Answer import *
@@ -56,6 +55,14 @@ def list_users():
         if file_exists(user_filename(i)):
             array.append(i)
     return str(array)
+
+def list_users_array():
+    array = []
+    a = os.listdir(user_directory(''))
+    for i in a:
+        if file_exists(user_filename(i)):
+            array.append(i)
+    return array
 
 def make_answer_sheet(u, test_id):
     filename = test_id
