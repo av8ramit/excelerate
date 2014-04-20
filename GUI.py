@@ -180,11 +180,11 @@ def get_test_id():
     else:
         messagebox.showwarning("Error", 'Please Load Or Create A Student First') 
 def auto_gdr():
-    #dirc = tkinter.filedialog.askopenfilename()
+
     dir_name = tkinter.filedialog.askdirectory()
     if(dir_name is not None):
         messagebox.showinfo( 'Pathname is: ', dir_name)
-   # messagebox.showinfo('Path name is:')
+   
 
 ######################################################################
 
