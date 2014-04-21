@@ -185,8 +185,7 @@ def get_test_id():
 def auto_gdr():
 
     dir_name = tkinter.filedialog.askdirectory()
-    if(dir_name is not None):
-        messagebox.showinfo( 'Pathname is: ', dir_name)
+    autograder(dir_name)
    
 
 ######################################################################
