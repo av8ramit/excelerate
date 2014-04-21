@@ -13,7 +13,12 @@ class Answered_Test(object):
     #This is the default constructor that assigns the id and opens the sections.
     def __init__(self, test_id):
         self.id = test_id
+        self.name = None
         self.sections = {}
+
+    #This method adds the name to the answer sheet.
+    def add_name(self, name):
+        self.name = name
 
     #This method adds a constructed section to the Answered_Test object.
     def add_section(self, section):

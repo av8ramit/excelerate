@@ -43,10 +43,13 @@ def grade(u, filename):
 
 def list_tests():
     a = os.listdir(test_directory(''))
-    print ("Here are the available test_ids:")
+    array = []
+    #print ("Here are the available test_ids:")
     for i in a:
         if valid_test_id(i):
-            print (i)
+            #print (i)
+            array.append(i)
+    return array
 
 def list_users():
     array = []
@@ -68,8 +71,9 @@ def make_answer_sheet(u, test_id):
     filename = test_id
     lines = []
 
-    label_vector = "Number:,Answer:\n"
-    lines.append(test_id + " Answer Sheet\n\n")
+    label_vector = "Number:,Answer:" + endl
+    lines.append(test_id + " Answer Sheet" + endl)
+    lines.append("Name:," + u.name + endl)
     lines.append(label_vector)
 
     with open(test_directory(filename) + DIR_SEP + KEYFILE, 'rU') as f:
@@ -99,6 +103,8 @@ def parse_answers(filename):
                 continue
             elif row == []:
                 continue
+            elif row[0] == "Name:":
+                test.add_name(row[1])
             elif row[0] == "": #blanks
                 continue
             elif not id_set:
@@ -134,6 +140,27 @@ def section_report(u):
     u.section_HTML(WRITING_TYPE)
     u.section_HTML(READING_TYPE)
     u.section_HTML(MATH_TYPE)
+
+def autograder(foldername):
+    list_of_tests = os.listdir(foldername)
+    for filename in list_of_tests:
+        if ".csv" in filename:
+            pa = parse_answers(foldername + DIR_SEP + filename)
+            name = pa.name
+            if name == None or name not in list_users_array():
+                #Error throw
+                print ("User not found.")
+                print (filename + "was unable to be graded.")
+            else:
+                print (name)
+
+
+
+
+
+
+    
+
 
 
 
