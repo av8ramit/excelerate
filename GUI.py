@@ -72,7 +72,7 @@ def save_user():
             messagebox.showwarning("Error", c.error)
 
 def reset_user():
-    ans = messagebox.askyesno('Reset User', 'Are you sure you want to reset user? This will permanently remove all data')
+    ans = messagebox.askyesno('Reset User', 'Are you sure you want to reset user? This will permanently remove all data and history.')
     if( ans is True):
 
         res = c.process_commands('reset')   
