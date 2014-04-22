@@ -24,6 +24,7 @@ from Library import *
 from Console import *
 from Commands import *
 from Values import *
+from Class_Analytics import *
 import csv
 c = Console()
 
@@ -187,10 +188,28 @@ def get_test_id():
                 messagebox.showwarning("Error", c.error)
     else:
         messagebox.showwarning("Error", 'Please Load Or Create A Student First') 
-def auto_gdr():
 
-    dir_name = tkinter.filedialog.askdirectory()
-    autograder(dir_name)
+def auto_gdr():
+  foldername = tkinter.filedialog.askdirectory()
+  if file_exists(foldername):
+      list_of_tests = os.listdir(foldername)
+      for filename in list_of_tests:
+          if ".csv" in filename:
+              pa = parse_answers(foldername + DIR_SEP + filename)
+              name = pa.name
+              if name == None or name not in list_users_array():
+                  messagebox.showwarning("Error", 'Student name not found. ' + filename + ' was unable to be graded.') 
+              else:
+                  c.process_commands('load_student ' + name)
+                  c.user.grade(pa)
+                  c.process_commands('save')
+
+def class_analyze():
+  a = Analytics()
+  a.report()
+  dirc = user_directory('')
+  os.system('open ' + dirc + DIR_SEP + 'analytics.html' )
+
 
 def harvard():
 
@@ -414,7 +433,7 @@ Button( root, image = Svimg,  width = 250, height = 250, pady = 0, command = sav
 
 Button( root, image = AutoGrdr,  width = 250, height = 250, pady = 0, command = auto_gdr ).grid( row = 10, column = 4, columnspan = 2, rowspan = 2,sticky = W)
 
-Button( root, image = ClassAnly, width = 250, height = 250, pady = 0).grid( row = 9, column = 9, columnspan = 2, rowspan = 2, sticky =W)
+Button( root, image = ClassAnly, width = 250, height = 250, pady = 0, command = class_analyze ).grid( row = 9, column = 9, columnspan = 2, rowspan = 2, sticky =W)
 ## Reports Submenu Button
 
 mb = Menubutton( root, image = Rptimg, width = 254, height = 256)

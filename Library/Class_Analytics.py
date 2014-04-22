@@ -39,10 +39,6 @@ class Analytics(object):
                     average_percent = int(total/len(percent_array))
                     uw.weakpoints[section_type] = (lowest_type, average_percent)
                 self.user_weakpoints_dict[user.name] = uw   
-        
-
-        self.report()
-
 
     def report(self):
         FILE = open('Users' + DIR_SEP + "analytics" + ".html", "w")

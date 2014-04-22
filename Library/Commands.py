@@ -141,31 +141,5 @@ def section_report(u):
     u.section_HTML(READING_TYPE)
     u.section_HTML(MATH_TYPE)
 
-def autograder(foldername):
-    list_of_tests = os.listdir(foldername)
-    for filename in list_of_tests:
-        if ".csv" in filename:
-            pa = parse_answers(foldername + DIR_SEP + filename)
-            name = pa.name
-            if name == None or name not in list_users_array():
-                #Error throw
-                print ("User not found.")
-                print (filename + "was unable to be graded.")
-            else:
-                print (name)
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
 #def valid_test(filename):
     
