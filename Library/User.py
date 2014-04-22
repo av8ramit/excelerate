@@ -588,6 +588,109 @@ class User(object):
         FILE.writelines(lines)
         FILE.close()
 
+    def c_graph_HTML(self, schoolscoreO, schoolscoreM, schoolscoreR, schoolscoreW, schoolname, schoolcolor, schoolbgcolor):
+        graphs = []
+        s1 = []
+        writing_scores = []
+        reading_scores = []
+        math_scores = []
+        graph_index = 1
+        index = 1
+        School_Score_O = schoolscoreO
+        School_Score_M = schoolscoreM
+        School_Score_R = schoolscoreR
+        School_Score_W = schoolscoreW
+        School_Name = schoolname
+        School_Color = schoolcolor
+        School_Bgcolor = schoolbgcolor
+        #calculate all scores
+        for test in self.tests_taken:
+            s1.append([index,test.score_summary.total_score()])
+            writing_scores.append([index, test.score_summary.section_scores[WRITING_TYPE]])
+            reading_scores.append([index, test.score_summary.section_scores[READING_TYPE]])
+            math_scores.append([index, test.score_summary.section_scores[MATH_TYPE]])
+            index += 1
+
+        #graph js
+        g = C_Graph("Overall Score Performance vs " + str(School_Name) + " Admission Average" , graph_index, s1, School_Score_O, School_Name, School_Color, School_Bgcolor)
+        graph_index += 1
+        wg = C_Graph("Writing Score Performance vs " + str(School_Name) + " Admission Average" , graph_index, writing_scores, School_Score_W, School_Name, School_Color, School_Bgcolor)
+        graph_index += 1
+        rg = C_Graph("Reading Score Performance vs " + str(School_Name) + " Admission Average" , graph_index, reading_scores, School_Score_R, School_Name, School_Color, School_Bgcolor)
+        graph_index += 1
+        mg = C_Graph("Math Score Performance vs " + str(School_Name) + " Admission Average" , graph_index, math_scores, School_Score_M, School_Name, School_Color, School_Bgcolor)
+        graph_index += 1
+        graphs.append(g)
+        graphs.append(wg)
+        graphs.append(rg)
+        graphs.append(mg)
+
+
+        FILE = open(self.directory() + DIR_SEP + "college_graph_report" + ".html", "w")
+        lines = []
+
+        scores = self.average_scores()
+
+        #HTML opener
+        lines.append('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">' + endl)
+        lines.append('<html xmlns="http://www.w3.org/1999/xhtml">' + endl)
+        lines.append('<head>')
+        lines.append('<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />' + endl)
+        lines.append('<link rel="stylesheet" type="text/css" href="../../HTML/style.css" />' + endl)
+        lines.append('<title>College Tracker</title>' + endl)
+        lines += g.head()
+        lines.append('</head>' + endl)
+        lines.append('<body>' + endl)
+        lines.append('<div id="page">' + endl)
+        lines.append('<div id="header">' + endl)
+        lines.append('<img src="../../HTML/Mini Logo.png" width="35%" alt="Excelerate" />' + endl)
+        lines.append('</div>' + endl)
+        lines.append('</div>' + endl)
+        lines.append('<div id="content">' + endl)
+        lines.append('<div id="container">' + endl)
+        lines.append('<div id="main">' + endl)
+        lines.append('<div id="menu">' + endl)
+        lines.append('<h2 style="text-align:center;"> Graph Report: ' + self.name + '</h2>' + endl)
+        lines.append('</div>' + endl)
+        lines.append('<div id="text">' + endl)
+            
+
+        #Average Results
+        lines.append('<h1 style = "text-align:center;" > ' + str(School_Name) + ' Graphs</h1>' + endl)
+        lines.append('<hr color="#BBBBBB" size="2" width="100%">' + endl)
+
+        #Graph js
+        for graph in graphs:
+            lines += graph.html()
+            #lines.append('<h2> ' + 'Students accepted to' + str(School_Name) + 'score an average of' + str(schoolscoreO) + ' </h2>' + endl)
+            lines.append('<br><hr color="#4169EF" size="1" width="90%">' + endl)
+            lines.append(endl)
+
+
+
+
+        #Footer
+        lines.append('<br>' + endl)
+        lines.append('</div>' + endl)
+        lines.append('</div>' + endl)
+        lines.append('</div>' + endl)
+        lines.append('<div class="clear"></div>' + endl)
+        lines.append('<div id="footer">' + endl)
+        lines.append('<p><a>' + self.name + ' Advanced Report</a></p>' + endl)
+        lines.append('</div>' + endl)
+        lines.append('</div>' + endl)
+
+        #scripts
+        lines += g.body()
+
+
+        lines.append('</body>' + endl)
+        lines.append('</html>' + endl)
+        lines.append(endl)
+
+        FILE.writelines(lines)
+        FILE.close()
+
     def grade_HTML(self, ts, ss):
         graphs = []
         s1 = []

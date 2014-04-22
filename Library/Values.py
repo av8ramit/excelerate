@@ -347,3 +347,20 @@ def section_name(section_type):
 def index_exists(dictionary, key):
   return key in dictionary.keys()
 
+#Vars to hold a colleges Overall, Math, Reading, Writing, and Name - passed to graph obj in user.py as args
+dict_bgcolor = {'Harvard': 'rgb(255,255,255)', 'UC Berkeley':'rgb(253, 181, 21)', 'MIT':'rgb(138, 139, 140)', 'Stanford':'rgb(140,21,21)', 'UCLA':'rgb(83, 104, 149)', 'Princeton':'rgb(216,100,44)', 'Yale':'rgb(15, 77,146)', 'Caltech':'rgb(255,255,255)', 'Johns Hopkins': 'rgb(28,72,130)', 'USC':'rgb(153,0,0)', 'Carnegie Mellon':'rgb(153,0,0)' }
+dict_colors ={'Harvard': 'rgb(165,28,48)', 'UC Berkeley':'rgb(0,50,98)', 'MIT':'rgb(161, 31, 52)', 'Stanford':'rgb(243,239,215)', 'UCLA':'rgb(255, 215, 0)', 'Princeton':'rgb(46,42,43)', 'Yale':'rgb(255, 255, 255)', 'Caltech':'rgb(255,102,0)', 'Johns Hopkins': 'rgb(207,181,59)', 'USC':'rgb(255,204,0)', 'Carnegie Mellon':'rgb(212,212,212)' }
+#Dictionary for 50th percentile Math
+dict_math = {'Harvard': 750, 'UC Berkeley': 720, 'MIT': 780, 'Stanford': 750, 'UCLA': 700, 'Princeton': 760, 'Yale': 750, 'Caltech': 780, 'Johns Hopkins': 720, 'USC': 710, 'Carnegie Mellon': 740}
+
+
+#Dictionary for 50th percentile Reading
+dict_read = {'Harvard': 750, 'UC Berkeley': 690, 'MIT': 740, 'Stanford': 730, 'UCLA': 680, 'Princeton': 760, 'Yale': 760, 'Caltech': 740, 'Johns Hopkins': 690, 'USC': 670, 'Carnegie Mellon': 680}
+
+#Dictionary for 50th percentile Writing
+dict_write = {'Harvard': 750, 'UC Berkeley': 700, 'MIT': 750, 'Stanford': 740, 'UCLA': 700, 'Princeton': 760, 'Yale': 760, 'Caltech': 740, 'Johns Hopkins': 700, 'USC': 690, 'Carnegie Mellon': 700}
+
+#Dictionary for 50th percentile Overall
+dict_overall = {'Harvard': 2250, 'UC Berkeley': 2110, 'MIT': 2270, 'Stanford':2220, 'UCLA': 2080, 'Princeton': 2280, 'Yale': 2270, 'Caltech' : 2260, 'Johns Hopkins': 2110, 'USC': 2070, 'Carnegie Mellon': 2120}
+
+

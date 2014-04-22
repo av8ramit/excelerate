@@ -41,6 +41,7 @@ class Graph(object):
         lines.append('showMarker:true,' + endl)
         lines.append('pointLabels: { show:false } ' + endl)
         lines.append('},' + endl)
+        lines.append('highlighter:{ show: true, sizeAdjust: 7.5 },' + endl)
         lines.append('axes:{' + endl)
         lines.append('xaxis:{min:0},' + endl)
         if percent:
@@ -67,6 +68,83 @@ class Graph(object):
         lines.append('<script class="include" language="javascript" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.dateAxisRenderer.min.js"></script>' + endl)
         lines.append('<script class="include" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.canvasTextRenderer.min.js"></script>' + endl)
         lines.append('<script class="include" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>' + endl)
+        lines.append('<script type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.highlighter.min.js"></script>' + endl)
+      
+        return lines
+
+
+class C_Graph(object):
+
+    def __init__(self, name, index, points, schval, schnm, schcol, schbgcol):
+        self.name = name
+        self.index = index
+        self.data = points
+        # canvas overlay vars
+        self.schscore = schval
+        self.schname = schnm 
+        self.schcolr = schcol
+        self.schgbcolr = schbgcol
+    def head(self):
+        lines = []
+        lines.append('<link class="include" rel="stylesheet" type="text/css" href="../../Graphs/examples/../jquery.jqplot.min.css" />' + endl)
+        #lines.append('<link rel="stylesheet" type="text/css" href="../../Graphs/examples/examples.min.css" />' + endl)
+        lines.append('<link type="text/css" rel="stylesheet" href="../../Graphs/examples/syntaxhighlighter/styles/shCoreDefault.min.css" />' + endl)
+        lines.append('<link type="text/css" rel="stylesheet" href="../../Graphs/examples/syntaxhighlighter/styles/shThemejqPlot.min.css" />' + endl)
+        lines.append('<script class="include" type="text/javascript" src="../../Graphs/jquery.min.js"></script>' + endl)
+        return lines
+
+
+    def html(self, percent=False, space = True):
+        lines = []
+        if space:
+            lines.append('<br>')
+        lines.append('<div id="chart' + str(self.index) + '" style="height:300px; width:500px;"></div>' + endl)
+        lines.append('<script class="code" type="text/javascript">' + endl)
+        lines.append('$(document).ready(function(){' + endl)
+        lines.append('var line1 = ' + str(self.data) + ';' + endl)
+
+      
+        lines.append("var plot1 = $.jqplot('chart" + str(self.index) + "', [line1], {" + endl)
+        lines.append("title:'" + self.name + "'," + endl)
+        lines.append('seriesDefaults: {' + endl)
+        lines.append('showMarker:true,' + endl)
+        lines.append('pointLabels: { show:false } ' + endl)
+        lines.append('},' + endl)
+        lines.append('highlighter:{ show: true, sizeAdjust: 7.5 },' + endl)
+        #lines.append("legend:{ show: true, location: e , placement: inside   },' " + endl)
+        lines.append('axes:{' + endl)
+        lines.append('xaxis:{min:0},' + endl)
+        if percent:
+            lines.append("yaxis:{" + 'label:' + "'Percent Correct'," + 'labelRenderer: $.jqplot.CanvasAxisLabelRenderer,' + "tickOptions: {formatString: " +  '"' +'%' + "'d" + '%"' + '}}' + endl)
+        else:
+            lines.append("yaxis:{" + 'label:' + "'Score'," + 'labelRenderer: $.jqplot.CanvasAxisLabelRenderer,' + '}' + endl)
+        lines.append('},' + endl)
+        lines.append("series:[{lineWidth:3},{}]," + endl)
+        # canvas overlay
+        lines.append("canvasOverlay: { show: true, objects: [ {horizontalLine: { name: '" + str(self.schname) + "', y: '"  + str(self.schscore) +  "', showTooltip: true, tooltipFormatString:  " '"' + str(self.schscore) + '"'  ", lineWidth: 4 ,color: " "'" + str(self.schcolr)  + "'" "}} , {dashedHorizontalLine: { name: '" + str(self.schname) + "', y: '"  + str(self.schscore) + "'" ", lineWidth: 5 , dashPattern: [12,12],color: " "'" + str(self.schgbcolr) + "'" "}}]}"   + endl )
+        lines.append('});' + endl)
+        lines.append('});' + endl)
+        lines.append('</script>' + endl)
+        return lines
+
+
+    def body(self):
+        lines = []
+        lines.append('<script class="include" type="text/javascript" src="../../Graphs/examples/../jquery.jqplot.min.js"></script>' + endl)
+        lines.append('<script type="text/javascript" src="../../Graphs/examples/syntaxhighlighter/scripts/shCore.min.js"></script>' + endl)
+        lines.append('<script type="text/javascript" src="../../Graphs/examples/syntaxhighlighter/scripts/shBrushJScript.min.js"></script>' + endl)
+        lines.append('<script type="text/javascript" src="../../Graphs/examples/syntaxhighlighter/scripts/shBrushXml.min.js"></script>' + endl)
+        lines.append('<script class="include" language="javascript" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.barRenderer.min.js"></script>' + endl)
+        lines.append('<script class="include" language="javascript" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.categoryAxisRenderer.min.js"></script>' + endl)
+        lines.append('<script class="include" language="javascript" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.pointLabels.min.js"></script>' + endl)
+        lines.append('<script class="include" language="javascript" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.dateAxisRenderer.min.js"></script>' + endl)
+        lines.append('<script class="include" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.canvasTextRenderer.min.js"></script>' + endl)
+        lines.append('<script class="include" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>' + endl)
+        # Canvas overlay 
+        lines.append('<script language="javascript" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.canvasOverlay.min.js"></script>' + endl)
+        # Highlighter
+        lines.append('<script type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.highlighter.min.js"></script>' + endl)
 
         return lines
+
 
