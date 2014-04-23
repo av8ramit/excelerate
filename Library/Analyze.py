@@ -37,8 +37,17 @@ class Analyze(object):
 		self.dataSet.append(data)
 
 	def linearRegression(self):
-		for qType in TYPE_ARRAY:
-			dataDict = 
+		dataSet = self.getScoreInfo
+		domain = []
+		values = []
+		i = 0
+		for point in dataSet:
+			percent = point.getCorrectPercentage()
+			domain.append(i)
+			values.append(percent)
+		slope, intercept, r_value, p_value, std_err = stats.linregress(domain, values)
+		return [slope, intercept, r_value, p_value, std_err]
+
 
 	def linearRegression(self, section):
 		resultList = []
@@ -66,16 +75,55 @@ class Analyze(object):
 			resultList.append( (dataPoint, sd) )
 		return resultList
 
+	def getScoreInfo(self):
+		outputSet = []
+		for data in dataSet:
+			correct = 0
+			blank = 0
+			miss = 0
+			total = 0
+			testID = ""
+			testContext = ""
+			tag = "W"
+			for i in range(1, WRITING_TYPES + 1):
+				fulltag = tag + str(i)
+				qStats = data[WRITING_TYPE].stats[fulltag]
+				correct += qStats.c
+				blank += qStats.b
+				miss += qStats.m
+				total += qStats.t
+			tag = "M"
+			for i in range(1, MATH_TYPES + 1):
+				fulltag = tag + str(i)
+				qStats = data[MATH_TYPE].stats[fulltag]
+				correct += qStats.c 
+				blank += qStats.b
+				miss += qStats.m
+				total += qStats.t
+			tag = "R"
+			for i in range(1, READING_TYPES + 1):
+				fulltag = tag + str(i)
+				qStats = data[READING_TYPE].stats[fulltag]
+				correct += qStats.c 
+				blank += qStats.b
+				miss += qStats.m
+				total += qStats.t
+			testScore = DataContainer(testID, testContext, correct, miss, blank, total)
+			outputSet.append(testScore)
+		return outputSet
+
+
+
 	def getSectionInfo(self, type):
 
 		if type == WRITING_TYPE:
 			size = WRITING_TYPES
 			tag = "W"
 		elif type == MATH_TYPE:
-			size == MATH_TYPES
+			size = MATH_TYPES
 			tag = "M"
 		elif type == READING_TYPE:
-			size == READING_TYPES
+			size = READING_TYPES
 			tag = "R"
 
 		outputSet = []
