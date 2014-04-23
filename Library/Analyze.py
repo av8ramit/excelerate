@@ -14,6 +14,7 @@ from Scored import *
 from Summary import *
 from Data import *
 from Graph import *
+from scipy import stats
 import math
 import csv
 
@@ -35,72 +36,37 @@ class Analyze(object):
 	def importData(self, data):
 		self.dataSet.append(data)
 
-	def runConsistencyCheck():
-		pass
-		#Yet to implement
+	def linearRegression(self):
+		for qType in TYPE_ARRAY:
+			dataDict = 
 
-	def calculateSD(self, dataPoints):
-		if type(dataPoints) is list:
-			runningSum = 0
-			total = 0
-			for point in dataPoints:
-				runningSum += point
-				total += 1
-			mean = runningSum/total
-			variance = 0
-			count = 0
-			for point in dataPoints:
-				variance += pow(mean - point, 2)
-				count += 1
-			variance = variance/count
-			standardDeviation = math.sqrt(variance)
-			return standardDeviation
-		elif type(dataPoints) is dict:
-			runningSum = 0
-			total = 0
-			for point in dataPoints.keys():
-				runningSum += dataPoints[point]
-				total += 1
-			mean = runningSum/total
-			variance = 0
-			count = 0
-			for point in dataPoints.keys():
-				variance += pow(mean - dataPoints[point], 2)
-				count += 1
-			variance = variance/count
-			standardDeviation = math.sqrt(variance)
-			return standardDeviation		
+	def linearRegression(self, section):
+		resultList = []
+		dataSet = self.getSectionInfo(qType, "Correct")
 
-	def missVariance(self, type):
-		dataDict = getSectionInfo(type, "Miss")
-		meanDict = {}
-		totalMean = 0
-		for typeNum in dataDict.keys():
-			sumType = 0
-			for x in dataDict[typeNum]:
-				sumType += x
-			mean = sumType/len(dataDict[typeNum])
-			meanDict[typeNum] = mean
-			totalMean += mean
-		totalMean = totalMean/len(dataDict.keys())
-		var = 0
-		for key in meanDict.keys():
-			var += pow(totalMean - meanDict[key], 2)
-		var = var/len(meanDict.keys())
-		standardDev = math.sqrt(var)
-		# determine if any section types fall too far away from the standard deviation
-		#Unfinished
 
-	def getSectionInfo(self, type, qStat):
+	# Finds Standard Deviation of a set based on miss or correct and then plots it to the mean
+	def plotConsistencyGraph(self, qStat):
+		resultList = []		
+		for qType in TYPE_ARRAY:
+			dataDict = self.getSectionInfo(qType, qStat)
+			localMean = self.calculateMean(dataDict)
+			localSD = self.calculateSD(dataDict)
+			resultList.append(qType, localMean, localSD)
+		return resultList
 
-		if qStat == "Miss":
-			stat = 'm'
-		elif qStat == "Correct":
-			stat = 'c'
-		elif qStat == "Blank":
-			stat = 'b'
-		elif qStat == "Score":
-			stat = 's'
+	def plotConsistencyByType(self, qType, qStat):
+		resultList = []
+		dataSoFar = []
+		dataDict = self.getSectionInfo(qType, qStat)
+		for dataPointKey in dataDict.keys():
+			dataPoint = dataDict[dataPointKey]
+			dataSoFar.append(dataPoint)
+			sd = self.calculateSD(dataSoFar)
+			resultList.append( (dataPoint, sd) )
+		return resultList
+
+	def getSectionInfo(self, type):
 
 		if type == WRITING_TYPE:
 			size = WRITING_TYPES
@@ -112,23 +78,18 @@ class Analyze(object):
 			size == READING_TYPES
 			tag = "R"
 
-		outputDict = {}
+		outputSet = []
 
 		for data in dataSet:
 			for i in range(1, size + 1):
 				fulltag = tag + str(i)
+				testID = ""
 				printDebug("Looking in " + fulltag)
-				questionStats = data[type].stats[fulltag]
-				if stat == 's':
-					number = scoreCalculate(questionStats.c, questionStats.m, questionStats.t)
-				else:
-					number = questionStats.qStat/questionStats.t
-				if fulltag in outputDict.keys():
-					outputDict[fulltag].append(number)
-				else:
-					intoDict = []
-					intoDict.append(number)
-					outputDict[fulltag] = intoDict
+				qStats = data[type].stats[fulltag]
+				dataPiece = DataContainer(fulltag, testID, qStats.c, qStats.m, qStats.b, qStats.t)
+				outputSet.append(dataPiece)
+
+		return outputSet
 
 	def scoreCalculate(correct, miss, total):
 		score = correct - miss/4
@@ -136,6 +97,27 @@ class Analyze(object):
 		# section specific scoring, etc.
 
 
+class DataContainer(object):
+
+	def __init__(self, tag, context, correct, miss, blank, total):
+		self.tag = tag
+		self.context = context
+		self.correct = correct
+		self.miss = miss
+		self.blank = blank
+		self.total = total
+
+	def getCorrectPercentage():
+		return self.correct/self.total
+
+	def getTotal():
+		return self.total
+
+	def getCorrect():
+		return self.correct
+
+	def getContext():
+		return self.context
 
 
 
