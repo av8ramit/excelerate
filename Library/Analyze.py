@@ -46,13 +46,19 @@ class Analyze(object):
 			domain.append(i)
 			values.append(percent)
 		slope, intercept, r_value, p_value, std_err = stats.linregress(domain, values)
-		return [slope, intercept, r_value, p_value, std_err]
-
+		return [slope, intercept, r_value, p_value, std_err, domain, values]
 
 	def linearRegression(self, section):
-		resultList = []
 		dataSet = self.getSectionInfo(qType, "Correct")
-
+		domain = []
+		values = []
+		i = 0
+		for point in dataSet:
+			percent = point.getCorrectPercentage()
+			domain.append(i)
+			values.append(percent)
+		slope, interncept, r_value, p_value, std_err = stats.linregress(domain, values)
+		return [slope, intercept, r_value, p_value, std_err, domain, values]
 
 	# Finds Standard Deviation of a set based on miss or correct and then plots it to the mean
 	def plotConsistencyGraph(self, qStat):

@@ -148,3 +148,50 @@ class C_Graph(object):
         return lines
 
 
+
+class A_Graph(object):
+
+    def __init__(self, name, index, points):
+        self.name = name
+        self.index = index
+        self.data = points
+
+    def head(self):
+        lines = []
+        lines.append('<link class="include" rel="stylesheet" type="text/css" href="../../Graphs/examples/../jquery.jqplot.min.css" />' + endl)
+        #lines.append('<link rel="stylesheet" type="text/css" href="../../Graphs/examples/examples.min.css" />' + endl)
+        lines.append('<link type="text/css" rel="stylesheet" href="../../Graphs/examples/syntaxhighlighter/styles/shCoreDefault.min.css" />' + endl)
+        lines.append('<link type="text/css" rel="stylesheet" href="../../Graphs/examples/syntaxhighlighter/styles/shThemejqPlot.min.css" />' + endl)
+        lines.append('<script class="include" type="text/javascript" src="../../Graphs/jquery.min.js"></script>' + endl)
+        return lines
+
+
+    def html(self, percent=False, space = True):
+        lines = []
+        if space:
+            lines.append('<br>')
+        lines.append('<div id="chart' + str(self.index) + '" style="height:300px; width:500px;"></div>' + endl)
+        lines.append('<script class="code" type="text/javascript">' + endl)
+        lines.append('$(document).ready(function(){' + endl)
+        lines.append('var line1 = ' + str(self.data) + ';' + endl)
+        lines.append("var plot1 = $.jqplot('chart" + str(self.index) + "', [line1], {" + endl)
+        lines.append("title:'" + self.name + "'," + endl)
+        lines.append('seriesDefaults: {' + endl)
+        lines.append('showMarker:true,' + endl)
+        lines.append('pointLabels: { show:false } ' + endl)
+        lines.append('},' + endl)
+        lines.append('highlighter:{ show: true, sizeAdjust: 7.5 },' + endl)
+        lines.append('axes:{' + endl)
+        lines.append('xaxis:{min:0},' + endl)
+        if percent:
+            lines.append("yaxis:{" + 'label:' + "'Percent Correct'," + 'labelRenderer: $.jqplot.CanvasAxisLabelRenderer,' + "tickOptions: {formatString: " +  '"' +'%' + "'d" + '%"' + '}}' + endl)
+        else:
+            lines.append("yaxis:{" + 'label:' + "'Score'," + 'labelRenderer: $.jqplot.CanvasAxisLabelRenderer,' + '}' + endl)
+        lines.append('},' + endl)
+        lines.append("series:[{lineWidth:3}]" + endl)
+        lines.append('});' + endl)
+        lines.append('});' + endl)
+        lines.append('</script>' + endl)
+        return lines
+
+
