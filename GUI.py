@@ -46,7 +46,11 @@ root.configure(background = 'light steel blue')
 #w_id = termframe.winfo_id()
 #os.system('konsole -into %d - geometry 400x200 -e /root/.bashrc&' % w_id)
 
- 
+##################### Users List  ################
+global users 
+
+
+
 
 ####################### Load Images ######################
 
@@ -140,8 +144,11 @@ def get_new_user():
                 var.set(UserName)
                 if(UserName != None):
                      messagebox.showinfo('Current Student', 'Created Student ' + UserName)
-def get_load_user():
-    name = tkinter.simpledialog.askstring( 'Load Student', 'Enter Username')
+                     users = list_users_array()
+                     make_button()
+def get_load_user(uname):
+    #name = tkinter.simpledialog.askstring( 'Load Student', 'Enter Username')
+    name = uname
     if(name != None):
         res = c.process_commands('load_student ' + name)
         if (not res and c.error is not None):
@@ -155,7 +162,8 @@ def get_load_user():
                 if(UserName != None):
                    
                     messagebox.showinfo('Current Student', 'Loaded Student ' + UserName)
-
+                    users = list_users_array()
+                    
 def get_test_name():
    
      if(c.user is not None):
@@ -211,22 +219,29 @@ def class_analyze():
   os.system('open ' + dirc + DIR_SEP + 'analytics.html' )
 
 
-def harvard():
 
-   SCHOOLSCORE_O = dict_overall['Harvard']
-   SCHOOLSCORE_M = dict_math['Harvard']
-   SCHOOLSCORE_R = dict_read['Harvard']
-   SCHOOLSCORE_W = dict_write['Harvard']
-   SCHOOLNAME = 'Harvard'
-   SCHOOLCOLOR = dict_colors['Harvard']
-   SCHOOLBGCOLOR = dict_bgcolor['Harvard']
-   messagebox.showinfo('School name', SCHOOLNAME)
-   if(c.user is not None):
-        c.user.c_graph_HTML(SCHOOLSCORE_O, SCHOOLSCORE_M, SCHOOLSCORE_R, SCHOOLSCORE_W, SCHOOLNAME, SCHOOLCOLOR, SCHOOLBGCOLOR)
-        name = c.user.name 
-        dirc = user_directory(name) 
-        os.system('open ' + dirc + DIR_SEP + 'college_graph_report.html' )
-   else:
+
+def harvard():
+    SCHOOLSCORE_O = dict_overall['Harvard']
+    SCHOOLSCORE_M = dict_math['Harvard']
+    SCHOOLSCORE_R = dict_read['Harvard']
+    SCHOOLSCORE_W = dict_write['Harvard']
+    SCHOOLNAME = 'Harvard'
+    SCHOOLCOLOR = dict_colors['Harvard']
+    SCHOOLBGCOLOR = dict_bgcolor['Harvard']
+    messagebox.showinfo('School name', SCHOOLNAME)   
+    if(c.user is not None):
+        if(len(c.user.tests_taken) is 0):
+            messagebox.showwarning("Error", 'Please take tests and grade them before generating reports.')
+
+           
+        else:
+            c.user.c_graph_HTML(SCHOOLSCORE_O, SCHOOLSCORE_M, SCHOOLSCORE_R, SCHOOLSCORE_W, SCHOOLNAME, SCHOOLCOLOR, SCHOOLBGCOLOR)
+            name = c.user.name 
+            dirc = user_directory(name) 
+            os.system('open ' + dirc + DIR_SEP + 'college_graph_report.html' )
+    else:
+
         messagebox.showwarning("Error", 'Please Load Or Create A Student First') 
 
 def stanford():
@@ -239,12 +254,18 @@ def stanford():
    SCHOOLBGCOLOR = dict_bgcolor['Stanford']
    messagebox.showinfo('School name', SCHOOLNAME)
    if(c.user is not None):
-        c.user.c_graph_HTML(SCHOOLSCORE_O, SCHOOLSCORE_M, SCHOOLSCORE_R, SCHOOLSCORE_W, SCHOOLNAME, SCHOOLCOLOR, SCHOOLBGCOLOR)
-        name = c.user.name 
-        dirc = user_directory(name) 
-        os.system('open ' + dirc + DIR_SEP + 'college_graph_report.html' )
+        if(len(c.user.tests_taken) is 0):
+            messagebox.showwarning("Error", 'Please take tests and grade them before generating reports.')
+
+           
+        else:
+            c.user.c_graph_HTML(SCHOOLSCORE_O, SCHOOLSCORE_M, SCHOOLSCORE_R, SCHOOLSCORE_W, SCHOOLNAME, SCHOOLCOLOR, SCHOOLBGCOLOR)
+            name = c.user.name 
+            dirc = user_directory(name) 
+            os.system('open ' + dirc + DIR_SEP + 'college_graph_report.html' )
    else:
-        messagebox.showwarning("Error", 'Please Load Or Create A Student First')  
+
+        messagebox.showwarning("Error", 'Please Load Or Create A Student First')   
 
 def mit():
    SCHOOLSCORE_O = dict_overall['MIT']
@@ -256,11 +277,17 @@ def mit():
    SCHOOLBGCOLOR = dict_bgcolor['MIT']
    messagebox.showinfo('School name', SCHOOLNAME)
    if(c.user is not None):
-        c.user.c_graph_HTML(SCHOOLSCORE_O, SCHOOLSCORE_M, SCHOOLSCORE_R, SCHOOLSCORE_W, SCHOOLNAME, SCHOOLCOLOR, SCHOOLBGCOLOR)
-        name = c.user.name 
-        dirc = user_directory(name) 
-        os.system('open ' + dirc + DIR_SEP + 'college_graph_report.html' )
+        if(len(c.user.tests_taken) is 0):
+            messagebox.showwarning("Error", 'Please take tests and grade them before generating reports.')
+
+           
+        else:
+            c.user.c_graph_HTML(SCHOOLSCORE_O, SCHOOLSCORE_M, SCHOOLSCORE_R, SCHOOLSCORE_W, SCHOOLNAME, SCHOOLCOLOR, SCHOOLBGCOLOR)
+            name = c.user.name 
+            dirc = user_directory(name) 
+            os.system('open ' + dirc + DIR_SEP + 'college_graph_report.html' )
    else:
+
         messagebox.showwarning("Error", 'Please Load Or Create A Student First') 
 def yale():
    SCHOOLSCORE_O = dict_overall['Yale']
@@ -272,12 +299,18 @@ def yale():
    SCHOOLBGCOLOR = dict_bgcolor['Yale']
    messagebox.showinfo('School name', SCHOOLNAME)
    if(c.user is not None):
-        c.user.c_graph_HTML(SCHOOLSCORE_O, SCHOOLSCORE_M, SCHOOLSCORE_R, SCHOOLSCORE_W, SCHOOLNAME, SCHOOLCOLOR, SCHOOLBGCOLOR)
-        name = c.user.name 
-        dirc = user_directory(name) 
-        os.system('open ' + dirc + DIR_SEP + 'college_graph_report.html' )
+        if(len(c.user.tests_taken) is 0):
+            messagebox.showwarning("Error", 'Please take tests and grade them before generating reports.')
+
+           
+        else:
+            c.user.c_graph_HTML(SCHOOLSCORE_O, SCHOOLSCORE_M, SCHOOLSCORE_R, SCHOOLSCORE_W, SCHOOLNAME, SCHOOLCOLOR, SCHOOLBGCOLOR)
+            name = c.user.name 
+            dirc = user_directory(name) 
+            os.system('open ' + dirc + DIR_SEP + 'college_graph_report.html' )
    else:
-        messagebox.showwarning("Error", 'Please Load Or Create A Student First')     
+
+        messagebox.showwarning("Error", 'Please Load Or Create A Student First')    
 def uc_berkeley():
    SCHOOLSCORE_O = dict_overall['UC Berkeley']
    SCHOOLSCORE_M = dict_math['UC Berkeley']
@@ -288,11 +321,17 @@ def uc_berkeley():
    SCHOOLNAME = 'UC Berkeley'
    messagebox.showinfo('School name', SCHOOLNAME)
    if(c.user is not None):
-        c.user.c_graph_HTML(SCHOOLSCORE_O, SCHOOLSCORE_M, SCHOOLSCORE_R, SCHOOLSCORE_W, SCHOOLNAME, SCHOOLCOLOR, SCHOOLBGCOLOR)
-        name = c.user.name 
-        dirc = user_directory(name) 
-        os.system('open ' + dirc + DIR_SEP + 'college_graph_report.html' )
+        if(len(c.user.tests_taken) is 0):
+            messagebox.showwarning("Error", 'Please take tests and grade them before generating reports.')
+
+           
+        else:
+            c.user.c_graph_HTML(SCHOOLSCORE_O, SCHOOLSCORE_M, SCHOOLSCORE_R, SCHOOLSCORE_W, SCHOOLNAME, SCHOOLCOLOR, SCHOOLBGCOLOR)
+            name = c.user.name 
+            dirc = user_directory(name) 
+            os.system('open ' + dirc + DIR_SEP + 'college_graph_report.html' )
    else:
+
         messagebox.showwarning("Error", 'Please Load Or Create A Student First')     
 def ucla():
    SCHOOLSCORE_O = dict_overall['UCLA']
@@ -304,11 +343,17 @@ def ucla():
    SCHOOLBGCOLOR = dict_bgcolor['UCLA']
    messagebox.showinfo('School name', SCHOOLNAME)
    if(c.user is not None):
-        c.user.c_graph_HTML(SCHOOLSCORE_O, SCHOOLSCORE_M, SCHOOLSCORE_R, SCHOOLSCORE_W, SCHOOLNAME, SCHOOLCOLOR, SCHOOLBGCOLOR)
-        name = c.user.name 
-        dirc = user_directory(name) 
-        os.system('open ' + dirc + DIR_SEP + 'college_graph_report.html' )
+        if(len(c.user.tests_taken) is 0):
+            messagebox.showwarning("Error", 'Please take tests and grade them before generating reports.')
+
+           
+        else:
+            c.user.c_graph_HTML(SCHOOLSCORE_O, SCHOOLSCORE_M, SCHOOLSCORE_R, SCHOOLSCORE_W, SCHOOLNAME, SCHOOLCOLOR, SCHOOLBGCOLOR)
+            name = c.user.name 
+            dirc = user_directory(name) 
+            os.system('open ' + dirc + DIR_SEP + 'college_graph_report.html' )
    else:
+
         messagebox.showwarning("Error", 'Please Load Or Create A Student First') 
 def princeton():
    SCHOOLSCORE_O = dict_overall['Princeton']
@@ -320,11 +365,17 @@ def princeton():
    SCHOOLBGCOLOR = dict_bgcolor['Princeton']
    messagebox.showinfo('School name', SCHOOLNAME)
    if(c.user is not None):
-        c.user.c_graph_HTML(SCHOOLSCORE_O, SCHOOLSCORE_M, SCHOOLSCORE_R, SCHOOLSCORE_W, SCHOOLNAME, SCHOOLCOLOR, SCHOOLBGCOLOR)
-        name = c.user.name 
-        dirc = user_directory(name) 
-        os.system('open ' + dirc + DIR_SEP + 'college_graph_report.html' )
+        if(len(c.user.tests_taken) is 0):
+            messagebox.showwarning("Error", 'Please take tests and grade them before generating reports.')
+
+           
+        else:
+            c.user.c_graph_HTML(SCHOOLSCORE_O, SCHOOLSCORE_M, SCHOOLSCORE_R, SCHOOLSCORE_W, SCHOOLNAME, SCHOOLCOLOR, SCHOOLBGCOLOR)
+            name = c.user.name 
+            dirc = user_directory(name) 
+            os.system('open ' + dirc + DIR_SEP + 'college_graph_report.html' )
    else:
+
         messagebox.showwarning("Error", 'Please Load Or Create A Student First') 
 def caltech():
    SCHOOLSCORE_O = dict_overall['Caltech']
@@ -336,12 +387,18 @@ def caltech():
    SCHOOLBGCOLOR = dict_bgcolor['Caltech']
    messagebox.showinfo('School name', SCHOOLNAME)
    if(c.user is not None):
-        c.user.c_graph_HTML(SCHOOLSCORE_O, SCHOOLSCORE_M, SCHOOLSCORE_R, SCHOOLSCORE_W, SCHOOLNAME, SCHOOLCOLOR, SCHOOLBGCOLOR)
-        name = c.user.name 
-        dirc = user_directory(name) 
-        os.system('open ' + dirc + DIR_SEP + 'college_graph_report.html' )
+        if(len(c.user.tests_taken) is 0):
+            messagebox.showwarning("Error", 'Please take tests and grade them before generating reports.')
+
+           
+        else:
+            c.user.c_graph_HTML(SCHOOLSCORE_O, SCHOOLSCORE_M, SCHOOLSCORE_R, SCHOOLSCORE_W, SCHOOLNAME, SCHOOLCOLOR, SCHOOLBGCOLOR)
+            name = c.user.name 
+            dirc = user_directory(name) 
+            os.system('open ' + dirc + DIR_SEP + 'college_graph_report.html' )
    else:
-        messagebox.showwarning("Error", 'Please Load Or Create A Student First')      
+
+        messagebox.showwarning("Error", 'Please Load Or Create A Student First')       
 def johns_hopkins():
    SCHOOLSCORE_O = dict_overall['Johns Hopkins']
    SCHOOLSCORE_M = dict_math['Johns Hopkins']
@@ -352,12 +409,18 @@ def johns_hopkins():
    SCHOOLBGCOLOR = dict_bgcolor['Johns Hopkins']
    messagebox.showinfo('School name', SCHOOLNAME)
    if(c.user is not None):
-        c.user.c_graph_HTML(SCHOOLSCORE_O, SCHOOLSCORE_M, SCHOOLSCORE_R, SCHOOLSCORE_W, SCHOOLNAME, SCHOOLCOLOR, SCHOOLBGCOLOR)
-        name = c.user.name 
-        dirc = user_directory(name) 
-        os.system('open ' + dirc + DIR_SEP + 'college_graph_report.html' )
+        if(len(c.user.tests_taken) is 0):
+            messagebox.showwarning("Error", 'Please take tests and grade them before generating reports.')
+
+           
+        else:
+            c.user.c_graph_HTML(SCHOOLSCORE_O, SCHOOLSCORE_M, SCHOOLSCORE_R, SCHOOLSCORE_W, SCHOOLNAME, SCHOOLCOLOR, SCHOOLBGCOLOR)
+            name = c.user.name 
+            dirc = user_directory(name) 
+            os.system('open ' + dirc + DIR_SEP + 'college_graph_report.html' )
    else:
-        messagebox.showwarning("Error", 'Please Load Or Create A Student First') 
+
+        messagebox.showwarning("Error", 'Please Load Or Create A Student First')  
 def carnegie_mellon():
    SCHOOLSCORE_O = dict_overall['Carnegie Mellon']
    SCHOOLSCORE_M = dict_math['Carnegie Mellon']
@@ -368,11 +431,17 @@ def carnegie_mellon():
    SCHOOLBGCOLOR = dict_bgcolor['Carnegie Mellon']
    messagebox.showinfo('School name', SCHOOLNAME)
    if(c.user is not None):
-       c.user.c_graph_HTML(SCHOOLSCORE_O, SCHOOLSCORE_M, SCHOOLSCORE_R, SCHOOLSCORE_W, SCHOOLNAME, SCHOOLCOLOR, SCHOOLBGCOLOR)
-       name = c.user.name 
-       dirc = user_directory(name) 
-       os.system('open ' + dirc + DIR_SEP + 'college_graph_report.html' )   
+        if(len(c.user.tests_taken) is 0):
+            messagebox.showwarning("Error", 'Please take tests and grade them before generating reports.')
+
+           
+        else:
+            c.user.c_graph_HTML(SCHOOLSCORE_O, SCHOOLSCORE_M, SCHOOLSCORE_R, SCHOOLSCORE_W, SCHOOLNAME, SCHOOLCOLOR, SCHOOLBGCOLOR)
+            name = c.user.name 
+            dirc = user_directory(name) 
+            os.system('open ' + dirc + DIR_SEP + 'college_graph_report.html' )
    else:
+
         messagebox.showwarning("Error", 'Please Load Or Create A Student First')   
 
 ######################################################################
@@ -419,7 +488,7 @@ Label(root, image = photo, background = 'light steel blue').grid(row=0, column =
 
 Button( root, image = NUimg, width = 250, height = 250, pady = 0,  command= get_new_user).grid( row = 1, column = 0 ,columnspan = 2, rowspan = 2, sticky = (W))
 
-Button( root, image = LUimg , width = 250, height = 250, pady = 0, command = get_load_user).grid(row = 1, column = 2, columnspan = 2, rowspan = 2,sticky = W)
+#Button( root, image = LUimg , width = 250, height = 250, pady = 0, command = get_load_user).grid(row = 1, column = 2, columnspan = 2, rowspan = 2,sticky = W)
 
 
 Button( root, image = Gimg, width = 250, height = 250,  pady = 0,  command = get_test_name ).grid( row = 1,column = 10, columnspan = 2, rowspan = 2,sticky = W)
@@ -447,22 +516,34 @@ mb.menu.add_checkbutton(label ="Section Report", command = section_report)
 
 
 # Goal School Drop down menu 
-
 Mb = Menubutton(root, image = GoalSchl, width = 254, height = 256)
 Mb.grid(row = 1, column = 16, columnspan = 3, rowspan = 2, sticky =(W))
 Mb.menu = Menu(Mb)
 Mb["menu"] = Mb.menu
-Mb.menu.add_radiobutton(label = "Harvard",  command = harvard) #textvariable = "Harvard", command = goal_school )
-Mb.menu.add_radiobutton(label = "Stanford", command = stanford )#command =)
-Mb.menu.add_radiobutton(label = "MIT", command = mit )#command =)
-Mb.menu.add_radiobutton(label = "Yale", command = yale)#command =)
-Mb.menu.add_radiobutton(label = "UC Berkeley", command = uc_berkeley)#command =)
-Mb.menu.add_radiobutton(label = "UCLA", command = ucla )#command =)
-Mb.menu.add_radiobutton(label = "Princeton", command = princeton ) #command =)
-Mb.menu.add_radiobutton(label = "Caltech", command = caltech)#command =)
-Mb.menu.add_radiobutton(label = "Johns Hopkins", command = johns_hopkins )#command =)
-Mb.menu.add_radiobutton(label = "Carnegie Mellon", command = carnegie_mellon)#command =)
+Mb.menu.add_radiobutton(label = "Harvard Report",  command = harvard) #textvariable = "Harvard", command = goal_school )
+Mb.menu.add_radiobutton(label = "Stanford Report", command = stanford )#command =)
+Mb.menu.add_radiobutton(label = "MIT Report", command = mit )#command =)
+Mb.menu.add_radiobutton(label = "Yale Report", command = yale)#command =)
+Mb.menu.add_radiobutton(label = "UC Berkeley Report", command = uc_berkeley)#command =)
+Mb.menu.add_radiobutton(label = "UCLA Report", command = ucla )#command =)
+Mb.menu.add_radiobutton(label = "Princeton Report", command = princeton ) #command =)
+Mb.menu.add_radiobutton(label = "Caltech Report", command = caltech)#command =)
+Mb.menu.add_radiobutton(label = "Johns Hopkins Report", command = johns_hopkins )#command =)
+Mb.menu.add_radiobutton(label = "Carnegie Mellon Report", command = carnegie_mellon)#command =)
+
+#Drop Down list Users 
+def make_button():
+    LU = Menubutton(root, image =  LUimg, width = 254, height = 256)
+    LU.grid(row = 1, column = 2, columnspan = 2, rowspan = 2,sticky = (W))
+    LU.menu = Menu(LU)
+    LU["menu"] = LU.menu
+    users = list_users_array()
+    for username in users:
+        name = username
+        LU.menu.add_radiobutton(label = name , command =lambda t = name: get_load_user(t))
+
 # Tk enters its event loop
+make_button()
 root.mainloop()
 
 
