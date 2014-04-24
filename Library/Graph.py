@@ -36,6 +36,8 @@ class Graph(object):
         lines.append('$(document).ready(function(){' + endl)
         lines.append('var line1 = ' + str(self.data) + ';' + endl)
         lines.append("var plot1 = $.jqplot('chart" + str(self.index) + "', [line1], {" + endl)
+        lines.append("animate: true," + endl)
+        lines.append("animateReplot:true," + endl)
         lines.append("title:'" + self.name + "'," + endl)
         lines.append('seriesDefaults: {' + endl)
         lines.append('showMarker:true,' + endl)
@@ -49,7 +51,8 @@ class Graph(object):
         else:
             lines.append("yaxis:{" + 'label:' + "'Score'," + 'labelRenderer: $.jqplot.CanvasAxisLabelRenderer,' + '}' + endl)
         lines.append('},' + endl)
-        lines.append("series:[{lineWidth:3}]" + endl)
+        lines.append("cursor: { show: true, zoom: true, looseZoom: true, showTooltip: false }," + endl)
+        lines.append("series:[{lineWidth:3, rendererOptions:{animation:{speed:4000}}}]," + endl)
         lines.append('});' + endl)
         lines.append('});' + endl)
         lines.append('</script>' + endl)
@@ -69,7 +72,7 @@ class Graph(object):
         lines.append('<script class="include" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.canvasTextRenderer.min.js"></script>' + endl)
         lines.append('<script class="include" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>' + endl)
         lines.append('<script type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.highlighter.min.js"></script>' + endl)
-      
+        lines.append('<script type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.cursor.min.js"></script>')
         return lines
 
 
@@ -102,9 +105,9 @@ class C_Graph(object):
         lines.append('<script class="code" type="text/javascript">' + endl)
         lines.append('$(document).ready(function(){' + endl)
         lines.append('var line1 = ' + str(self.data) + ';' + endl)
-
-      
         lines.append("var plot1 = $.jqplot('chart" + str(self.index) + "', [line1], {" + endl)
+        lines.append("animate: true," + endl)
+        lines.append("animateReplot:true," + endl)
         lines.append("title:'" + self.name + "'," + endl)
         lines.append('seriesDefaults: {' + endl)
         lines.append('showMarker:true,' + endl)
@@ -119,7 +122,8 @@ class C_Graph(object):
         else:
             lines.append("yaxis:{" + 'label:' + "'Score'," + 'labelRenderer: $.jqplot.CanvasAxisLabelRenderer,' + '}' + endl)
         lines.append('},' + endl)
-        lines.append("series:[{lineWidth:3},{}]," + endl)
+        lines.append("cursor: { show: true, zoom: true, looseZoom: true, showTooltip: false }," + endl)
+        lines.append("series:[{lineWidth:3, rendererOptions:{animation:{speed:4000}}}]," + endl)
         # canvas overlay
         lines.append("canvasOverlay: { show: true, objects: [ {horizontalLine: { name: '" + str(self.schname) + "', y: '"  + str(self.schscore) +  "', showTooltip: true, tooltipFormatString:  " '"' + str(self.schscore) + '"'  ", lineWidth: 4 ,color: " "'" + str(self.schcolr)  + "'" "}} , {dashedHorizontalLine: { name: '" + str(self.schname) + "', y: '"  + str(self.schscore) + "'" ", lineWidth: 5 , dashPattern: [12,12],color: " "'" + str(self.schgbcolr) + "'" "}}]}"   + endl )
         lines.append('});' + endl)
@@ -144,7 +148,7 @@ class C_Graph(object):
         lines.append('<script language="javascript" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.canvasOverlay.min.js"></script>' + endl)
         # Highlighter
         lines.append('<script type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.highlighter.min.js"></script>' + endl)
-
+        lines.append('<script type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.cursor.min.js"></script>')
         return lines
 
 

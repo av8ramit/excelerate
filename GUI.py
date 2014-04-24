@@ -34,7 +34,7 @@ c = Console()
 root = Tk()
 
 #set window size
-root.geometry("1433x615")
+root.geometry("1280x615")
 
 #set window title
 root.title("Excelerate")
