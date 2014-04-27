@@ -1,6 +1,19 @@
 #!/usr/bin/python
 
 
+
+
+####################################################################################################################################################  
+#                                                                                                                                                  #
+# This file has been created by Neel Bhadra:                                                                                                   #
+#     Created by              : neel.bhadra                                                                                                      #    
+#     Created on              : 12-26-2013                                                                                                         #
+#     Directory               : /Excelerate/                                                                                                          #
+#     Purpose                 : This file creates and launches our Graphical User Interface                                                                                 #
+#                                                                                                                                                  #
+#################################################################################################################################################### 
+
+
 # import tkinter, load existing TK library on system
 from tkinter import *
 # import python's binding to newer "themed widgets" added to Tk in 8.5
@@ -46,7 +59,7 @@ root.configure(background = 'light steel blue')
 #w_id = termframe.winfo_id()
 #os.system('konsole -into %d - geometry 400x200 -e /root/.bashrc&' % w_id)
 
-##################### Users List  ################
+# var to hold username when creating menu button 
 global users 
 
 
@@ -187,9 +200,9 @@ def get_test_name():
      else:
         messagebox.showwarning("Error", 'Please Load Or Create A Student First')           
 
-def get_test_id():
+def get_test_id(test_id):
     if(c.user is not None):
-        name = tkinter.simpledialog.askstring( 'Create Answer Sheet', 'Enter Test ID')
+        name = test_id
         if(name != None):
             res = c.process_commands('answer_sheet ' + name)
             if (not res):
@@ -494,7 +507,7 @@ Button( root, image = NUimg, width = 250, height = 250, pady = 0,  command= get_
 Button( root, image = Gimg, width = 250, height = 250,  pady = 0,  command = get_test_name ).grid( row = 1,column = 10, columnspan = 2, rowspan = 2,sticky = W)
  
 
-Button( root, image = CASimg,  width = 250, height = 250, pady = 0 , command = get_test_id).grid( row = 1, column = 4, columnspan = 2, rowspan = 2,sticky = W)
+#Button( root, image = CASimg,  width = 250, height = 250, pady = 0 , command = get_test_id).grid( row = 1, column = 4, columnspan = 2, rowspan = 2,sticky = W)
 
 Button( root, image = Rstimg,  width = 250, height = 250, pady = 0, command = reset_user).grid( row = 9, column = 16, columnspan = 2, rowspan = 2,sticky = W)
 
@@ -532,7 +545,7 @@ Mb.menu.add_radiobutton(label = "Johns Hopkins Report", command = johns_hopkins 
 Mb.menu.add_radiobutton(label = "Carnegie Mellon Report", command = carnegie_mellon)#command =)
 
 #Drop Down list Users 
-def make_button():
+def make_lu_button():
     LU = Menubutton(root, image =  LUimg, width = 254, height = 256)
     LU.grid(row = 1, column = 2, columnspan = 2, rowspan = 2,sticky = (W))
     LU.menu = Menu(LU)
@@ -542,8 +555,22 @@ def make_button():
         name = username
         LU.menu.add_radiobutton(label = name , command =lambda t = name: get_load_user(t))
 
+#Drop Down Create Ans Sheet
+def make_ans_sheet_button():
+    CA = Menubutton(root, image = CASimg, width = 254, height = 256)
+    CA.grid( row = 1, column = 4, columnspan = 2, rowspan = 2,sticky = (W))
+    CA.menu = Menu(CA)
+    CA["menu"] = CA.menu
+    tests = list_tests()
+    for test in tests:
+        name = test
+        CA.menu.add_radiobutton(label = name, command = lambda t = name: get_test_id(t))
+
+
+
 # Tk enters its event loop
-make_button()
+make_ans_sheet_button()
+make_lu_button()
 root.mainloop()
 
 

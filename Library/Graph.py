@@ -43,7 +43,7 @@ class Graph(object):
         lines.append('showMarker:true,' + endl)
         lines.append('pointLabels: { show:false } ' + endl)
         lines.append('},' + endl)
-        lines.append('highlighter:{ show: true, sizeAdjust: 7.5 },' + endl)
+        lines.append('highlighter:{ show: true, sizeAdjust: 7.5},' + endl)
         lines.append('axes:{' + endl)
         lines.append('xaxis:{min:0},' + endl)
         if percent:
