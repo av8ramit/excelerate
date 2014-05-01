@@ -38,7 +38,10 @@ from Console import *
 from Commands import *
 from Values import *
 from Class_Analytics import *
+from Graph import *
 import csv
+from Summary import *
+from User import *
 c = Console()
 
 
@@ -232,6 +235,66 @@ def class_analyze():
   os.system('open ' + dirc + DIR_SEP + 'analytics.html' )
 
 
+def college_profile():
+    schoolname = []
+    overall = []
+    math = []
+    reading = []
+    writing = []
+    school_overall = []
+    schoolname = []
+    school_m = []
+    school_r = []
+    school_w = []
+    p_o = []
+    p_m = []
+    p_r = []
+    p_w = []
+    if(c.user is not None):
+
+        if(len(c.user.tests_taken) is 0):
+
+            messagebox.showwarning("Error", 'Please take tests and grade them before generating reports.')
+        else:
+            for key, value in dict_overall.items():
+                schoolname.append(key)
+                school_overall.append(value)
+            for key, value in dict_math.items():
+                school_m.append(value)
+            for key, value in dict_read.items():
+                school_r.append(value)
+            for key, value in dict_write.items():
+                school_w.append(value)
+
+            for test in c.user.tests_taken:
+                overall.append(test.score_summary.total_score())
+                math.append(test.score_summary.section_scores[MATH_TYPE])
+                reading.append(test.score_summary.section_scores[READING_TYPE])
+                writing.append(test.score_summary.section_scores[WRITING_TYPE])
+                
+            overalls = overall.pop()
+            maths = math.pop()
+            readings = reading.pop()
+            writings = writing.pop()
+            print (overalls, maths, readings, writings)
+            for school in schoolname:
+                p_o.append((overalls/(dict_overall[school])))
+                p_m.append((maths/(dict_math[school])))
+                p_r.append((readings/(dict_read[school])))
+                p_w.append((writings/(dict_write[school])))
+
+            cp = College_Profile()
+            dirc = user_directory(c.user.name)
+            name = c.user.name
+
+            cp.report(schoolname, p_o, p_m, p_r, p_w, name)
+            
+            os.system('open ' + dirc + DIR_SEP + 'college_profile.html')
+
+    else:
+    
+
+        messagebox.showwarning("Error", 'Please Load Or Create A Student First') 
 
 
 def harvard():
@@ -543,7 +606,7 @@ Mb.menu.add_radiobutton(label = "Princeton Report", command = princeton ) #comma
 Mb.menu.add_radiobutton(label = "Caltech Report", command = caltech)#command =)
 Mb.menu.add_radiobutton(label = "Johns Hopkins Report", command = johns_hopkins )#command =)
 Mb.menu.add_radiobutton(label = "Carnegie Mellon Report", command = carnegie_mellon)#command =)
-
+Mb.menu.add_radiobutton(label = "Complete College Profile", command = college_profile)
 #Drop Down list Users 
 def make_lu_button():
     LU = Menubutton(root, image =  LUimg, width = 254, height = 256)

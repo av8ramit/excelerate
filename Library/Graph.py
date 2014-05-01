@@ -9,6 +9,7 @@
 #################################################################################################################################################### 
 
 from Values import *
+from User import *
 
 class Graph(object):
 
@@ -150,5 +151,86 @@ class C_Graph(object):
         lines.append('<script type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.highlighter.min.js"></script>' + endl)
         lines.append('<script type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.cursor.min.js"></script>')
         return lines
+
+class College_Profile(object):
+
+       
+        def report(self, schoolname, overall, math, reading, writing, name):
+            schools = schoolname
+            p_o = overall
+            p_m  = math
+            p_r = reading
+            p_w = writing
+            index = 0
+            dirc = user_directory(name)
+            FILE = open(dirc + DIR_SEP + "college_profile" + ".html", "w")
+            lines = []
+
+            
+      
+            #HTML opener
+            lines.append('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">' + endl)
+            lines.append('<html xmlns="http://www.w3.org/1999/xhtml">' + endl)
+            lines.append('<head>')
+            lines.append('<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />' + endl)
+            lines.append('<link rel="stylesheet" type="text/css" href="../../HTML/style.css" />' + endl)
+            lines.append('<title>Advanced Score Report</title>' + endl)
+            lines.append('</head>' + endl)
+            lines.append('<body>' + endl)
+            lines.append('<div id="page">' + endl)
+            lines.append('<div id="header">' + endl)
+            lines.append('<img src="../../HTML/Mini Logo.png" width="35%" alt="Excelerate" />' + endl)
+            lines.append('</div>' + endl)
+            lines.append('</div>' + endl)
+            lines.append('<div id="content">' + endl)
+            lines.append('<div id="container">' + endl)
+            lines.append('<div id="main">' + endl)
+            lines.append('<div id="menu">' + endl)
+            lines.append('<h2 style="text-align:center;">' + str(name) + '</h2>' + endl)
+            lines.append('</div>' + endl)
+            lines.append('<div id="text">' + endl)
+
+
+            #Class Analysis
+            lines.append(endl)
+            lines.append("<h1> College Profile</h1>" + endl)
+            lines.append("<head>")
+            lines.append("<style>")
+            lines.append("table,th,td{border:1px solid black;border-collapse:collapse;}th,td{padding:5px;}th{text-align:left;}")
+            lines.append("</style>")
+            lines.append("</head>")
+
+            lines.append('<table style="width:500px">')
+            lines.append('<tr><th>College</th><th>Your Overall Percentile vs Average Admission Score</th><th>Your Math Percentile vs Average Admission Score</th><th>Your Reading Percentile vs Average Admission Score</th><th>Your Writing Percentile vs Average Admission Score</th></tr>')
+
+            for school in schools:
+                lines.append('<tr>')
+                lines.append('<td>' + school + '</td>')
+                lines.append('<td>' + str(round(p_o[index]*100, 2)) + '</td>')
+                lines.append('<td>' + str(round(p_m[index]*100, 2)) + '</td>')
+                lines.append('<td>' + str(round(p_r[index]*100, 2)) + '</td>')
+                lines.append('<td>' + str(round(p_w[index]*100, 2)) + '</td>')
+                lines.append('</tr>')
+                index += 1 
+            lines.append('</table>')
+
+            #Footer
+            lines.append('<br>' + endl)
+            lines.append('</div>' + endl)
+            lines.append('</div>' + endl)
+            lines.append('</div>' + endl)
+            lines.append('<div class="clear"></div>' + endl)
+            lines.append('<div id="footer">' + endl)
+            lines.append('<p><a>' + 'College Profile Report</a></p>' + endl)
+            lines.append('</div>' + endl)
+            lines.append('</div>' + endl)
+
+
+            lines.append('</body>' + endl)
+            lines.append('</html>' + endl)
+            lines.append(endl)
+
+            FILE.writelines(lines)
+            FILE.close()
 
 
