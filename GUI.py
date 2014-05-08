@@ -84,7 +84,7 @@ ClassAnly = PhotoImage(file = "./GUI/CollegeA.gif")
 
 ################### Functions ##########################
 def help_usage():
-    os.system('open ' + './Documents/Usage_v1.pdf' )
+    os.system('./Documents/Usage_v1.pdf' )
 
 def save_user():
     res = c.process_commands('save')
@@ -113,7 +113,7 @@ def simple_report():
         dirc = user_directory(name) 
         fname = os.path.basename(dirc)
         if (dirc != None):
-            os.system('open ' + dirc + DIR_SEP + 'simple_report.html' ) 
+            os.system(dirc + DIR_SEP + 'simple_report.html' ) 
 def advance_report():
     res = c.process_commands('advanced_report')
     if (not res):
@@ -123,7 +123,7 @@ def advance_report():
         dirc = user_directory(name) 
         fname = os.path.basename(dirc)
         if (dirc != None):
-            os.system('open ' + dirc + DIR_SEP + 'advanced_report.html' )
+            os.system(dirc + DIR_SEP + 'advanced_report.html' )
 def graph_report():
     res = c.process_commands('graph_report')
     if (not res):
@@ -133,7 +133,7 @@ def graph_report():
         dirc = user_directory(name) 
         fname = os.path.basename(dirc)
         if (dirc != None):
-            os.system('open ' + dirc + DIR_SEP + 'graph_report.html' )
+            os.system(dirc + DIR_SEP + 'graph_report.html' )
 def section_report():
     res = c.process_commands('section_report')
     if (not res):
@@ -143,9 +143,9 @@ def section_report():
         dirc = user_directory(name) 
         fname = os.path.basename(dirc)
         if (dirc != None):
-            os.system('open ' + dirc + DIR_SEP + 'math_report.html' )
-            os.system('open ' + dirc + DIR_SEP + 'reading_report.html' )
-            os.system('open ' + dirc + DIR_SEP + 'writing_report.html' )
+            os.system(dirc + DIR_SEP + 'math_report.html' )
+            os.system(dirc + DIR_SEP + 'reading_report.html' )
+            os.system(dirc + DIR_SEP + 'writing_report.html' )
 
 def get_new_user():
     name = tkinter.simpledialog.askstring( 'New Student', 'Enter New Username')
@@ -199,7 +199,7 @@ def get_test_name():
                 fname = os.path.basename(dirc)
                 ans = messagebox.askyesno('Test Has Been Graded!', 'Would You Like To Open The Graded Test?')
                 if (dirc != None and ans is True):
-                    os.system('open ' + dirc + DIR_SEP + 'grade.html' )     
+                    os.system(dirc + DIR_SEP + 'grade.html' )     
      else:
         messagebox.showwarning("Error", 'Please Load Or Create A Student First')           
 
@@ -232,7 +232,7 @@ def class_analyze():
   a = Analytics()
   a.report()
   dirc = user_directory('')
-  os.system('open ' + dirc + DIR_SEP + 'analytics.html' )
+  os.system(dirc + DIR_SEP + 'analytics.html' )
 
 
 def college_profile():
@@ -289,7 +289,7 @@ def college_profile():
 
             cp.report(schoolname, p_o, p_m, p_r, p_w, name)
             
-            os.system('open ' + dirc + DIR_SEP + 'college_profile.html')
+            os.system(dirc + DIR_SEP + 'college_profile.html')
 
     else:
     
@@ -315,7 +315,7 @@ def harvard():
             c.user.c_graph_HTML(SCHOOLSCORE_O, SCHOOLSCORE_M, SCHOOLSCORE_R, SCHOOLSCORE_W, SCHOOLNAME, SCHOOLCOLOR, SCHOOLBGCOLOR)
             name = c.user.name 
             dirc = user_directory(name) 
-            os.system('open ' + dirc + DIR_SEP + 'college_graph_report.html' )
+            os.system(dirc + DIR_SEP + 'college_graph_report.html' )
     else:
 
         messagebox.showwarning("Error", 'Please Load Or Create A Student First') 
@@ -338,7 +338,7 @@ def stanford():
             c.user.c_graph_HTML(SCHOOLSCORE_O, SCHOOLSCORE_M, SCHOOLSCORE_R, SCHOOLSCORE_W, SCHOOLNAME, SCHOOLCOLOR, SCHOOLBGCOLOR)
             name = c.user.name 
             dirc = user_directory(name) 
-            os.system('open ' + dirc + DIR_SEP + 'college_graph_report.html' )
+            os.system(dirc + DIR_SEP + 'college_graph_report.html' )
    else:
 
         messagebox.showwarning("Error", 'Please Load Or Create A Student First')   
@@ -361,7 +361,7 @@ def mit():
             c.user.c_graph_HTML(SCHOOLSCORE_O, SCHOOLSCORE_M, SCHOOLSCORE_R, SCHOOLSCORE_W, SCHOOLNAME, SCHOOLCOLOR, SCHOOLBGCOLOR)
             name = c.user.name 
             dirc = user_directory(name) 
-            os.system('open ' + dirc + DIR_SEP + 'college_graph_report.html' )
+            os.system(dirc + DIR_SEP + 'college_graph_report.html' )
    else:
 
         messagebox.showwarning("Error", 'Please Load Or Create A Student First') 
@@ -383,7 +383,7 @@ def yale():
             c.user.c_graph_HTML(SCHOOLSCORE_O, SCHOOLSCORE_M, SCHOOLSCORE_R, SCHOOLSCORE_W, SCHOOLNAME, SCHOOLCOLOR, SCHOOLBGCOLOR)
             name = c.user.name 
             dirc = user_directory(name) 
-            os.system('open ' + dirc + DIR_SEP + 'college_graph_report.html' )
+            os.system(dirc + DIR_SEP + 'college_graph_report.html' )
    else:
 
         messagebox.showwarning("Error", 'Please Load Or Create A Student First')    
@@ -405,7 +405,7 @@ def uc_berkeley():
             c.user.c_graph_HTML(SCHOOLSCORE_O, SCHOOLSCORE_M, SCHOOLSCORE_R, SCHOOLSCORE_W, SCHOOLNAME, SCHOOLCOLOR, SCHOOLBGCOLOR)
             name = c.user.name 
             dirc = user_directory(name) 
-            os.system('open ' + dirc + DIR_SEP + 'college_graph_report.html' )
+            os.system(dirc + DIR_SEP + 'college_graph_report.html' )
    else:
 
         messagebox.showwarning("Error", 'Please Load Or Create A Student First')     
@@ -427,7 +427,7 @@ def ucla():
             c.user.c_graph_HTML(SCHOOLSCORE_O, SCHOOLSCORE_M, SCHOOLSCORE_R, SCHOOLSCORE_W, SCHOOLNAME, SCHOOLCOLOR, SCHOOLBGCOLOR)
             name = c.user.name 
             dirc = user_directory(name) 
-            os.system('open ' + dirc + DIR_SEP + 'college_graph_report.html' )
+            os.system(dirc + DIR_SEP + 'college_graph_report.html' )
    else:
 
         messagebox.showwarning("Error", 'Please Load Or Create A Student First') 
@@ -449,7 +449,7 @@ def princeton():
             c.user.c_graph_HTML(SCHOOLSCORE_O, SCHOOLSCORE_M, SCHOOLSCORE_R, SCHOOLSCORE_W, SCHOOLNAME, SCHOOLCOLOR, SCHOOLBGCOLOR)
             name = c.user.name 
             dirc = user_directory(name) 
-            os.system('open ' + dirc + DIR_SEP + 'college_graph_report.html' )
+            os.system(dirc + DIR_SEP + 'college_graph_report.html' )
    else:
 
         messagebox.showwarning("Error", 'Please Load Or Create A Student First') 
@@ -471,7 +471,7 @@ def caltech():
             c.user.c_graph_HTML(SCHOOLSCORE_O, SCHOOLSCORE_M, SCHOOLSCORE_R, SCHOOLSCORE_W, SCHOOLNAME, SCHOOLCOLOR, SCHOOLBGCOLOR)
             name = c.user.name 
             dirc = user_directory(name) 
-            os.system('open ' + dirc + DIR_SEP + 'college_graph_report.html' )
+            os.system(dirc + DIR_SEP + 'college_graph_report.html' )
    else:
 
         messagebox.showwarning("Error", 'Please Load Or Create A Student First')       
@@ -493,7 +493,7 @@ def johns_hopkins():
             c.user.c_graph_HTML(SCHOOLSCORE_O, SCHOOLSCORE_M, SCHOOLSCORE_R, SCHOOLSCORE_W, SCHOOLNAME, SCHOOLCOLOR, SCHOOLBGCOLOR)
             name = c.user.name 
             dirc = user_directory(name) 
-            os.system('open ' + dirc + DIR_SEP + 'college_graph_report.html' )
+            os.system(dirc + DIR_SEP + 'college_graph_report.html' )
    else:
 
         messagebox.showwarning("Error", 'Please Load Or Create A Student First')  
@@ -515,7 +515,7 @@ def carnegie_mellon():
             c.user.c_graph_HTML(SCHOOLSCORE_O, SCHOOLSCORE_M, SCHOOLSCORE_R, SCHOOLSCORE_W, SCHOOLNAME, SCHOOLCOLOR, SCHOOLBGCOLOR)
             name = c.user.name 
             dirc = user_directory(name) 
-            os.system('open ' + dirc + DIR_SEP + 'college_graph_report.html' )
+            os.system(dirc + DIR_SEP + 'college_graph_report.html' )
    else:
 
         messagebox.showwarning("Error", 'Please Load Or Create A Student First')   
