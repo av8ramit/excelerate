@@ -51,7 +51,7 @@ TXT = ".txt"
 endl = "\n"
 
 #Directory Values
-DIR_SEP = "/"
+DIR_SEP = '\\'
 PAR_DIR = ".."
 
 #File Value
