@@ -1,4 +1,4 @@
-import sys
+import sys, os
 from cx_Freeze import setup, Executable
 
 def find_data_file(filename):
