@@ -2,7 +2,7 @@ import sys
 from cx_Freeze import setup, Executable
 
 build_exe_options = {"packages":['Library', 'Graphs'], 
-					"includes":["tkinter", "csv", "subprocess", "datetime", "shutil", "random"],
+					"includes":["tkinter", "csv", "subprocess", "datetime", "shutil", "random",'Library','Graphs'],
 					"include_files": ['GUI','HTML','Users','Tests','Library','E.icns', 'Graphs'],
 					}
 
