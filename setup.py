@@ -16,7 +16,7 @@ lib = find_data_file("Library")
 
 build_exe_options = {"packages":[lib, 'Graphs'], 
 					"includes":["tkinter", "csv", "subprocess", "datetime", "shutil", "random", 'Library', 'Graphs'],
-					"include_files": ['GUI','HTML','Users','Tests','Library','E.icns', 'Graphs'],
+					"include_files": ['GUI','HTML','Users','Tests', lib,'E.icns', 'Graphs'],
 					}
 
 base = None
