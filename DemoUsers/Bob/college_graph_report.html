@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="../../HTML/style.css" />
+<title>College Tracker</title>
+<link class="include" rel="stylesheet" type="text/css" href="../../Graphs/examples/../jquery.jqplot.min.css" />
+<link type="text/css" rel="stylesheet" href="../../Graphs/examples/syntaxhighlighter/styles/shCoreDefault.min.css" />
+<link type="text/css" rel="stylesheet" href="../../Graphs/examples/syntaxhighlighter/styles/shThemejqPlot.min.css" />
+<script class="include" type="text/javascript" src="../../Graphs/jquery.min.js"></script>
+</head>
+<body>
+<div id="page">
+<div id="header">
+<img src="../../HTML/Mini Logo.png" width="35%" alt="Excelerate" />
+</div>
+</div>
+<div id="content">
+<div id="container">
+<div id="main">
+<div id="menu">
+<h2 style="text-align:center;"> Graph Report: Bob</h2>
+</div>
+<div id="text">
+<h1 style = "text-align:center;" > Caltech Graphs</h1>
+<hr color="#BBBBBB" size="2" width="100%">
+<br><div id="chart1" style="height:300px; width:500px;"></div>
+<script class="code" type="text/javascript">
+$(document).ready(function(){
+var line1 = [[1, 1720], [2, 1730], [3, 1870], [4, 1760], [5, 1870], [6, 1930], [7, 1990], [8, 1990], [9, 2020], [10, 2020], [11, 2020], [12, 2060], [13, 2110], [14, 2110], [15, 2170], [16, 2220], [17, 2280], [18, 2300], [19, 2350], [20, 2400]];
+var plot1 = $.jqplot('chart1', [line1], {
+animate: true,
+animateReplot:true,
+title:'Overall Score Performance vs Caltech Admission Average',
+seriesDefaults: {
+showMarker:true,
+pointLabels: { show:false } 
+},
+highlighter:{ show: true, sizeAdjust: 7.5 },
+axes:{
+xaxis:{min:0},
+yaxis:{label:'Score',labelRenderer: $.jqplot.CanvasAxisLabelRenderer,}
+},
+cursor: { show: true, zoom: true, looseZoom: true, showTooltip: false },
+series:[{lineWidth:3, rendererOptions:{animation:{speed:4000}}}],
+canvasOverlay: { show: true, objects: [ {horizontalLine: { name: 'Caltech', y: '2260', showTooltip: true, tooltipFormatString:  "2260", lineWidth: 4 ,color: 'rgb(255,102,0)'}} , {dashedHorizontalLine: { name: 'Caltech', y: '2260', lineWidth: 5 , dashPattern: [12,12],color: 'rgb(255,255,255)'}}]}
+});
+});
+</script>
+<br><hr color="#4169EF" size="1" width="90%">
+
+<br><div id="chart2" style="height:300px; width:500px;"></div>
+<script class="code" type="text/javascript">
+$(document).ready(function(){
+var line1 = [[1, 420], [2, 430], [3, 650], [4, 420], [5, 650], [6, 650], [7, 680], [8, 680], [9, 710], [10, 710], [11, 710], [12, 620], [13, 750], [14, 750], [15, 750], [16, 750], [17, 750], [18, 750], [19, 800], [20, 800]];
+var plot1 = $.jqplot('chart2', [line1], {
+animate: true,
+animateReplot:true,
+title:'Writing Score Performance vs Caltech Admission Average',
+seriesDefaults: {
+showMarker:true,
+pointLabels: { show:false } 
+},
+highlighter:{ show: true, sizeAdjust: 7.5 },
+axes:{
+xaxis:{min:0},
+yaxis:{label:'Score',labelRenderer: $.jqplot.CanvasAxisLabelRenderer,}
+},
+cursor: { show: true, zoom: true, looseZoom: true, showTooltip: false },
+series:[{lineWidth:3, rendererOptions:{animation:{speed:4000}}}],
+canvasOverlay: { show: true, objects: [ {horizontalLine: { name: 'Caltech', y: '740', showTooltip: true, tooltipFormatString:  "740", lineWidth: 4 ,color: 'rgb(255,102,0)'}} , {dashedHorizontalLine: { name: 'Caltech', y: '740', lineWidth: 5 , dashPattern: [12,12],color: 'rgb(255,255,255)'}}]}
+});
+});
+</script>
+<br><hr color="#4169EF" size="1" width="90%">
+
+<br><div id="chart3" style="height:300px; width:500px;"></div>
+<script class="code" type="text/javascript">
+$(document).ready(function(){
+var line1 = [[1, 650], [2, 670], [3, 610], [4, 690], [5, 610], [6, 610], [7, 640], [8, 640], [9, 640], [10, 640], [11, 640], [12, 730], [13, 690], [14, 690], [15, 730], [16, 760], [17, 780], [18, 800], [19, 800], [20, 800]];
+var plot1 = $.jqplot('chart3', [line1], {
+animate: true,
+animateReplot:true,
+title:'Reading Score Performance vs Caltech Admission Average',
+seriesDefaults: {
+showMarker:true,
+pointLabels: { show:false } 
+},
+highlighter:{ show: true, sizeAdjust: 7.5 },
+axes:{
+xaxis:{min:0},
+yaxis:{label:'Score',labelRenderer: $.jqplot.CanvasAxisLabelRenderer,}
+},
+cursor: { show: true, zoom: true, looseZoom: true, showTooltip: false },
+series:[{lineWidth:3, rendererOptions:{animation:{speed:4000}}}],
+canvasOverlay: { show: true, objects: [ {horizontalLine: { name: 'Caltech', y: '740', showTooltip: true, tooltipFormatString:  "740", lineWidth: 4 ,color: 'rgb(255,102,0)'}} , {dashedHorizontalLine: { name: 'Caltech', y: '740', lineWidth: 5 , dashPattern: [12,12],color: 'rgb(255,255,255)'}}]}
+});
+});
+</script>
+<br><hr color="#4169EF" size="1" width="90%">
+
+<br><div id="chart4" style="height:300px; width:500px;"></div>
+<script class="code" type="text/javascript">
+$(document).ready(function(){
+var line1 = [[1, 650], [2, 630], [3, 610], [4, 650], [5, 610], [6, 670], [7, 670], [8, 670], [9, 670], [10, 670], [11, 670], [12, 710], [13, 670], [14, 670], [15, 690], [16, 710], [17, 750], [18, 750], [19, 750], [20, 800]];
+var plot1 = $.jqplot('chart4', [line1], {
+animate: true,
+animateReplot:true,
+title:'Math Score Performance vs Caltech Admission Average',
+seriesDefaults: {
+showMarker:true,
+pointLabels: { show:false } 
+},
+highlighter:{ show: true, sizeAdjust: 7.5 },
+axes:{
+xaxis:{min:0},
+yaxis:{label:'Score',labelRenderer: $.jqplot.CanvasAxisLabelRenderer,}
+},
+cursor: { show: true, zoom: true, looseZoom: true, showTooltip: false },
+series:[{lineWidth:3, rendererOptions:{animation:{speed:4000}}}],
+canvasOverlay: { show: true, objects: [ {horizontalLine: { name: 'Caltech', y: '780', showTooltip: true, tooltipFormatString:  "780", lineWidth: 4 ,color: 'rgb(255,102,0)'}} , {dashedHorizontalLine: { name: 'Caltech', y: '780', lineWidth: 5 , dashPattern: [12,12],color: 'rgb(255,255,255)'}}]}
+});
+});
+</script>
+<br><hr color="#4169EF" size="1" width="90%">
+
+<br>
+</div>
+</div>
+</div>
+<div class="clear"></div>
+<div id="footer">
+<p><a>Bob Advanced Report</a></p>
+</div>
+</div>
+<script class="include" type="text/javascript" src="../../Graphs/examples/../jquery.jqplot.min.js"></script>
+<script type="text/javascript" src="../../Graphs/examples/syntaxhighlighter/scripts/shCore.min.js"></script>
+<script type="text/javascript" src="../../Graphs/examples/syntaxhighlighter/scripts/shBrushJScript.min.js"></script>
+<script type="text/javascript" src="../../Graphs/examples/syntaxhighlighter/scripts/shBrushXml.min.js"></script>
+<script class="include" language="javascript" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.barRenderer.min.js"></script>
+<script class="include" language="javascript" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.categoryAxisRenderer.min.js"></script>
+<script class="include" language="javascript" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.pointLabels.min.js"></script>
+<script class="include" language="javascript" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.dateAxisRenderer.min.js"></script>
+<script class="include" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.canvasTextRenderer.min.js"></script>
+<script class="include" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>
+<script language="javascript" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.canvasOverlay.min.js"></script>
+<script type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.highlighter.min.js"></script>
+<script type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.cursor.min.js"></script></body>
+</html>
+
