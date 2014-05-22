@@ -42,5 +42,6 @@ setup( name = "Excelerate",
 	version = "2.0",
 	description = "Excelerate Test Preparation",
 	options = {"build.exe": build_exe_options},
-	#executables = [Executable("GUI.py", base=base)])
+	#executables = [Executable("GUI.py", base=base)]
 	executables = [exe]
+	)
