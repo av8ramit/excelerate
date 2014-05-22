@@ -32,7 +32,7 @@ if sys.platform == "win32":
 		targetName = "GUI.exe",
 		compress = True,
 		copyDependentFiles = True,
-		appendScruotToExe,
+		appendScriptToExe = False,
 		appendScriptToLibrary = False,
 		icon = None
 	)
