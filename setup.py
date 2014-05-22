@@ -25,7 +25,7 @@ base = None
 exe = None
 if sys.platform == "win32":
 	exe = Executable(
-		script="../GUI.py",
+		script="GUI.py",
 		initScript = None,
 		base = "Win32GUI",
 		targetDir = r"dist",
