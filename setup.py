@@ -14,17 +14,33 @@ def find_data_file(filename):
 
 lib = find_data_file("Library")
 
+
+
 build_exe_options = {"packages":['Libary', 'Graphs'], 
 					"includes":["tkinter", "csv", "subprocess", "datetime", "shutil", "random", lib, 'Graphs'],
 					"include_files": ['GUI','HTML','Users','Tests', 'Library','E.icns', 'Graphs'],
 					}
 
 base = None
+exe = None
 if sys.platform == "win32":
+	exe = Executable(
+		script="../GUI.py",
+		initScript = None,
+		base = "Win32GUI",
+		targetDir = r"dist",
+		targetName = "GUI.exe",
+		compress = True,
+		copyDependentFiles = True,
+		appendScruotToExe,
+		appendScriptToLibrary = False,
+		icon = None
+	)
 	base = "Win32GUI"
 
 setup( name = "Excelerate",
 	version = "2.0",
 	description = "Excelerate Test Preparation",
 	options = {"build.exe": build_exe_options},
-	executables = [Executable("GUI.py", base=base)])
+	#executables = [Executable("GUI.py", base=base)])
+	executables = [exe]
