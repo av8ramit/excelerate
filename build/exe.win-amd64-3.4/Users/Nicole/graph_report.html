@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="../../HTML/style.css" />
+<title>Graph Report</title>
+<link class="include" rel="stylesheet" type="text/css" href="../../Graphs/examples/../jquery.jqplot.min.css" />
+<link type="text/css" rel="stylesheet" href="../../Graphs/examples/syntaxhighlighter/styles/shCoreDefault.min.css" />
+<link type="text/css" rel="stylesheet" href="../../Graphs/examples/syntaxhighlighter/styles/shThemejqPlot.min.css" />
+<script class="include" type="text/javascript" src="../../Graphs/jquery.min.js"></script>
+</head>
+<body>
+<div id="page">
+<div id="header">
+<img src="../../HTML/Mini Logo.png" width="35%" alt="Excelerate" />
+</div>
+</div>
+<div id="content">
+<div id="container">
+<div id="main">
+<div id="menu">
+<h2 style="text-align:center;">Graph Report: Nicole</h2>
+</div>
+<div id="text">
+<h1>Score Graphs</h1>
+<hr color="#BBBBBB" size="2" width="100%">
+<br><div id="chart1" style="height:300px; width:500px;"></div>
+<script class="code" type="text/javascript">
+$(document).ready(function(){
+var line1 = [[1, 1090], [2, 2400], [3, 2400], [4, 2110], [5, 1090], [6, 610], [7, 2110], [8, 2010], [9, 610], [10, 2110], [11, 1980], [12, 1980], [13, 1980], [14, 1980], [15, 1980], [16, 1980], [17, 1980], [18, 1980], [19, 1920], [20, 1860], [21, 1860], [22, 2110], [23, 2400]];
+var plot1 = $.jqplot('chart1', [line1], {
+animate: true,
+animateReplot:true,
+title:'Overall Score Performance',
+seriesDefaults: {
+showMarker:true,
+pointLabels: { show:false } 
+},
+highlighter:{ show: true, sizeAdjust: 7.5},
+axes:{
+xaxis:{min:0},
+yaxis:{label:'Score',labelRenderer: $.jqplot.CanvasAxisLabelRenderer,}
+},
+cursor: { show: true, zoom: true, looseZoom: true, showTooltip: false },
+series:[{lineWidth:3, rendererOptions:{animation:{speed:4000}}}],
+});
+});
+</script>
+<br><hr color="#4169EF" size="1" width="90%">
+
+<br><div id="chart2" style="height:300px; width:500px;"></div>
+<script class="code" type="text/javascript">
+$(document).ready(function(){
+var line1 = [[1, 400], [2, 800], [3, 800], [4, 620], [5, 400], [6, 210], [7, 620], [8, 520], [9, 210], [10, 620], [11, 490], [12, 490], [13, 490], [14, 490], [15, 490], [16, 490], [17, 490], [18, 490], [19, 490], [20, 430], [21, 430], [22, 620], [23, 800]];
+var plot1 = $.jqplot('chart2', [line1], {
+animate: true,
+animateReplot:true,
+title:'Writing Score Performance',
+seriesDefaults: {
+showMarker:true,
+pointLabels: { show:false } 
+},
+highlighter:{ show: true, sizeAdjust: 7.5},
+axes:{
+xaxis:{min:0},
+yaxis:{label:'Score',labelRenderer: $.jqplot.CanvasAxisLabelRenderer,}
+},
+cursor: { show: true, zoom: true, looseZoom: true, showTooltip: false },
+series:[{lineWidth:3, rendererOptions:{animation:{speed:4000}}}],
+});
+});
+</script>
+<br><hr color="#4169EF" size="1" width="90%">
+
+<br><div id="chart3" style="height:300px; width:500px;"></div>
+<script class="code" type="text/javascript">
+$(document).ready(function(){
+var line1 = [[1, 350], [2, 800], [3, 800], [4, 780], [5, 350], [6, 200], [7, 780], [8, 780], [9, 200], [10, 780], [11, 780], [12, 780], [13, 780], [14, 780], [15, 780], [16, 780], [17, 780], [18, 780], [19, 780], [20, 780], [21, 780], [22, 780], [23, 800]];
+var plot1 = $.jqplot('chart3', [line1], {
+animate: true,
+animateReplot:true,
+title:'Reading Score Performance',
+seriesDefaults: {
+showMarker:true,
+pointLabels: { show:false } 
+},
+highlighter:{ show: true, sizeAdjust: 7.5},
+axes:{
+xaxis:{min:0},
+yaxis:{label:'Score',labelRenderer: $.jqplot.CanvasAxisLabelRenderer,}
+},
+cursor: { show: true, zoom: true, looseZoom: true, showTooltip: false },
+series:[{lineWidth:3, rendererOptions:{animation:{speed:4000}}}],
+});
+});
+</script>
+<br><hr color="#4169EF" size="1" width="90%">
+
+<br><div id="chart4" style="height:300px; width:500px;"></div>
+<script class="code" type="text/javascript">
+$(document).ready(function(){
+var line1 = [[1, 340], [2, 800], [3, 800], [4, 710], [5, 340], [6, 200], [7, 710], [8, 710], [9, 200], [10, 710], [11, 710], [12, 710], [13, 710], [14, 710], [15, 710], [16, 710], [17, 710], [18, 710], [19, 650], [20, 650], [21, 650], [22, 710], [23, 800]];
+var plot1 = $.jqplot('chart4', [line1], {
+animate: true,
+animateReplot:true,
+title:'Math Score Performance',
+seriesDefaults: {
+showMarker:true,
+pointLabels: { show:false } 
+},
+highlighter:{ show: true, sizeAdjust: 7.5},
+axes:{
+xaxis:{min:0},
+yaxis:{label:'Score',labelRenderer: $.jqplot.CanvasAxisLabelRenderer,}
+},
+cursor: { show: true, zoom: true, looseZoom: true, showTooltip: false },
+series:[{lineWidth:3, rendererOptions:{animation:{speed:4000}}}],
+});
+});
+</script>
+<br><hr color="#4169EF" size="1" width="90%">
+
+<br>
+</div>
+</div>
+</div>
+<div class="clear"></div>
+<div id="footer">
+<p><a>Nicole Advanced Report</a></p>
+</div>
+</div>
+<script class="include" type="text/javascript" src="../../Graphs/examples/../jquery.jqplot.min.js"></script>
+<script type="text/javascript" src="../../Graphs/examples/syntaxhighlighter/scripts/shCore.min.js"></script>
+<script type="text/javascript" src="../../Graphs/examples/syntaxhighlighter/scripts/shBrushJScript.min.js"></script>
+<script type="text/javascript" src="../../Graphs/examples/syntaxhighlighter/scripts/shBrushXml.min.js"></script>
+<script class="include" language="javascript" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.barRenderer.min.js"></script>
+<script class="include" language="javascript" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.categoryAxisRenderer.min.js"></script>
+<script class="include" language="javascript" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.pointLabels.min.js"></script>
+<script class="include" language="javascript" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.dateAxisRenderer.min.js"></script>
+<script class="include" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.canvasTextRenderer.min.js"></script>
+<script class="include" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>
+<script type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.highlighter.min.js"></script>
+<script type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.cursor.min.js"></script></body>
+</html>
+

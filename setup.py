@@ -13,12 +13,19 @@ def find_data_file(filename):
     return os.path.join(datadir, filename)
 
 lib = find_data_file("Library")
+e = find_data_file("E.gif")
 
+packages = [lib, 'Graphs']
+includes = ["tkinter", "csv", "subprocess", "datetime", "shutil", "random", "Graphs", "Library"]
+includefiles = ['./GUI','HTML','Users','Tests', lib,'E.icns', 'Graphs','*.py', '*.gif']
+zip_includes = [e,'./GUI']
+icon = ["E.icns"]
 
-
-build_exe_options = {"packages":['Libary', 'Graphs'], 
-					"includes":["tkinter", "csv", "subprocess", "datetime", "shutil", "random", lib, 'Graphs'],
-					"include_files": ['GUI','HTML','Users','Tests', 'Library','E.icns', 'Graphs'],
+build_exe_options = {"packages": packages, 
+		    "includes": includes,
+		    "include_files": includefiles,
+                     "zip_includes": zip_includes,
+                     "icon": icon,
 					}
 
 base = None
@@ -28,7 +35,7 @@ if sys.platform == "win32":
 		script="GUI.py",
 		initScript = None,
 		base = "Win32GUI",
-		targetDir = r"dist",
+		targetDir = r"build",
 		targetName = "GUI.exe",
 		compress = True,
 		copyDependentFiles = True,

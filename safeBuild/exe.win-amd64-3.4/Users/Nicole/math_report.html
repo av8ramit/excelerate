@@ -1,0 +1,222 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="../../HTML/style.css" />
+<title>Math Score Report</title>
+<link class="include" rel="stylesheet" type="text/css" href="../../Graphs/examples/../jquery.jqplot.min.css" />
+<link type="text/css" rel="stylesheet" href="../../Graphs/examples/syntaxhighlighter/styles/shCoreDefault.min.css" />
+<link type="text/css" rel="stylesheet" href="../../Graphs/examples/syntaxhighlighter/styles/shThemejqPlot.min.css" />
+<script class="include" type="text/javascript" src="../../Graphs/jquery.min.js"></script>
+</head>
+<body>
+<div id="page">
+<div id="header">
+<img src="../../HTML/Mini Logo.png" width="35%" alt="Excelerate" />
+</div>
+</div>
+<div id="content">
+<div id="container">
+<div id="main">
+<div id="menu">
+<h2 style="text-align:center;">Math Analytics Report: Nicole</h2>
+</div>
+<div id="text">
+<h1>Math Analytics</h1>
+<hr color="#BBBBBB" size="2" width="100%">
+<br><div id="chart1" style="height:300px; width:500px;"></div>
+<script class="code" type="text/javascript">
+$(document).ready(function(){
+var line1 = [[1, 340], [2, 800], [3, 800], [4, 710], [5, 340], [6, 200], [7, 710], [8, 710], [9, 200], [10, 710], [11, 710], [12, 710], [13, 710], [14, 710], [15, 710], [16, 710], [17, 710], [18, 710], [19, 650], [20, 650], [21, 650], [22, 710], [23, 800]];
+var plot1 = $.jqplot('chart1', [line1], {
+animate: true,
+animateReplot:true,
+title:'Math Score Performance',
+seriesDefaults: {
+showMarker:true,
+pointLabels: { show:false } 
+},
+highlighter:{ show: true, sizeAdjust: 7.5},
+axes:{
+xaxis:{min:0},
+yaxis:{label:'Score',labelRenderer: $.jqplot.CanvasAxisLabelRenderer,}
+},
+cursor: { show: true, zoom: true, looseZoom: true, showTooltip: false },
+series:[{lineWidth:3, rendererOptions:{animation:{speed:4000}}}],
+});
+});
+</script>
+<p>This is your performance in the Math section of the last 23 tests you have taken. The more comprehensive analysis of questions correct in each type is found below.</p><h1>Question Type Analytics</h1>
+<hr color="#BBBBBB" size="2" width="100%">
+<br><div id="chart2" style="height:300px; width:500px;"></div>
+<script class="code" type="text/javascript">
+$(document).ready(function(){
+var line1 = [18.181818181818183, 100.0, 100.0, 100.0, 18.181818181818183, 0.0, 100.0, 100.0, 0.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 81.81818181818183, 81.81818181818183, 81.81818181818183, 100.0, 100.0];
+var plot1 = $.jqplot('chart2', [line1], {
+animate: true,
+animateReplot:true,
+title:'Geometry (Triangles and Circles)',
+seriesDefaults: {
+showMarker:true,
+pointLabels: { show:false } 
+},
+highlighter:{ show: true, sizeAdjust: 7.5},
+axes:{
+xaxis:{min:0},
+yaxis:{label:'Percent Correct',labelRenderer: $.jqplot.CanvasAxisLabelRenderer,tickOptions: {formatString: "%'d%"}}
+},
+cursor: { show: true, zoom: true, looseZoom: true, showTooltip: false },
+series:[{lineWidth:3, rendererOptions:{animation:{speed:4000}}}],
+});
+});
+</script>
+<p><b><font color = "00CC00">Geometry (Triangles and Circles)</b> T: 253 | C: 207 | M: 21 | B: 25</font></p><p>
+You've been improving a lot. You have gotten 81% of the questions in this category correct.Guess balance is okay.
+</p><hr color="#4169EF" size="1" width="90%">
+<br><div id="chart3" style="height:300px; width:500px;"></div>
+<script class="code" type="text/javascript">
+$(document).ready(function(){
+var line1 = [23.52941176470588, 100.0, 100.0, 100.0, 23.52941176470588, 0.0, 100.0, 100.0, 0.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 94.11764705882352, 94.11764705882352, 94.11764705882352, 100.0, 100.0];
+var plot1 = $.jqplot('chart3', [line1], {
+animate: true,
+animateReplot:true,
+title:'Trigonometry and Angles',
+seriesDefaults: {
+showMarker:true,
+pointLabels: { show:false } 
+},
+highlighter:{ show: true, sizeAdjust: 7.5},
+axes:{
+xaxis:{min:0},
+yaxis:{label:'Percent Correct',labelRenderer: $.jqplot.CanvasAxisLabelRenderer,tickOptions: {formatString: "%'d%"}}
+},
+cursor: { show: true, zoom: true, looseZoom: true, showTooltip: false },
+series:[{lineWidth:3, rendererOptions:{animation:{speed:4000}}}],
+});
+});
+</script>
+<p><b><font color = "00CC00">Trigonometry and Angles</b> T: 391 | C: 328 | M: 22 | B: 41</font></p><p>
+Fantastic! Well done. You have gotten 83% of the questions in this category correct.Guess balance is okay.
+</p><hr color="#4169EF" size="1" width="90%">
+<br><div id="chart4" style="height:300px; width:500px;"></div>
+<script class="code" type="text/javascript">
+$(document).ready(function(){
+var line1 = [0.0, 100.0, 100.0, 91.66666666666666, 0.0, 0.0, 91.66666666666666, 91.66666666666666, 0.0, 91.66666666666666, 91.66666666666666, 91.66666666666666, 91.66666666666666, 91.66666666666666, 91.66666666666666, 91.66666666666666, 91.66666666666666, 91.66666666666666, 75.0, 75.0, 75.0, 91.66666666666666, 100.0];
+var plot1 = $.jqplot('chart4', [line1], {
+animate: true,
+animateReplot:true,
+title:'Probability and Statistics',
+seriesDefaults: {
+showMarker:true,
+pointLabels: { show:false } 
+},
+highlighter:{ show: true, sizeAdjust: 7.5},
+axes:{
+xaxis:{min:0},
+yaxis:{label:'Percent Correct',labelRenderer: $.jqplot.CanvasAxisLabelRenderer,tickOptions: {formatString: "%'d%"}}
+},
+cursor: { show: true, zoom: true, looseZoom: true, showTooltip: false },
+series:[{lineWidth:3, rendererOptions:{animation:{speed:4000}}}],
+});
+});
+</script>
+<p><b><font color = "00CC00">Probability and Statistics</b> T: 276 | C: 206 | M: 46 | B: 24</font></p><p>
+Great work. You have gotten 74% of the questions in this category correct.Guessing in this category is a much better option and will improve your score.
+</p><hr color="#4169EF" size="1" width="90%">
+<br><div id="chart5" style="height:300px; width:500px;"></div>
+<script class="code" type="text/javascript">
+$(document).ready(function(){
+var line1 = [0.0, 100.0, 100.0, 81.81818181818183, 0.0, 0.0, 81.81818181818183, 81.81818181818183, 0.0, 81.81818181818183, 81.81818181818183, 81.81818181818183, 81.81818181818183, 81.81818181818183, 81.81818181818183, 81.81818181818183, 81.81818181818183, 81.81818181818183, 63.63636363636363, 63.63636363636363, 63.63636363636363, 81.81818181818183, 100.0];
+var plot1 = $.jqplot('chart5', [line1], {
+animate: true,
+animateReplot:true,
+title:'Algebra',
+seriesDefaults: {
+showMarker:true,
+pointLabels: { show:false } 
+},
+highlighter:{ show: true, sizeAdjust: 7.5},
+axes:{
+xaxis:{min:0},
+yaxis:{label:'Percent Correct',labelRenderer: $.jqplot.CanvasAxisLabelRenderer,tickOptions: {formatString: "%'d%"}}
+},
+cursor: { show: true, zoom: true, looseZoom: true, showTooltip: false },
+series:[{lineWidth:3, rendererOptions:{animation:{speed:4000}}}],
+});
+});
+</script>
+<p><b><font color = "blue">Algebra</b> T: 253 | C: 171 | M: 50 | B: 32</font></p><p>
+Your scores in this category are average. You have gotten 67% correct which is acceptable but could use improvement.Instead of guessing, leave these questions blank.
+</p><hr color="#4169EF" size="1" width="90%">
+<br><div id="chart6" style="height:300px; width:500px;"></div>
+<script class="code" type="text/javascript">
+$(document).ready(function(){
+var line1 = [0.0, 100.0, 100.0, 100.0, 0.0, 0.0, 100.0, 100.0, 0.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0];
+var plot1 = $.jqplot('chart6', [line1], {
+animate: true,
+animateReplot:true,
+title:'Arithmetic',
+seriesDefaults: {
+showMarker:true,
+pointLabels: { show:false } 
+},
+highlighter:{ show: true, sizeAdjust: 7.5},
+axes:{
+xaxis:{min:0},
+yaxis:{label:'Percent Correct',labelRenderer: $.jqplot.CanvasAxisLabelRenderer,tickOptions: {formatString: "%'d%"}}
+},
+cursor: { show: true, zoom: true, looseZoom: true, showTooltip: false },
+series:[{lineWidth:3, rendererOptions:{animation:{speed:4000}}}],
+});
+});
+</script>
+<p><b><font color = "00CC00">Arithmetic</b> T: 46 | C: 38 | M: 4 | B: 4</font></p><p>
+Fantastic! Well done. You have gotten 82% of the questions in this category correct.
+</p><hr color="#4169EF" size="1" width="90%">
+<br><div id="chart7" style="height:300px; width:500px;"></div>
+<script class="code" type="text/javascript">
+$(document).ready(function(){
+var line1 = [0.0, 100.0, 100.0, 100.0, 0.0, 0.0, 100.0, 100.0, 0.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0];
+var plot1 = $.jqplot('chart7', [line1], {
+animate: true,
+animateReplot:true,
+title:'Numbers and Operations',
+seriesDefaults: {
+showMarker:true,
+pointLabels: { show:false } 
+},
+highlighter:{ show: true, sizeAdjust: 7.5},
+axes:{
+xaxis:{min:0},
+yaxis:{label:'Percent Correct',labelRenderer: $.jqplot.CanvasAxisLabelRenderer,tickOptions: {formatString: "%'d%"}}
+},
+cursor: { show: true, zoom: true, looseZoom: true, showTooltip: false },
+series:[{lineWidth:3, rendererOptions:{animation:{speed:4000}}}],
+});
+});
+</script>
+<p><b><font color = "00CC00">Numbers and Operations</b> T: 23 | C: 19 | M: 2 | B: 2</font></p><p>
+You've been improving a lot. You have gotten 82% of the questions in this category correct.
+</p><hr color="#4169EF" size="1" width="90%">
+<br>
+</div>
+</div>
+</div>
+<div class="clear"></div>
+<div id="footer">
+<p><a>Nicole Math  Report</a></p>
+</div>
+</div>
+<script class="include" type="text/javascript" src="../../Graphs/examples/../jquery.jqplot.min.js"></script>
+<script type="text/javascript" src="../../Graphs/examples/syntaxhighlighter/scripts/shCore.min.js"></script>
+<script type="text/javascript" src="../../Graphs/examples/syntaxhighlighter/scripts/shBrushJScript.min.js"></script>
+<script type="text/javascript" src="../../Graphs/examples/syntaxhighlighter/scripts/shBrushXml.min.js"></script>
+<script class="include" language="javascript" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.barRenderer.min.js"></script>
+<script class="include" language="javascript" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.categoryAxisRenderer.min.js"></script>
+<script class="include" language="javascript" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.pointLabels.min.js"></script>
+<script class="include" language="javascript" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.dateAxisRenderer.min.js"></script>
+<script class="include" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.canvasTextRenderer.min.js"></script>
+<script class="include" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>
+<script type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.highlighter.min.js"></script>
+<script type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.cursor.min.js"></script></body>
+</html>
+

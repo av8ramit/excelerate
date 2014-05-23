@@ -32,8 +32,8 @@ from tkinter import messagebox
 
 
 
-sys.path.append('Library')
-from Library import *
+#sys.path.insert(0,'Library')
+#from Library import *
 from Console import *
 from Commands import *
 from Values import *

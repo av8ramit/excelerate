@@ -1,0 +1,197 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="../../HTML/style.css" />
+<title>Writing Score Report</title>
+<link class="include" rel="stylesheet" type="text/css" href="../../Graphs/examples/../jquery.jqplot.min.css" />
+<link type="text/css" rel="stylesheet" href="../../Graphs/examples/syntaxhighlighter/styles/shCoreDefault.min.css" />
+<link type="text/css" rel="stylesheet" href="../../Graphs/examples/syntaxhighlighter/styles/shThemejqPlot.min.css" />
+<script class="include" type="text/javascript" src="../../Graphs/jquery.min.js"></script>
+</head>
+<body>
+<div id="page">
+<div id="header">
+<img src="../../HTML/Mini Logo.png" width="35%" alt="Excelerate" />
+</div>
+</div>
+<div id="content">
+<div id="container">
+<div id="main">
+<div id="menu">
+<h2 style="text-align:center;">Writing Analytics Report: Nicole</h2>
+</div>
+<div id="text">
+<h1>Writing Analytics</h1>
+<hr color="#BBBBBB" size="2" width="100%">
+<br><div id="chart1" style="height:300px; width:500px;"></div>
+<script class="code" type="text/javascript">
+$(document).ready(function(){
+var line1 = [[1, 400], [2, 800], [3, 800], [4, 620], [5, 400], [6, 210], [7, 620], [8, 520], [9, 210], [10, 620], [11, 490], [12, 490], [13, 490], [14, 490], [15, 490], [16, 490], [17, 490], [18, 490], [19, 490], [20, 430], [21, 430], [22, 620], [23, 800]];
+var plot1 = $.jqplot('chart1', [line1], {
+animate: true,
+animateReplot:true,
+title:'Writing Score Performance',
+seriesDefaults: {
+showMarker:true,
+pointLabels: { show:false } 
+},
+highlighter:{ show: true, sizeAdjust: 7.5},
+axes:{
+xaxis:{min:0},
+yaxis:{label:'Score',labelRenderer: $.jqplot.CanvasAxisLabelRenderer,}
+},
+cursor: { show: true, zoom: true, looseZoom: true, showTooltip: false },
+series:[{lineWidth:3, rendererOptions:{animation:{speed:4000}}}],
+});
+});
+</script>
+<p>This is your performance in the Writing section of the last 23 tests you have taken. The more comprehensive analysis of questions correct in each type is found below.</p><h1>Question Type Analytics</h1>
+<hr color="#BBBBBB" size="2" width="100%">
+<br><div id="chart2" style="height:300px; width:500px;"></div>
+<script class="code" type="text/javascript">
+$(document).ready(function(){
+var line1 = [20.0, 100.0, 100.0, 80.0, 20.0, 0.0, 80.0, 70.0, 0.0, 80.0, 70.0, 70.0, 70.0, 70.0, 70.0, 70.0, 70.0, 70.0, 70.0, 60.0, 60.0, 80.0, 100.0];
+var plot1 = $.jqplot('chart2', [line1], {
+animate: true,
+animateReplot:true,
+title:'Verb Tense Agreement',
+seriesDefaults: {
+showMarker:true,
+pointLabels: { show:false } 
+},
+highlighter:{ show: true, sizeAdjust: 7.5},
+axes:{
+xaxis:{min:0},
+yaxis:{label:'Percent Correct',labelRenderer: $.jqplot.CanvasAxisLabelRenderer,tickOptions: {formatString: "%'d%"}}
+},
+cursor: { show: true, zoom: true, looseZoom: true, showTooltip: false },
+series:[{lineWidth:3, rendererOptions:{animation:{speed:4000}}}],
+});
+});
+</script>
+<p><b><font color = "blue">Verb Tense Agreement</b> T: 230 | C: 148 | M: 48 | B: 34</font></p><p>
+Improve in these areas once you have finished working on your more poor areas. You have gotten 64% correct which is acceptable but could use improvement.Your guesses in this category are often wrong. Consider leaving them blank.
+</p><hr color="#4169EF" size="1" width="90%">
+<br><div id="chart3" style="height:300px; width:500px;"></div>
+<script class="code" type="text/javascript">
+$(document).ready(function(){
+var line1 = [23.076923076923077, 100.0, 100.0, 76.92307692307693, 23.076923076923077, 0.0, 76.92307692307693, 46.15384615384615, 0.0, 76.92307692307693, 38.46153846153847, 38.46153846153847, 38.46153846153847, 38.46153846153847, 38.46153846153847, 38.46153846153847, 38.46153846153847, 38.46153846153847, 38.46153846153847, 23.076923076923077, 23.076923076923077, 76.92307692307693, 100.0];
+var plot1 = $.jqplot('chart3', [line1], {
+animate: true,
+animateReplot:true,
+title:'Prepositional Phrases',
+seriesDefaults: {
+showMarker:true,
+pointLabels: { show:false } 
+},
+highlighter:{ show: true, sizeAdjust: 7.5},
+axes:{
+xaxis:{min:0},
+yaxis:{label:'Percent Correct',labelRenderer: $.jqplot.CanvasAxisLabelRenderer,tickOptions: {formatString: "%'d%"}}
+},
+cursor: { show: true, zoom: true, looseZoom: true, showTooltip: false },
+series:[{lineWidth:3, rendererOptions:{animation:{speed:4000}}}],
+});
+});
+</script>
+<p><b><font color = "blue">Prepositional Phrases</b> T: 299 | C: 142 | M: 83 | B: 74</font></p><p>
+Your performance here is okay. Focus on other weaker areas first. You have gotten 47% correct which is acceptable but could use improvement.Instead of guessing, leave these questions blank.
+</p><hr color="#4169EF" size="1" width="90%">
+<br><div id="chart4" style="height:300px; width:500px;"></div>
+<script class="code" type="text/javascript">
+$(document).ready(function(){
+var line1 = [60.0, 100.0, 100.0, 90.0, 60.0, 0.0, 90.0, 70.0, 0.0, 90.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 30.0, 30.0, 90.0, 100.0];
+var plot1 = $.jqplot('chart4', [line1], {
+animate: true,
+animateReplot:true,
+title:'Noun Pronoun Agreement',
+seriesDefaults: {
+showMarker:true,
+pointLabels: { show:false } 
+},
+highlighter:{ show: true, sizeAdjust: 7.5},
+axes:{
+xaxis:{min:0},
+yaxis:{label:'Percent Correct',labelRenderer: $.jqplot.CanvasAxisLabelRenderer,tickOptions: {formatString: "%'d%"}}
+},
+cursor: { show: true, zoom: true, looseZoom: true, showTooltip: false },
+series:[{lineWidth:3, rendererOptions:{animation:{speed:4000}}}],
+});
+});
+</script>
+<p><b><font color = "blue">Noun Pronoun Agreement</b> T: 230 | C: 136 | M: 61 | B: 33</font></p><p>
+Your performance here is okay. Focus on other weaker areas first. You have gotten 59% correct which is acceptable but could use improvement.Guessing in this category is a much better option and will improve your score.
+</p><hr color="#4169EF" size="1" width="90%">
+<br><div id="chart5" style="height:300px; width:500px;"></div>
+<script class="code" type="text/javascript">
+$(document).ready(function(){
+var line1 = [37.5, 100.0, 100.0, 75.0, 37.5, 0.0, 75.0, 50.0, 0.0, 75.0, 25.0, 25.0, 25.0, 25.0, 25.0, 25.0, 25.0, 25.0, 25.0, 25.0, 25.0, 75.0, 100.0];
+var plot1 = $.jqplot('chart5', [line1], {
+animate: true,
+animateReplot:true,
+title:'Punctuation and Purpose',
+seriesDefaults: {
+showMarker:true,
+pointLabels: { show:false } 
+},
+highlighter:{ show: true, sizeAdjust: 7.5},
+axes:{
+xaxis:{min:0},
+yaxis:{label:'Percent Correct',labelRenderer: $.jqplot.CanvasAxisLabelRenderer,tickOptions: {formatString: "%'d%"}}
+},
+cursor: { show: true, zoom: true, looseZoom: true, showTooltip: false },
+series:[{lineWidth:3, rendererOptions:{animation:{speed:4000}}}],
+});
+});
+</script>
+<p><b><font color = "blue">Punctuation and Purpose</b> T: 184 | C: 80 | M: 52 | B: 52</font></p><p>
+Your scores in this category are average. You have gotten 43% correct which is acceptable but could use improvement.
+</p><hr color="#4169EF" size="1" width="90%">
+<br><div id="chart6" style="height:300px; width:500px;"></div>
+<script class="code" type="text/javascript">
+$(document).ready(function(){
+var line1 = [12.5, 100.0, 100.0, 87.5, 12.5, 0.0, 87.5, 75.0, 0.0, 87.5, 75.0, 75.0, 75.0, 75.0, 75.0, 75.0, 75.0, 75.0, 75.0, 50.0, 50.0, 87.5, 100.0];
+var plot1 = $.jqplot('chart6', [line1], {
+animate: true,
+animateReplot:true,
+title:'Correct Sentences',
+seriesDefaults: {
+showMarker:true,
+pointLabels: { show:false } 
+},
+highlighter:{ show: true, sizeAdjust: 7.5},
+axes:{
+xaxis:{min:0},
+yaxis:{label:'Percent Correct',labelRenderer: $.jqplot.CanvasAxisLabelRenderer,tickOptions: {formatString: "%'d%"}}
+},
+cursor: { show: true, zoom: true, looseZoom: true, showTooltip: false },
+series:[{lineWidth:3, rendererOptions:{animation:{speed:4000}}}],
+});
+});
+</script>
+<p><b><font color = "blue">Correct Sentences</b> T: 184 | C: 122 | M: 36 | B: 26</font></p><p>
+Your scores in this category are average. You have gotten 66% correct which is acceptable but could use improvement.Guessing in this category is a much better option and will improve your score.
+</p><hr color="#4169EF" size="1" width="90%">
+<br>
+</div>
+</div>
+</div>
+<div class="clear"></div>
+<div id="footer">
+<p><a>Nicole Writing  Report</a></p>
+</div>
+</div>
+<script class="include" type="text/javascript" src="../../Graphs/examples/../jquery.jqplot.min.js"></script>
+<script type="text/javascript" src="../../Graphs/examples/syntaxhighlighter/scripts/shCore.min.js"></script>
+<script type="text/javascript" src="../../Graphs/examples/syntaxhighlighter/scripts/shBrushJScript.min.js"></script>
+<script type="text/javascript" src="../../Graphs/examples/syntaxhighlighter/scripts/shBrushXml.min.js"></script>
+<script class="include" language="javascript" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.barRenderer.min.js"></script>
+<script class="include" language="javascript" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.categoryAxisRenderer.min.js"></script>
+<script class="include" language="javascript" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.pointLabels.min.js"></script>
+<script class="include" language="javascript" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.dateAxisRenderer.min.js"></script>
+<script class="include" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.canvasTextRenderer.min.js"></script>
+<script class="include" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>
+<script type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.highlighter.min.js"></script>
+<script type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.cursor.min.js"></script></body>
+</html>
+
