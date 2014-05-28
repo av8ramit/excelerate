@@ -161,7 +161,7 @@ def get_new_user():
                 if(UserName != None):
                      messagebox.showinfo('Current Student', 'Created Student ' + UserName)
                      users = list_users_array()
-                     make_button()
+                     make_lu_button()
 def get_load_user(uname):
     #name = tkinter.simpledialog.askstring( 'Load Student', 'Enter Username')
     name = uname
