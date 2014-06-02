@@ -7,13 +7,35 @@ from Graph import *
 import csv
 import unittest
 
+class SetupTeardownError(Exception):
+
+	def __init__(self, value):
+		self.value = value
+
+	def __str__(self):
+		return repr(self.value)
+
 class SanityTest(unittest.TestCase):
 
 	def setUp(self):
-		# construct a test user here
+		# construct a test user here named dummy
+		name = "dummy"
+		res = c.process_commands('new_student ' + name)
+        if (not res):
+            raise SetupTeardownError("Failed to set up.")
+        else:     
+            var = StringVar()
+            if(c.state == LOAD_STATE):
+                UserName = c.user.name
+                var.set(UserName)
 
 	def tearDown(self):
 		# delete a test user here along with all data related to it
+		name = "dummy"
+		res = c.process_commands('delete_student ' + name)
+		if (not res):
+			raise SetupTeardownError("Failed to tear down. Manually reset the environment before testing.")
+
 
 	def testLoadUser(self):
 		#Test the loading of a user
