@@ -1,3 +1,5 @@
+import sys
+sys.path.append('Library')
 from Values import *
 from Key import *
 from Scored import *
