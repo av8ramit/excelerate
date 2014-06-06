@@ -7,6 +7,7 @@ from Summary import *
 from Data import *
 from Graph import *
 from Console import *
+from Class_Analytics import *
 import shutil
 import csv
 import unittest
@@ -25,6 +26,7 @@ class SanityTest(unittest.TestCase):
     def setUp(self):
         # construct a test user here named dummy
         self.c = Console()
+        self.count = 0
         self.total = 1
         self.passed = self.total
         self.name = "dummy"
@@ -44,6 +46,7 @@ class SanityTest(unittest.TestCase):
         res2 = self.c.process_commands('delete_student ' + self.name2)        
         if (not res2):
             raise SetupTeardownError("Failed to tear down. Manually reset the environment before testing.")
+        print ("TEST PASSED")
 
     def testLoadUser(self):
         #Test the loading of a user
@@ -54,6 +57,7 @@ class SanityTest(unittest.TestCase):
         res2 = self.c.process_commands('load_student ' + self.name)
         if (not res2):
             raise SetupTeardownError("Load Student Failed Internally.")
+        self.count += 1
         #print ("Ending Load User Test")
 
     def testCreateAnswerSheet(self):
@@ -69,7 +73,7 @@ class SanityTest(unittest.TestCase):
         res = self.c.process_commands('answer_sheet ' + "12_09")
         if (res):
             raise SetupTeardownError("Answer Sheet Didn't Fail when it should have internally.")
-        
+        self.count += 1
 
     def testAutoGrader(self):
         #Autograde the dummy test with the test user's data
@@ -113,17 +117,55 @@ class SanityTest(unittest.TestCase):
 
 
         rmdir("../../testfolder")
-        
+        self.count += 1
 
-    """def testSaveChanges(self):
+    def testSaveChanges(self):
         #Check the functionality of this
-        pass
+        res = self.c.process_commands('load_student ' + self.name)
 
-    def testSimpleReport(self):
-        #Test the data sent to the html creator. Don't actually launch any reports
-        pass
+        if (not res):
+            raise SetupTeardownError("Load Student Failed Internally.")
 
+        res = self.c.process_commands('answer_sheet ' + "10_09")
+        if (not res):
+            raise SetupTeardownError("Answer Sheet Failed Internally.")
+
+        res = self.c.process_commands('grade ' + "10_09.csv")
+        if (not res):
+            raise SetupTeardownError("Grade Failed Internally.")
+
+        res = self.c.process_commands('save')
+        if (not res):
+            raise SetupTeardownError("Save Failed Internally.")
+        self.count += 1
+    
     def testAdvancedReport(self):
+        #Test the data sent to the html creator. Don't actually launch any reports
+        res = self.c.process_commands('load_student ' + self.name)
+
+        if (not res):
+            raise SetupTeardownError("Load Student Failed Internally.")
+
+        res = self.c.process_commands('answer_sheet ' + "10_09")
+        if (not res):
+            raise SetupTeardownError("Answer Sheet Failed Internally.")
+
+        for i in range(0, random_number(10)):
+            res = self.c.process_commands('grade ' + "10_09.csv")
+            if (not res):
+                raise SetupTeardownError("Grade Failed Internally.")
+
+        res = self.c.process_commands('save')
+        if (not res):
+            raise SetupTeardownError("Save Failed Internally.")
+
+        res = self.c.process_commands("advanced_report")
+        if (not res):
+            raise SetupTeardownError("Simple Report Failed Internally.")
+        self.count += 1
+
+    """
+    def testSimpleReport(self):
         #Same as above
         pass
 
@@ -134,13 +176,50 @@ class SanityTest(unittest.TestCase):
     def testGraphsReport(self):
         #Same as above
         pass
+    """
 
     def testClassAnalytics(self):
         #Test the functionality of class analytics. Should be isolated from other users, and class should only include the test user. Or we can run classAnalytics, but only have the assertion statement check for the test user we created in setup()
-        pass
+        res = self.c.process_commands('load_student ' + self.name)
 
-    def testCollegeTracker(self):
-        #Test all colleges in this test method
-        pass"""
+        if (not res):
+            raise SetupTeardownError("Load Student Failed Internally.")
+
+        res = self.c.process_commands('answer_sheet ' + "10_09")
+        if (not res):
+            raise SetupTeardownError("Answer Sheet Failed Internally.")
+
+        res = self.c.process_commands('grade ' + "10_09.csv")
+        if (not res):
+            raise SetupTeardownError("Grade Failed Internally.")
+
+        res = self.c.process_commands('save')
+        if (not res):
+            raise SetupTeardownError("Save Failed Internally.")
+
+        res = self.c.process_commands('load_student ' + self.name2)
+
+        if (not res):
+            raise SetupTeardownError("Load Student Failed Internally.")
+
+        res = self.c.process_commands('answer_sheet ' + "10_09")
+        if (not res):
+            raise SetupTeardownError("Answer Sheet Failed Internally.")
+
+        res = self.c.process_commands('grade ' + "10_09.csv")
+        if (not res):
+            raise SetupTeardownError("Grade Failed Internally.")
+
+        res = self.c.process_commands('save')
+        if (not res):
+            raise SetupTeardownError("Save Failed Internally.")
+
+        a = Analytics()
+        a.report()
+        self.count += 1
+
+    """def testCollegeTracker(self):
+        pass
+        """
 
 
