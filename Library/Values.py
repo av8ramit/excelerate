@@ -69,7 +69,8 @@ SPACE = ' '
 #CONSOLE VALUES
 COMMAND_INDEX = 0
 LAUNCH_STATE = 0
-LOAD_STATE = 1
+CLASS_STATE = 1
+USER_STATE = 2
 PROMPT = ">>> "
 
 
@@ -286,14 +287,17 @@ def empty(s):
 def file_exists(filename):
   return os.path.exists(filename)
 
-def user_directory(name):
-  return "Users" + DIR_SEP + name 
+def user_directory(name, c):
+  return "Users" + DIR_SEP + c + DIR_SEP + name 
+
+def class_directory(name, c):
+  return "Users" + DIR_SEP + c
 
 def test_directory(test_id):
   return "Tests" + DIR_SEP + test_id
 
-def user_filename(name):
-  return "Users" + DIR_SEP + name + DIR_SEP + name + TXT
+def user_filename(name, c):
+  return "Users" + DIR_SEP + c + DIR_SEP + name + DIR_SEP + name + TXT
 
 def valid_test_id(test_id):
   if file_exists(test_directory(test_id)):

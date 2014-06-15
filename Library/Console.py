@@ -53,11 +53,30 @@ class Console(object):
                 self.error = ("Error: Invalid use of clear command.")
                 return False
 
+        #New Class
+        if cmd == "new_class":
+            if (len(cmd_vector) == 2 and not empty(cmd_vector[1])):
+                if file_exists(class_directory(cmd_vector[1])):
+                    self.error = ("User record already exists. Please try again with a new name.")
+                    return False
+                else:
+                    if (user_limit_license()):
+                        self.user = new_user(cmd_vector[1])
+                        self.state = CLASS_STATE
+                        return True
+                    else:
+                        self.error = ("Error: You have exceeded the number of users purchased.")
+                        return False
+            else:
+                self.error = ("Error: Invalid use of new student command.")
+                return False        
+
         #New User
         if cmd == "new_student":
+            if (self.state == )###LEFT OFF HERE
             if (len(cmd_vector) == 2 and not empty(cmd_vector[1])):
                 if file_exists(user_directory(cmd_vector[1])):
-                    self.error = ("User record already exists. Please try again with a new name.")
+                    self.error = ("Student record already exists. Please try again with a new name.")
                     return False
                 else:
                     if (user_limit_license()):

@@ -36,13 +36,15 @@ def check_date_license():
 
 def user_limit_license():
 	USER_LICENSE_VALID = True
-	a = os.listdir(user_directory(''))
+	a = os.listdir(class_directory(''))
 	total_users = 0
-	for directory in a:
-		if file_exists(user_directory(directory) + DIR_SEP + directory + TXT):
-			total_users += 1
-	if (total_users >= USER_LIMIT):
-		USER_LICENSE_VALID = False
+	for classes in a:
+		b = os.listdir(user_directory('', classes))
+		for directory in b:
+			if file_exists(user_directory(directory) + DIR_SEP + directory + TXT):
+				total_users += 1
+		if (total_users >= USER_LIMIT):
+			USER_LICENSE_VALID = False
 	return USER_LICENSE_VALID
 
 

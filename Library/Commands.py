@@ -18,12 +18,12 @@ def clear(n):
     for i in range(0,n):
         print (n)
 
-def new_user(name):
-    directory = "Users" + DIR_SEP + name
+def new_user(name, c):
+    directory = user_directory(name, c)
     #disable deleting old directory to make a new one
     #if (file_exists(directory)):
     #    rmdir(directory)
-    u = User(name)
+    u = User(name, c)
     u.build()
     return u
 

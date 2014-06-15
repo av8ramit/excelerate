@@ -20,17 +20,15 @@ import csv
 class User(object):
 
     #This is the default constructor with all variables defined.
-    def __init__(self, name):
+    def __init__(self, name, c):
         self.name = name
+        self.c = c #class
         self.tests_taken = [] #array of scored tests for data analysis
         self.data = Data_Holder()
     
     def build(self):
-        mkdir(self.directory())
+        mkdir(user_directory(self.name, self.c))
         self.save_user()
-
-    def directory(self):
-        return "Users" + DIR_SEP + self.name
 
     def grade(self, answers):
         t = Test(answers.id)
@@ -52,7 +50,7 @@ class User(object):
 
 
     def save_user(self):
-        FILE = open(self.directory() + DIR_SEP + self.name + ".txt", "w")
+        FILE = open(user_filename(self.name, self.c), "w")
         lines = []
         lines.append("Name:" + self.name + endl + endl)
         for test in self.tests_taken:
@@ -189,7 +187,7 @@ class User(object):
 
 
     def simple_HTML(self):
-        FILE = open(self.directory() + DIR_SEP + "simple_report" + ".html", "w")
+        FILE = open(user_directory(self.name, self.c) + DIR_SEP + "simple_report" + ".html", "w")
         lines = []
 
         index = 1
@@ -304,7 +302,7 @@ class User(object):
 
     def section_HTML(self, section_type):
         section_type_name = section_name(section_type)
-        FILE = open(self.directory() + DIR_SEP + section_type_name.lower() + "_report" + ".html", "w")
+        FILE = open(user_directory(self.name, self.c) + DIR_SEP + section_type_name.lower() + "_report" + ".html", "w")
         lines = []
 
         index = 1
@@ -402,7 +400,7 @@ class User(object):
 
     def advanced_HTML(self):
 
-        FILE = open(self.directory() + DIR_SEP + "advanced_report" + ".html", "w")
+        FILE = open(user_directory(self.name, self.c) + DIR_SEP + "advanced_report" + ".html", "w")
         lines = []
 
         scores = self.average_scores()
@@ -524,7 +522,7 @@ class User(object):
         graphs.append(mg)
 
 
-        FILE = open(self.directory() + DIR_SEP + "graph_report" + ".html", "w")
+        FILE = open(user_directory(self.name, self.c) + DIR_SEP + "graph_report" + ".html", "w")
         lines = []
 
         scores = self.average_scores()
@@ -626,7 +624,7 @@ class User(object):
         graphs.append(mg)
 
 
-        FILE = open(self.directory() + DIR_SEP + "college_graph_report" + ".html", "w")
+        FILE = open(user_directory(self.name, self.c) + DIR_SEP + "college_graph_report" + ".html", "w")
         lines = []
 
         scores = self.average_scores()
@@ -710,7 +708,7 @@ class User(object):
 
 
 
-        FILE = open(self.directory() + DIR_SEP + "grade" + ".html", "w")
+        FILE = open(user_directory(self.name, self.c) + DIR_SEP + "grade" + ".html", "w")
         lines = []
 
         scores = self.average_scores()
@@ -769,7 +767,7 @@ class User(object):
         FILE.close()
 
     def simple_report(self):
-        FILE = open(self.directory() + DIR_SEP + "simple_report" + ".txt", "w")
+        FILE = open(user_directory(self.name, self.c) + DIR_SEP + "simple_report" + ".txt", "w")
         lines = []
 
         #Name
@@ -802,7 +800,7 @@ class User(object):
 
 
     def advanced_report(self):
-        FILE = open(self.directory() + DIR_SEP + "advanced_report" + ".txt", "w")
+        FILE = open(user_directory(self.name, self.c)+ DIR_SEP + "advanced_report" + ".txt", "w")
         lines = []
 
         #Name

@@ -14,8 +14,9 @@ from Commands import *
 #Base Class Analytics Class
 class Analytics(object):
 
-    def __init__(self):
-        users = list_users_array()
+    def __init__(self, c):
+        self.c = c
+        users = list_users_array(self.c)
         self.user_weakpoints_dict = {}  
         self.type_classes = {}    
         for username in users:
@@ -41,7 +42,7 @@ class Analytics(object):
                 self.user_weakpoints_dict[user.name] = uw   
 
     def report(self):
-        FILE = open('Users' + DIR_SEP + "analytics" + ".html", "w")
+        FILE = open('Users' + DIR_SEP + self.c + DIR_SEP + "analytics" + ".html", "w")
         lines = []
 
         #HTML opener
@@ -49,13 +50,13 @@ class Analytics(object):
         lines.append('<html xmlns="http://www.w3.org/1999/xhtml">' + endl)
         lines.append('<head>')
         lines.append('<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />' + endl)
-        lines.append('<link rel="stylesheet" type="text/css" href="../HTML/style.css" />' + endl)
+        lines.append('<link rel="stylesheet" type="text/css" href="../../HTML/style.css" />' + endl)
         lines.append('<title>Advanced Score Report</title>' + endl)
         lines.append('</head>' + endl)
         lines.append('<body>' + endl)
         lines.append('<div id="page">' + endl)
         lines.append('<div id="header">' + endl)
-        lines.append('<img src="../HTML/Mini Logo.png" width="35%" alt="Excelerate" />' + endl)
+        lines.append('<img src="../../HTML/Mini Logo.png" width="35%" alt="Excelerate" />' + endl)
         lines.append('</div>' + endl)
         lines.append('</div>' + endl)
         lines.append('<div id="content">' + endl)
