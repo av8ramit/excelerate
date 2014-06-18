@@ -290,7 +290,7 @@ def file_exists(filename):
 def user_directory(name, c):
   return "Users" + DIR_SEP + c + DIR_SEP + name 
 
-def class_directory(name, c):
+def class_directory(c):
   return "Users" + DIR_SEP + c
 
 def test_directory(test_id):

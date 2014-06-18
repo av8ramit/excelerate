@@ -20,6 +20,7 @@ class Console(object):
         self.user = None
         self.state = LAUNCH_STATE
         self.error = None
+        self.Class = None
 
     def parse_command(self, user_input):
         if empty(user_input):
@@ -57,11 +58,11 @@ class Console(object):
         if cmd == "new_class":
             if (len(cmd_vector) == 2 and not empty(cmd_vector[1])):
                 if file_exists(class_directory(cmd_vector[1])):
-                    self.error = ("User record already exists. Please try again with a new name.")
+                    self.error = ("Class record already exists. Please try again with a new name.")
                     return False
                 else:
                     if (user_limit_license()):
-                        self.user = new_user(cmd_vector[1])
+                        self.Class = new_class(cmd_vector[1])
                         self.state = CLASS_STATE
                         return True
                     else:
@@ -71,24 +72,28 @@ class Console(object):
                 self.error = ("Error: Invalid use of new student command.")
                 return False        
 
+
+        #Load Class 
+                
+
         #New User
         if cmd == "new_student":
-            if (self.state == )###LEFT OFF HERE
-            if (len(cmd_vector) == 2 and not empty(cmd_vector[1])):
-                if file_exists(user_directory(cmd_vector[1])):
-                    self.error = ("Student record already exists. Please try again with a new name.")
-                    return False
-                else:
-                    if (user_limit_license()):
-                        self.user = new_user(cmd_vector[1])
-                        self.state = LOAD_STATE
-                        return True
-                    else:
-                        self.error = ("Error: You have exceeded the number of users purchased.")
+            if (self.state == CLASS_STATE ):
+                if (len(cmd_vector) == 2 and not empty(cmd_vector[1])):
+                    if file_exists(user_directory(cmd_vector[1], self.Class)):
+                        self.error = ("Student record already exists. Please try again with a new name.")
                         return False
-            else:
-                self.error = ("Error: Invalid use of new student command.")
-                return False
+                    else:
+                        if (user_limit_license()):
+                            self.user = new_user(cmd_vector[1], self.Class)
+                            self.state = LOAD_STATE
+                            return True
+                        else:
+                            self.error = ("Error: You have exceeded the number of users purchased.")
+                            return False
+                else:
+                    self.error = ("Error: Invalid use of new student command.")
+                    return False
 
         #Save Progress
         if cmd == "save":
@@ -113,7 +118,7 @@ class Console(object):
             if (len(cmd_vector) == 2 and not empty(cmd_vector[1])):
                 name = cmd_vector[1]
                 if (name in list_users()):
-                    filename = user_filename(name)
+                    filename = user_filename(name, self.Class)
                     if file_exists(filename):
                         self.user = load_user(name, filename)
                         self.state = LOAD_STATE

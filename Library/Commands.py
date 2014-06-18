@@ -13,10 +13,19 @@ from Values import *
 from Key import *
 from Answer import *
 from User import *
+from Class import *
+
 
 def clear(n):
     for i in range(0,n):
         print (n)
+
+def new_class(name):   #new class function 
+    c = Class(name)
+    return c
+
+#def load_class(name):   #load class function 
+
 
 def new_user(name, c):
     directory = user_directory(name, c)
@@ -27,11 +36,13 @@ def new_user(name, c):
     u.build()
     return u
 
+
 def load_user(name, filename):
     u = User(name)
     u.name = name
     u.recreate_user(filename)
     return u
+
 
 def delete_user(name):
     rmdir(name)
@@ -51,19 +62,20 @@ def list_tests():
             array.append(i)
     return array
 
-def list_users():
+def list_users(c):
     array = []
-    a = os.listdir(user_directory(''))
+    a = os.listdir(user_directory('', c))
     for i in a:
-        if file_exists(user_filename(i)):
+        if file_exists(user_filename(i, c)):
             array.append(i)
     return str(array)
 
-def list_users_array():
+def list_users_array(c):
+    self.c = c
     array = []
-    a = os.listdir(user_directory(''))
+    a = os.listdir(user_directory('', c))
     for i in a:
-        if file_exists(user_filename(i)):
+        if file_exists(user_filename(i, c)):
             array.append(i)
     return array
 

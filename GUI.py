@@ -228,7 +228,7 @@ def auto_gdr():
                   c.process_commands('save')
 
 def class_analyze():
-  a = Analytics()
+  a = Analytics()      
   a.report()
   dirc = user_directory('')
   os.system('open ' + dirc + DIR_SEP + 'analytics.html' )
@@ -612,7 +612,7 @@ def make_lu_button():
     LU.grid(row = 1, column = 2, columnspan = 2, rowspan = 2,sticky = (W))
     LU.menu = Menu(LU)
     LU["menu"] = LU.menu
-    users = list_users_array()
+    users = list_users_array(c.Class)
     for username in users:
         name = username
         LU.menu.add_radiobutton(label = name , command =lambda t = name: get_load_user(t))

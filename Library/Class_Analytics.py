@@ -20,7 +20,7 @@ class Analytics(object):
         self.user_weakpoints_dict = {}  
         self.type_classes = {}    
         for username in users:
-            filename = user_filename(username)
+            filename = user_filename(username, self.c)
             user = load_user(username, filename)
             if len(user.tests_taken) != 0:
                 uw = User_Weakpoints(user.name)
