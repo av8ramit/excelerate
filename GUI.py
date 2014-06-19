@@ -109,7 +109,7 @@ def simple_report():
         messagebox.showwarning("Error", c.error)
     else:     
         name = c.user.name 
-        dirc = user_directory(name) 
+        dirc = user_directory(name, c.Class.name) 
         fname = os.path.basename(dirc)
         if (dirc != None):
             os.system('open ' + dirc + DIR_SEP + 'simple_report.html' ) 
@@ -119,7 +119,7 @@ def advance_report():
         messagebox.showwarning("Error", c.error)
     else:     
         name = c.user.name 
-        dirc = user_directory(name) 
+        dirc = user_directory(name, c.Class.name) 
         fname = os.path.basename(dirc)
         if (dirc != None):
             os.system('open ' + dirc + DIR_SEP + 'advanced_report.html' )
@@ -129,7 +129,7 @@ def graph_report():
         messagebox.showwarning("Error", c.error)
     else:     
         name = c.user.name 
-        dirc = user_directory(name) 
+        dirc = user_directory(name, c.Class.name) #passing user name and console's class object's name attribute
         fname = os.path.basename(dirc)
         if (dirc != None):
             os.system('open ' + dirc + DIR_SEP + 'graph_report.html' )
@@ -139,7 +139,7 @@ def section_report():
         messagebox.showwarning("Error", c.error)
     else:    
         name = c.user.name 
-        dirc = user_directory(name) 
+        dirc = user_directory(name, c.Class.name) #passing user name and console's class object's name attribute
         fname = os.path.basename(dirc)
         if (dirc != None):
             os.system('open ' + dirc + DIR_SEP + 'math_report.html' )
@@ -194,7 +194,7 @@ def get_test_name():
             else:
 
                 name = c.user.name 
-                dirc = user_directory(name) 
+                dirc = user_directory(name, c.Class.name) 
                 fname = os.path.basename(dirc)
                 ans = messagebox.askyesno('Test Has Been Graded!', 'Would You Like To Open The Graded Test?')
                 if (dirc != None and ans is True):
@@ -228,9 +228,9 @@ def auto_gdr():
                   c.process_commands('save')
 
 def class_analyze():
-  a = Analytics()      
+  a = Analytics(c.Class.name)      
   a.report()
-  dirc = user_directory('')
+  dirc = user_directory('', c.Class.name)
   os.system('open ' + dirc + DIR_SEP + 'analytics.html' )
 
 
@@ -283,7 +283,7 @@ def college_profile():
                 p_w.append((writings/(dict_write[school])))
 
             cp = College_Profile()
-            dirc = user_directory(c.user.name)
+            dirc = user_directory(c.user.name, c.Class.name)
             name = c.user.name
 
             cp.report(schoolname, p_o, p_m, p_r, p_w, name)
@@ -612,7 +612,7 @@ def make_lu_button():
     LU.grid(row = 1, column = 2, columnspan = 2, rowspan = 2,sticky = (W))
     LU.menu = Menu(LU)
     LU["menu"] = LU.menu
-    users = list_users_array(c.Class)
+    users = list_users_array(c.Class.name)
     for username in users:
         name = username
         LU.menu.add_radiobutton(label = name , command =lambda t = name: get_load_user(t))

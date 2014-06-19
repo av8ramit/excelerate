@@ -69,16 +69,31 @@ class Console(object):
                         self.error = ("Error: You have exceeded the number of users purchased.")
                         return False
             else:
-                self.error = ("Error: Invalid use of new student command.")
+                self.error = ("Error: Invalid use of New Class command.")
                 return False        
 
 
         #Load Class 
-                
+        if cmd == "load_class":        # command passed via GUI.py buttons
+            if (len(cmd_vector) == 2 and not empty(cmd_vector[1])):  #check command length and contents
+                if not file_exists(class_directory(cmd_vector[1])):   #check to make sure class directory exists
+                    self.error = ("Class record does not exist. Please try again with a new name.")
+                    return False
+                else:
+                    if (user_limit_license()):
+                        self.Class = load_class(cmd_vector[1])
+                        self.state = CLASS_STATE
+                        return True
+                    else:
+                        self.error = ("Error: You have exceeded the number of users purchased.")
+                        return False
+            else:
+                self.error = ("Error: Invalid use of Load Class command.")
+                return False          
 
         #New User
         if cmd == "new_student":
-            if (self.state == CLASS_STATE ):
+            if (self.state == CLASS_STATE ):   # make sure a class has been made or loaded
                 if (len(cmd_vector) == 2 and not empty(cmd_vector[1])):
                     if file_exists(user_directory(cmd_vector[1], self.Class)):
                         self.error = ("Student record already exists. Please try again with a new name.")
@@ -94,7 +109,8 @@ class Console(object):
                 else:
                     self.error = ("Error: Invalid use of new student command.")
                     return False
-
+            else: 
+                self.error = ("Error: Please create a new class or load an existing class first")       
         #Save Progress
         if cmd == "save":
             if (len(cmd_vector) == 1 and self.state == LOAD_STATE):

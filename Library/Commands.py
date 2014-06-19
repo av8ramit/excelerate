@@ -20,35 +20,38 @@ def clear(n):
     for i in range(0,n):
         print (n)
 
-def new_class(name):   #new class function 
-    c = Class(name)
-    return c
+def new_class(name):   #new class function creates a new class object with no students in it
+    c = Class(name)      #instantiate class object 
+    return c             #return class object - used in Console.py 
 
-#def load_class(name):   #load class function 
+def load_class(name):   #load class function creates a new class object and then loads all applicable students
+    c = Class(name)    #instantiate class object
+    c.students = list_users_array(name) # assign array of student names as strings to class object's 'students' attribute
+    return c            #return class object with all applicable users - used in Console.py
 
 
-def new_user(name, c):
-    directory = user_directory(name, c)
+def new_user(name, c):    # new user function creates a user object and builds it
+    #directory = user_directory(name, c)     
     #disable deleting old directory to make a new one
     #if (file_exists(directory)):
     #    rmdir(directory)
-    u = User(name, c)
-    u.build()
-    return u
+    u = User(name, c)   #instantiate a user object with parameters username and user's classname  
+    u.build()        #call user object method build() from User.py
+    return u           # return built user object - used in Console.py 
 
 
-def load_user(name, filename):
-    u = User(name)
-    u.name = name
-    u.recreate_user(filename)
-    return u
+def load_user(name, filename):   #load user function creates a user object and recreates user data
+    u = User(name)       #instantiate a user object with parameters username and user's classname 
+    u.name = name         #assign user object 'name' attribute the username
+    u.recreate_user(filename)  #call user object method recreate_user() from User.py
+    return u                  #return recreated user object - used in Console.py 
 
 
-def delete_user(name):
-    rmdir(name)
+def delete_user(name):   #delete user function removes the users directory
+    rmdir(name)            #removes directory
 
 
-def grade(u, filename):
+def grade(u, filename):  
     pa = parse_answers(filename)
     u.grade(pa)
 
@@ -71,7 +74,6 @@ def list_users(c):
     return str(array)
 
 def list_users_array(c):
-    self.c = c
     array = []
     a = os.listdir(user_directory('', c))
     for i in a:
