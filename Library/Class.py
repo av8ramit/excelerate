@@ -15,5 +15,5 @@ class Class(object):
 
     #This is the default constructor with all variables defined.
     def __init__(self, classname):
-        self.name = name
+        self.name = classname    #name of class object
         self.students = [] #array of student names as strings

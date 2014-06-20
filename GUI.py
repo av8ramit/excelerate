@@ -67,7 +67,7 @@ global users
 
 
 
-####################### Load Images ######################
+####################### Load Images for buttons ######################
 
 photo = PhotoImage(file = "./GUI/E.gif")
 NUimg = PhotoImage(file = "./GUI/NewStdntButton.gif")
@@ -80,7 +80,9 @@ Svimg = PhotoImage(file = "./GUI/SaveButton.gif")
 AutoGrdr = PhotoImage(file = "./GUI/AutoGrdr.gif")
 GoalSchl = PhotoImage(file = "./GUI/GoalSchool.gif")
 ClassAnly = PhotoImage(file = "./GUI/CollegeA.gif")
-
+LoadClass = PhotoImage(file = "./GUI/LdCls.gif")
+NewClass = PhotoImage(file = "./GUI/NwCls.gif")
+ChngClass = PhotoImage(file = "./GUI/ChCls.gif")
 ################### Functions ##########################
 def help_usage():
     os.system('open ' + './Documents/Usage_v1.pdf' )
@@ -109,7 +111,7 @@ def simple_report():
         messagebox.showwarning("Error", c.error)
     else:     
         name = c.user.name 
-        dirc = user_directory(name, c.Class.name) 
+        dirc = user_directory(name, c.c.name) 
         fname = os.path.basename(dirc)
         if (dirc != None):
             os.system('open ' + dirc + DIR_SEP + 'simple_report.html' ) 
@@ -119,7 +121,7 @@ def advance_report():
         messagebox.showwarning("Error", c.error)
     else:     
         name = c.user.name 
-        dirc = user_directory(name, c.Class.name) 
+        dirc = user_directory(name, c.c.name) 
         fname = os.path.basename(dirc)
         if (dirc != None):
             os.system('open ' + dirc + DIR_SEP + 'advanced_report.html' )
@@ -129,7 +131,7 @@ def graph_report():
         messagebox.showwarning("Error", c.error)
     else:     
         name = c.user.name 
-        dirc = user_directory(name, c.Class.name) #passing user name and console's class object's name attribute
+        dirc = user_directory(name, c.c.name) #passing user name and console's class object's name attribute
         fname = os.path.basename(dirc)
         if (dirc != None):
             os.system('open ' + dirc + DIR_SEP + 'graph_report.html' )
@@ -139,12 +141,37 @@ def section_report():
         messagebox.showwarning("Error", c.error)
     else:    
         name = c.user.name 
-        dirc = user_directory(name, c.Class.name) #passing user name and console's class object's name attribute
+        dirc = user_directory(name, c.c.name) #passing user name and console's class object's name attribute
         fname = os.path.basename(dirc)
         if (dirc != None):
             os.system('open ' + dirc + DIR_SEP + 'math_report.html' )
             os.system('open ' + dirc + DIR_SEP + 'reading_report.html' )
             os.system('open ' + dirc + DIR_SEP + 'writing_report.html' )
+
+def get_new_class(): #function passes new class name from GUI button to console
+    name = tkinter.simpledialog.askstring('New Class', 'Enter New Class Name')
+    if(name != None):
+        res = c.process_commands('new_class ' + name)
+        if(not res and c.error is not None):  #if console's process_commands returns false and error msg exists
+            messagebox.showwarning('Error', c.error)  #disply error on GUI
+        else: 
+            if(c.state == CLASS_STATE): #succesfully passed class object to console
+                classname = c.c.name
+                if(classname != None): # make sure objects name attribute is right
+                    messagebox.showinfo('Current Class', 'Created Class ' + classname)
+                    make_lc_button()  #update load class dropdown menu 
+
+
+def get_load_class(cname):
+    name = cname 
+    if(name != None):
+        res = c.process_commands('load_class ' + name)
+        if(not res and c.error is not None):
+            messagebox.showwarning("Error", c.error)
+        else:
+            if(c.state == CLASS_STATE): #make sure class object successfully passed to console
+                if(c.c.name != None): #make sure loaded class objec has name attribute 
+                    messagebox.showinfo('Current Class', 'Loaded Class ' + c.c.name)
 
 def get_new_user():
     name = tkinter.simpledialog.askstring( 'New Student', 'Enter New Username')
@@ -194,7 +221,7 @@ def get_test_name():
             else:
 
                 name = c.user.name 
-                dirc = user_directory(name, c.Class.name) 
+                dirc = user_directory(name, c.c.name) 
                 fname = os.path.basename(dirc)
                 ans = messagebox.askyesno('Test Has Been Graded!', 'Would You Like To Open The Graded Test?')
                 if (dirc != None and ans is True):
@@ -228,9 +255,9 @@ def auto_gdr():
                   c.process_commands('save')
 
 def class_analyze():
-  a = Analytics(c.Class.name)      
+  a = Analytics(c.c.name)      
   a.report()
-  dirc = user_directory('', c.Class.name)
+  dirc = user_directory('', c.c.name)
   os.system('open ' + dirc + DIR_SEP + 'analytics.html' )
 
 
@@ -283,7 +310,7 @@ def college_profile():
                 p_w.append((writings/(dict_write[school])))
 
             cp = College_Profile()
-            dirc = user_directory(c.user.name, c.Class.name)
+            dirc = user_directory(c.user.name, c.c.name)
             name = c.user.name
 
             cp.report(schoolname, p_o, p_m, p_r, p_w, name)
@@ -313,7 +340,7 @@ def harvard():
         else:
             c.user.c_graph_HTML(SCHOOLSCORE_O, SCHOOLSCORE_M, SCHOOLSCORE_R, SCHOOLSCORE_W, SCHOOLNAME, SCHOOLCOLOR, SCHOOLBGCOLOR)
             name = c.user.name 
-            dirc = user_directory(name) 
+            dirc = user_directory(name, c.c.name) 
             os.system('open ' + dirc + DIR_SEP + 'college_graph_report.html' )
     else:
 
@@ -336,7 +363,7 @@ def stanford():
         else:
             c.user.c_graph_HTML(SCHOOLSCORE_O, SCHOOLSCORE_M, SCHOOLSCORE_R, SCHOOLSCORE_W, SCHOOLNAME, SCHOOLCOLOR, SCHOOLBGCOLOR)
             name = c.user.name 
-            dirc = user_directory(name) 
+            dirc = user_directory(name, c.c.name) 
             os.system('open ' + dirc + DIR_SEP + 'college_graph_report.html' )
    else:
 
@@ -359,7 +386,7 @@ def mit():
         else:
             c.user.c_graph_HTML(SCHOOLSCORE_O, SCHOOLSCORE_M, SCHOOLSCORE_R, SCHOOLSCORE_W, SCHOOLNAME, SCHOOLCOLOR, SCHOOLBGCOLOR)
             name = c.user.name 
-            dirc = user_directory(name) 
+            dirc = user_directory(name, c.c.name) 
             os.system('open ' + dirc + DIR_SEP + 'college_graph_report.html' )
    else:
 
@@ -381,7 +408,7 @@ def yale():
         else:
             c.user.c_graph_HTML(SCHOOLSCORE_O, SCHOOLSCORE_M, SCHOOLSCORE_R, SCHOOLSCORE_W, SCHOOLNAME, SCHOOLCOLOR, SCHOOLBGCOLOR)
             name = c.user.name 
-            dirc = user_directory(name) 
+            dirc = user_directory(name, c.c.name) 
             os.system('open ' + dirc + DIR_SEP + 'college_graph_report.html' )
    else:
 
@@ -403,7 +430,7 @@ def uc_berkeley():
         else:
             c.user.c_graph_HTML(SCHOOLSCORE_O, SCHOOLSCORE_M, SCHOOLSCORE_R, SCHOOLSCORE_W, SCHOOLNAME, SCHOOLCOLOR, SCHOOLBGCOLOR)
             name = c.user.name 
-            dirc = user_directory(name) 
+            dirc = user_directory(name, c.c.name) 
             os.system('open ' + dirc + DIR_SEP + 'college_graph_report.html' )
    else:
 
@@ -425,7 +452,7 @@ def ucla():
         else:
             c.user.c_graph_HTML(SCHOOLSCORE_O, SCHOOLSCORE_M, SCHOOLSCORE_R, SCHOOLSCORE_W, SCHOOLNAME, SCHOOLCOLOR, SCHOOLBGCOLOR)
             name = c.user.name 
-            dirc = user_directory(name) 
+            dirc = user_directory(name, c.c.name) 
             os.system('open ' + dirc + DIR_SEP + 'college_graph_report.html' )
    else:
 
@@ -447,7 +474,7 @@ def princeton():
         else:
             c.user.c_graph_HTML(SCHOOLSCORE_O, SCHOOLSCORE_M, SCHOOLSCORE_R, SCHOOLSCORE_W, SCHOOLNAME, SCHOOLCOLOR, SCHOOLBGCOLOR)
             name = c.user.name 
-            dirc = user_directory(name) 
+            dirc = user_directory(name, c.c.name) 
             os.system('open ' + dirc + DIR_SEP + 'college_graph_report.html' )
    else:
 
@@ -469,7 +496,7 @@ def caltech():
         else:
             c.user.c_graph_HTML(SCHOOLSCORE_O, SCHOOLSCORE_M, SCHOOLSCORE_R, SCHOOLSCORE_W, SCHOOLNAME, SCHOOLCOLOR, SCHOOLBGCOLOR)
             name = c.user.name 
-            dirc = user_directory(name) 
+            dirc = user_directory(name, c.c.name) 
             os.system('open ' + dirc + DIR_SEP + 'college_graph_report.html' )
    else:
 
@@ -491,7 +518,7 @@ def johns_hopkins():
         else:
             c.user.c_graph_HTML(SCHOOLSCORE_O, SCHOOLSCORE_M, SCHOOLSCORE_R, SCHOOLSCORE_W, SCHOOLNAME, SCHOOLCOLOR, SCHOOLBGCOLOR)
             name = c.user.name 
-            dirc = user_directory(name) 
+            dirc = user_directory(name, c.c.name) 
             os.system('open ' + dirc + DIR_SEP + 'college_graph_report.html' )
    else:
 
@@ -513,11 +540,44 @@ def carnegie_mellon():
         else:
             c.user.c_graph_HTML(SCHOOLSCORE_O, SCHOOLSCORE_M, SCHOOLSCORE_R, SCHOOLSCORE_W, SCHOOLNAME, SCHOOLCOLOR, SCHOOLBGCOLOR)
             name = c.user.name 
-            dirc = user_directory(name) 
+            dirc = user_directory(name, c.c.name) 
             os.system('open ' + dirc + DIR_SEP + 'college_graph_report.html' )
    else:
 
         messagebox.showwarning("Error", 'Please Load Or Create A Student First')   
+
+#Drop Down list Users 
+def make_lu_button():
+    LU = Menubutton(root, image =  LUimg, width = 254, height = 256)
+    LU.grid(row = 1, column = 2, columnspan = 2, rowspan = 2,sticky = (W))
+    LU.menu = Menu(LU)
+    LU["menu"] = LU.menu
+    users = list_users_array(c.c.name)
+    for username in users:
+        name = username
+        LU.menu.add_radiobutton(label = name , command =lambda t = name: get_load_user(t))
+
+#Drop Down Create Ans Sheet
+def make_ans_sheet_button():
+    CA = Menubutton(root, image = CASimg, width = 254, height = 256)
+    CA.grid( row = 1, column = 4, columnspan = 2, rowspan = 2,sticky = (W))
+    CA.menu = Menu(CA)
+    CA["menu"] = CA.menu
+    tests = list_tests()
+    for test in tests:
+        name = test
+        CA.menu.add_radiobutton(label = name, command = lambda t = name: get_test_id(t))
+
+def make_lc_button():
+    LC = Menubutton(root, image =  LoadClass, width = 254, height = 256)
+    LC.grid(row = 1, column = 2, columnspan = 2, rowspan = 2,sticky = (W))
+    LC.menu = Menu(LC)
+    LC["menu"] = LC.menu
+    classes = list_classes()   #get list of classes in filesystem
+    for Class in classes:  
+        classname = Class
+        LC.menu.add_radiobutton(label = classname , command =lambda t = classname: get_load_class(t)) #lambda to make function and pass params during runtime
+
 
 ######################################################################
 
@@ -560,79 +620,64 @@ Label(root, image = photo, background = 'light steel blue').grid(row=0, column =
 
 
 ####### MAIN COLORED GUI BUTTONS 
+if (c.state is CLASS_STATE): #if a class has been created or loaded, display class level user GUI
+  Button( root, image = NUimg, width = 250, height = 250, pady = 0,  command= get_new_user).grid( row = 1, column = 0 ,columnspan = 2, rowspan = 2, sticky = (W))
 
-Button( root, image = NUimg, width = 250, height = 250, pady = 0,  command= get_new_user).grid( row = 1, column = 0 ,columnspan = 2, rowspan = 2, sticky = (W))
-
-#Button( root, image = LUimg , width = 250, height = 250, pady = 0, command = get_load_user).grid(row = 1, column = 2, columnspan = 2, rowspan = 2,sticky = W)
-
-
-Button( root, image = Gimg, width = 250, height = 250,  pady = 0,  command = get_test_name ).grid( row = 1,column = 10, columnspan = 2, rowspan = 2,sticky = W)
- 
-
-#Button( root, image = CASimg,  width = 250, height = 250, pady = 0 , command = get_test_id).grid( row = 1, column = 4, columnspan = 2, rowspan = 2,sticky = W)
-
-Button( root, image = Rstimg,  width = 250, height = 250, pady = 0, command = reset_user).grid( row = 9, column = 16, columnspan = 2, rowspan = 2,sticky = W)
-
-Button( root, image = Svimg,  width = 250, height = 250, pady = 0, command = save_user ).grid( row = 10, column = 2, columnspan = 2, rowspan = 2,sticky = W)
-
-Button( root, image = AutoGrdr,  width = 250, height = 250, pady = 0, command = auto_gdr ).grid( row = 10, column = 4, columnspan = 2, rowspan = 2,sticky = W)
-
-Button( root, image = ClassAnly, width = 250, height = 250, pady = 0, command = class_analyze ).grid( row = 9, column = 9, columnspan = 2, rowspan = 2, sticky =W)
-## Reports Submenu Button
-
-mb = Menubutton( root, image = Rptimg, width = 254, height = 256)
-mb.grid(row = 10, column = 0, columnspan = 3, rowspan = 2, sticky = (W))
-mb.menu = Menu(mb)
-mb["menu"] = mb.menu
-mb.menu.add_checkbutton(label = "Simple Report", command = simple_report)
-mb.menu.add_checkbutton(label ="Advanced Report", command = advance_report)
-mb.menu.add_checkbutton(label ="Graphs Report", command = graph_report)
-mb.menu.add_checkbutton(label ="Section Report", command = section_report)
+  #Button( root, image = LUimg , width = 250, height = 250, pady = 0, command = get_load_user).grid(row = 1, column = 2, columnspan = 2, rowspan = 2,sticky = W)
 
 
-# Goal School Drop down menu 
-Mb = Menubutton(root, image = GoalSchl, width = 254, height = 256)
-Mb.grid(row = 1, column = 16, columnspan = 3, rowspan = 2, sticky =(W))
-Mb.menu = Menu(Mb)
-Mb["menu"] = Mb.menu
-Mb.menu.add_radiobutton(label = "Harvard Report",  command = harvard) #textvariable = "Harvard", command = goal_school )
-Mb.menu.add_radiobutton(label = "Stanford Report", command = stanford )#command =)
-Mb.menu.add_radiobutton(label = "MIT Report", command = mit )#command =)
-Mb.menu.add_radiobutton(label = "Yale Report", command = yale)#command =)
-Mb.menu.add_radiobutton(label = "UC Berkeley Report", command = uc_berkeley)#command =)
-Mb.menu.add_radiobutton(label = "UCLA Report", command = ucla )#command =)
-Mb.menu.add_radiobutton(label = "Princeton Report", command = princeton ) #command =)
-Mb.menu.add_radiobutton(label = "Caltech Report", command = caltech)#command =)
-Mb.menu.add_radiobutton(label = "Johns Hopkins Report", command = johns_hopkins )#command =)
-Mb.menu.add_radiobutton(label = "Carnegie Mellon Report", command = carnegie_mellon)#command =)
-Mb.menu.add_radiobutton(label = "Complete College Profile", command = college_profile)
-#Drop Down list Users 
-def make_lu_button():
-    LU = Menubutton(root, image =  LUimg, width = 254, height = 256)
-    LU.grid(row = 1, column = 2, columnspan = 2, rowspan = 2,sticky = (W))
-    LU.menu = Menu(LU)
-    LU["menu"] = LU.menu
-    users = list_users_array(c.Class.name)
-    for username in users:
-        name = username
-        LU.menu.add_radiobutton(label = name , command =lambda t = name: get_load_user(t))
+  Button( root, image = Gimg, width = 250, height = 250,  pady = 0,  command = get_test_name ).grid( row = 1,column = 10, columnspan = 2, rowspan = 2,sticky = W)
+   
 
-#Drop Down Create Ans Sheet
-def make_ans_sheet_button():
-    CA = Menubutton(root, image = CASimg, width = 254, height = 256)
-    CA.grid( row = 1, column = 4, columnspan = 2, rowspan = 2,sticky = (W))
-    CA.menu = Menu(CA)
-    CA["menu"] = CA.menu
-    tests = list_tests()
-    for test in tests:
-        name = test
-        CA.menu.add_radiobutton(label = name, command = lambda t = name: get_test_id(t))
+  #Button( root, image = CASimg,  width = 250, height = 250, pady = 0 , command = get_test_id).grid( row = 1, column = 4, columnspan = 2, rowspan = 2,sticky = W)
+
+  Button( root, image = Rstimg,  width = 250, height = 250, pady = 0, command = reset_user).grid( row = 9, column = 16, columnspan = 2, rowspan = 2,sticky = W)
+
+  Button( root, image = Svimg,  width = 250, height = 250, pady = 0, command = save_user ).grid( row = 10, column = 2, columnspan = 2, rowspan = 2,sticky = W)
+
+  Button( root, image = AutoGrdr,  width = 250, height = 250, pady = 0, command = auto_gdr ).grid( row = 10, column = 4, columnspan = 2, rowspan = 2,sticky = W)
+
+  Button( root, image = ClassAnly, width = 250, height = 250, pady = 0, command = class_analyze ).grid( row = 9, column = 9, columnspan = 2, rowspan = 2, sticky =W)
+  ## Reports Submenu Button
+
+  mb = Menubutton( root, image = Rptimg, width = 254, height = 256)
+  mb.grid(row = 10, column = 0, columnspan = 3, rowspan = 2, sticky = (W))
+  mb.menu = Menu(mb)
+  mb["menu"] = mb.menu
+  mb.menu.add_checkbutton(label = "Simple Report", command = simple_report)
+  mb.menu.add_checkbutton(label ="Advanced Report", command = advance_report)
+  mb.menu.add_checkbutton(label ="Graphs Report", command = graph_report)
+  mb.menu.add_checkbutton(label ="Section Report", command = section_report)
+
+
+  # Goal School Drop down menu 
+  Mb = Menubutton(root, image = GoalSchl, width = 254, height = 256)
+  Mb.grid(row = 1, column = 16, columnspan = 3, rowspan = 2, sticky =(W))
+  Mb.menu = Menu(Mb)
+  Mb["menu"] = Mb.menu
+  Mb.menu.add_radiobutton(label = "Harvard Report",  command = harvard) #textvariable = "Harvard", command = goal_school )
+  Mb.menu.add_radiobutton(label = "Stanford Report", command = stanford )#command =)
+  Mb.menu.add_radiobutton(label = "MIT Report", command = mit )#command =)
+  Mb.menu.add_radiobutton(label = "Yale Report", command = yale)#command =)
+  Mb.menu.add_radiobutton(label = "UC Berkeley Report", command = uc_berkeley)#command =)
+  Mb.menu.add_radiobutton(label = "UCLA Report", command = ucla )#command =)
+  Mb.menu.add_radiobutton(label = "Princeton Report", command = princeton ) #command =)
+  Mb.menu.add_radiobutton(label = "Caltech Report", command = caltech)#command =)
+  Mb.menu.add_radiobutton(label = "Johns Hopkins Report", command = johns_hopkins )#command =)
+  Mb.menu.add_radiobutton(label = "Carnegie Mellon Report", command = carnegie_mellon)#command =)
+  Mb.menu.add_radiobutton(label = "Complete College Profile", command = college_profile)
+  
+  
+  make_ans_sheet_button()
+  if(c.c is not None):
+    make_lu_button()
+else:  #if class has not been created or loaded yet display New/Load Class
+  Button( root, image = NewClass, width = 250, height = 250, pady = 0,  command= get_new_class).grid( row = 1, column = 0 ,columnspan = 2, rowspan = 2, sticky = (W))
 
 
 
+  make_lc_button() #make load class button 
 # Tk enters its event loop
-make_ans_sheet_button()
-make_lu_button()
 root.mainloop()
 
 

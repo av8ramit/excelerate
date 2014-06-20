@@ -55,6 +55,15 @@ def grade(u, filename):
     pa = parse_answers(filename)
     u.grade(pa)
 
+def list_classes(): # function that returns an array of class names - used in GUI.py dropdown button
+    array = []               
+    a = os.listdir(class_directory(''))   # a is all classes in class directory
+    for i in a:                            # for each class in all class directories 
+        if file_exists(class_directory(i)):  # if class exists 
+            array.append(i)                    # add to array 
+    return array                     #return array of class names
+    
+
 def list_tests():
     a = os.listdir(test_directory(''))
     array = []

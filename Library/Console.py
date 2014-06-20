@@ -20,7 +20,7 @@ class Console(object):
         self.user = None
         self.state = LAUNCH_STATE
         self.error = None
-        self.Class = None
+        self.c = None  # c is class 
 
     def parse_command(self, user_input):
         if empty(user_input):
@@ -57,12 +57,12 @@ class Console(object):
         #New Class
         if cmd == "new_class":
             if (len(cmd_vector) == 2 and not empty(cmd_vector[1])):
-                if file_exists(class_directory(cmd_vector[1])):
+                if file_exists(class_directory(cmd_vector[1])):  #check to make sure class directory doesn't exist
                     self.error = ("Class record already exists. Please try again with a new name.")
                     return False
                 else:
                     if (user_limit_license()):
-                        self.Class = new_class(cmd_vector[1])
+                        self.c = new_class(cmd_vector[1])
                         self.state = CLASS_STATE
                         return True
                     else:
@@ -81,7 +81,7 @@ class Console(object):
                     return False
                 else:
                     if (user_limit_license()):
-                        self.Class = load_class(cmd_vector[1])
+                        self.c = load_class(cmd_vector[1])
                         self.state = CLASS_STATE
                         return True
                     else:
@@ -95,12 +95,12 @@ class Console(object):
         if cmd == "new_student":
             if (self.state == CLASS_STATE ):   # make sure a class has been made or loaded
                 if (len(cmd_vector) == 2 and not empty(cmd_vector[1])):
-                    if file_exists(user_directory(cmd_vector[1], self.Class)):
+                    if file_exists(user_directory(cmd_vector[1], self.c.name)):
                         self.error = ("Student record already exists. Please try again with a new name.")
                         return False
                     else:
                         if (user_limit_license()):
-                            self.user = new_user(cmd_vector[1], self.Class)
+                            self.user = new_user(cmd_vector[1], self.c.name)
                             self.state = LOAD_STATE
                             return True
                         else:
@@ -134,7 +134,7 @@ class Console(object):
             if (len(cmd_vector) == 2 and not empty(cmd_vector[1])):
                 name = cmd_vector[1]
                 if (name in list_users()):
-                    filename = user_filename(name, self.Class)
+                    filename = user_filename(name, self.c.name)
                     if file_exists(filename):
                         self.user = load_user(name, filename)
                         self.state = LOAD_STATE
