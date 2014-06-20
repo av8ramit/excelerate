@@ -17,3 +17,7 @@ class Class(object):
     def __init__(self, classname):
         self.name = classname    #name of class object
         self.students = [] #array of student names as strings
+
+    #This method adds a student.
+    def add_student(name):
+    	self.students.append(name)

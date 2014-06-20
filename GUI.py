@@ -552,7 +552,10 @@ def make_lu_button():
     LU.grid(row = 1, column = 2, columnspan = 2, rowspan = 2,sticky = (W))
     LU.menu = Menu(LU)
     LU["menu"] = LU.menu
-    users = list_users_array(c.c.name)
+    if c.c == None:
+      users = []
+    else:
+      users = list_users_array(c.c.name)
     for username in users:
         name = username
         LU.menu.add_radiobutton(label = name , command =lambda t = name: get_load_user(t))
@@ -620,7 +623,7 @@ Label(root, image = photo, background = 'light steel blue').grid(row=0, column =
 
 
 ####### MAIN COLORED GUI BUTTONS 
-if (c.state is CLASS_STATE): #if a class has been created or loaded, display class level user GUI
+if (c.state is CLASS_STATE or c.state is USER_STATE or c.state is LAUNCH_STATE): #if a class has been created or loaded, display class level user GUI
   Button( root, image = NUimg, width = 250, height = 250, pady = 0,  command= get_new_user).grid( row = 1, column = 0 ,columnspan = 2, rowspan = 2, sticky = (W))
 
   #Button( root, image = LUimg , width = 250, height = 250, pady = 0, command = get_load_user).grid(row = 1, column = 2, columnspan = 2, rowspan = 2,sticky = W)
@@ -669,9 +672,9 @@ if (c.state is CLASS_STATE): #if a class has been created or loaded, display cla
   
   
   make_ans_sheet_button()
-  if(c.c is not None):
-    make_lu_button()
-else:  #if class has not been created or loaded yet display New/Load Class
+  #if(c.c is not None):
+  make_lu_button()
+#else:  #if class has not been created or loaded yet display New/Load Class
   Button( root, image = NewClass, width = 250, height = 250, pady = 0,  command= get_new_class).grid( row = 1, column = 0 ,columnspan = 2, rowspan = 2, sticky = (W))
 
 

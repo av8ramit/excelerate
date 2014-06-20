@@ -80,13 +80,9 @@ class Console(object):
                     self.error = ("Class record does not exist. Please try again with a new name.")
                     return False
                 else:
-                    if (user_limit_license()):
-                        self.c = load_class(cmd_vector[1])
-                        self.state = CLASS_STATE
-                        return True
-                    else:
-                        self.error = ("Error: You have exceeded the number of users purchased.")
-                        return False
+                    self.c = load_class(cmd_vector[1])
+                    self.state = CLASS_STATE
+                    return True
             else:
                 self.error = ("Error: Invalid use of Load Class command.")
                 return False          
@@ -101,6 +97,7 @@ class Console(object):
                     else:
                         if (user_limit_license()):
                             self.user = new_user(cmd_vector[1], self.c.name)
+                            self.c.add_student(cmd_vector[1])
                             self.state = LOAD_STATE
                             return True
                         else:

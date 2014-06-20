@@ -39,6 +39,8 @@ def user_limit_license():
 	a = os.listdir(class_directory(''))
 	total_users = 0
 	for classes in a:
+		if classes[0] == '.':
+			continue
 		b = os.listdir(user_directory('', classes))
 		for directory in b:
 			if file_exists(user_directory(directory) + DIR_SEP + directory + TXT):

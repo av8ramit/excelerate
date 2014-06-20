@@ -22,6 +22,7 @@ def clear(n):
 
 def new_class(name):   #new class function creates a new class object with no students in it
     c = Class(name)      #instantiate class object 
+    mkdir(class_directory(name))
     return c             #return class object - used in Console.py 
 
 def load_class(name):   #load class function creates a new class object and then loads all applicable students
@@ -47,9 +48,8 @@ def load_user(name, filename):   #load user function creates a user object and r
     return u                  #return recreated user object - used in Console.py 
 
 
-def delete_user(name):   #delete user function removes the users directory
-    rmdir(name)            #removes directory
-
+def delete_user(name, c):   #delete user function removes the users directory
+    rmdir(user_directory(name, c))            #removes directory
 
 def grade(u, filename):  
     pa = parse_answers(filename)
@@ -59,10 +59,11 @@ def list_classes(): # function that returns an array of class names - used in GU
     array = []               
     a = os.listdir(class_directory(''))   # a is all classes in class directory
     for i in a:                            # for each class in all class directories 
+        if i[0] == '.':
+            continue
         if file_exists(class_directory(i)):  # if class exists 
             array.append(i)                    # add to array 
-    return array                     #return array of class names
-    
+    return array                     #return array of class names 
 
 def list_tests():
     a = os.listdir(test_directory(''))
