@@ -11,6 +11,7 @@
 from Commands import *
 from Values import *
 from License import *
+from Class_Analytics import *
 import subprocess
 
 class Console(object):
@@ -284,6 +285,18 @@ class Console(object):
             else:
                 make_test()
                 return True
+
+        if cmd == "class_analyze":
+            if self.state == CLASS_STATE or self.state == USER_STATE:
+                a = Analytics(self.c.name)      
+                a.report()
+                dirc = class_directory(self.c.name)
+                os.system('open ' + dirc + DIR_SEP + 'analytics.html' )
+                return True
+            else:
+                self.error = ("Error: Please load or create a class before running analysis on it.")
+                return False
+
 
 
         #Help

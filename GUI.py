@@ -36,7 +36,6 @@ sys.path.append('Library')
 from Console import *
 from Commands import *
 from Values import *
-from Class_Analytics import *
 from Graph import *
 import csv
 from Summary import *
@@ -251,11 +250,10 @@ def auto_gdr():
                   c.user.grade(pa)
                   c.process_commands('save')
 
-def class_analyze():
-  a = Analytics(c.c.name)      
-  a.report()
-  dirc = user_directory('', c.c.name)
-  os.system('open ' + dirc + DIR_SEP + 'analytics.html' )
+def class_analyze(): #TODO: MOVE THIS TO class_analyze classname
+  res = c.process_commands('class_analyze')
+  if (not res):
+      messagebox.showwarning("Error", c.error)
 
 
 def college_profile():

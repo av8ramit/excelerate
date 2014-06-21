@@ -8,8 +8,8 @@
 #                                                                                                                                                  #
 ####################################################################################################################################################
 
-from Values import *
 from Commands import *
+from Values import *
 
 #Base Class Analytics Class
 class Analytics(object):
