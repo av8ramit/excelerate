@@ -48,7 +48,7 @@ c = Console()
 root = Tk()
 
 #set window size
-root.geometry("1280x615")
+root.geometry("1280x633")
 
 #set window title
 root.title("Excelerate")
@@ -60,6 +60,9 @@ root.configure(background = 'light steel blue')
 #w_id = termframe.winfo_id()
 #os.system('konsole -into %d - geometry 400x200 -e /root/.bashrc&' % w_id)
 
+
+status = Label(root, text="(c) 2014 Excelerate Test Prep", bd=2, relief=SUNKEN)
+status.grid(row = 50, column = 4)
 ## window for NEW/LOAD class 
 win = Toplevel(root)
 win.geometry("510x260+410+240")
@@ -614,7 +617,7 @@ root.config(menu=menubar)
 
 
 # Logo
-Label(root, image = photo, background = 'light steel blue').grid(row=0, column = 2, columnspan = 3) 
+Label(root, image = photo, background = 'light steel blue').grid(row=0, column = 3, columnspan = 3) 
 
 
 ####### MAIN COLORED GUI BUTTONS 
