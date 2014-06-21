@@ -36,13 +36,14 @@ def new_user(name, c):    # new user function creates a user object and builds i
     #disable deleting old directory to make a new one
     #if (file_exists(directory)):
     #    rmdir(directory)
+    
     u = User(name, c)   #instantiate a user object with parameters username and user's classname  
     u.build()        #call user object method build() from User.py
     return u           # return built user object - used in Console.py 
 
 
-def load_user(name, filename):   #load user function creates a user object and recreates user data
-    u = User(name)       #instantiate a user object with parameters username and user's classname 
+def load_user(name, filename, classname):   #load user function creates a user object and recreates user data
+    u = User(name, classname)       #instantiate a user object with parameters username and user's classname 
     u.name = name         #assign user object 'name' attribute the username
     u.recreate_user(filename)  #call user object method recreate_user() from User.py
     return u                  #return recreated user object - used in Console.py 
@@ -94,12 +95,10 @@ def list_users_array(c):
 def make_answer_sheet(u, test_id):
     filename = test_id
     lines = []
-
     label_vector = "Number:,Answer:" + endl
     lines.append(test_id + " Answer Sheet" + endl)
     lines.append("Name:," + u.name + endl)
     lines.append(label_vector)
-
     with open(test_directory(filename) + DIR_SEP + KEYFILE, 'rU') as f:
         reader = csv.reader(f)
         for row in reader:
@@ -108,8 +107,7 @@ def make_answer_sheet(u, test_id):
                 for j in range(1,int(row[2]) + 1):
                     lines.append(str(j) + ",?")
                     lines.append(endl)
-
-    FILE = open(u.directory() + DIR_SEP + test_id + ".csv", "w")
+    FILE = open(user_directory(u.name, u.c) + DIR_SEP + test_id + ".csv", "w")
     FILE.writelines(lines)
     FILE.close()
 

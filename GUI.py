@@ -61,12 +61,12 @@ root.configure(background = 'light steel blue')
 #w_id = termframe.winfo_id()
 #os.system('konsole -into %d - geometry 400x200 -e /root/.bashrc&' % w_id)
 
-# var to hold username when creating menu button 
-global users 
-
-
-
-
+## window for NEW/LOAD class 
+win = Toplevel(root)
+win.geometry("510x260+410+240")
+win.title("Excelerate")
+win.configure(background = 'light steel blue')
+win.lift(root)
 ####################### Load Images for buttons ######################
 
 photo = PhotoImage(file = "./GUI/E.gif")
@@ -160,7 +160,7 @@ def get_new_class(): #function passes new class name from GUI button to console
                 if(classname != None): # make sure objects name attribute is right
                     messagebox.showinfo('Current Class', 'Created Class ' + classname)
                     make_lc_button()  #update load class dropdown menu 
-
+                    make_lu_button()
 
 def get_load_class(cname):
     name = cname 
@@ -172,6 +172,7 @@ def get_load_class(cname):
             if(c.state == CLASS_STATE): #make sure class object successfully passed to console
                 if(c.c.name != None): #make sure loaded class objec has name attribute 
                     messagebox.showinfo('Current Class', 'Loaded Class ' + c.c.name)
+                    make_lu_button()
 
 def get_new_user():
     name = tkinter.simpledialog.askstring( 'New Student', 'Enter New Username')
@@ -180,13 +181,10 @@ def get_new_user():
         if (not res):
             messagebox.showwarning("Error", c.error)
         else:     
-            var = StringVar()
-            if(c.state == LOAD_STATE):
-                UserName = c.user.name
-                var.set(UserName)
-                if(UserName != None):
-                     messagebox.showinfo('Current Student', 'Created Student ' + UserName)
-                     users = list_users_array()
+            if(c.state == USER_STATE):
+                if(c.user.name != None):
+                     messagebox.showinfo('Current Student', 'Created Student ' + c.user.name)
+                     users = list_users_array(c.c.name)
                      make_lu_button()
 def get_load_user(uname):
     #name = tkinter.simpledialog.askstring( 'Load Student', 'Enter Username')
@@ -197,19 +195,17 @@ def get_load_user(uname):
             messagebox.showwarning("Error", c.error)
      
         else:    
-            var = StringVar()
-            if(c.state == LOAD_STATE):
-                UserName = c.user.name 
-                var.set(UserName)
-                if(UserName != None):
-                   
-                    messagebox.showinfo('Current Student', 'Loaded Student ' + UserName)
-                    users = list_users_array()
+          
+            if(c.state == USER_STATE):
+                if(c.user.name != None):
+  
+                    messagebox.showinfo('Current Student', 'Loaded Student ' + c.user.name)
+                    users = list_users_array(c.c.name)
                     
 def get_test_name():
    
      if(c.user is not None):
-        file_path = tkinter.filedialog.askopenfilename( initialdir = './Users' + DIR_SEP + c.user.name )
+        file_path = tkinter.filedialog.askopenfilename( initialdir = './Users' + DIR_SEP + c.c.name + DIR_SEP + c.user.name )
         if (not file_path):
             return
         #extract filename from pathing stored in file_path
@@ -234,6 +230,7 @@ def get_test_id(test_id):
         name = test_id
         if(name != None):
             res = c.process_commands('answer_sheet ' + name)
+            messagebox.showinfo('Answer Sheet', 'Created Answer Sheet ' + name)
             if (not res):
                 messagebox.showwarning("Error", c.error)
     else:
@@ -247,7 +244,7 @@ def auto_gdr():
           if ".csv" in filename:
               pa = parse_answers(foldername + DIR_SEP + filename)
               name = pa.name
-              if name == None or name not in list_users_array():
+              if name == None or name not in list_users_array(c.c.name):
                   messagebox.showwarning("Error", 'Student name not found. ' + filename + ' was unable to be graded.') 
               else:
                   c.process_commands('load_student ' + name)
@@ -302,7 +299,7 @@ def college_profile():
             maths = math.pop()
             readings = reading.pop()
             writings = writing.pop()
-            print (overalls, maths, readings, writings)
+            #print (overalls, maths, readings, writings)
             for school in schoolname:
                 p_o.append((overalls/(dict_overall[school])))
                 p_m.append((maths/(dict_math[school])))
@@ -313,7 +310,7 @@ def college_profile():
             dirc = user_directory(c.user.name, c.c.name)
             name = c.user.name
 
-            cp.report(schoolname, p_o, p_m, p_r, p_w, name)
+            cp.report(schoolname, p_o, p_m, p_r, p_w, name, c.c.name)
             
             os.system('open ' + dirc + DIR_SEP + 'college_profile.html')
 
@@ -572,7 +569,7 @@ def make_ans_sheet_button():
         CA.menu.add_radiobutton(label = name, command = lambda t = name: get_test_id(t))
 
 def make_lc_button():
-    LC = Menubutton(root, image =  LoadClass, width = 254, height = 256)
+    LC = Menubutton(win, image =  LoadClass, width = 254, height = 256)
     LC.grid(row = 1, column = 2, columnspan = 2, rowspan = 2,sticky = (W))
     LC.menu = Menu(LC)
     LC["menu"] = LC.menu
@@ -598,7 +595,7 @@ menubar.add_cascade(menu = menu_file, label = 'File')
 menubar.add_cascade(menu = menu_edit, label = 'Edit')
 menubar.add_cascade(menu = menu_view, label = 'View')
 menubar.add_cascade(menu = menu_help, label = 'Help')
-
+##### SOME COMMANDS NOW HAVE PARAMS AND NEED TO BE UPDATED ****v v v v 
 
 menu_file.add_command(label='New User', command = get_new_user)
 menu_file.add_command(label = 'Load User', command = get_load_user)
@@ -624,6 +621,8 @@ Label(root, image = photo, background = 'light steel blue').grid(row=0, column =
 
 ####### MAIN COLORED GUI BUTTONS 
 if (c.state is CLASS_STATE or c.state is USER_STATE or c.state is LAUNCH_STATE): #if a class has been created or loaded, display class level user GUI
+  
+
   Button( root, image = NUimg, width = 250, height = 250, pady = 0,  command= get_new_user).grid( row = 1, column = 0 ,columnspan = 2, rowspan = 2, sticky = (W))
 
   #Button( root, image = LUimg , width = 250, height = 250, pady = 0, command = get_load_user).grid(row = 1, column = 2, columnspan = 2, rowspan = 2,sticky = W)
@@ -675,7 +674,7 @@ if (c.state is CLASS_STATE or c.state is USER_STATE or c.state is LAUNCH_STATE):
   #if(c.c is not None):
   make_lu_button()
 #else:  #if class has not been created or loaded yet display New/Load Class
-  Button( root, image = NewClass, width = 250, height = 250, pady = 0,  command= get_new_class).grid( row = 1, column = 0 ,columnspan = 2, rowspan = 2, sticky = (W))
+  Button( win, image = NewClass, width = 250, height = 250, pady = 0,  command= get_new_class).grid( row = 1, column = 0 ,columnspan = 2, rowspan = 2, sticky = (W))
 
 
 

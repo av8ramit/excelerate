@@ -19,5 +19,5 @@ class Class(object):
         self.students = [] #array of student names as strings
 
     #This method adds a student.
-    def add_student(name):
+    def add_student(self, name):
     	self.students.append(name)

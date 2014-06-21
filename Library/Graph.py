@@ -20,11 +20,11 @@ class Graph(object):
 
     def head(self):
         lines = []
-        lines.append('<link class="include" rel="stylesheet" type="text/css" href="../../Graphs/examples/../jquery.jqplot.min.css" />' + endl)
+        lines.append('<link class="include" rel="stylesheet" type="text/css" href="../../../Graphs/examples/../jquery.jqplot.min.css" />' + endl)
         #lines.append('<link rel="stylesheet" type="text/css" href="../../Graphs/examples/examples.min.css" />' + endl)
-        lines.append('<link type="text/css" rel="stylesheet" href="../../Graphs/examples/syntaxhighlighter/styles/shCoreDefault.min.css" />' + endl)
-        lines.append('<link type="text/css" rel="stylesheet" href="../../Graphs/examples/syntaxhighlighter/styles/shThemejqPlot.min.css" />' + endl)
-        lines.append('<script class="include" type="text/javascript" src="../../Graphs/jquery.min.js"></script>' + endl)
+        lines.append('<link type="text/css" rel="stylesheet" href="../../../Graphs/examples/syntaxhighlighter/styles/shCoreDefault.min.css" />' + endl)
+        lines.append('<link type="text/css" rel="stylesheet" href="../../../Graphs/examples/syntaxhighlighter/styles/shThemejqPlot.min.css" />' + endl)
+        lines.append('<script class="include" type="text/javascript" src="../../../Graphs/jquery.min.js"></script>' + endl)
         return lines
 
 
@@ -62,18 +62,18 @@ class Graph(object):
 
     def body(self):
         lines = []
-        lines.append('<script class="include" type="text/javascript" src="../../Graphs/examples/../jquery.jqplot.min.js"></script>' + endl)
-        lines.append('<script type="text/javascript" src="../../Graphs/examples/syntaxhighlighter/scripts/shCore.min.js"></script>' + endl)
-        lines.append('<script type="text/javascript" src="../../Graphs/examples/syntaxhighlighter/scripts/shBrushJScript.min.js"></script>' + endl)
-        lines.append('<script type="text/javascript" src="../../Graphs/examples/syntaxhighlighter/scripts/shBrushXml.min.js"></script>' + endl)
-        lines.append('<script class="include" language="javascript" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.barRenderer.min.js"></script>' + endl)
-        lines.append('<script class="include" language="javascript" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.categoryAxisRenderer.min.js"></script>' + endl)
-        lines.append('<script class="include" language="javascript" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.pointLabels.min.js"></script>' + endl)
-        lines.append('<script class="include" language="javascript" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.dateAxisRenderer.min.js"></script>' + endl)
-        lines.append('<script class="include" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.canvasTextRenderer.min.js"></script>' + endl)
-        lines.append('<script class="include" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>' + endl)
-        lines.append('<script type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.highlighter.min.js"></script>' + endl)
-        lines.append('<script type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.cursor.min.js"></script>')
+        lines.append('<script class="include" type="text/javascript" src="../../../Graphs/examples/../jquery.jqplot.min.js"></script>' + endl)
+        lines.append('<script type="text/javascript" src="../../../Graphs/examples/syntaxhighlighter/scripts/shCore.min.js"></script>' + endl)
+        lines.append('<script type="text/javascript" src="../../../Graphs/examples/syntaxhighlighter/scripts/shBrushJScript.min.js"></script>' + endl)
+        lines.append('<script type="text/javascript" src="../../../Graphs/examples/syntaxhighlighter/scripts/shBrushXml.min.js"></script>' + endl)
+        lines.append('<script class="include" language="javascript" type="text/javascript" src="../../../Graphs/examples/../plugins/jqplot.barRenderer.min.js"></script>' + endl)
+        lines.append('<script class="include" language="javascript" type="text/javascript" src="../../../Graphs/examples/../plugins/jqplot.categoryAxisRenderer.min.js"></script>' + endl)
+        lines.append('<script class="include" language="javascript" type="text/javascript" src="../../../Graphs/examples/../plugins/jqplot.pointLabels.min.js"></script>' + endl)
+        lines.append('<script class="include" language="javascript" type="text/javascript" src="../../../Graphs/examples/../plugins/jqplot.dateAxisRenderer.min.js"></script>' + endl)
+        lines.append('<script class="include" type="text/javascript" src="../../../Graphs/examples/../plugins/jqplot.canvasTextRenderer.min.js"></script>' + endl)
+        lines.append('<script class="include" type="text/javascript" src="../../../Graphs/examples/../plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>' + endl)
+        lines.append('<script type="text/javascript" src="../../../Graphs/examples/../plugins/jqplot.highlighter.min.js"></script>' + endl)
+        lines.append('<script type="text/javascript" src="../../../Graphs/examples/../plugins/jqplot.cursor.min.js"></script>')
         return lines
 
 
@@ -90,11 +90,11 @@ class C_Graph(object):
         self.schgbcolr = schbgcol
     def head(self):
         lines = []
-        lines.append('<link class="include" rel="stylesheet" type="text/css" href="../../Graphs/examples/../jquery.jqplot.min.css" />' + endl)
+        lines.append('<link class="include" rel="stylesheet" type="text/css" href="../../../Graphs/examples/../jquery.jqplot.min.css" />' + endl)
         #lines.append('<link rel="stylesheet" type="text/css" href="../../Graphs/examples/examples.min.css" />' + endl)
-        lines.append('<link type="text/css" rel="stylesheet" href="../../Graphs/examples/syntaxhighlighter/styles/shCoreDefault.min.css" />' + endl)
-        lines.append('<link type="text/css" rel="stylesheet" href="../../Graphs/examples/syntaxhighlighter/styles/shThemejqPlot.min.css" />' + endl)
-        lines.append('<script class="include" type="text/javascript" src="../../Graphs/jquery.min.js"></script>' + endl)
+        lines.append('<link type="text/css" rel="stylesheet" href="../../../Graphs/examples/syntaxhighlighter/styles/shCoreDefault.min.css" />' + endl)
+        lines.append('<link type="text/css" rel="stylesheet" href="../../../Graphs/examples/syntaxhighlighter/styles/shThemejqPlot.min.css" />' + endl)
+        lines.append('<script class="include" type="text/javascript" src="../../../Graphs/jquery.min.js"></script>' + endl)
         return lines
 
 
@@ -135,34 +135,34 @@ class C_Graph(object):
 
     def body(self):
         lines = []
-        lines.append('<script class="include" type="text/javascript" src="../../Graphs/examples/../jquery.jqplot.min.js"></script>' + endl)
-        lines.append('<script type="text/javascript" src="../../Graphs/examples/syntaxhighlighter/scripts/shCore.min.js"></script>' + endl)
-        lines.append('<script type="text/javascript" src="../../Graphs/examples/syntaxhighlighter/scripts/shBrushJScript.min.js"></script>' + endl)
-        lines.append('<script type="text/javascript" src="../../Graphs/examples/syntaxhighlighter/scripts/shBrushXml.min.js"></script>' + endl)
-        lines.append('<script class="include" language="javascript" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.barRenderer.min.js"></script>' + endl)
-        lines.append('<script class="include" language="javascript" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.categoryAxisRenderer.min.js"></script>' + endl)
-        lines.append('<script class="include" language="javascript" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.pointLabels.min.js"></script>' + endl)
-        lines.append('<script class="include" language="javascript" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.dateAxisRenderer.min.js"></script>' + endl)
-        lines.append('<script class="include" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.canvasTextRenderer.min.js"></script>' + endl)
-        lines.append('<script class="include" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>' + endl)
+        lines.append('<script class="include" type="text/javascript" src="../../../Graphs/examples/../jquery.jqplot.min.js"></script>' + endl)
+        lines.append('<script type="text/javascript" src="../../../Graphs/examples/syntaxhighlighter/scripts/shCore.min.js"></script>' + endl)
+        lines.append('<script type="text/javascript" src="../../../Graphs/examples/syntaxhighlighter/scripts/shBrushJScript.min.js"></script>' + endl)
+        lines.append('<script type="text/javascript" src="../../../Graphs/examples/syntaxhighlighter/scripts/shBrushXml.min.js"></script>' + endl)
+        lines.append('<script class="include" language="javascript" type="text/javascript" src="../../../Graphs/examples/../plugins/jqplot.barRenderer.min.js"></script>' + endl)
+        lines.append('<script class="include" language="javascript" type="text/javascript" src="../../../Graphs/examples/../plugins/jqplot.categoryAxisRenderer.min.js"></script>' + endl)
+        lines.append('<script class="include" language="javascript" type="text/javascript" src="../../../Graphs/examples/../plugins/jqplot.pointLabels.min.js"></script>' + endl)
+        lines.append('<script class="include" language="javascript" type="text/javascript" src="../../../Graphs/examples/../plugins/jqplot.dateAxisRenderer.min.js"></script>' + endl)
+        lines.append('<script class="include" type="text/javascript" src="../../../Graphs/examples/../plugins/jqplot.canvasTextRenderer.min.js"></script>' + endl)
+        lines.append('<script class="include" type="text/javascript" src="../../../Graphs/examples/../plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>' + endl)
         # Canvas overlay 
-        lines.append('<script language="javascript" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.canvasOverlay.min.js"></script>' + endl)
+        lines.append('<script language="javascript" type="text/javascript" src="../../../Graphs/examples/../plugins/jqplot.canvasOverlay.min.js"></script>' + endl)
         # Highlighter
-        lines.append('<script type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.highlighter.min.js"></script>' + endl)
-        lines.append('<script type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.cursor.min.js"></script>')
+        lines.append('<script type="text/javascript" src="../../../Graphs/examples/../plugins/jqplot.highlighter.min.js"></script>' + endl)
+        lines.append('<script type="text/javascript" src="../../../Graphs/examples/../plugins/jqplot.cursor.min.js"></script>')
         return lines
 
 class College_Profile(object):
 
        
-        def report(self, schoolname, overall, math, reading, writing, name):
+        def report(self, schoolname, overall, math, reading, writing, name, classname):
             schools = schoolname
             p_o = overall
             p_m  = math
             p_r = reading
             p_w = writing
             index = 0
-            dirc = user_directory(name)
+            dirc = user_directory(name, classname)
             FILE = open(dirc + DIR_SEP + "college_profile" + ".html", "w")
             lines = []
 
@@ -173,13 +173,13 @@ class College_Profile(object):
             lines.append('<html xmlns="http://www.w3.org/1999/xhtml">' + endl)
             lines.append('<head>')
             lines.append('<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />' + endl)
-            lines.append('<link rel="stylesheet" type="text/css" href="../../HTML/style.css" />' + endl)
+            lines.append('<link rel="stylesheet" type="text/css" href="../../../HTML/style.css" />' + endl)
             lines.append('<title>Advanced Score Report</title>' + endl)
             lines.append('</head>' + endl)
             lines.append('<body>' + endl)
             lines.append('<div id="page">' + endl)
             lines.append('<div id="header">' + endl)
-            lines.append('<img src="../../HTML/Mini Logo.png" width="35%" alt="Excelerate" />' + endl)
+            lines.append('<img src="../../../HTML/Mini Logo.png" width="35%" alt="Excelerate" />' + endl)
             lines.append('</div>' + endl)
             lines.append('</div>' + endl)
             lines.append('<div id="content">' + endl)
