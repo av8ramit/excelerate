@@ -21,7 +21,7 @@ class Analytics(object):
         self.type_classes = {}    
         for username in users:
             filename = user_filename(username, self.c)
-            user = load_user(username, filename)
+            user = load_user(username, filename, c)
             if len(user.tests_taken) != 0:
                 uw = User_Weakpoints(user.name)
                 for section_type in TYPE_ARRAY:
