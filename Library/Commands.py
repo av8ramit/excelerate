@@ -78,7 +78,7 @@ def list_tests():
 
 def list_users(c):
     array = []
-    a = os.listdir(user_directory('', c))
+    a = os.listdir(class_directory(c))
     for i in a:
         if file_exists(user_filename(i, c)):
             array.append(i)
