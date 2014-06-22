@@ -86,7 +86,7 @@ def list_users(c):
 
 def list_users_array(c):
     array = []
-    a = os.listdir(user_directory('', c))
+    a = os.listdir(class_directory(c))
     for i in a:
         if file_exists(user_filename(i, c)):
             array.append(i)
