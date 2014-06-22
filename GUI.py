@@ -36,6 +36,7 @@ sys.path.append('Library')
 from Console import *
 from Commands import *
 from Values import *
+from Class_Analytics import *
 from Graph import *
 import csv
 from Summary import *
@@ -48,7 +49,7 @@ c = Console()
 root = Tk()
 
 #set window size
-root.geometry("1280x633")
+root.geometry("835x338")
 
 #set window title
 root.title("Excelerate")
@@ -60,15 +61,12 @@ root.configure(background = 'light steel blue')
 #w_id = termframe.winfo_id()
 #os.system('konsole -into %d - geometry 400x200 -e /root/.bashrc&' % w_id)
 
-
-status = Label(root, text="(c) 2014 Excelerate Test Prep", bd=2, relief=SUNKEN)
-status.grid(row = 50, column = 4)
 ## window for NEW/LOAD class 
-win = Toplevel(root)
-win.geometry("510x260+410+240")
-win.title("Excelerate")
-win.configure(background = 'light steel blue')
-win.lift(root)
+#win = Toplevel(root)
+#win.geometry("510x260+410+240")
+#win.title("Excelerate")
+#win.configure(background = 'light steel blue')
+#win.lift(root)
 ####################### Load Images for buttons ######################
 
 photo = PhotoImage(file = "./GUI/E.gif")
@@ -253,10 +251,11 @@ def auto_gdr():
                   c.user.grade(pa)
                   c.process_commands('save')
 
-def class_analyze(): #TODO: MOVE THIS TO class_analyze classname
-  res = c.process_commands('class_analyze')
-  if (not res):
-      messagebox.showwarning("Error", c.error)
+def class_analyze():
+  a = Analytics(c.c.name)      
+  a.report()
+  dirc = user_directory('', c.c.name)
+  os.system('open ' + dirc + DIR_SEP + 'analytics.html' )
 
 
 def college_profile():
@@ -545,9 +544,10 @@ def carnegie_mellon():
         messagebox.showwarning("Error", 'Please Load Or Create A Student First')   
 
 #Drop Down list Users 
+
 def make_lu_button():
-    LU = Menubutton(root, image =  LUimg, width = 254, height = 256)
-    LU.grid(row = 1, column = 2, columnspan = 2, rowspan = 2,sticky = (W))
+    LU = Menubutton(root, image =  LUimg, width = 136, height = 136)
+    LU.grid(row = 3, column = 3, sticky = (W))#, columnspan = 2, rowspan = 2,sticky = (W))
     LU.menu = Menu(LU)
     LU["menu"] = LU.menu
     if c.c == None:
@@ -559,9 +559,10 @@ def make_lu_button():
         LU.menu.add_radiobutton(label = name , command =lambda t = name: get_load_user(t))
 
 #Drop Down Create Ans Sheet
+
 def make_ans_sheet_button():
-    CA = Menubutton(root, image = CASimg, width = 254, height = 256)
-    CA.grid( row = 1, column = 4, columnspan = 2, rowspan = 2,sticky = (W))
+    CA = Menubutton(root, image = CASimg, width = 136, height = 136)
+    CA.grid( row = 3, column = 4, sticky =(W))#, columnspan = 2, rowspan = 2,sticky = (W))
     CA.menu = Menu(CA)
     CA["menu"] = CA.menu
     tests = list_tests()
@@ -570,8 +571,8 @@ def make_ans_sheet_button():
         CA.menu.add_radiobutton(label = name, command = lambda t = name: get_test_id(t))
 
 def make_lc_button():
-    LC = Menubutton(win, image =  LoadClass, width = 254, height = 256)
-    LC.grid(row = 1, column = 2, columnspan = 2, rowspan = 2,sticky = (W))
+    LC = Menubutton(root, image =  LoadClass, width = 136, height = 136)
+    LC.grid(row = 3, column = 1)#, columnspan = 2, rowspan = 2,sticky = (W))
     LC.menu = Menu(LC)
     LC["menu"] = LC.menu
     classes = list_classes()   #get list of classes in filesystem
@@ -617,34 +618,34 @@ root.config(menu=menubar)
 
 
 # Logo
-Label(root, image = photo, background = 'light steel blue').grid(row=0, column = 3, columnspan = 3) 
+Label(root, image = photo, background = 'light steel blue').grid(row=0, column = 2, columnspan = 2)#, columnspan = 1, rowspan = 1) 
 
 
 ####### MAIN COLORED GUI BUTTONS 
 if (c.state is CLASS_STATE or c.state is USER_STATE or c.state is LAUNCH_STATE): #if a class has been created or loaded, display class level user GUI
   
 
-  Button( root, image = NUimg, width = 250, height = 250, pady = 0,  command= get_new_user).grid( row = 1, column = 0 ,columnspan = 2, rowspan = 2, sticky = (W))
+  Button( root, image = NUimg, width = 130, height = 130, pady = 0,  command= get_new_user).grid( row = 3 , column = 2, sticky = (W))#,columnspan = 2, rowspan = 2, sticky = (W))
 
   #Button( root, image = LUimg , width = 250, height = 250, pady = 0, command = get_load_user).grid(row = 1, column = 2, columnspan = 2, rowspan = 2,sticky = W)
 
 
-  Button( root, image = Gimg, width = 250, height = 250,  pady = 0,  command = get_test_name ).grid( row = 1,column = 10, columnspan = 2, rowspan = 2,sticky = W)
+  Button( root, image = Gimg, width = 130, height = 130,  pady = 0,  command = get_test_name ).grid( row = 3,column = 5)#, columnspan = 2, rowspan = 2,sticky = W)
    
 
   #Button( root, image = CASimg,  width = 250, height = 250, pady = 0 , command = get_test_id).grid( row = 1, column = 4, columnspan = 2, rowspan = 2,sticky = W)
 
-  Button( root, image = Rstimg,  width = 250, height = 250, pady = 0, command = reset_user).grid( row = 9, column = 16, columnspan = 2, rowspan = 2,sticky = W)
+  Button( root, image = Rstimg,  width = 130, height = 130, pady = 0, command = reset_user).grid( row = 4, column = 5, sticky = (W))#, columnspan = 2, rowspan = 2,sticky = W)
 
-  Button( root, image = Svimg,  width = 250, height = 250, pady = 0, command = save_user ).grid( row = 10, column = 2, columnspan = 2, rowspan = 2,sticky = W)
+  Button( root, image = Svimg,  width = 130, height = 130, pady = 0, command = save_user ).grid( row = 4, column = 2, sticky = (W))#, columnspan = 2, rowspan = 2,sticky = W)
 
-  Button( root, image = AutoGrdr,  width = 250, height = 250, pady = 0, command = auto_gdr ).grid( row = 10, column = 4, columnspan = 2, rowspan = 2,sticky = W)
+  Button( root, image = AutoGrdr,  width = 130, height = 130, pady = 0, command = auto_gdr ).grid( row = 4, column = 3, sticky = (W))#, columnspan = 2, rowspan = 2,sticky = W)
 
-  Button( root, image = ClassAnly, width = 250, height = 250, pady = 0, command = class_analyze ).grid( row = 9, column = 9, columnspan = 2, rowspan = 2, sticky =W)
+  Button( root, image = ClassAnly, width = 131, height = 131, pady = 0, command = class_analyze ).grid( row = 4, column = 4, sticky = (W))#, columnspan = 2, rowspan = 2, sticky =W)
   ## Reports Submenu Button
 
-  mb = Menubutton( root, image = Rptimg, width = 254, height = 256)
-  mb.grid(row = 10, column = 0, columnspan = 3, rowspan = 2, sticky = (W))
+  mb = Menubutton( root, image = Rptimg, width = 136, height = 136)
+  mb.grid(row = 4, column = 0)#, columnspan = 3, rowspan = 2, sticky = (W))
   mb.menu = Menu(mb)
   mb["menu"] = mb.menu
   mb.menu.add_checkbutton(label = "Simple Report", command = simple_report)
@@ -654,8 +655,8 @@ if (c.state is CLASS_STATE or c.state is USER_STATE or c.state is LAUNCH_STATE):
 
 
   # Goal School Drop down menu 
-  Mb = Menubutton(root, image = GoalSchl, width = 254, height = 256)
-  Mb.grid(row = 1, column = 16, columnspan = 3, rowspan = 2, sticky =(W))
+  Mb = Menubutton(root, image = GoalSchl, width = 136, height = 136)
+  Mb.grid(row = 4, column = 1)#, columnspan = 3, rowspan = 2, sticky =(W))
   Mb.menu = Menu(Mb)
   Mb["menu"] = Mb.menu
   Mb.menu.add_radiobutton(label = "Harvard Report",  command = harvard) #textvariable = "Harvard", command = goal_school )
@@ -675,12 +676,13 @@ if (c.state is CLASS_STATE or c.state is USER_STATE or c.state is LAUNCH_STATE):
   #if(c.c is not None):
   make_lu_button()
 #else:  #if class has not been created or loaded yet display New/Load Class
-  Button( win, image = NewClass, width = 250, height = 250, pady = 0,  command= get_new_class).grid( row = 1, column = 0 ,columnspan = 2, rowspan = 2, sticky = (W))
+  Button( root, image = NewClass, width = 130, height = 130, pady = 0,  command= get_new_class).grid( row = 3, column = 0)# ,columnspan = 2, rowspan = 2, sticky = (W))
 
 
 
   make_lc_button() #make load class button 
 # Tk enters its event loop
 root.mainloop()
+
 
 
