@@ -207,9 +207,11 @@ def get_test_name():
      if(c.user is not None):
         file_path = tkinter.filedialog.askopenfilename( initialdir = './Users' + DIR_SEP + c.c.name + DIR_SEP + c.user.name )
         if (not file_path):
+            #Add invalid file type of error or something similar
             return
         #extract filename from pathing stored in file_path
         file_name = os.path.basename(file_path)
+        print(file_name)
         if (file_name != None):
             res = c.process_commands('grade ' + file_name)
             if (not res):

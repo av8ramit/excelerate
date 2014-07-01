@@ -5,20 +5,20 @@ from Key import *
 from Scored import *
 from Summary import *
 from Data import *
-from Graph import *
+#from Graph import *  #commented out due to import clashing from user.py
 from Console import *
 from Class_Analytics import *
 import shutil
 import csv
 import unittest
 
-class SetupTeardownError(Exception):
+#class SetupTeardownError(Exception):
 
-    def __init__(self, value):
-        self.value = value
+ #   def __init__(self, value):
+  #      self.value = value
 
-    def __str__(self):
-        return repr(self.value)
+   # def __str__(self):
+    #    return repr(self.value)
 
 class SanityTest(unittest.TestCase):
 
@@ -26,78 +26,190 @@ class SanityTest(unittest.TestCase):
     def setUp(self):
         # construct a test user here named dummy
         self.c = Console()
-        self.count = 0
-        self.total = 1
-        self.passed = self.total
         self.name = "dummy"
-        self.name2 = "dummy2"
-        res = self.c.process_commands('new_student ' + self.name)        
+       # print(self.c)
+        #test new class
+        res = self.c.process_commands('new_class ' + self.name)
+        #print("res is: " + str(res))
         if (not res):
-            raise SetupTeardownError("Failed to set up.")
-        res2 = self.c.process_commands('new_student ' + self.name2)        
-        if (not res2):
-            raise SetupTeardownError("Failed to set up.")
+            print(self.c.error)
+        else:     
+            if(self.c.state == CLASS_STATE):
+                ClassName = self.c.c.name
+                #print ("Class "+ ClassName +" was created.")
 
     def tearDown(self):
-        # delete a test user here along with all data related to it
-        res = self.c.process_commands('delete_student ' + self.name)
-        if (not res):
-            raise SetupTeardownError("Failed to tear down. Manually reset the environment before testing.")
-        res2 = self.c.process_commands('delete_student ' + self.name2)        
-        if (not res2):
-            raise SetupTeardownError("Failed to tear down. Manually reset the environment before testing.")
-        print ("TEST PASSED")
 
-    def testLoadUser(self):
-        #Test the loading of a user
-        #print ("Starting Load User Test")
-        res = self.c.process_commands('load_student ' + self.name2)
-        if (not res):
-            raise SetupTeardownError("Load Student Failed Internally.")
-        res2 = self.c.process_commands('load_student ' + self.name)
-        if (not res2):
-            raise SetupTeardownError("Load Student Failed Internally.")
-        self.count += 1
-        #print ("Ending Load User Test")
+        shutil.rmtree('./Users/dummy')
 
-    def testCreateAnswerSheet(self):
-        #Create an answer sheet to the dummy test created above
-        res = self.c.process_commands('load_student ' + self.name2)
-        if (not res):
-            raise SetupTeardownError("Load Student Failed Internally.")
+    def test_loadClass(self):
+        #test load class
+        res = self.c.process_commands('load_class ' + self.name)    
+        self.assertEqual(res, True)  
 
-        res = self.c.process_commands('answer_sheet ' + "10_09")
-        if (not res):
-            raise SetupTeardownError("Answer Sheet Failed Internally.")
+    def test_newUser(self):
+        #test load class
+        res = self.c.process_commands('load_class ' + self.name)    
+        self.assertEqual(res, True) 
+        #test new student
+        res = self.c.process_commands('new_student ' + self.name)
+        self.assertEqual(res, True) 
 
-        res = self.c.process_commands('answer_sheet ' + "12_09")
-        if (res):
-            raise SetupTeardownError("Answer Sheet Didn't Fail when it should have internally.")
-        self.count += 1
+    def test_loadUser(self):
+        #test load class
+        res = self.c.process_commands('load_class ' + self.name)    
+        self.assertEqual(res, True) 
+        #test new student
+        res = self.c.process_commands('new_student ' + self.name)
+        self.assertEqual(res, True) 
+         #test load student
+        res = self.c.process_commands('load_student ' + self.name)
+        self.assertEqual(res, True)
 
-    def testAutoGrader(self):
+    def test_createAnswerSheet(self):
+         #test load class
+        res = self.c.process_commands('load_class ' + self.name)    
+        self.assertEqual(res, True) 
+        #test new student
+        res = self.c.process_commands('new_student ' + self.name)
+        self.assertEqual(res, True) 
+         #test load student
+        res = self.c.process_commands('load_student ' + self.name)
+        self.assertEqual(res, True)
+        res = self.c.process_commands('answer_sheet 10_09')  #create answer sheet test
+        self.assertEqual(res, True)
+
+    def test_gradeTest(self):
+        #test load class
+        res = self.c.process_commands('load_class ' + self.name)    
+        self.assertEqual(res, True) 
+        #test new student
+        res = self.c.process_commands('new_student ' + self.name)
+        self.assertEqual(res, True) 
+         #test load student
+        res = self.c.process_commands('load_student ' + self.name)
+        self.assertEqual(res, True)
+        res = self.c.process_commands('answer_sheet 10_09')  #create answer sheet test
+        #test grade test
+        self.assertEqual(res, True)
+        res = self.c.process_commands('grade 10_09.csv')
+        self.assertEqual(res, True)
+
+    def test_saveUser(self):
+        #test load class
+        res = self.c.process_commands('load_class ' + self.name)    
+        self.assertEqual(res, True) 
+        #test new student
+        res = self.c.process_commands('new_student ' + self.name)
+        self.assertEqual(res, True) 
+        #test load student
+        res = self.c.process_commands('load_student ' + self.name)
+        self.assertEqual(res, True)
+        res = self.c.process_commands('answer_sheet 10_09')  #create answer sheet test
+        #test grade test
+        self.assertEqual(res, True)
+        res = self.c.process_commands('grade 10_09.csv')
+        self.assertEqual(res, True)
+        res = self.c.process_commands('save')
+        self.assertEqual(res, True)
+
+    def test_graphReport(self):
+        #test load class
+        res = self.c.process_commands('load_class ' + self.name)    
+        self.assertEqual(res, True) 
+        #test new student
+        res = self.c.process_commands('new_student ' + self.name)
+        self.assertEqual(res, True) 
+         #test load student
+        res = self.c.process_commands('load_student ' + self.name)
+        self.assertEqual(res, True)
+        res = self.c.process_commands('answer_sheet 10_09')  #create answer sheet test
+        #test grade test
+        self.assertEqual(res, True)
+        res = self.c.process_commands('grade 10_09.csv')
+        self.assertEqual(res, True)
+        # test graph report
+        res = self.c.process_commands('graph_report')
+        self.assertEqual(res, True)
+
+    def test_sectionReport(self):
+        #test load class
+        res = self.c.process_commands('load_class ' + self.name)    
+        self.assertEqual(res, True) 
+        #test new student
+        res = self.c.process_commands('new_student ' + self.name)
+        self.assertEqual(res, True) 
+         #test load student
+        res = self.c.process_commands('load_student ' + self.name)
+        self.assertEqual(res, True)
+        res = self.c.process_commands('answer_sheet 10_09')  #create answer sheet test
+        #test grade test
+        self.assertEqual(res, True)
+        res = self.c.process_commands('grade 10_09.csv')
+        self.assertEqual(res, True)
+        # test section report
+        res = self.c.process_commands('section_report')
+        self.assertEqual(res, True)
+
+    def test_advancedReport(self):
+        #test load class
+        res = self.c.process_commands('load_class ' + self.name)    
+        self.assertEqual(res, True) 
+        #test new student
+        res = self.c.process_commands('new_student ' + self.name)
+        self.assertEqual(res, True) 
+         #test load student
+        res = self.c.process_commands('load_student ' + self.name)
+        self.assertEqual(res, True)
+        res = self.c.process_commands('answer_sheet 10_09')  #create answer sheet test
+        #test grade test
+        self.assertEqual(res, True)
+        res = self.c.process_commands('grade 10_09.csv')
+        self.assertEqual(res, True)
+        # test advanced report
+        res = self.c.process_commands('advanced_report')
+        self.assertEqual(res, True)
+
+    def test_simpleReport(self):
+        #test load class
+        res = self.c.process_commands('load_class ' + self.name)    
+        self.assertEqual(res, True) 
+        #test new student
+        res = self.c.process_commands('new_student ' + self.name)
+        self.assertEqual(res, True) 
+         #test load student
+        res = self.c.process_commands('load_student ' + self.name)
+        self.assertEqual(res, True)
+        res = self.c.process_commands('answer_sheet 10_09')  #create answer sheet test
+        #test grade test
+        self.assertEqual(res, True)
+        res = self.c.process_commands('grade 10_09.csv')
+        self.assertEqual(res, True)
+        # test simple report
+        res = self.c.process_commands('simple_report')
+        self.assertEqual(res, True)
+    '''
+
+    def test_autoGrader(self):
         #Autograde the dummy test with the test user's data
         mkdir("../../testfolder")
-        res = self.c.process_commands('load_student ' + self.name2)
-
-        if (not res):
-            raise SetupTeardownError("Load Student Failed Internally.")
-
-        res = self.c.process_commands('answer_sheet ' + "10_09")
-        if (not res):
-            raise SetupTeardownError("Answer Sheet Failed Internally.")
-
-        shutil.copy(user_directory(self.name2) + DIR_SEP + '10_09.csv', "../../testfolder" + DIR_SEP + self.name2 + ".csv")
-
+         #test load class
+        res = self.c.process_commands('load_class ' + self.name)    
+        self.assertEqual(res, True) 
+        #test new student
+        res = self.c.process_commands('new_student ' + self.name)
+        self.assertEqual(res, True) 
+         #test load student
         res = self.c.process_commands('load_student ' + self.name)
-        if (not res):
-            raise SetupTeardownError("Load Student Failed Internally.")
+        self.assertEqual(res, True)
+        res = self.c.process_commands('answer_sheet 10_09')  #create answer sheet test
+        #test grade test
+        self.assertEqual(res, True)
+        res = self.c.process_commands('grade 10_09.csv')
+        self.assertEqual(res, True)
 
-        res = self.c.process_commands('answer_sheet ' + "10_09")
-        if (not res):
-            raise SetupTeardownError("Answer Sheet Failed Internally.")
 
-        shutil.copy(user_directory(self.name2) + DIR_SEP + '10_09.csv', "../../testfolder" + DIR_SEP + self.name + ".csv")
+        shutil.copy(user_directory(self.name) + DIR_SEP + '10_09.csv', "../../testfolder" + DIR_SEP + self.name + ".csv")
 
         foldername = "../../testfolder"
         if file_exists(foldername):
@@ -118,108 +230,33 @@ class SanityTest(unittest.TestCase):
 
         rmdir("../../testfolder")
         self.count += 1
+    '''
 
-    def testSaveChanges(self):
-        #Check the functionality of this
-        res = self.c.process_commands('load_student ' + self.name)
-
-        if (not res):
-            raise SetupTeardownError("Load Student Failed Internally.")
-
-        res = self.c.process_commands('answer_sheet ' + "10_09")
-        if (not res):
-            raise SetupTeardownError("Answer Sheet Failed Internally.")
-
-        res = self.c.process_commands('grade ' + "10_09.csv")
-        if (not res):
-            raise SetupTeardownError("Grade Failed Internally.")
-
-        res = self.c.process_commands('save')
-        if (not res):
-            raise SetupTeardownError("Save Failed Internally.")
-        self.count += 1
-    
-    def testAdvancedReport(self):
-        #Test the data sent to the html creator. Don't actually launch any reports
-        res = self.c.process_commands('load_student ' + self.name)
-
-        if (not res):
-            raise SetupTeardownError("Load Student Failed Internally.")
-
-        res = self.c.process_commands('answer_sheet ' + "10_09")
-        if (not res):
-            raise SetupTeardownError("Answer Sheet Failed Internally.")
-
-        for i in range(0, random_number(10)):
-            res = self.c.process_commands('grade ' + "10_09.csv")
-            if (not res):
-                raise SetupTeardownError("Grade Failed Internally.")
-
-        res = self.c.process_commands('save')
-        if (not res):
-            raise SetupTeardownError("Save Failed Internally.")
-
-        res = self.c.process_commands("advanced_report")
-        if (not res):
-            raise SetupTeardownError("Simple Report Failed Internally.")
-        self.count += 1
-
-    """
-    def testSimpleReport(self):
-        #Same as above
-        pass
-
-    def testSectionReport(self):
-        #Same as above
-        pass
-
-    def testGraphsReport(self):
-        #Same as above
-        pass
-    """
-
-    def testClassAnalytics(self):
+    def test_classAnalytics(self):
         #Test the functionality of class analytics. Should be isolated from other users, and class should only include the test user. Or we can run classAnalytics, but only have the assertion statement check for the test user we created in setup()
+        #test load class
+        res = self.c.process_commands('load_class ' + self.name)    
+        self.assertEqual(res, True) 
+        #test new student
+        res = self.c.process_commands('new_student ' + self.name)
+        self.assertEqual(res, True) 
+         #test load student
         res = self.c.process_commands('load_student ' + self.name)
+        self.assertEqual(res, True)
+        res = self.c.process_commands('answer_sheet 10_09')  #create answer sheet test
+        #test grade test
+        self.assertEqual(res, True)
+        res = self.c.process_commands('grade 10_09.csv')
+        self.assertEqual(res, True)
 
-        if (not res):
-            raise SetupTeardownError("Load Student Failed Internally.")
-
-        res = self.c.process_commands('answer_sheet ' + "10_09")
-        if (not res):
-            raise SetupTeardownError("Answer Sheet Failed Internally.")
-
-        res = self.c.process_commands('grade ' + "10_09.csv")
-        if (not res):
-            raise SetupTeardownError("Grade Failed Internally.")
-
-        res = self.c.process_commands('save')
-        if (not res):
-            raise SetupTeardownError("Save Failed Internally.")
-
-        res = self.c.process_commands('load_student ' + self.name2)
-
-        if (not res):
-            raise SetupTeardownError("Load Student Failed Internally.")
-
-        res = self.c.process_commands('answer_sheet ' + "10_09")
-        if (not res):
-            raise SetupTeardownError("Answer Sheet Failed Internally.")
-
-        res = self.c.process_commands('grade ' + "10_09.csv")
-        if (not res):
-            raise SetupTeardownError("Grade Failed Internally.")
-
-        res = self.c.process_commands('save')
-        if (not res):
-            raise SetupTeardownError("Save Failed Internally.")
-
-        a = Analytics()
+        
+        a = Analytics(self.c.c.name)
         a.report()
-        self.count += 1
-
-    """def testCollegeTracker(self):
-        pass
-        """
+        dirc = user_directory('', self.c.c.name)
+        self.assertEqual(file_exists(dirc + DIR_SEP + 'analytics.html'), True)
 
 
+
+
+suite = unittest.TestLoader().loadTestsFromTestCase(SanityTest)
+unittest.TextTestRunner(verbosity=2).run(suite)
