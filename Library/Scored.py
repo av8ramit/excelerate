@@ -27,6 +27,7 @@ class Scored_Test(object):
         self.test_summary = None
         self.score_summary = None
         self.data = Data_Holder()
+        self.qtypedict = {}
 
     #This sets the test summary upon creation and recreation.
     def set_summary(self, s):
@@ -71,6 +72,7 @@ class Scored_Test(object):
             self.test_summary.reports[section_type].incorrect_questions.append(entry)
 
             q = Scored_Question(current_section, q_id, attempt)
+            self.qtypedict[q_id[6:]]= q.question_type
             current_section.add_question(q)
             self.missed_questions[section_type].append(entry)
             self.test_summary.reports[section_type].incorrect_questions.append(entry)
@@ -239,8 +241,16 @@ class Scored_Question(object):
         self.difficulty = int(row[DIFFICULTY_INDEX])
         self.question_type = row[TYPE_INDEX]
 
+
     #This returns the scored question id.
     def get_id(self):
         return self.scored_section.get_id() + FIELD_SEP + str(num)
+
+#class to make question objects for class analytics, questions missed by majority of class
+class Class_Question(object):
+    def __init__(self, q, freq):
+            self.question = q
+            self.frequency = freq
+
 
 

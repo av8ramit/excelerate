@@ -18,7 +18,9 @@ class Analytics(object):
         self.c = c
         users = list_users_array(self.c)
         self.user_weakpoints_dict = {}  
-        self.type_classes = {}    
+        self.type_classes = {} 
+        self.uw_frequency = []
+        self.uw_frequency_dict = {} 
         for username in users:
             filename = user_filename(username, self.c)
             user = load_user(username, filename, c)
@@ -37,10 +39,27 @@ class Analytics(object):
                             lowest_type = key
                         total += current_percentage
                         percent_array.append(current_percentage)
+                    if(section_type == WRITING_TYPE):
+                        self.uw_frequency.append(WRITING_TYPE_DICT[lowest_type])
+                    if(section_type == READING_TYPE):
+                        self.uw_frequency.append(READING_TYPE_DICT[lowest_type])
+                            
+                    if(section_type == MATH_TYPE):
+                        self.uw_frequency.append(MATH_TYPE_DICT[lowest_type])
+
                     average_percent = int(total/len(percent_array))
                     uw.weakpoints[section_type] = (lowest_type, average_percent)
-                self.user_weakpoints_dict[user.name] = uw   
 
+                self.user_weakpoints_dict[user.name] = uw   
+       
+        for qtype in self.uw_frequency:
+            freq = self.uw_frequency.count(qtype)
+            if freq > 1:
+                for i in range(0,freq):
+                    self.uw_frequency.remove(qtype) 
+            self.uw_frequency_dict[qtype] = freq  
+    
+        
     def report(self):
         FILE = open('Users' + DIR_SEP + self.c + DIR_SEP + "analytics" + ".html", "w")
         lines = []
@@ -88,7 +107,70 @@ class Analytics(object):
             lines.append('<td>' + READING_TYPE_DICT[self.user_weakpoints_dict[user].weakpoints[READING_TYPE][0]] + '</td>')
             lines.append('</tr>')
 
+
         lines.append('</table>')
+
+
+        lines.append(endl)
+
+        lines.append("<h1>Class Question Type Weakness</h1>" + endl)
+        lines.append('<table style="width:500px">')
+        lines.append('<tr><th>Weakest Question Type</th><th>Number Of Students</th></tr>')
+
+        for key in self.uw_frequency_dict:
+            lines.append('<tr>')
+            lines.append('<td>' + key + '</td>')
+            lines.append('<td>' + str(self.uw_frequency_dict[key]) + '</td>')
+            lines.append('</tr>')
+
+
+        lines.append('</table>')
+
+        lines.append(endl)
+        lines.append("<h1>Class Writing Questions Missed</h1>" + endl)
+
+        lines.append('<table style="width:500px">')
+        lines.append('<tr><th>Section_Question</th><th> Number Of Students Incorrect</th></tr>')
+        index = 0
+        for q in CLASS_MISSED_WRITING:
+            lines.append('<tr>')
+            lines.append('<td>' + str(q.question) + '</td>')
+            lines.append('<td>' + str(q.frequency) + '</td>')
+            index += 1
+            if index == 10:
+                break
+        lines.append('</table>')
+
+
+        lines.append(endl)
+        lines.append("<h1>Class Reading Questions Missed</h1>" + endl)
+        lines.append('<table style="width:500px">')
+        lines.append('<tr><th>Section_Question</th><th> Number Of Students Incorrect</th></tr>')
+        index = 0
+        for q in CLASS_MISSED_READING:
+            lines.append('<tr>')
+            lines.append('<td>' + str(q.question) + '</td>')
+            lines.append('<td>' + str(q.frequency) + '</td>')
+            index += 1
+            if index == 10:
+                break
+        lines.append('</table>')
+
+        lines.append(endl)
+        lines.append("<h1>Class Math Questions Missed</h1>" + endl)
+        lines.append('<table style="width:500px">')
+        lines.append('<tr><th>Section_Question</th><th> Number Of Students Incorrect</th></tr>')
+        index = 0
+        for q in CLASS_MISSED_MATH:
+            lines.append('<tr>')
+            lines.append('<td>' + str(q.question) + '</td>')
+            lines.append('<td>' + str(q.frequency) + '</td>')
+            index += 1
+            if index == 10:
+                break
+        lines.append('</table>')
+        
+
 
         #Footer
         lines.append('<br>' + endl)
@@ -114,10 +196,11 @@ class User_Weakpoints(object):
 
     def __init__(self, name):
         self.name = name
-        self.weakpoints = {}
+        self.weakpoints = {}  
         #value is tuple (weakest question type, average percent for a type)
         self.weakpoints[WRITING_TYPE] = (0,0)
         self.weakpoints[READING_TYPE] = (0,0)
         self.weakpoints[MATH_TYPE] = (0,0)
+
 
 

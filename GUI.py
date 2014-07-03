@@ -211,7 +211,7 @@ def get_test_name():
             return
         #extract filename from pathing stored in file_path
         file_name = os.path.basename(file_path)
-        print(file_name)
+        #print(file_name)
         if (file_name != None):
             res = c.process_commands('grade ' + file_name)
             if (not res):
@@ -219,11 +219,14 @@ def get_test_name():
             else:
 
                 name = c.user.name 
+                save_user()
                 dirc = user_directory(name, c.c.name) 
                 fname = os.path.basename(dirc)
+               
                 ans = messagebox.askyesno('Test Has Been Graded!', 'Would You Like To Open The Graded Test?')
                 if (dirc != None and ans is True):
-                    os.system('open ' + dirc + DIR_SEP + 'grade.html' )     
+                    os.system('open ' + dirc + DIR_SEP + 'grade.html' ) 
+
      else:
         messagebox.showwarning("Error", 'Please Load Or Create A Student First')           
 
@@ -254,10 +257,16 @@ def auto_gdr():
                   c.process_commands('save')
 
 def class_analyze():
-  a = Analytics(c.c.name)      
-  a.report()
-  dirc = user_directory('', c.c.name)
-  os.system('open ' + dirc + DIR_SEP + 'analytics.html' )
+  if(c.state is USER_STATE):
+      class_missed_qs_array(c.c)
+
+      a = Analytics(c.c.name)      
+      a.report()
+
+      dirc = user_directory('', c.c.name)
+      os.system('open ' + dirc + DIR_SEP + 'analytics.html' )
+  else:
+      messagebox.showwarning("Error", 'Please Load Or Create A Student First')
 
 
 def college_profile():

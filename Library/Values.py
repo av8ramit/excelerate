@@ -126,6 +126,13 @@ READING_TYPE_DICT[READING_TYPE_2] = "Reasoning and Deduction"
 READING_TYPE_DICT[READING_TYPE_3] = "Literal Comprehension"
 READING_TYPE_DICT[READING_TYPE_4] = "Passage Comparison"
 
+
+CLASS_MISSED_WRITING =[]
+CLASS_MISSED_READING =[]
+CLASS_MISSED_MATH =[]
+
+QUESTION_TYPE = []
+
 def section_type_dict(section_type):
   if section_type == WRITING_TYPE:
     return WRITING_TYPE_DICT
