@@ -49,8 +49,8 @@ class Scored_Test(object):
     def make_sections(self, missed_array, section_type):
         current_section = Scored_Section(0, 0, 0, 0)
         for entry in missed_array:
-            section_index = int(entry[0].split('_')[2])         
-            index = int(entry[0].split('_')[3])
+            section_index = int(entry[0].split('_')[-2])         
+            index = int(entry[0].split('_')[-1])
             q_id = entry[0]
             attempt = entry[1]
             if index != current_section.index:
@@ -227,9 +227,10 @@ class Scored_Question(object):
     #This is the default constructor with all variables defined.
     def make_by_id(self, q_id):
         array = q_id.split('_')
-        test_id = array[0] + '_' + array[1]
-        filename = test_id + DIR_SEP + "Section " + array[2] + ".csv"
-        number = array[3]
+        #test_id = array[0] + '_' + array[1]
+        test_id = fuse_id_array(array[:-2])
+        filename = test_id + DIR_SEP + "Section " + array[-2] + ".csv"
+        number = array[-1]
         with open(test_directory(filename), 'rU') as f:
             reader = csv.reader(f)
             for row in reader:

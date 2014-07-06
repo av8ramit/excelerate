@@ -5,8 +5,8 @@ import random
 #License Information
 USER_LIMIT = 25
 #Year/Month/Day
-EXPIRATION_DATE = '2014/07/15'
-date_of_expiration = '07/15/2014'
+EXPIRATION_DATE = '2014/09/15'
+date_of_expiration = '09/15/2014'
 
 #Question Value
 PARSED_ARRAY_SIZE = 5
@@ -307,12 +307,21 @@ def user_filename(name, c):
   return "Users" + DIR_SEP + c + DIR_SEP + name + DIR_SEP + name + TXT
 
 def valid_test_id(test_id):
+  if test_id[0] == '.':
+    return False
   if file_exists(test_directory(test_id)):
-    array = test_id.split('_')
-    if len(array) == 2:
-      if is_int(array[0]) and is_int(array[1]):
-        return True
+    array = test_id.split()
+    if SPACE not in array:
+      return True
   return False
+
+def fuse_id_array(array):
+  output = ""
+  end = array.pop()
+  for element in array:
+    output += (element + '_')
+  output += end
+  return output
 
 def mkdir(dir_name):
   os.mkdir(dir_name)

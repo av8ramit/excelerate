@@ -20,9 +20,7 @@ class Test(object):
 
         assert(file_exists(test_directory(test_id)))
 
-        t = test_id.split("_")
-        self.month = t[0]
-        self.year = t[1]
+        self.test_id = test_id
         self.sections = {}
 
         key = {}
@@ -57,7 +55,7 @@ class Test(object):
 
     #This returns the test id.
     def get_id(self):
-        return str(self.month) + FIELD_SEP + str(self.year)
+        return self.test_id
 
     #This prints an answer sheet that corresponds to the test_id given.
     """def make_answer_sheet(test_id):

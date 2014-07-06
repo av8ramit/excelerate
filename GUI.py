@@ -219,7 +219,6 @@ def get_test_name():
             else:
 
                 name = c.user.name 
-                save_user()
                 dirc = user_directory(name, c.c.name) 
                 fname = os.path.basename(dirc)
                
