@@ -33,7 +33,7 @@ class Analytics(object):
                     percent_array = []
                     total = 0
                     for key in section_type_dict(section_type):
-                        current_percentage = int(section_stats.stats[key].c/section_stats.stats[key].t*100)
+                        current_percentage = int(div(section_stats.stats[key].c,section_stats.stats[key].t*100))
                         if current_percentage <= lowest_type_percentage:
                             lowest_type_percentage = current_percentage
                             lowest_type = key
@@ -47,7 +47,7 @@ class Analytics(object):
                     if(section_type == MATH_TYPE):
                         self.uw_frequency.append(MATH_TYPE_DICT[lowest_type])
 
-                    average_percent = int(total/len(percent_array))
+                    average_percent = int(div(total,len(percent_array)))
                     uw.weakpoints[section_type] = (lowest_type, average_percent)
 
                 self.user_weakpoints_dict[user.name] = uw   

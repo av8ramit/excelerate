@@ -58,6 +58,7 @@ PAR_DIR = ".."
 KEY_VECTOR = ['Section:', 'Type:', 'Size:']
 KEYFILE = "key.csv"
 SCOREFILE = "score.csv"
+KEY_INDEX = 0
 KEY_TYPE = 1
 KEY_SIZE = 2
 ANSWER_VECTOR = ['Number:', 'Answer:']
@@ -190,6 +191,8 @@ ga4 = "Guessing in this category is a much better option and will improve your s
 guess = [ga1, ga2, ga3, ga4]
 
 def div(x, y):
+  if y == 0:
+    return 0
   return float(x) / float(y)
 
 def random_choice(array):
