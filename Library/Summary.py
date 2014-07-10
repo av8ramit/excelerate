@@ -45,13 +45,13 @@ class Score_Summary(object):
                         #print "WS: " + str(ws)
                         #print "Raw: " + str(scores[WRITING_TYPE])
                         scores[WRITING_TYPE] = int(row[3])
-                    elif rs == score:
+                    if rs == score:
                         #print "RS: " + str(rs)
                         #print "Raw: " + str(scores[READING_TYPE])                      
                         scores[READING_TYPE] = int(row[1])
-                    elif ms == score:
+                    if ms == score:
                         #print "MS: " + str(ms)
-                        #print "Raw: " + str(scores[READING_TYPE])                          
+                        #print "Raw: " + str(scores[MATH_TYPE])                          
                         scores[MATH_TYPE] = int(row[2])                     
             self.section_scores = scores
 
