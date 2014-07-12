@@ -75,7 +75,7 @@ class Analytics(object):
         lines.append('<body>' + endl)
         lines.append('<div id="page">' + endl)
         lines.append('<div id="header">' + endl)
-        lines.append('<img src="../../HTML/Mini Logo.png" width="35%" alt="Excelerate" />' + endl)
+        lines.append('<img src="../../HTML/EliteLogo.png" width="35%" alt="Excelerate" />' + endl)
         lines.append('</div>' + endl)
         lines.append('</div>' + endl)
         lines.append('<div id="content">' + endl)
@@ -137,7 +137,7 @@ class Analytics(object):
             lines.append('<td>' + str(q.question) + '</td>')
             lines.append('<td>' + str(q.frequency) + '</td>')
             index += 1
-            if index == 10:
+            if index == 30:
                 break
         lines.append('</table>')
 
@@ -179,7 +179,8 @@ class Analytics(object):
         lines.append('</div>' + endl)
         lines.append('<div class="clear"></div>' + endl)
         lines.append('<div id="footer">' + endl)
-        lines.append('<p><a>' + 'Class Analytics Report</a></p>' + endl)
+        #lines.append('<p><a>' + 'Class Analytics Report</a></p>' + endl)
+        lines.append('<p><img src="../../../HTML/Mini Logo.png" width="8%" alt="Excelerate" /></p>' + endl)
         lines.append('</div>' + endl)
         lines.append('</div>' + endl)
 
