@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<form id="form" onsubmit="return false;">
+  First name: <input type="text" id="fname"><br>
+  <button onclick="myFunction(); return false;">Submit</button>
+</form>
+
+<p1 id="demo">Hello</p1>
+
+<script>
+function myFunction() {
+    var userInput = document.getElementById("fname").value;
+    window.location.href = ("EliteSJ/Users/ID/" + userInput + "/simple_report.html");
+}
+</script>
+
+</body>
+</html>
