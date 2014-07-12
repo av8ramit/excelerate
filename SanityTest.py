@@ -76,7 +76,7 @@ class SanityTest(unittest.TestCase):
          #test load student
         res = self.c.process_commands('load_student ' + self.name)
         self.assertEqual(res, True)
-        res = self.c.process_commands('answer_sheet 10_09')  #create answer sheet test
+        res = self.c.process_commands('answer_sheet GE30')  #create answer sheet test
         self.assertEqual(res, True)
 
     def test_gradeTest(self):
@@ -89,10 +89,10 @@ class SanityTest(unittest.TestCase):
          #test load student
         res = self.c.process_commands('load_student ' + self.name)
         self.assertEqual(res, True)
-        res = self.c.process_commands('answer_sheet 10_09')  #create answer sheet test
+        res = self.c.process_commands('answer_sheet GE30')  #create answer sheet test
         #test grade test
         self.assertEqual(res, True)
-        res = self.c.process_commands('grade 10_09.csv')
+        res = self.c.process_commands('grade GE30.csv')
         self.assertEqual(res, True)
 
     def test_saveUser(self):
@@ -105,10 +105,10 @@ class SanityTest(unittest.TestCase):
         #test load student
         res = self.c.process_commands('load_student ' + self.name)
         self.assertEqual(res, True)
-        res = self.c.process_commands('answer_sheet 10_09')  #create answer sheet test
+        res = self.c.process_commands('answer_sheet GE30')  #create answer sheet test
         #test grade test
         self.assertEqual(res, True)
-        res = self.c.process_commands('grade 10_09.csv')
+        res = self.c.process_commands('grade GE30.csv')
         self.assertEqual(res, True)
         res = self.c.process_commands('save')
         self.assertEqual(res, True)
@@ -123,10 +123,10 @@ class SanityTest(unittest.TestCase):
          #test load student
         res = self.c.process_commands('load_student ' + self.name)
         self.assertEqual(res, True)
-        res = self.c.process_commands('answer_sheet 10_09')  #create answer sheet test
+        res = self.c.process_commands('answer_sheet GE30')  #create answer sheet test
         #test grade test
         self.assertEqual(res, True)
-        res = self.c.process_commands('grade 10_09.csv')
+        res = self.c.process_commands('grade GE30.csv')
         self.assertEqual(res, True)
         # test graph report
         res = self.c.process_commands('graph_report')
@@ -142,10 +142,10 @@ class SanityTest(unittest.TestCase):
          #test load student
         res = self.c.process_commands('load_student ' + self.name)
         self.assertEqual(res, True)
-        res = self.c.process_commands('answer_sheet 10_09')  #create answer sheet test
+        res = self.c.process_commands('answer_sheet GE30')  #create answer sheet test
         #test grade test
         self.assertEqual(res, True)
-        res = self.c.process_commands('grade 10_09.csv')
+        res = self.c.process_commands('grade GE30.csv')
         self.assertEqual(res, True)
         # test section report
         res = self.c.process_commands('section_report')
@@ -161,10 +161,10 @@ class SanityTest(unittest.TestCase):
          #test load student
         res = self.c.process_commands('load_student ' + self.name)
         self.assertEqual(res, True)
-        res = self.c.process_commands('answer_sheet 10_09')  #create answer sheet test
+        res = self.c.process_commands('answer_sheet GE30')  #create answer sheet test
         #test grade test
         self.assertEqual(res, True)
-        res = self.c.process_commands('grade 10_09.csv')
+        res = self.c.process_commands('grade GE30.csv')
         self.assertEqual(res, True)
         # test advanced report
         res = self.c.process_commands('advanced_report')
@@ -180,10 +180,10 @@ class SanityTest(unittest.TestCase):
          #test load student
         res = self.c.process_commands('load_student ' + self.name)
         self.assertEqual(res, True)
-        res = self.c.process_commands('answer_sheet 10_09')  #create answer sheet test
+        res = self.c.process_commands('answer_sheet GE30')  #create answer sheet test
         #test grade test
         self.assertEqual(res, True)
-        res = self.c.process_commands('grade 10_09.csv')
+        res = self.c.process_commands('grade GE30.csv')
         self.assertEqual(res, True)
         # test simple report
         res = self.c.process_commands('simple_report')
@@ -202,14 +202,14 @@ class SanityTest(unittest.TestCase):
          #test load student
         res = self.c.process_commands('load_student ' + self.name)
         self.assertEqual(res, True)
-        res = self.c.process_commands('answer_sheet 10_09')  #create answer sheet test
+        res = self.c.process_commands('answer_sheet GE30')  #create answer sheet test
         #test grade test
         self.assertEqual(res, True)
-        res = self.c.process_commands('grade 10_09.csv')
+        res = self.c.process_commands('grade GE30.csv')
         self.assertEqual(res, True)
 
 
-        shutil.copy(user_directory(self.name) + DIR_SEP + '10_09.csv', "../../testfolder" + DIR_SEP + self.name + ".csv")
+        shutil.copy(user_directory(self.name) + DIR_SEP + 'GE30.csv', "../../testfolder" + DIR_SEP + self.name + ".csv")
 
         foldername = "../../testfolder"
         if file_exists(foldername):
@@ -243,10 +243,10 @@ class SanityTest(unittest.TestCase):
          #test load student
         res = self.c.process_commands('load_student ' + self.name)
         self.assertEqual(res, True)
-        res = self.c.process_commands('answer_sheet 10_09')  #create answer sheet test
+        res = self.c.process_commands('answer_sheet GE30')  #create answer sheet test
         #test grade test
         self.assertEqual(res, True)
-        res = self.c.process_commands('grade 10_09.csv')
+        res = self.c.process_commands('grade GE30.csv')
         self.assertEqual(res, True)
 
         
