@@ -47,15 +47,15 @@ def class_missed_qs_array(classname):
             index = index + 1
         for q in (wqs[index-1]):
             question, answer = q
-            classwritingqs.append(question[6:]) #add missed question object to class list
+            classwritingqs.append(question) #add missed question object to class list
             
         for q in rqs[index-1]:
             question, answer = q
-            classreadingqs.append(question[6:]) #add missed question object to class list
+            classreadingqs.append(question) #add missed question object to class list
             
         for q in mqs[index-1]:
             question, answer = q
-            classmathqs.append(question[6:]) #add missed question object to class list    
+            classmathqs.append(question) #add missed question object to class list    
 
     for question in classwritingqs:
         frequency = classwritingqs.count(question)  

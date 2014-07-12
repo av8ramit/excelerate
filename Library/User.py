@@ -214,7 +214,7 @@ class User(object):
         lines.append('<body>' + endl)
         lines.append('<div id="page">' + endl)
         lines.append('<div id="header">' + endl)
-        lines.append('<img src="../../../HTML/Mini Logo.png" width="35%" alt="Excelerate" />' + endl)
+        lines.append('<img src="../../../HTML/EliteLogo.png" width="35%" alt="Excelerate" />' + endl)
         lines.append('</div>' + endl)
         lines.append('</div>' + endl)
         lines.append('<div id="content">' + endl)
@@ -343,7 +343,7 @@ class User(object):
         lines.append('<body>' + endl)
         lines.append('<div id="page">' + endl)
         lines.append('<div id="header">' + endl)
-        lines.append('<img src="../../../HTML/Mini Logo.png" width="35%" alt="Excelerate" />' + endl)
+        lines.append('<img src="../../../HTML/EliteLogo.png" width="35%" alt="Excelerate" />' + endl)
         lines.append('</div>' + endl)
         lines.append('</div>' + endl)
         lines.append('<div id="content">' + endl)
@@ -417,7 +417,7 @@ class User(object):
         lines.append('<body>' + endl)
         lines.append('<div id="page">' + endl)
         lines.append('<div id="header">' + endl)
-        lines.append('<img src="../../../HTML/Mini Logo.png" width="35%" alt="Excelerate" />' + endl)
+        lines.append('<img src="../../../HTML/EliteLogo.png" width="35%" alt="Excelerate" />' + endl)
         lines.append('</div>' + endl)
         lines.append('</div>' + endl)
         lines.append('<div id="content">' + endl)
@@ -540,7 +540,7 @@ class User(object):
         lines.append('<body>' + endl)
         lines.append('<div id="page">' + endl)
         lines.append('<div id="header">' + endl)
-        lines.append('<img src="../../../HTML/Mini Logo.png" width="35%" alt="Excelerate" />' + endl)
+        lines.append('<img src="../../../HTML/EliteLogo.png" width="35%" alt="Excelerate" />' + endl)
         lines.append('</div>' + endl)
         lines.append('</div>' + endl)
         lines.append('<div id="content">' + endl)
@@ -556,11 +556,18 @@ class User(object):
         lines.append('<h1>Score Graphs</h1>' + endl)
         lines.append('<hr color="#BBBBBB" size="2" width="100%">' + endl)
 
+
+        index = 0
         #Graph js
         for graph in graphs:
             lines += graph.html()
+            index += 1
+
+            if index == 2:
+                lines.append('<div style="page-break-after: always;">' '</div>')
             lines.append('<br><hr color="#4169EF" size="1" width="90%">' + endl)
             lines.append(endl)
+
 
 
 
@@ -572,7 +579,8 @@ class User(object):
         lines.append('</div>' + endl)
         lines.append('<div class="clear"></div>' + endl)
         lines.append('<div id="footer">' + endl)
-        lines.append('<p><a>' + self.name + ' Advanced Report</a></p>' + endl)
+        #lines.append('<p><a>' + self.name + ' Advanced Report</a></p>' + endl)
+        lines.append('<p><img src="../../../HTML/Mini Logo.png" width="8%" alt="Excelerate" /></p>' + endl)
         lines.append('</div>' + endl)
         lines.append('</div>' + endl)
 
@@ -642,7 +650,7 @@ class User(object):
         lines.append('<body>' + endl)
         lines.append('<div id="page">' + endl)
         lines.append('<div id="header">' + endl)
-        lines.append('<img src="../../../HTML/Mini Logo.png" width="35%" alt="Excelerate" />' + endl)
+        lines.append('<img src="../../../HTML/EliteLogo.png" width="35%" alt="Excelerate" />' + endl)
         lines.append('</div>' + endl)
         lines.append('</div>' + endl)
         lines.append('<div id="content">' + endl)
@@ -661,11 +669,14 @@ class User(object):
         #Graph js
         for graph in graphs:
             lines += graph.html()
+            index += 1
+            if index == 2:
+                lines.append('<div style="page-break-after: always;">' '</div>')
+
             #lines.append('<h2> ' + 'Students accepted to' + str(School_Name) + 'score an average of' + str(schoolscoreO) + ' </h2>' + endl)
-            lines.append('<br><hr color="#4169EF" size="1" width="90%">' + endl)
-            lines.append(endl)
-
-
+            #lines.append('<br><hr color="#4169EF" size="1" width="90%">' + endl)
+            if index < 4:
+                lines.append(endl)
 
 
         #Footer
@@ -673,12 +684,13 @@ class User(object):
         lines.append('</div>' + endl)
         lines.append('</div>' + endl)
         lines.append('</div>' + endl)
+        #lines.append('<p><img src="../../../HTML/Mini Logo.png" width="10%" alt="Excelerate" /></p>' + endl)
         lines.append('<div class="clear"></div>' + endl)
         lines.append('<div id="footer">' + endl)
-        lines.append('<p><a>' + self.name + ' Advanced Report</a></p>' + endl)
+        #lines.append('<p><a>' + self.name + ' Advanced Report</a></p>' + endl)
+        lines.append('<p><img src="../../../HTML/Mini Logo.png" width="8%" alt="Excelerate" /></p>')
         lines.append('</div>' + endl)
         lines.append('</div>' + endl)
-
         #scripts
         lines += g.body()
 
@@ -725,7 +737,7 @@ class User(object):
         lines.append('<body>' + endl)
         lines.append('<div id="page">' + endl)
         lines.append('<div id="header">' + endl)
-        lines.append('<img src="../../../HTML/Mini Logo.png" width="35%" alt="Excelerate" />' + endl)
+        lines.append('<img src="../../../HTML/EliteLogo.png" width="35%" alt="Excelerate" />' + endl)
         lines.append('</div>' + endl)
         lines.append('</div>' + endl)
         lines.append('<div id="content">' + endl)
@@ -754,7 +766,8 @@ class User(object):
         lines.append('</div>' + endl)
         lines.append('<div class="clear"></div>' + endl)
         lines.append('<div id="footer">' + endl)
-        lines.append('<p><a>' + self.name + ' Test Report</a></p>' + endl)
+        #lines.append('<p><a>' + self.name + ' Test Report</a></p>' + endl)
+        lines.append('<p><img src="../../../HTML/Mini Logo.png" width="8%" alt="Excelerate" /></p>' + endl)
         lines.append('</div>' + endl)
         lines.append('</div>' + endl)
 

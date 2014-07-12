@@ -279,6 +279,10 @@ def college_profile():
     school_m = []
     school_r = []
     school_w = []
+    d_o = []
+    d_m = []
+    d_r = []
+    d_w = []
     p_o = []
     p_m = []
     p_r = []
@@ -305,16 +309,82 @@ def college_profile():
                 reading.append(test.score_summary.section_scores[READING_TYPE])
                 writing.append(test.score_summary.section_scores[WRITING_TYPE])
                 
+            # get last item; most recent test data
             overalls = overall.pop()
+          
             maths = math.pop()
+            
             readings = reading.pop()
+            
             writings = writing.pop()
-            #print (overalls, maths, readings, writings)
+          
+            print (overalls, maths, readings, writings)
             for school in schoolname:
-                p_o.append((overalls/(dict_overall[school])))
-                p_m.append((maths/(dict_math[school])))
-                p_r.append((readings/(dict_read[school])))
-                p_w.append((writings/(dict_write[school])))
+                d_o.append((overalls-(dict_overall[school])))
+                d_m.append((maths-(dict_math[school])))
+                d_r.append((readings-(dict_read[school])))
+                d_w.append((writings-(dict_write[school])))
+
+            for diff in d_o:
+                if diff < 0:
+                  if abs(diff) > 280:
+                      p_o.append('<7')
+                  else:
+                      temp = round(50 + (diff/6),1)
+                      p_o.append(temp)
+                else:
+                  if diff > 280:
+                      p_m.append('90+')
+                  else:
+                      temp = round(50 + (diff/6),1)
+                      p_m.append(temp)
+
+
+            for diff in d_m:
+                if diff < 0:
+                  if abs(diff) > 80:
+                      p_m.append('<7')
+                  else:
+                      temp = round(50 + (diff/2),1)
+                      p_m.append(temp)
+                else:
+                  if diff > 80:
+                      p_m.append('90+')
+                  else:
+                      temp = round(50 + (diff/2),1)
+                      p_m.append(temp)
+
+
+                
+            for diff in d_r:
+                if diff < 0:
+                  if abs(diff) > 80:
+                      p_r.append('<7')
+                  else:
+                      temp = round(50 + (diff/2),1)
+                      p_r.append(temp)
+                else:
+                  if diff > 80:
+                      p_r.append('90+')
+                  else:
+                      temp = round(50 + (diff/2),1)
+                      p_r.append(temp)
+
+
+            for diff in d_w:
+                if diff < 0:
+                  if abs(diff) > 80:
+                      p_w.append('<7')
+                  else:
+                      temp = round(50 + (diff/2),1)
+                      p_w.append(temp) 
+                else:
+                  if diff > 80:
+                      p_w.append('90+')
+                  else:
+                      temp = round(50 + (diff/2),1)
+                      p_w.append(temp)        
+                    
 
             cp = College_Profile()
             dirc = user_directory(c.user.name, c.c.name)

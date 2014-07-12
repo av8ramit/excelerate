@@ -53,7 +53,7 @@ class Graph(object):
             lines.append("yaxis:{" + 'label:' + "'Score'," + 'labelRenderer: $.jqplot.CanvasAxisLabelRenderer,' + '}' + endl)
         lines.append('},' + endl)
         lines.append("cursor: { show: true, zoom: true, looseZoom: true, showTooltip: false }," + endl)
-        lines.append("series:[{lineWidth:3, rendererOptions:{animation:{speed:4000}}}]," + endl)
+        lines.append("series:[{lineWidth:1, rendererOptions:{animation:{speed:4000}}}]," + endl)
         lines.append('});' + endl)
         lines.append('});' + endl)
         lines.append('</script>' + endl)
@@ -124,7 +124,7 @@ class C_Graph(object):
             lines.append("yaxis:{" + 'label:' + "'Score'," + 'labelRenderer: $.jqplot.CanvasAxisLabelRenderer,' + '}' + endl)
         lines.append('},' + endl)
         lines.append("cursor: { show: true, zoom: true, looseZoom: true, showTooltip: false }," + endl)
-        lines.append("series:[{lineWidth:3, rendererOptions:{animation:{speed:4000}}}]," + endl)
+        lines.append("series:[{lineWidth:1, rendererOptions:{animation:{speed:4000}}}]," + endl)
         # canvas overlay
         lines.append("canvasOverlay: { show: true, objects: [ {horizontalLine: { name: '" + str(self.schname) + "', y: '"  + str(self.schscore) +  "', showTooltip: true, tooltipFormatString:  " '"' + str(self.schscore) + '"'  ", lineWidth: 4 ,color: " "'" + str(self.schcolr)  + "'" "}} , {dashedHorizontalLine: { name: '" + str(self.schname) + "', y: '"  + str(self.schscore) + "'" ", lineWidth: 5 , dashPattern: [12,12],color: " "'" + str(self.schgbcolr) + "'" "}}]}"   + endl )
         lines.append('});' + endl)
@@ -161,7 +161,6 @@ class College_Profile(object):
             p_m  = math
             p_r = reading
             p_w = writing
-            index = 0
             dirc = user_directory(name, classname)
             FILE = open(dirc + DIR_SEP + "college_profile" + ".html", "w")
             lines = []
@@ -179,7 +178,7 @@ class College_Profile(object):
             lines.append('<body>' + endl)
             lines.append('<div id="page">' + endl)
             lines.append('<div id="header">' + endl)
-            lines.append('<img src="../../../HTML/Mini Logo.png" width="35%" alt="Excelerate" />' + endl)
+            lines.append('<img src="../../../HTML/EliteLogo.png" width="35%" alt="Excelerate" />' + endl)
             lines.append('</div>' + endl)
             lines.append('</div>' + endl)
             lines.append('<div id="content">' + endl)
@@ -201,15 +200,16 @@ class College_Profile(object):
             lines.append("</head>")
 
             lines.append('<table style="width:500px">')
-            lines.append('<tr><th>College</th><th>Your Overall Percentile vs Average Admission Score</th><th>Your Math Percentile vs Average Admission Score</th><th>Your Reading Percentile vs Average Admission Score</th><th>Your Writing Percentile vs Average Admission Score</th></tr>')
+            lines.append('<tr><th>College</th><th>Percent Of Students Admitted With Your Overall Score</th><th>Percent Of Students Admitted With Your Math Score</th><th>Percent Of Students Admitted With Your Reading Score</th><th>Percent Of Students Admitted With Your Writing Score</th></tr>')
 
+            index = 0
             for school in schools:
                 lines.append('<tr>')
                 lines.append('<td>' + school + '</td>')
-                lines.append('<td>' + str(round(p_o[index]*100, 2)) + '</td>')
-                lines.append('<td>' + str(round(p_m[index]*100, 2)) + '</td>')
-                lines.append('<td>' + str(round(p_r[index]*100, 2)) + '</td>')
-                lines.append('<td>' + str(round(p_w[index]*100, 2)) + '</td>')
+                lines.append('<td>' + str(p_o[index]) + '%</td>')
+                lines.append('<td>' + str(p_m[index]) + '%</td>')
+                lines.append('<td>' + str(p_r[index]) + '%</td>')
+                lines.append('<td>' + str(p_w[index]) + '%</td>')
                 lines.append('</tr>')
                 index += 1 
             lines.append('</table>')
@@ -221,7 +221,8 @@ class College_Profile(object):
             lines.append('</div>' + endl)
             lines.append('<div class="clear"></div>' + endl)
             lines.append('<div id="footer">' + endl)
-            lines.append('<p><a>' + 'College Profile Report</a></p>' + endl)
+            #lines.append('<p><a>' + 'College Profile Report</a></p>' + endl)
+            lines.append('<p><img src="../../../HTML/Mini Logo.png" width="8%" alt="Excelerate" /></p>' + endl)
             lines.append('</div>' + endl)
             lines.append('</div>' + endl)
 
