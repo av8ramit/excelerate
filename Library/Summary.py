@@ -18,10 +18,10 @@ class Score_Summary(object):
         assert(type(test_summary) == Test_Summary)
         self.id = test_summary.id
         self.section_scores = {}        
-        writing_score = test_summary.reports[WRITING_TYPE].raw_score()
-        reading_score = test_summary.reports[READING_TYPE].raw_score()
-        math_score = test_summary.reports[MATH_TYPE].raw_score()
-        self.lookup_score(writing_score, reading_score, math_score)
+        self.writing_score = test_summary.reports[WRITING_TYPE].raw_score()
+        self.reading_score = test_summary.reports[READING_TYPE].raw_score()
+        self.math_score = test_summary.reports[MATH_TYPE].raw_score()
+        self.lookup_score(self.writing_score, self.reading_score, self.math_score)
 
     #Calculates total score.
     def total_score(self):
