@@ -182,7 +182,7 @@ class Analytics(object):
         lines.append('<div class="clear"></div>' + endl)
         lines.append('<div id="footer">' + endl)
         #lines.append('<p><a>' + 'Class Analytics Report</a></p>' + endl)
-        lines.append('<p><img src="../../../HTML/Mini Logo.png" width="8%" alt="Excelerate" /></p>' + endl)
+        lines.append('<p><img src="../../HTML/mini.png" width="8%" alt="Excelerate" /></p>' + endl)
         lines.append('</div>' + endl)
         lines.append('</div>' + endl)
 

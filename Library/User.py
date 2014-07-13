@@ -580,7 +580,7 @@ class User(object):
         lines.append('<div class="clear"></div>' + endl)
         lines.append('<div id="footer">' + endl)
         #lines.append('<p><a>' + self.name + ' Advanced Report</a></p>' + endl)
-        lines.append('<p><img src="../../../HTML/Mini Logo.png" width="8%" alt="Excelerate" /></p>' + endl)
+        lines.append('<p><img src="../../../HTML/mini.png" width="8%" alt="Excelerate" /></p>' + endl)
         lines.append('</div>' + endl)
         lines.append('</div>' + endl)
 
@@ -684,11 +684,11 @@ class User(object):
         lines.append('</div>' + endl)
         lines.append('</div>' + endl)
         lines.append('</div>' + endl)
-        #lines.append('<p><img src="../../../HTML/Mini Logo.png" width="10%" alt="Excelerate" /></p>' + endl)
+        #lines.append('<p><img src="../../../HTML/mini.png" width="10%" alt="Excelerate" /></p>' + endl)
         lines.append('<div class="clear"></div>' + endl)
         lines.append('<div id="footer">' + endl)
         #lines.append('<p><a>' + self.name + ' Advanced Report</a></p>' + endl)
-        lines.append('<p><img src="../../../HTML/Mini Logo.png" width="8%" alt="Excelerate" /></p>')
+        lines.append('<p><img src="../../../HTML/mini.png" width="8%" alt="Excelerate" /></p>')
         lines.append('</div>' + endl)
         lines.append('</div>' + endl)
         #scripts
@@ -767,7 +767,7 @@ class User(object):
         lines.append('<div class="clear"></div>' + endl)
         lines.append('<div id="footer">' + endl)
         #lines.append('<p><a>' + self.name + ' Test Report</a></p>' + endl)
-        lines.append('<p><img src="../../../HTML/Mini Logo.png" width="8%" alt="Excelerate" /></p>' + endl)
+        lines.append('<p><img src="../../../HTML/mini.png" width="8%" alt="Excelerate" /></p>' + endl)
         lines.append('</div>' + endl)
         lines.append('</div>' + endl)
 
