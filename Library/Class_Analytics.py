@@ -33,7 +33,9 @@ class Analytics(object):
                     percent_array = []
                     total = 0
                     for key in section_type_dict(section_type):
-                        current_percentage = int(div(section_stats.stats[key].c,section_stats.stats[key].t*100))
+                        if section_stats.stats[key].t == 0:
+                            continue
+                        current_percentage = int(div(section_stats.stats[key].c,section_stats.stats[key].t)*100)
                         if current_percentage <= lowest_type_percentage:
                             lowest_type_percentage = current_percentage
                             lowest_type = key
