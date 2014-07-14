@@ -57,6 +57,7 @@ class Elite_Class(object):
 
 
     def convert_database(self, filename):
+        #n = 0
         with open(filename, 'rU') as f:
             reader = csv.reader(f)
             for row in reader:
@@ -65,7 +66,7 @@ class Elite_Class(object):
                     continue
                 if SID not in self.students.keys():
                     self.students[SID] = User(SID, 'Elite')
-
+                #n+=1
                 userid = row[STUDENT_ID_INDEX]
                 test_id = row[FORM_CODE]
                 user_test = Scored_Test(test_id)
@@ -80,6 +81,8 @@ class Elite_Class(object):
                         #print ('!!!')
                         user_test.missed_questions[test_key[index - DIFFERENCE]] += array
                 self.students[SID].tests_taken.append(user_test)
+                #if n==2:
+                #    break
         new_class('Elite')
         for student in self.students.keys():
             new_user(student, 'Elite')
@@ -122,6 +125,7 @@ class Elite_Class(object):
             for index in range(GRID_1, GRID_10 + 1):
                 answer = row[index]
                 result = self.translate_grid_answer(answer, answer_key[index-19])
+                #print (result)
                 if result != "CORRECT":
                     q_id = test_id + FIELD_SEP + str(section_number) + FIELD_SEP + str(len(results_string)+(index-18))
                     entry = (q_id, result[1])
@@ -157,6 +161,7 @@ class Elite_Class(object):
             attempt = "A"
 
         answer = key_answer
+        #print (attempt)
         if '(' in answer and ')' in answer:
             answer = answer.replace(' ','')
             answer = answer.replace('(','')
@@ -167,6 +172,7 @@ class Elite_Class(object):
                 return "CORRECT"
         elif attempt == float(answer):
             return "CORRECT"
+        #print(attempt)
         return "INCORRECT",attempt
 
 

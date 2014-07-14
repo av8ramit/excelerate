@@ -106,7 +106,7 @@ class Section_Summary(object):
         self.incorrect_questions = []
 
     def raw_score(self):
-        return self.qa - round_rem(float(self.qm)/4)
+        return int(round(self.qa - (float(self.qm)/4)))
 
     def size(self):
         return self.qa + self.qm + self.qb
