@@ -56,11 +56,12 @@
             <!-- <h1 class="cover-heading">Score Report Login</h1> -->
             <p class="lead">Enter your Elite student ID to access score reports and analysis</p>
             <p class="lead">
-              <form class="form-inline" role="form">
+              <form class="form-inline" role="form" onsubmit="toScoreReports(); return false;">
                 <div class="form-group">
                   <label class="sr-only" for="StudentID">Student ID</label>
                   <input type="text" class="form-control" id="StudentID" placeholder="Elite Student ID">
-                  <button type="button" class="btn btn-primary" onclick="toScoreReports(); return false;">Submit</button>
+                  <input type="submit" value="Submit" class="btn btn-primary">
+                  <!-- <button type="button" class="btn btn-primary" onclick="toScoreReports(); return false;">Submit</button> -->
                 </div>
               </form>
             </p>
