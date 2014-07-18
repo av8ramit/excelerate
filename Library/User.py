@@ -179,7 +179,7 @@ class User(object):
             output[section_type] = (current_code, percent)
         return output
 
-    def positive_cram(self):
+    def positivecram(self):
         """
         Returns a dictionary indexed by type and key as tuple of high type and level
         """
@@ -283,28 +283,28 @@ class User(object):
 
         #Cram
         cram = self.cram()
-        positive_cram = self.positive_cram
+        positivecram = self.positivecram()
         lines.append('<h1>Quick Advice</h1>' + endl)
 
         if (cram[READING_TYPE][0] != None):
             type_name = READING_TYPE_DICT[cram[READING_TYPE][0]]
-            best_type = READING_TYPE_DICT[positive_cram[READING_TYPE][0]]
+            best_type = READING_TYPE_DICT[positivecram[READING_TYPE][0]]
             lines.append("<h3><i>Reading Highlights:</i></h3>" + endl)
-            lines.append(paropen + "Your strongest reading section is " + best_type + " as you are scoring " + positive_cram[READING_TYPE][1] + " in these questions.")
+            lines.append(paropen + "Your strongest reading section is " + best_type + " as you are scoring " + positivecram[READING_TYPE][1] + " in these questions.")
             lines.append(paropen + "Your weakest reading section is " + type_name + " as you are scoring " + cram[READING_TYPE][1] + " in these questions.")
          
         if (cram[WRITING_TYPE][0] != None):
             lines.append("<h3><i>Writing Highlights:</i></h3>" + endl)
             type_name = WRITING_TYPE_DICT[cram[WRITING_TYPE][0]]
-            best_type = WRITING_TYPE_DICT[cram[WRITING_TYPE][0]]
-            lines.append(paropen + "Your strongest writing section is " + best_type + " as you are scoring " + positive_cram[WRITING_TYPE][1] + " in these questions.")
+            best_type = WRITING_TYPE_DICT[positivecram[WRITING_TYPE][0]]
+            lines.append(paropen + "Your strongest writing section is " + best_type + " as you are scoring " + positivecram[WRITING_TYPE][1] + " in these questions.")
             lines.append(paropen + "Your weakest writing section is " + type_name + " as you are only scoring " + cram[WRITING_TYPE][1] + " in these questions.")
         
         if (cram[MATH_TYPE][0] != None):
             lines.append("<h3><i>Math Highlights:</i></h3>" + endl)
             type_name = MATH_TYPE_DICT[cram[MATH_TYPE][0]]
-            best_type = MATH_TYPE_DICT[cram[MATH_TYPE][0]]
-            lines.append(paropen + "Your strongest math section is " + best_type + " as you are scoring " + positive_cram[MATH_TYPE][1] + " in these questions.")
+            best_type = MATH_TYPE_DICT[positivecram[MATH_TYPE][0]]
+            lines.append(paropen + "Your strongest math section is " + best_type + " as you are scoring " + positivecram[MATH_TYPE][1] + " in these questions.")
             lines.append(paropen + "Your weakest math section is " + type_name + " as you are only scoring " + cram[MATH_TYPE][1] + " in these questions.")
 
 
