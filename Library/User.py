@@ -194,7 +194,7 @@ class User(object):
                 code = letter + str(i)
                 qs = self.data.data[section_type].stats[code]
                 new_point = div(qs.c, qs.t)
-                if new_point < current_max or current_max < 0:
+                if new_point > current_max or current_max < 0:
                     current_max = new_point
                     current_code = code
                     percent = percentage(new_point)
