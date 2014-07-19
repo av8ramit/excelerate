@@ -291,21 +291,24 @@ class User(object):
             best_type = READING_TYPE_DICT[positivecram[READING_TYPE][0]]
             lines.append("<h3><i>Reading Highlights:</i></h3>" + endl)
             lines.append(paropen + "Your strongest reading section is " + best_type + " as you are scoring " + positivecram[READING_TYPE][1] + " in these questions.")
-            lines.append(paropen + "Your weakest reading section is " + type_name + " as you are scoring " + cram[READING_TYPE][1] + " in these questions.")
+            if best_type != type_name:
+                lines.append(paropen + "Your weakest reading section is " + type_name + " as you are scoring " + cram[READING_TYPE][1] + " in these questions.")
          
         if (cram[WRITING_TYPE][0] != None):
             lines.append("<h3><i>Writing Highlights:</i></h3>" + endl)
             type_name = WRITING_TYPE_DICT[cram[WRITING_TYPE][0]]
             best_type = WRITING_TYPE_DICT[positivecram[WRITING_TYPE][0]]
             lines.append(paropen + "Your strongest writing section is " + best_type + " as you are scoring " + positivecram[WRITING_TYPE][1] + " in these questions.")
-            lines.append(paropen + "Your weakest writing section is " + type_name + " as you are only scoring " + cram[WRITING_TYPE][1] + " in these questions.")
+            if best_type != type_name:
+                lines.append(paropen + "Your weakest writing section is " + type_name + " as you are only scoring " + cram[WRITING_TYPE][1] + " in these questions.")
         
         if (cram[MATH_TYPE][0] != None):
             lines.append("<h3><i>Math Highlights:</i></h3>" + endl)
             type_name = MATH_TYPE_DICT[cram[MATH_TYPE][0]]
             best_type = MATH_TYPE_DICT[positivecram[MATH_TYPE][0]]
             lines.append(paropen + "Your strongest math section is " + best_type + " as you are scoring " + positivecram[MATH_TYPE][1] + " in these questions.")
-            lines.append(paropen + "Your weakest math section is " + type_name + " as you are only scoring " + cram[MATH_TYPE][1] + " in these questions.")
+            if best_type != type_name:
+                lines.append(paropen + "Your weakest math section is " + type_name + " as you are only scoring " + cram[MATH_TYPE][1] + " in these questions.")
 
 
         #Footer
