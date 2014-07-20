@@ -191,8 +191,8 @@ ga1 = "Your guesses in this category are often wrong. Consider leaving them blan
 ga2 = "Leave more questions in these catgories blank. You are losing 1/4th a point for each one you miss."
 ga3 = "Instead of guessing, leave these questions blank."
 ga4 = "Guessing in this category is a much better option and will improve your score."
-guess = [ga1, ga2, ga3, ga4]
-
+guess_remove = ""
+guess = [guess_remove, guess_remove, guess_remove, guess_remove]
 def div(x, y):
   if y == 0:
     return 0
