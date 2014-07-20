@@ -43,6 +43,7 @@ class Analytics(object):
                         percent_array.append(current_percentage)
                     if(section_type == WRITING_TYPE):
                         self.uw_frequency.append(WRITING_TYPE_DICT[lowest_type])
+                        
                     if(section_type == READING_TYPE):
                         self.uw_frequency.append(READING_TYPE_DICT[lowest_type])
                             
@@ -61,7 +62,6 @@ class Analytics(object):
                     self.uw_frequency.remove(qtype) 
             self.uw_frequency_dict[qtype] = freq  
     
-        
     def report(self):
         FILE = open('Users' + DIR_SEP + self.c + DIR_SEP + "analytics" + ".html", "w")
         lines = []
@@ -139,7 +139,7 @@ class Analytics(object):
             lines.append('<td>' + str(q.question) + '</td>')
             lines.append('<td>' + str(q.frequency) + '</td>')
             index += 1
-            if index == 30:
+            if index == 100:
                 break
         lines.append('</table>')
 
@@ -154,7 +154,7 @@ class Analytics(object):
             lines.append('<td>' + str(q.question) + '</td>')
             lines.append('<td>' + str(q.frequency) + '</td>')
             index += 1
-            if index == 10:
+            if index == 100:
                 break
         lines.append('</table>')
 
@@ -168,7 +168,7 @@ class Analytics(object):
             lines.append('<td>' + str(q.question) + '</td>')
             lines.append('<td>' + str(q.frequency) + '</td>')
             index += 1
-            if index == 10:
+            if index == 100:
                 break
         lines.append('</table>')
         

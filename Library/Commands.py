@@ -21,6 +21,7 @@ def clear(n):
         print (n)
 
 
+
 def class_missed_qs_array(classname):
     wqs = []
     rqs = []
@@ -48,7 +49,7 @@ def class_missed_qs_array(classname):
         for q in (wqs[index-1]):
             question, answer = q
             classwritingqs.append(question) #add missed question object to class list
-            #print("w: " + question)
+        
             
         for q in rqs[index-1]:
             question, answer = q
@@ -58,19 +59,21 @@ def class_missed_qs_array(classname):
             question, answer = q
             classmathqs.append(question) #add missed question object to class list    
             #print("m: " + question)
+
     for question in classwritingqs:
         frequency = classwritingqs.count(question)
-        #print(str(frequency) + " w " + question)  
-        if frequency > 2:
+        print(str(frequency) + " writing " + question) 
+        CLASS_MISSED_WRITING.append(Class_Question(question,frequency)) 
+        if frequency > 1:
             for i in range(1,frequency):
                 classwritingqs.remove(question)
-            CLASS_MISSED_WRITING.append(Class_Question(question,frequency))
-
+            
+    print(str(ccount))
 
     for question in classreadingqs:
         frequency = classreadingqs.count(question)
         #print(str(frequency) + " r " + question)
-        if frequency > 2:  
+        if frequency > 1:  
             for i in range(1,frequency):
                 classreadingqs.remove(question)
             CLASS_MISSED_READING.append(Class_Question(question,frequency))
@@ -78,7 +81,7 @@ def class_missed_qs_array(classname):
     for question in classmathqs:
         frequency = classmathqs.count(question)
         #print(str(frequency) + " m " + question)  
-        if frequency > 2:
+        if frequency > 1:
             for i in range(1,frequency):
                 classmathqs.remove(question)
             CLASS_MISSED_MATH.append(Class_Question(question,frequency))

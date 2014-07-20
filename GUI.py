@@ -30,8 +30,6 @@ import sys
 from tkinter import messagebox
 
 
-
-
 sys.path.append('Library')
 from Console import *
 from Commands import *

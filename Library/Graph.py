@@ -10,7 +10,6 @@
 
 from Values import *
 from User import *
-
 class Graph(object):
 
     def __init__(self, name, index, points):
@@ -28,7 +27,7 @@ class Graph(object):
         return lines
 
 
-    def html(self, percent=False, space = True):
+    def html(self, percent=False, space = True, SIMPLE_REP_FLAG = False):
         lines = []
         if space:
             lines.append('<br>')
@@ -47,10 +46,13 @@ class Graph(object):
         lines.append('highlighter:{ show: true, sizeAdjust: 7.5},' + endl)
         lines.append('axes:{' + endl)
         lines.append('xaxis:{min:0},' + endl)
-        if percent:
-            lines.append("yaxis:{" + 'label:' + "'Percent Correct'," + 'labelRenderer: $.jqplot.CanvasAxisLabelRenderer,' + "tickOptions: {formatString: " +  '"' +'%' + "'d" + '%"' + '}}' + endl)
+        if SIMPLE_REP_FLAG:
+            lines.append("yaxis:{" 'min:0, max:2400,'+ 'label:' + "'Score'," + 'labelRenderer: $.jqplot.CanvasAxisLabelRenderer,' + '}' + endl)
+            
+        elif percent:
+            lines.append("yaxis:{" + 'label:' + "'Percent Correct'," + 'labelRenderer: $.jqplot.CanvasAxisLabelRenderer,' + "tickOptions: {formatString: " +  '"' +'%' + "'d" + '%"' + '}}' + endl)    
         else:
-            lines.append("yaxis:{" + 'label:' + "'Score'," + 'labelRenderer: $.jqplot.CanvasAxisLabelRenderer,' + '}' + endl)
+            lines.append("yaxis:{" 'label:' + "'Score'," + 'labelRenderer: $.jqplot.CanvasAxisLabelRenderer,' + '}' + endl)
         lines.append('},' + endl)
         lines.append("cursor: { show: true, zoom: true, looseZoom: true, showTooltip: false }," + endl)
         lines.append("series:[{lineWidth:1, rendererOptions:{animation:{speed:4000}}}]," + endl)
@@ -161,6 +163,7 @@ class College_Profile(object):
             p_m  = math
             p_r = reading
             p_w = writing
+            index = 0
             dirc = user_directory(name, classname)
             FILE = open(dirc + DIR_SEP + "college_profile" + ".html", "w")
             lines = []

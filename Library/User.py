@@ -259,7 +259,7 @@ class User(object):
 
         #Overall Graph
         lines.append('<h1>Previous Test History</h1>' + endl)
-        lines += g.html(False, False)
+        lines += g.html(False, False, True)
         lines.append('<br><hr color="#BBBBBB" size="2" width="100%">' + endl)
 
 
