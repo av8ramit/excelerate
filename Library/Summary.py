@@ -18,10 +18,10 @@ class Score_Summary(object):
         assert(type(test_summary) == Test_Summary)
         self.id = test_summary.id
         self.section_scores = {}        
-        writing_score = test_summary.reports[WRITING_TYPE].raw_score()
-        reading_score = test_summary.reports[READING_TYPE].raw_score()
-        math_score = test_summary.reports[MATH_TYPE].raw_score()
-        self.lookup_score(writing_score, reading_score, math_score)
+        self.writing_score = test_summary.reports[WRITING_TYPE].raw_score()
+        self.reading_score = test_summary.reports[READING_TYPE].raw_score()
+        self.math_score = test_summary.reports[MATH_TYPE].raw_score()
+        self.lookup_score(self.writing_score, self.reading_score, self.math_score)
 
     #Calculates total score.
     def total_score(self):
@@ -106,7 +106,7 @@ class Section_Summary(object):
         self.incorrect_questions = []
 
     def raw_score(self):
-        return self.qa - round_rem(float(self.qm)/4)
+        return int(round(self.qa - (float(self.qm)/4)))
 
     def size(self):
         return self.qa + self.qm + self.qb

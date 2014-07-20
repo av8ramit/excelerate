@@ -161,7 +161,7 @@ class User(object):
     def cram(self):
         #returns a dictionary indexed by type and key as tuple of lowest type and level
         #calculate lowest data has in terms of performance for each section
-        array = [WRITING_TYPE, READING_TYPE, MATH_TYPE]
+        array = TYPE_ARRAY
         output = {}
         for section_type in array:
             letter,size = get_section_type_size(section_type)
@@ -179,9 +179,27 @@ class User(object):
             output[section_type] = (current_code, percent)
         return output
 
-
-
-
+    def positivecram(self):
+        """
+        Returns a dictionary indexed by type and key as tuple of high type and level
+        """
+        types = TYPE_ARRAY
+        output = {}
+        for section_type in types:
+            letter,size = get_section_type_size(section_type)
+            current_max = -1
+            current_code = None
+            percent = None
+            for i in range (1, len(section_type_dict(section_type)) + 1):
+                code = letter + str(i)
+                qs = self.data.data[section_type].stats[code]
+                new_point = div(qs.c, qs.t)
+                if new_point > current_max or current_max < 0:
+                    current_max = new_point
+                    current_code = code
+                    percent = percentage(new_point)
+            output[section_type] = (current_code, percent)
+        return output
 
 
 
@@ -265,22 +283,32 @@ class User(object):
 
         #Cram
         cram = self.cram()
+        positivecram = self.positivecram()
         lines.append('<h1>Quick Advice</h1>' + endl)
 
         if (cram[READING_TYPE][0] != None):
             type_name = READING_TYPE_DICT[cram[READING_TYPE][0]]
-            lines.append("<h3><i>Reading Weakness:</i></h3>" + endl)
-            lines.append(paropen + "Your weakest reading section is " + type_name + " as you are only scoring " + cram[READING_TYPE][1] + " in these questions.")
-        
+            best_type = READING_TYPE_DICT[positivecram[READING_TYPE][0]]
+            lines.append("<h3><i>Reading Highlights:</i></h3>" + endl)
+            lines.append(paropen + "Your strongest reading section is " + best_type + " as you are scoring " + positivecram[READING_TYPE][1] + " in these questions.")
+            if best_type != type_name:
+                lines.append(paropen + "Your weakest reading section is " + type_name + " as you are scoring " + cram[READING_TYPE][1] + " in these questions.")
+         
         if (cram[WRITING_TYPE][0] != None):
-            lines.append("<h3><i>Writing Weakness:</i></h3>" + endl)
+            lines.append("<h3><i>Writing Highlights:</i></h3>" + endl)
             type_name = WRITING_TYPE_DICT[cram[WRITING_TYPE][0]]
-            lines.append(paropen + "Your weakest writing section is " + type_name + " as you are only scoring " + cram[WRITING_TYPE][1] + " in these questions.")
+            best_type = WRITING_TYPE_DICT[positivecram[WRITING_TYPE][0]]
+            lines.append(paropen + "Your strongest writing section is " + best_type + " as you are scoring " + positivecram[WRITING_TYPE][1] + " in these questions.")
+            if best_type != type_name:
+                lines.append(paropen + "Your weakest writing section is " + type_name + " as you are only scoring " + cram[WRITING_TYPE][1] + " in these questions.")
         
         if (cram[MATH_TYPE][0] != None):
-            lines.append("<h3><i>Math Weakness:</i></h3>" + endl)
+            lines.append("<h3><i>Math Highlights:</i></h3>" + endl)
             type_name = MATH_TYPE_DICT[cram[MATH_TYPE][0]]
-            lines.append(paropen + "Your weakest math section is " + type_name + " as you are only scoring " + cram[MATH_TYPE][1] + " in these questions.")
+            best_type = MATH_TYPE_DICT[positivecram[MATH_TYPE][0]]
+            lines.append(paropen + "Your strongest math section is " + best_type + " as you are scoring " + positivecram[MATH_TYPE][1] + " in these questions.")
+            if best_type != type_name:
+                lines.append(paropen + "Your weakest math section is " + type_name + " as you are only scoring " + cram[MATH_TYPE][1] + " in these questions.")
 
 
         #Footer

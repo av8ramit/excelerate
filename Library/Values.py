@@ -169,14 +169,14 @@ pa3 = "You are performing well."
 pa4 = "Great work."
 pa5 = "You've been improving a lot."
 positive = [pa1, pa2, pa3, pa4, pa5]
-p_thresh = 0.7
+p_thresh = 0.8
 
 #average
 aa1 = "Your performance here is okay. Focus on other weaker areas first."
 aa2 = "Your scores in this category are average."
 aa3 = "Improve in these areas once you have finished working on your more poor areas."
 average = [aa1, aa2, aa3]
-a_thresh = 0.4
+a_thresh = 0.55
 
 #negative
 na1 = "Uh oh, you need some work in this category."
@@ -191,8 +191,8 @@ ga1 = "Your guesses in this category are often wrong. Consider leaving them blan
 ga2 = "Leave more questions in these catgories blank. You are losing 1/4th a point for each one you miss."
 ga3 = "Instead of guessing, leave these questions blank."
 ga4 = "Guessing in this category is a much better option and will improve your score."
-guess = [ga1, ga2, ga3, ga4]
-
+guess_remove = ""
+guess = [guess_remove, guess_remove, guess_remove, guess_remove]
 def div(x, y):
   if y == 0:
     return 0
@@ -232,8 +232,8 @@ def percentage(decimal):
   output = str(int(decimal)) + "%"
   return output
 
-average_bound1 = 500
-average_bound2 = 600
+average_bound1 = 550
+average_bound2 = 670
 
 def qualitative_color(score):
   if score < average_bound1:

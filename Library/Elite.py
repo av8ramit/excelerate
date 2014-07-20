@@ -14,6 +14,7 @@ from Commands import *
 from User import *
 from os import *
 import csv
+import shutil
 
 #Base Elite Class Class
 
@@ -36,6 +37,16 @@ SECTION_8 = 16
 SECTION_9 = 17
 SECTION_10 = 18
 DIFFERENCE = 8
+GRID_1 = 19
+GRID_2 = 20
+GRID_3 = 21
+GRID_4 = 22
+GRID_5 = 23
+GRID_6 = 24
+GRID_7 = 25
+GRID_8 = 26
+GRID_9 = 27
+GRID_10 = 28
 
 class Elite_Class(object):
 
@@ -46,6 +57,7 @@ class Elite_Class(object):
 
 
     def convert_database(self, filename):
+        #n = 0
         with open(filename, 'rU') as f:
             reader = csv.reader(f)
             for row in reader:
@@ -54,13 +66,13 @@ class Elite_Class(object):
                     continue
                 if SID not in self.students.keys():
                     self.students[SID] = User(SID, 'Elite')
-
+                #n+=1
                 userid = row[STUDENT_ID_INDEX]
                 test_id = row[FORM_CODE]
                 user_test = Scored_Test(test_id)
                 test_key = self.key_test(test_id)
                 for index in range(SECTION_1, SECTION_10 + 1):
-                    array = self.convert_section(index, row[index], test_id)
+                    array = self.convert_section(index, row[index], test_id, row)
                     #print (array)
                     #print ('\n\n')
                     section_type = test_key[index - DIFFERENCE]
@@ -69,6 +81,8 @@ class Elite_Class(object):
                         #print ('!!!')
                         user_test.missed_questions[test_key[index - DIFFERENCE]] += array
                 self.students[SID].tests_taken.append(user_test)
+                #if n==2:
+                #    break
         new_class('Elite')
         for student in self.students.keys():
             new_user(student, 'Elite')
@@ -77,6 +91,9 @@ class Elite_Class(object):
             simple_report(u)
             advanced_report(u)
             section_report(u)
+            graph_report(u)
+            shutil.copy2('reports.html', 'Users/Elite/' + student)
+
 
 
             #break
@@ -89,7 +106,7 @@ class Elite_Class(object):
             return False
         return True
 
-    def convert_section(self, section_index, results_string, test_id):
+    def convert_section(self, section_index, results_string, test_id, row):
         section_number = section_index - DIFFERENCE
         question_index = 0
         missed_array = []
@@ -102,7 +119,73 @@ class Elite_Class(object):
                 else: #incorrect
                     entry = (q_id, char)
                 missed_array.append(entry)
+        if self.math_grid(test_id, section_number):
+            answer_key = self.convert_grid(test_id, section_number)
+            answer_array = []
+            for index in range(GRID_1, GRID_10 + 1):
+                answer = row[index]
+                result = self.translate_grid_answer(answer, answer_key[index-19])
+                #print (result)
+                if result != "CORRECT":
+                    q_id = test_id + FIELD_SEP + str(section_number) + FIELD_SEP + str(len(results_string)+(index-18))
+                    entry = (q_id, result[1])
+                    missed_array.append(entry)                    
         return missed_array
+
+    def math_grid(self, test_id, section_id):
+        filename = test_directory(test_id) + "/Section " + str(section_id) + CSV 
+        if not file_exists(filename):
+            return False
+        with open(filename, 'rU') as f:
+            reader = csv.reader(f)
+            for row in reader:
+                if row[RANGE_INDEX] == "Y":
+                    return True
+        return False
+
+
+    def translate_grid_answer(self, answer, key_answer):
+        attempt = None
+        if answer == '':
+            return 'BLANK','?'
+        try:
+            if '/' in answer:
+                num = answer.split('/')[0]
+                sub = answer.split('/')[1]
+                attempt = round(div(num, sub),3)
+            elif '.' in answer:
+                attempt = float(answer)
+            else:
+                attempt = int(answer)
+        except:
+            attempt = "A"
+
+        answer = key_answer
+        #print (attempt)
+        if '(' in answer and ')' in answer:
+            answer = answer.replace(' ','')
+            answer = answer.replace('(','')
+            answer = answer.replace(')','')
+            lower_limit = float(answer.split(',')[0])
+            upper_limit = float(answer.split(',')[1])
+            if attempt >= lower_limit and attempt <= upper_limit:
+                return "CORRECT"
+        elif attempt == float(answer):
+            return "CORRECT"
+        #print(attempt)
+        return "INCORRECT",attempt
+
+
+    def convert_grid(self, test_id, section_id):
+        array = []
+        filename = test_directory(test_id) + "/Section " + str(section_id) + CSV 
+        with open(filename, 'rU') as f:
+            reader = csv.reader(f)
+            for row in reader:
+                if row[RANGE_INDEX] == "Y":
+                    array.append(row[ANSWER_INDEX])
+        return array
+
 
     def key_test(self, test_id):
         test_dict = {}
@@ -112,7 +195,6 @@ class Elite_Class(object):
                 if row != KEY_VECTOR:
                     test_dict[int(row[KEY_INDEX])] = int(row[KEY_TYPE])
         return test_dict
-
 
                 
 
