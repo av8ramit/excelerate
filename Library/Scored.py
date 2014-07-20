@@ -28,6 +28,8 @@ class Scored_Test(object):
         self.score_summary = None
         self.data = Data_Holder()
         self.qtypedict = {}
+        self.essay = 7
+        self.date = ''
 
     #This sets the test summary upon creation and recreation.
     def set_summary(self, s):
@@ -117,6 +119,7 @@ class Scored_Test(object):
 
         #create Test Summary for Scored Test
         self.test_summary = Test_Summary(self.test_id)
+        self.test_summary.essay = self.essay
 
         #WRITING RECONSTRUCTION
         self.make_sections(sections[WRITING_TYPE], WRITING_TYPE)
@@ -131,7 +134,9 @@ class Scored_Test(object):
     #String override method.
     def __str__(self):
         output = endl + "TEST_ID: " + self.test_id + endl
-        output += endl              
+        output += endl
+        output += ("DATE: " + self.date + endl)
+        output += ("ESSAY: " + str(self.essay) + endl)              
         output += "WRITING:" + endl
         output += "Missed Questions:"
         output += str(self.missed_questions[WRITING_TYPE])

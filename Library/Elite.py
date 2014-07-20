@@ -70,6 +70,11 @@ class Elite_Class(object):
                 userid = row[STUDENT_ID_INDEX]
                 test_id = row[FORM_CODE]
                 user_test = Scored_Test(test_id)
+                user_test.date = row[TEST_DATE_INDEX]
+                if (is_int(row[ESSAY_INDEX])):
+                    user_test.essay = row[ESSAY_INDEX]
+                else:
+                    user_test.essay = 7
                 test_key = self.key_test(test_id)
                 for index in range(SECTION_1, SECTION_10 + 1):
                     array = self.convert_section(index, row[index], test_id, row)

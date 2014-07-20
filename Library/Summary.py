@@ -21,7 +21,7 @@ class Score_Summary(object):
         self.writing_score = test_summary.reports[WRITING_TYPE].raw_score()
         self.reading_score = test_summary.reports[READING_TYPE].raw_score()
         self.math_score = test_summary.reports[MATH_TYPE].raw_score()
-        self.lookup_score(self.writing_score, self.reading_score, self.math_score)
+        self.lookup_score(self.writing_score, self.reading_score, self.math_score, test_summary.essay)
 
     #Calculates total score.
     def total_score(self):
@@ -31,11 +31,12 @@ class Score_Summary(object):
         return score
 
     #Looks up score in table based upon test scoring sheet.
-    def lookup_score(self, ws, rs, ms):
+    def lookup_score(self, ws, rs, ms, es = 7):
         scores = {}
         scores[MATH_TYPE] = 200
         scores[WRITING_TYPE] = 200
         scores[READING_TYPE] = 200
+        """
         with open(test_directory(self.id) + DIR_SEP + SCOREFILE, 'rU') as f:
             reader = csv.reader(f)
             for row in reader:
@@ -53,7 +54,35 @@ class Score_Summary(object):
                         #print "MS: " + str(ms)
                         #print "Raw: " + str(scores[MATH_TYPE])                          
                         scores[MATH_TYPE] = int(row[2])                     
-            self.section_scores = scores
+            self.section_scores = scores"""
+        with open(test_directory(self.id) + DIR_SEP + MATH_SCOREFILE, 'rU') as f:
+            reader = csv.reader(f)
+            for row in reader:
+                if row[0] != SCORE_VECTOR[0] and not empty(row):
+                    score = int(row[0])
+                    if ms == score:
+                        scores[MATH_TYPE] = int(row[1])
+                        break
+
+        with open(test_directory(self.id) + DIR_SEP + READING_SCOREFILE, 'rU') as f:
+            reader = csv.reader(f)
+            for row in reader:
+                if row[0] != SCORE_VECTOR[0] and not empty(row):
+                    score = int(row[0])
+                    if rs == score:
+                        scores[READING_TYPE] = int(row[1])
+                        break
+
+        with open(test_directory(self.id) + DIR_SEP + WRITING_SCOREFILE, 'rU') as f:
+            reader = csv.reader(f)
+            for row in reader:
+                if row[0] != SCORE_VECTOR[0] and not empty(row):
+                    score = int(row[0])
+                    if ws == score:
+                        scores[WRITING_TYPE] = int(row[es])
+                        break
+        self.section_scores = scores
+
 
     #String override method.
     def __str__(self):
@@ -70,6 +99,7 @@ class Test_Summary(object):
     #This is the default constructor with all variables defined.
     def __init__(self, test_id):
         self.id = test_id
+        self.essay = 7
         self.reports = {}
         self.reports[MATH_TYPE] = Section_Summary(test_id, MATH_TYPE)
         self.reports[READING_TYPE] = Section_Summary(test_id, READING_TYPE)

@@ -72,6 +72,10 @@ class User(object):
                     test_id = line.split(' ')[1]
                     sections = {}
                     current_test = Scored_Test(test_id)
+                elif 'ESSAY' in line:
+                    current_test.essay = int(line.split(' ')[1])
+                elif 'DATE' in line:
+                    current_test.date = line.split(' ')[1]
                 elif 'WRITING:' in line:
                     current_TYPE = WRITING_TYPE
                 elif 'MATH:' in line:
