@@ -147,16 +147,16 @@ class Question_Stats(object):
 
     def __str__(self):
         output = ""
-        output += "T: "
+        output += "Total: "
         output += str(self.t)
         output += " | "
-        output += "C: "
+        output += "Correct: "
         output += str(self.c)
         output += " | "
-        output += "M: "
+        output += "Missed: "
         output += str(self.m)
         output += " | "
-        output += "B: "
+        output += "Blank: "
         output += str(self.b)
         output += "</font></p><p>"
         output += endl

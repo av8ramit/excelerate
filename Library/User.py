@@ -478,24 +478,27 @@ class User(object):
         #Writing Analytics
         lines.append("<h3><i>Writing Analytics:</i></h3>" + endl)
         for i in range(1, WRITING_TYPES + 1):
-            lines.append('<p><b><font color = "' + self.data.data[WRITING_TYPE].stats["W"+str(i)].color() +'">' + WRITING_TYPE_DICT["W" + str(i)] + '</b> ' + str(self.data.data[WRITING_TYPE].stats["W"+str(i)]) + '</p>')
-            lines.append(endl)
+            if self.data.data[WRITING_TYPE].stats["W"+str(i)].t != 0:
+                lines.append('<p><b><font color = "' + self.data.data[WRITING_TYPE].stats["W"+str(i)].color() +'">' + WRITING_TYPE_DICT["W" + str(i)] + '</b> ' + str(self.data.data[WRITING_TYPE].stats["W"+str(i)]) + '</p>')
+                lines.append(endl)
         lines.append('<hr color="#4169EF" size="1" width="90%">' + endl)
         lines.append("<br>" + endl)     
 
         #Reading Analytics
         lines.append("<h3><i>Reading Analytics:</i></h3>" + endl)
         for i in range(1, READING_TYPES + 1):
-            lines.append('<p><b><font color = "' + self.data.data[READING_TYPE].stats["R"+str(i)].color() +'">' + READING_TYPE_DICT["R" + str(i)] + "</b> " + str(self.data.data[READING_TYPE].stats["R"+str(i)]) + '</p>')
-            lines.append(endl)  
+            if self.data.data[READING_TYPE].stats["R"+str(i)].t != 0:
+                lines.append('<p><b><font color = "' + self.data.data[READING_TYPE].stats["R"+str(i)].color() +'">' + READING_TYPE_DICT["R" + str(i)] + "</b> " + str(self.data.data[READING_TYPE].stats["R"+str(i)]) + '</p>')
+                lines.append(endl)  
         lines.append('<hr color="#4169EF" size="1" width="90%">' + endl)
         lines.append("<br>" + endl)
 
         #Math Analytics
         lines.append("<h3><i>Math Analytics:</i></h3>" + endl)
         for i in range(1, MATH_TYPES + 1):
-            lines.append('<p><b><font color = "' + self.data.data[MATH_TYPE].stats["M"+str(i)].color() +'">' + MATH_TYPE_DICT["M" + str(i)] + "</b> " + str(self.data.data[MATH_TYPE].stats["M"+str(i)]) + '</p>')
-            lines.append(endl)  
+            if self.data.data[MATH_TYPE].stats["M"+str(i)].t != 0:
+                lines.append('<p><b><font color = "' + self.data.data[MATH_TYPE].stats["M"+str(i)].color() +'">' + MATH_TYPE_DICT["M" + str(i)] + "</b> " + str(self.data.data[MATH_TYPE].stats["M"+str(i)]) + '</p>')
+                lines.append(endl)  
         lines.append("<br>" + endl) 
         lines.append('<hr color="#BBBBBB" size="2" width="100%">' + endl)
 
