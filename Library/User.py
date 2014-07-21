@@ -216,9 +216,10 @@ class User(object):
         index = 1
         scores = self.average_scores()
         s1 = []
+
         #calculate all scores
         for test in self.tests_taken:
-            s1.append([index,test.score_summary.total_score()])
+            s1.append([date_converter(test.date),test.score_summary.total_score()])
             index += 1
 
         #graph js
@@ -345,7 +346,7 @@ class User(object):
         graphs = []
         #calculate all scores
         for test in self.tests_taken:
-            s1.append([index,test.score_summary.section_scores[section_type]])
+            s1.append([date_converter(test.date),test.score_summary.section_scores[section_type]])
             index += 1
         
         g = Graph(section_type_name + " Score Performance", graph_index, s1)
@@ -356,8 +357,7 @@ class User(object):
             data = []
             graph_index += 1
             for test in self.tests_taken:
-                data.append(div(test.data.data[section_type].stats[key].c, test.data.data[section_type].stats[key].t) * 100)
-
+                data.append([date_converter(test.date),div(test.data.data[section_type].stats[key].c, test.data.data[section_type].stats[key].t) * 100])
             graphs.append(Graph(type_dict[key], graph_index, data))
 
 
@@ -537,10 +537,10 @@ class User(object):
 
         #calculate all scores
         for test in self.tests_taken:
-            s1.append([index,test.score_summary.total_score()])
-            writing_scores.append([index, test.score_summary.section_scores[WRITING_TYPE]])
-            reading_scores.append([index, test.score_summary.section_scores[READING_TYPE]])
-            math_scores.append([index, test.score_summary.section_scores[MATH_TYPE]])
+            s1.append([date_converter(test.date),test.score_summary.total_score()])
+            writing_scores.append([date_converter(test.date), test.score_summary.section_scores[WRITING_TYPE]])
+            reading_scores.append([date_converter(test.date), test.score_summary.section_scores[READING_TYPE]])
+            math_scores.append([date_converter(test.date), test.score_summary.section_scores[MATH_TYPE]])
             index += 1
 
         #graph js

@@ -8,6 +8,10 @@ USER_LIMIT = 25
 EXPIRATION_DATE = '2014/09/15'
 date_of_expiration = '09/15/2014'
 
+def date_converter(datestring):
+  datestring = datestring.split('/')
+  return ('20'+datestring[2] + '-' + datestring[0] + '-' + datestring[1])
+
 #Question Value
 PARSED_ARRAY_SIZE = 5
 

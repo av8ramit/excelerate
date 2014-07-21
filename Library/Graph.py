@@ -31,7 +31,7 @@ class Graph(object):
         lines = []
         if space:
             lines.append('<br>')
-        lines.append('<div id="chart' + str(self.index) + '" style="height:300px; width:500px;"></div>' + endl)
+        lines.append('<div id="chart' + str(self.index) + '" style="height:300px; width:490px;"></div>' + endl)
         lines.append('<script class="code" type="text/javascript">' + endl)
         lines.append('$(document).ready(function(){' + endl)
         lines.append('var line1 = ' + str(self.data) + ';' + endl)
@@ -45,7 +45,7 @@ class Graph(object):
         lines.append('},' + endl)
         lines.append('highlighter:{ show: true, sizeAdjust: 7.5},' + endl)
         lines.append('axes:{' + endl)
-        lines.append('xaxis:{min:0},' + endl)
+        lines.append('xaxis:{' + 'label:' + "'Date of Test Taken'," + 'renderer:$.jqplot.DateAxisRenderer, tickInterval:' + "'" + '1 week' + "'}," + endl)
         if SIMPLE_REP_FLAG:
             lines.append("yaxis:{" 'min:0, max:2400,'+ 'label:' + "'Score'," + 'labelRenderer: $.jqplot.CanvasAxisLabelRenderer,' + '}' + endl)
             
@@ -75,7 +75,8 @@ class Graph(object):
         lines.append('<script class="include" type="text/javascript" src="../../../Graphs/examples/../plugins/jqplot.canvasTextRenderer.min.js"></script>' + endl)
         lines.append('<script class="include" type="text/javascript" src="../../../Graphs/examples/../plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>' + endl)
         lines.append('<script type="text/javascript" src="../../../Graphs/examples/../plugins/jqplot.highlighter.min.js"></script>' + endl)
-        lines.append('<script type="text/javascript" src="../../../Graphs/examples/../plugins/jqplot.cursor.min.js"></script>')
+        lines.append('<script type="text/javascript" src="../../../Graphs/examples/../plugins/jqplot.cursor.min.js"></script>' + endl)
+        lines.append('<script type="text/javascript" src="../../../Graphs/examples/../plugins/jqplot.dateAxisRenderer.min.js"></script>' + endl)
         return lines
 
 
