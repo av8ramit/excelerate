@@ -308,7 +308,7 @@ class User(object):
             best_type = WRITING_TYPE_DICT[positivecram[WRITING_TYPE][0]]
             lines.append(paropen + "Your strongest writing section is " + best_type + " as you are scoring " + positivecram[WRITING_TYPE][1] + " in these questions.")
             if best_type != type_name:
-                lines.append(paropen + "Your weakest writing section is " + type_name + " as you are only scoring " + cram[WRITING_TYPE][1] + " in these questions.")
+                lines.append(paropen + "Your weakest writing section is " + type_name + " as you are scoring " + cram[WRITING_TYPE][1] + " in these questions.")
         
         if (cram[MATH_TYPE][0] != None):
             lines.append("<h3><i>Math Highlights:</i></h3>" + endl)
@@ -316,7 +316,7 @@ class User(object):
             best_type = MATH_TYPE_DICT[positivecram[MATH_TYPE][0]]
             lines.append(paropen + "Your strongest math section is " + best_type + " as you are scoring " + positivecram[MATH_TYPE][1] + " in these questions.")
             if best_type != type_name:
-                lines.append(paropen + "Your weakest math section is " + type_name + " as you are only scoring " + cram[MATH_TYPE][1] + " in these questions.")
+                lines.append(paropen + "Your weakest math section is " + type_name + " as you are scoring " + cram[MATH_TYPE][1] + " in these questions.")
 
 
         #Footer

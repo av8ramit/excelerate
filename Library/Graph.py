@@ -34,8 +34,41 @@ class Graph(object):
         lines.append('<div id="chart' + str(self.index) + '" style="height:300px; width:490px;"></div>' + endl)
         lines.append('<script class="code" type="text/javascript">' + endl)
         lines.append('$(document).ready(function(){' + endl)
+        if SIMPLE_REP_FLAG:
+            lines.append("var labels = ['Class Average', 'Your Performance'];" + endl)
         lines.append('var line1 = ' + str(self.data) + ';' + endl)
-        lines.append("var plot1 = $.jqplot('chart" + str(self.index) + "', [line1], {" + endl)
+        if SIMPLE_REP_FLAG:
+            filename = class_directory('Elite') + DIR_SEP + "average.txt"
+            with open(filename) as f:
+                array = f.readlines()
+                l = {}
+                total = 0
+                current_date = None
+                for line in array:
+                    line = line.strip()
+                    if line == '':
+                        continue
+                    if 'TEST_DATE' in line:
+                        current_date = line.split(' ')[1]
+                    if 'WRITING:' in line:
+                        total += int(line.split(' ')[1])
+                    if 'MATH:' in line:
+                        total += int(line.split(' ')[1])
+                    if 'READING:' in line:
+                        total += int(line.split(' ')[1])
+                    if SECTION_SEP in line:
+                        l[current_date] = total
+                        total = 0
+                #lines.append("var line2 = " + str(l) + ";" + endl)
+            op= []
+            for entry in self.data:
+                new_entry = [entry[0], l[entry[0]]]
+                op.append(new_entry)
+            lines.append("var line2 = " + str(op) + ";" + endl)
+
+            lines.append("var plot1 = $.jqplot('chart" + str(self.index) + "', [line1, line2], {" + endl)
+        else:
+            lines.append("var plot1 = $.jqplot('chart" + str(self.index) + "', [line1], {" + endl)
         lines.append("animate: true," + endl)
         lines.append("animateReplot:true," + endl)
         lines.append("title:'" + self.name + "'," + endl)
@@ -43,6 +76,17 @@ class Graph(object):
         lines.append('showMarker:true,' + endl)
         lines.append('pointLabels: { show:false } ' + endl)
         lines.append('},' + endl)
+        if SIMPLE_REP_FLAG:
+            lines.append("legend: {" + endl)
+            lines.append("show: true," + endl)
+            lines.append("renderer: $.jqplot.EnhancedLegendRenderer," + endl)
+            lines.append("rendererOptions: {" + endl)
+            lines.append("numberRows: 2" + endl)
+            lines.append("}," + endl)
+            lines.append("placement: 'insideGrid'," + endl)
+            lines.append("labels: labels," + endl)
+            lines.append("location: 'se'" + endl)
+            lines.append("}," + endl)
         lines.append('highlighter:{ show: true, sizeAdjust: 7.5},' + endl)
         lines.append('axes:{' + endl)
         lines.append('xaxis:{' + 'label:' + "'Date of Test Taken'," + 'renderer:$.jqplot.DateAxisRenderer, tickInterval:' + "'" + '1 week' + "'}," + endl)
@@ -77,6 +121,7 @@ class Graph(object):
         lines.append('<script type="text/javascript" src="../../../Graphs/examples/../plugins/jqplot.highlighter.min.js"></script>' + endl)
         lines.append('<script type="text/javascript" src="../../../Graphs/examples/../plugins/jqplot.cursor.min.js"></script>' + endl)
         lines.append('<script type="text/javascript" src="../../../Graphs/examples/../plugins/jqplot.dateAxisRenderer.min.js"></script>' + endl)
+        lines.append('<script type="text/javascript" src="../../../Graphs/examples/../plugins/jqplot.enhancedLegendRenderer.min.js"></script>' + endl)
         return lines
 
 

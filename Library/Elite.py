@@ -74,18 +74,19 @@ class Elite_Class(object):
                 #n+=1
                 userid = row[STUDENT_ID_INDEX]
                 test_id = row[FORM_CODE]
+                test_date = date_converter(row[TEST_DATE_INDEX])
 
-                if test_id not in self.averages.keys():
-                    self.averages[test_id] = {}
-                    self.averages[test_id][MATH_TYPE] = []
-                    self.averages[test_id][READING_TYPE] = []
-                    self.averages[test_id][WRITING_TYPE] = []
+                if test_date not in self.averages.keys():
+                    self.averages[test_date] = {}
+                    self.averages[test_date][MATH_TYPE] = []
+                    self.averages[test_date][READING_TYPE] = []
+                    self.averages[test_date][WRITING_TYPE] = []
 
                 user_test = Scored_Test(test_id)
                 user_test.date = row[TEST_DATE_INDEX]
-                self.averages[test_id][WRITING_TYPE].append(int(row[WRITING_SCALED]))
-                self.averages[test_id][MATH_TYPE].append(int(row[MATH_SCALED]))
-                self.averages[test_id][READING_TYPE].append(int(row[READING_SCALED]))
+                self.averages[test_date][WRITING_TYPE].append(int(row[WRITING_SCALED]))
+                self.averages[test_date][MATH_TYPE].append(int(row[MATH_SCALED]))
+                self.averages[test_date][READING_TYPE].append(int(row[READING_SCALED]))
                 if (is_int(row[ESSAY_INDEX])):
                     user_test.essay = row[ESSAY_INDEX]
                 else:
@@ -111,6 +112,19 @@ class Elite_Class(object):
                 #if n==2:
                 #    break
         new_class('Elite')
+        filename = class_directory('Elite') + DIR_SEP + "average.txt"
+        array = []
+        with open(filename, 'w') as f:
+            for key in self.averages:
+                array.append("TEST_DATE: " + key + endl)
+                array.append("WRITING: " + str(self.averages[key][WRITING_TYPE]) + endl)
+                array.append("READING: " + str(self.averages[key][READING_TYPE]) + endl)
+                array.append("MATH: " + str(self.averages[key][MATH_TYPE]) + endl)
+                array.append(SECTION_SEP + endl)
+                array.append(endl)
+            f.writelines(array)
+            f.close()
+
         for student in self.students.keys():
             new_user(student, 'Elite')
             self.students[student].save_user()
@@ -120,18 +134,6 @@ class Elite_Class(object):
             section_report(u)
             graph_report(u)
             shutil.copy2('reports.html', 'Users/Elite/' + student)
-
-        filename = class_directory('Elite') + DIR_SEP + "average.txt"
-        array = []
-        with open(filename, 'w') as f:
-            for key in self.averages:
-                array.append("TEST_ID: " + key + endl)
-                array.append("WRITING: " + str(self.averages[key][WRITING_TYPE]) + endl)
-                array.append("READING: " + str(self.averages[key][READING_TYPE]) + endl)
-                array.append("MATH: " + str(self.averages[key][MATH_TYPE]) + endl)
-                array.append(endl)
-            f.writelines(array)
-            f.close()
 
 
             #break
