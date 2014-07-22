@@ -47,12 +47,17 @@ GRID_7 = 25
 GRID_8 = 26
 GRID_9 = 27
 GRID_10 = 28
+MATH_SCALED = 38
+READING_SCALED = 39
+WRITING_SCALED = 40
 
 class Elite_Class(object):
 
     def __init__(self, filename):
         self.students = {}
         self.valid_tests = list_tests()
+        self.averages = {}
+
         self.convert_database(filename)
 
 
@@ -69,8 +74,18 @@ class Elite_Class(object):
                 #n+=1
                 userid = row[STUDENT_ID_INDEX]
                 test_id = row[FORM_CODE]
+
+                if test_id not in self.averages.keys():
+                    self.averages[test_id] = {}
+                    self.averages[test_id][MATH_TYPE] = []
+                    self.averages[test_id][READING_TYPE] = []
+                    self.averages[test_id][WRITING_TYPE] = []
+
                 user_test = Scored_Test(test_id)
                 user_test.date = row[TEST_DATE_INDEX]
+                self.averages[test_id][WRITING_TYPE].append(int(row[WRITING_SCALED]))
+                self.averages[test_id][MATH_TYPE].append(int(row[MATH_SCALED]))
+                self.averages[test_id][READING_TYPE].append(int(row[READING_SCALED]))
                 if (is_int(row[ESSAY_INDEX])):
                     user_test.essay = row[ESSAY_INDEX]
                 else:
@@ -86,6 +101,13 @@ class Elite_Class(object):
                         #print ('!!!')
                         user_test.missed_questions[test_key[index - DIFFERENCE]] += array
                 self.students[SID].tests_taken.append(user_test)
+
+        for test in self.averages.keys():
+            self.averages[test][WRITING_TYPE] = average_array(self.averages[test][WRITING_TYPE])
+            self.averages[test][READING_TYPE] = average_array(self.averages[test][READING_TYPE])
+            self.averages[test][MATH_TYPE] = average_array(self.averages[test][MATH_TYPE])
+        #print(self.averages)
+
                 #if n==2:
                 #    break
         new_class('Elite')
@@ -99,6 +121,17 @@ class Elite_Class(object):
             graph_report(u)
             shutil.copy2('reports.html', 'Users/Elite/' + student)
 
+        filename = class_directory('Elite') + DIR_SEP + "average.txt"
+        array = []
+        with open(filename, 'w') as f:
+            for key in self.averages:
+                array.append("TEST_ID: " + key + endl)
+                array.append("WRITING: " + str(self.averages[key][WRITING_TYPE]) + endl)
+                array.append("READING: " + str(self.averages[key][READING_TYPE]) + endl)
+                array.append("MATH: " + str(self.averages[key][MATH_TYPE]) + endl)
+                array.append(endl)
+            f.writelines(array)
+            f.close()
 
 
             #break

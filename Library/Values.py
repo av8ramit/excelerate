@@ -377,6 +377,13 @@ def section_name(section_type):
     print ("Error invalid section type.")
     return 0
 
+def average_array(array):
+  average = 0
+  for element in array:
+    average+=element
+  return average // len(array)
+
+
 def index_exists(dictionary, key):
   return key in dictionary.keys()
 
