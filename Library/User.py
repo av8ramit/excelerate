@@ -146,16 +146,19 @@ class User(object):
         writing_score = 0
         reading_score = 0
         math_score = 0
+        essay_score = 0
         total_score = 0
         for test in self.tests_taken:
             writing_score += test.score_summary.section_scores[WRITING_TYPE]
             reading_score += test.score_summary.section_scores[READING_TYPE]
             math_score += test.score_summary.section_scores[MATH_TYPE]
+            essay_score += test.essay
         total_score = (writing_score + reading_score + math_score) // len(self.tests_taken)
         reading_score = reading_score // len(self.tests_taken)
         writing_score = writing_score // len(self.tests_taken)
         math_score = math_score // len(self.tests_taken)
-        return [total_score, reading_score, writing_score, math_score]
+        essay_score = essay_score // len(self.tests_taken)
+        return [total_score, reading_score, writing_score, math_score, essay_score]
 
     def reset_account(self):
         self.tests_taken = [] #array of scored tests for data analysis
@@ -255,8 +258,8 @@ class User(object):
         lines.append('<p><b>Writing Performance:</b><font color = "' + qualitative_color(scores[2]) + '"> ' + qualitative(scores[2]) + '</font></p>' + endl)
         lines.append('<p><b>Reading Performance:</b><font color = "' + qualitative_color(scores[1]) + '"> ' + qualitative(scores[1]) + '</font></p>' + endl)
         lines.append('<p><b>Math Performance:</b><font color = "' + qualitative_color(scores[3]) + '"> ' + qualitative(scores[3]) + '</font></p>' + endl)
-        lines.append('<p><b>Essay Performance:</b> Unknown</p>' + endl)
-        lines.append('<p><i>Here are the details regarding the scores. Average scores are between 500 to 600. All scores above average are recorded as proficient and all scores below are noted as poor. Unknown scores have no records.</i></p>' + endl)
+        #lines.append('<p><b>Essay Performance:</b> Unknown</p>' + endl)
+        lines.append('<p><i>Here are the details regarding the scores. Average scores are between 550 to 670. All scores above average are recorded as proficient and all scores below are noted as poor. Unknown scores have no records.</i></p>' + endl)
         lines.append('<hr color="#BBBBBB" size="2" width="100%">' + endl)
 
         #Average Results
@@ -265,7 +268,7 @@ class User(object):
         lines.append('<p><b>Average Writing Score:</b><font color = "' + qualitative_color(scores[2]) + '">  ' + str(scores[2]) + '/800</font></p>' + endl)
         lines.append('<p><b>Average Reading Score:</b><font color = "' + qualitative_color(scores[1]) + '">  ' + str(scores[1]) + '/800</font></p>' + endl)
         lines.append('<p><b>Average Math Score:</b><font color = "' + qualitative_color(scores[3]) + '">  ' + str(scores[3]) + '/800</font></p>' + endl)
-        lines.append('<p><b>Average Essay Score:</b> ??/12</p>' + endl)
+        lines.append('<p><b>Average Essay Score: </b>' + str(scores[4]) + '/12</p>' + endl)
         lines.append('<p><b>Tests Taken:</b> ' + str(len(self.tests_taken)) + '</p>' + endl)
         lines.append('<hr color="#BBBBBB" size="2" width="100%">' + endl)
 
@@ -467,7 +470,7 @@ class User(object):
         lines.append('<p><b>Average Writing Score:</b><font color = "' + qualitative_color(scores[2]) + '">  ' + str(scores[2]) + '/800</font></p>' + endl)
         lines.append('<p><b>Average Reading Score:</b><font color = "' + qualitative_color(scores[1]) + '">  ' + str(scores[1]) + '/800</font></p>' + endl)
         lines.append('<p><b>Average Math Score:</b><font color = "' + qualitative_color(scores[3]) + '">  ' + str(scores[3]) + '/800</font></p>' + endl)
-        lines.append('<p><b>Average Essay Score:</b> ??/12</p>' + endl)
+        lines.append('<p><b>Average Essay Score: </b>' + str(scores[4]) + '/12</p>' + endl)
         lines.append('<p><b>Tests Taken:</b> ' + str(len(self.tests_taken)) + '</p>' + endl)
         lines.append('<hr color="#BBBBBB" size="2" width="100%">' + endl)
 
