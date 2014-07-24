@@ -12,11 +12,12 @@ from Values import *
 from User import *
 class Graph(object):
 
-    def __init__(self, name, index, points):
+    def __init__(self, name, index, points, averages = None, overallreport = None):
         self.name = name
         self.index = index
         self.data = points
-
+        self.section_averages = averages
+        self.overallrep = overallreport
     def head(self):
         lines = []
         lines.append('<link class="include" rel="stylesheet" type="text/css" href="../../../Graphs/examples/../jquery.jqplot.min.css" />' + endl)
@@ -34,10 +35,10 @@ class Graph(object):
         lines.append('<div id="chart' + str(self.index) + '" style="height:300px; width:490px;"></div>' + endl)
         lines.append('<script class="code" type="text/javascript">' + endl)
         lines.append('$(document).ready(function(){' + endl)
-        if SIMPLE_REP_FLAG:
-            lines.append("var labels = ['Class Average', 'Your Performance'];" + endl)
+        #if SIMPLE_REP_FLAG:
+         #   lines.append("var labels = ['Class Average', 'Your Performance'];" + endl)
         lines.append('var line1 = ' + str(self.data) + ';' + endl)
-        if SIMPLE_REP_FLAG:
+        if SIMPLE_REP_FLAG :
             filename = class_directory('Elite') + DIR_SEP + "average.txt"
             with open(filename) as f:
                 array = f.readlines()
@@ -52,10 +53,13 @@ class Graph(object):
                         current_date = line.split(' ')[1]
                     if 'WRITING:' in line:
                         total += int(line.split(' ')[1])
+                        
                     if 'MATH:' in line:
                         total += int(line.split(' ')[1])
+                        
                     if 'READING:' in line:
                         total += int(line.split(' ')[1])
+
                     if SECTION_SEP in line:
                         l[current_date] = total
                         total = 0
@@ -64,11 +68,14 @@ class Graph(object):
             for entry in self.data:
                 new_entry = [entry[0], l[entry[0]]]
                 op.append(new_entry)
-            lines.append("var line2 = " + str(op) + ";" + endl)
 
+            lines.append("var line2 = " + str(op) + ";" + endl)
+            lines.append("var labels = ['Class Average', 'Your Performance'];" + endl)
             lines.append("var plot1 = $.jqplot('chart" + str(self.index) + "', [line1, line2], {" + endl)
         else:
-            lines.append("var plot1 = $.jqplot('chart" + str(self.index) + "', [line1], {" + endl)
+            lines.append("var labels = ['Class Average', 'Your Performance'];" + endl)
+            lines.append("var line2 = " + str(self.section_averages) + ";" + endl)
+            lines.append("var plot1 = $.jqplot('chart" + str(self.index) + "', [line1, line2], {" + endl)
         lines.append("animate: true," + endl)
         lines.append("animateReplot:true," + endl)
         lines.append("title:'" + self.name + "'," + endl)
@@ -76,7 +83,18 @@ class Graph(object):
         lines.append('showMarker:true,' + endl)
         lines.append('pointLabels: { show:false } ' + endl)
         lines.append('},' + endl)
-        if SIMPLE_REP_FLAG:
+        lines.append("legend: {" + endl)
+        lines.append("show: true," + endl)
+        lines.append("renderer: $.jqplot.EnhancedLegendRenderer," + endl)
+        lines.append("rendererOptions: {" + endl)
+        lines.append("numberRows: 2" + endl)
+        lines.append("}," + endl)
+        lines.append("placement: 'insideGrid'," + endl)
+        lines.append("labels: labels," + endl)
+        lines.append("location: 'se'" + endl)
+        lines.append("}," + endl)
+        '''        
+        if SIMPLE_REP_FLAG :
             lines.append("legend: {" + endl)
             lines.append("show: true," + endl)
             lines.append("renderer: $.jqplot.EnhancedLegendRenderer," + endl)
@@ -87,12 +105,15 @@ class Graph(object):
             lines.append("labels: labels," + endl)
             lines.append("location: 'se'" + endl)
             lines.append("}," + endl)
+        '''
         lines.append('highlighter:{ show: true, sizeAdjust: 7.5},' + endl)
         lines.append('axes:{' + endl)
         lines.append('xaxis:{' + 'label:' + "'Date of Test Taken'," + 'renderer:$.jqplot.DateAxisRenderer, tickInterval:' + "'" + '1 week' + "'}," + endl)
-        if SIMPLE_REP_FLAG:
+        if SIMPLE_REP_FLAG or self.overallrep == True:
             lines.append("yaxis:{" 'min:0, max:2400,'+ 'label:' + "'Score'," + 'labelRenderer: $.jqplot.CanvasAxisLabelRenderer,' + '}' + endl)
-            
+        elif self.section_averages != None:
+            lines.append("yaxis:{" 'min:0, max:800,'+ 'label:' + "'Score'," + 'labelRenderer: $.jqplot.CanvasAxisLabelRenderer,' + '}' + endl)
+
         elif percent:
             lines.append("yaxis:{" + 'label:' + "'Percent Correct'," + 'labelRenderer: $.jqplot.CanvasAxisLabelRenderer,' + "tickOptions: {formatString: " +  '"' +'%' + "'d" + '%"' + '}}' + endl)    
         else:

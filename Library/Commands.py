@@ -62,13 +62,12 @@ def class_missed_qs_array(classname):
 
     for question in classwritingqs:
         frequency = classwritingqs.count(question)
-        print(str(frequency) + " writing " + question) 
+        #print(str(frequency) + " writing " + question) 
         CLASS_MISSED_WRITING.append(Class_Question(question,frequency)) 
         if frequency > 1:
             for i in range(1,frequency):
                 classwritingqs.remove(question)
             
-    print(str(ccount))
 
     for question in classreadingqs:
         frequency = classreadingqs.count(question)

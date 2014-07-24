@@ -537,7 +537,11 @@ class User(object):
         math_scores = []
         graph_index = 1
         index = 1
-
+        l = {} #overall class average dictionary
+        m = {} #math class average dictionary
+        r = {} #reading " " "
+        w = {} #writing " " "
+        overall_rep_flag = True
         #calculate all scores
         for test in self.tests_taken:
             s1.append([date_converter(test.date),test.score_summary.total_score()])
@@ -546,14 +550,57 @@ class User(object):
             math_scores.append([date_converter(test.date), test.score_summary.section_scores[MATH_TYPE]])
             index += 1
 
+        # calculate class averages for each of the 4 graphs Overall, M W R Sections
+        filename = class_directory('Elite') + DIR_SEP + "average.txt"
+        with open(filename) as f:
+            array = f.readlines()
+            total = 0
+            current_date = None
+            for line in array:
+                line = line.strip()
+                if line == '':
+                    continue
+                if 'TEST_DATE' in line:
+                    current_date = line.split(' ')[1]
+
+                if 'WRITING:' in line:
+                    total += int(line.split(' ')[1])
+                    w[current_date] = total # get writing class average for 'current_date'
+
+                if 'MATH:' in line:
+                    total += int(line.split(' ')[1])
+                    m[current_date] = int(line.split(' ')[1])
+                        
+                if 'READING:' in line:
+                    total += int(line.split(' ')[1])
+                    r[current_date] = int(line.split(' ')[1])
+                        
+                if SECTION_SEP in line:
+                    l[current_date] = total
+                    total = 0
+        op= []
+        math_class_average = []
+        reading_class_average = []
+        writing_class_average = []
+
+        for entry in s1:
+            new_entry = [entry[0], l[entry[0]]]
+            math_new_entry = [entry[0], m[entry[0]]] # get math class average for test on that date
+            reading_new_entry = [entry[0], r[entry[0]]]
+            writing_new_entry = [entry[0], w[entry[0]]]
+            op.append(new_entry)
+            math_class_average.append(math_new_entry)
+            reading_class_average.append(reading_new_entry)
+            writing_class_average.append(writing_new_entry)
+
         #graph js
-        g = Graph("Overall Score Performance", graph_index, s1)
+        g = Graph("Overall Score Performance", graph_index, s1, op, overall_rep_flag)
         graph_index += 1
-        wg = Graph("Writing Score Performance", graph_index, writing_scores)
+        wg = Graph("Writing Score Performance", graph_index, writing_scores, writing_class_average)
         graph_index += 1
-        rg = Graph("Reading Score Performance", graph_index, reading_scores)
+        rg = Graph("Reading Score Performance", graph_index, reading_scores, reading_class_average)
         graph_index += 1
-        mg = Graph("Math Score Performance", graph_index, math_scores)
+        mg = Graph("Math Score Performance", graph_index, math_scores, math_class_average)
         graph_index += 1
         graphs.append(g)
         graphs.append(wg)

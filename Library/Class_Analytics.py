@@ -19,8 +19,15 @@ class Analytics(object):
         users = list_users_array(self.c)
         self.user_weakpoints_dict = {}  
         self.type_classes = {} 
-        self.uw_frequency = []
-        self.uw_frequency_dict = {} 
+        self.uw_frequencym = []
+        self.uw_frequencyr = []
+        self.uw_frequencyw = []
+        self.uw_frequency_dictm = {}  # weak question type: student frequency 
+        self.uw_frequency_dictr = {}
+        self.uw_frequency_dictw = {}
+        self.piechart_datam = []   #   ^^^ data formatted for piechart 
+        self.piechart_datar = []
+        self.piechart_dataw = []
         for username in users:
             filename = user_filename(username, self.c)
             user = load_user(username, filename, c)
@@ -42,25 +49,41 @@ class Analytics(object):
                         total += current_percentage
                         percent_array.append(current_percentage)
                     if(section_type == WRITING_TYPE):
-                        self.uw_frequency.append(WRITING_TYPE_DICT[lowest_type])
-                        
+                        self.uw_frequencyw.append(WRITING_TYPE_DICT[lowest_type])
+
                     if(section_type == READING_TYPE):
-                        self.uw_frequency.append(READING_TYPE_DICT[lowest_type])
+                        self.uw_frequencyr.append(READING_TYPE_DICT[lowest_type])
                             
                     if(section_type == MATH_TYPE):
-                        self.uw_frequency.append(MATH_TYPE_DICT[lowest_type])
+                        self.uw_frequencym.append(MATH_TYPE_DICT[lowest_type])
 
                     average_percent = int(div(total,len(percent_array)))
                     uw.weakpoints[section_type] = (lowest_type, average_percent)
 
                 self.user_weakpoints_dict[user.name] = uw   
        
-        for qtype in self.uw_frequency:
-            freq = self.uw_frequency.count(qtype)
-            if freq > 1:
-                for i in range(0,freq):
-                    self.uw_frequency.remove(qtype) 
-            self.uw_frequency_dict[qtype] = freq  
+        for qtype in self.uw_frequencym:
+            freq = self.uw_frequencym.count(qtype)
+            self.uw_frequency_dictm[qtype] = freq
+            self.piechart_datam.append([str(qtype),freq])
+            for i in range(freq):
+                self.uw_frequencym.remove(qtype)   
+
+        for qtype in self.uw_frequencyr:
+            freq = self.uw_frequencyr.count(qtype)
+            self.uw_frequency_dictr[qtype] = freq  
+            self.piechart_datar.append([str(qtype),freq])
+            for i in range(freq):
+                self.uw_frequencyr.remove(qtype) 
+
+        for qtype in self.uw_frequencyw:
+            freq = self.uw_frequencyw.count(qtype)
+            self.uw_frequency_dictw[qtype] = freq
+            self.piechart_dataw.append([str(qtype),freq])
+            for i in range(freq):
+                self.uw_frequencyw.remove(qtype) 
+           
+            
     
     def report(self):
         FILE = open('Users' + DIR_SEP + self.c + DIR_SEP + "analytics" + ".html", "w")
@@ -72,6 +95,10 @@ class Analytics(object):
         lines.append('<head>')
         lines.append('<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />' + endl)
         lines.append('<link rel="stylesheet" type="text/css" href="../../HTML/style.css" />' + endl)
+        lines.append('<link class="include" rel="stylesheet" type="text/css" href="../../Graphs/examples/../jquery.jqplot.min.css" />' + endl)
+        lines.append('<link type="text/css" rel="stylesheet" href="../../Graphs/examples/syntaxhighlighter/styles/shCoreDefault.min.css" />' + endl)
+        lines.append('<link type="text/css" rel="stylesheet" href="../../Graphs/examples/syntaxhighlighter/styles/shThemejqPlot.min.css" />' + endl)
+        lines.append('<script class="include" type="text/javascript" src="../../Graphs/jquery.min.js"></script>' + endl)
         lines.append('<title>Advanced Score Report</title>' + endl)
         lines.append('</head>' + endl)
         lines.append('<body>' + endl)
@@ -114,24 +141,130 @@ class Analytics(object):
 
 
         lines.append(endl)
-
-        lines.append("<h1>Class Question Type Weakness</h1>" + endl)
+        
+        lines.append('<br><hr color="#4169EF" size="1" width="90%">'+ endl)
+        lines.append("<h1>Class Math Question Type Weakness</h1>" + endl)
+        '''
         lines.append('<table style="width:500px">')
         lines.append('<tr><th>Weakest Question Type</th><th>Number Of Students</th></tr>')
 
-        for key in self.uw_frequency_dict:
+        for key in self.uw_frequency_dictm:
             lines.append('<tr>')
             lines.append('<td>' + key + '</td>')
-            lines.append('<td>' + str(self.uw_frequency_dict[key]) + '</td>')
+            lines.append('<td>' + str(self.uw_frequency_dictm[key]) + '</td>')
             lines.append('</tr>')
 
 
         lines.append('</table>')
+        lines.append(endl)
+        '''
+
+        #lines.append('<br><hr color="#4169EF" size="1" width="90%">'+ endl)
+        lines.append('<div id="chart2' + '" style="height:300px; width:500px;"></div>' + endl)
+        lines.append('<script class="code" type="text/javascript">' + endl)
+        lines.append('$(document).ready(function(){' + endl)
+        lines.append('jQuery.jqplot.config.enablePlugins = true;' + endl)
+        lines.append("plot2 = jQuery.jqplot('chart2',[" + str(self.piechart_datam) + " ],{" + endl)
+        #lines.append('title = ' + "'" + 'Class Math Question Type Weakness' + "'" + ' ,' + endl)
+        lines.append('seriesDefaults: {' + endl)
+        lines.append('renderer: jQuery.jqplot.PieRenderer,' + endl)
+        lines.append('rendererOptions: {' + endl)
+        lines.append('fill: false,' + endl)
+        lines.append('showDataLabels: true,' + endl)
+        lines.append('sliceMargin: 4' + endl)
+        lines.append('}' + endl)
+        lines.append('},' + endl)
+        lines.append('legend: {show:true}'  + endl)
+        lines.append('}' + endl)
+        lines.append(');' + endl)
+        lines.append('});' + endl)
+        lines.append('</script>' + endl)
+
+
+
+        lines.append("<h1>Class Reading Question Type Weakness</h1>" + endl)
+        '''
+        lines.append('<table style="width:500px">')
+        lines.append('<tr><th>Weakest Question Type</th><th>Number Of Students</th></tr>')
+
+
+        for key in self.uw_frequency_dictr:
+            lines.append('<tr>')
+            lines.append('<td>' + key + '</td>')
+            lines.append('<td>' + str(self.uw_frequency_dictr[key]) + '</td>')
+            lines.append('</tr>')
+
+
+        lines.append('</table>')
+        '''
 
         lines.append(endl)
-        lines.append("<h1>Class Writing Questions Missed</h1>" + endl)
-
+        
+        #lines.append('<br><hr color="#4169EF" size="1" width="90%">'+ endl)        
+        lines.append('<div id="chart3' + '" style="height:300px; width:500px;"></div>' + endl)
+        lines.append('<script class="code" type="text/javascript">' + endl)
+        lines.append('$(document).ready(function(){' + endl)
+        lines.append('jQuery.jqplot.config.enablePlugins = true;' + endl)
+        lines.append("plot2 = jQuery.jqplot('chart3',[" + str(self.piechart_datar) + " ],{" + endl)
+        #lines.append('title = ' + " '" + 'Class Reading Question Type Weakness' + "'" + ',' + endl)
+        lines.append('seriesDefaults: {' + endl)
+        lines.append('renderer: jQuery.jqplot.PieRenderer,' + endl)
+        lines.append('rendererOptions: {' + endl)
+        lines.append('fill: false,' + endl)
+        lines.append('showDataLabels: true,' + endl)
+        lines.append('sliceMargin: 6' + endl)
+        lines.append('}' + endl)
+        lines.append('},' + endl)
+        lines.append('legend: {show:true}'  + endl)
+        lines.append('}' + endl)
+        lines.append(');' + endl)
+        lines.append('});' + endl)
+        lines.append('</script>' + endl)
+        
+        lines.append("<h1>Class Writing Question Type Weakness</h1>" + endl)
+        '''
         lines.append('<table style="width:500px">')
+        lines.append('<tr><th>Weakest Question Type</th><th>Number Of Students</th></tr>')
+
+        for key in self.uw_frequency_dictw:
+            lines.append('<tr>')
+            lines.append('<td>' + key + '</td>')
+            lines.append('<td>' + str(self.uw_frequency_dictw[key]) + '</td>')
+            lines.append('</tr>')
+
+
+        lines.append('</table>')
+        '''
+        lines.append(endl)
+        
+        #lines.append('<br><hr color="#4169EF" size="1" width="90%">'+ endl) 
+        lines.append('<br><div id="chart4' + '" style="height:300px; width:500px;"></div>' + endl)
+        lines.append('<script class="code" type="text/javascript">' + endl)
+        lines.append('$(document).ready(function(){' + endl)
+        lines.append('jQuery.jqplot.config.enablePlugins = true;' + endl)
+        lines.append("plot2 = jQuery.jqplot('chart4',[" + str(self.piechart_dataw) + " ],{" + endl)
+        #lines.append('title = ' + "'" + 'Class Writing Question Type Weakness' + "'" + ',' + endl)
+        lines.append('seriesDefaults: {' + endl)
+        lines.append('renderer: jQuery.jqplot.PieRenderer,' + endl)
+        lines.append('rendererOptions: {' + endl)
+        lines.append('fill: false,' + endl)
+        lines.append('showDataLabels: true,' + endl)
+        lines.append('sliceMargin: 4' + endl)
+        lines.append('}' + endl)
+        lines.append('},' + endl)
+        lines.append('legend: {show:true}'  + endl)
+        lines.append('}' + endl)
+        lines.append(');' + endl)
+        lines.append('});' + endl)
+        lines.append('</script>' + endl)
+        
+
+
+        lines.append(endl)
+        lines.append('<br><hr color="#4169EF" size="1" width="90%">'+ endl)
+        lines.append("<br><h1>Class Writing Questions Missed</h1>" + endl)
+
+        lines.append('<br><table style="width:500px">')
         lines.append('<tr><th>Section_Question</th><th> Number Of Students Incorrect</th></tr>')
         index = 0
         for q in CLASS_MISSED_WRITING:
@@ -139,14 +272,15 @@ class Analytics(object):
             lines.append('<td>' + str(q.question) + '</td>')
             lines.append('<td>' + str(q.frequency) + '</td>')
             index += 1
-            if index == 100:
+            if index == 10:
                 break
         lines.append('</table>')
 
 
         lines.append(endl)
+        lines.append('<br><hr color="#4169EF" size="1" width="90%">'+ endl)
         lines.append("<h1>Class Reading Questions Missed</h1>" + endl)
-        lines.append('<table style="width:500px">')
+        lines.append('<br><table style="width:500px">')
         lines.append('<tr><th>Section_Question</th><th> Number Of Students Incorrect</th></tr>')
         index = 0
         for q in CLASS_MISSED_READING:
@@ -154,13 +288,14 @@ class Analytics(object):
             lines.append('<td>' + str(q.question) + '</td>')
             lines.append('<td>' + str(q.frequency) + '</td>')
             index += 1
-            if index == 100:
+            if index == 10:
                 break
         lines.append('</table>')
 
         lines.append(endl)
-        lines.append("<h1>Class Math Questions Missed</h1>" + endl)
-        lines.append('<table style="width:500px">')
+        lines.append('<br><hr color="#4169EF" size="1" width="90%">'+ endl)
+        lines.append("<br><h1>Class Math Questions Missed</h1>" + endl)
+        lines.append('<br><table style="width:500px">')
         lines.append('<tr><th>Section_Question</th><th> Number Of Students Incorrect</th></tr>')
         index = 0
         for q in CLASS_MISSED_MATH:
@@ -168,7 +303,7 @@ class Analytics(object):
             lines.append('<td>' + str(q.question) + '</td>')
             lines.append('<td>' + str(q.frequency) + '</td>')
             index += 1
-            if index == 100:
+            if index == 10:
                 break
         lines.append('</table>')
         
@@ -182,10 +317,24 @@ class Analytics(object):
         lines.append('<div class="clear"></div>' + endl)
         lines.append('<div id="footer">' + endl)
         #lines.append('<p><a>' + 'Class Analytics Report</a></p>' + endl)
-        lines.append('<p><img src="../../../HTML/Mini Logo.png" width="8%" alt="Excelerate" /></p>' + endl)
+        lines.append('<p><img src="../../HTML/Mini Logo.png" width="8%" alt="Excelerate" /></p>' + endl)
         lines.append('</div>' + endl)
         lines.append('</div>' + endl)
-
+        lines.append('<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>' + endl)
+        lines.append('<script class="include" type="text/javascript" src="../../Graphs/examples/../jquery.jqplot.min.js"></script>' + endl)
+        lines.append('<script type="text/javascript" src="../../Graphs/examples/syntaxhighlighter/scripts/shCore.min.js"></script>' + endl)
+        lines.append('<script type="text/javascript" src="../../Graphs/examples/syntaxhighlighter/scripts/shBrushJScript.min.js"></script>' + endl)
+        lines.append('<script type="text/javascript" src="../../Graphs/examples/syntaxhighlighter/scripts/shBrushXml.min.js"></script>' + endl)
+        lines.append('<script class="include" language="javascript" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.barRenderer.min.js"></script>' + endl)
+        lines.append('<script class="include" language="javascript" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.categoryAxisRenderer.min.js"></script>' + endl)
+        lines.append('<script class="include" language="javascript" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.pointLabels.min.js"></script>' + endl)
+        lines.append('<script class="include" language="javascript" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.dateAxisRenderer.min.js"></script>' + endl)
+        lines.append('<script class="include" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.canvasTextRenderer.min.js"></script>' + endl)
+        lines.append('<script class="include" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>' + endl)
+        lines.append('<script type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.highlighter.min.js"></script>' + endl)
+        #lines.append('<script type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.cursor.min.js"></script>' + endl)
+        lines.append('<script type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.dateAxisRenderer.min.js"></script>' + endl)
+        lines.append('<script class="include" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.pieRenderer.min.js"></script>' + endl)
 
         lines.append('</body>' + endl)
         lines.append('</html>' + endl)
