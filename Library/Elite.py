@@ -57,6 +57,7 @@ class Elite_Class(object):
         self.students = {}
         self.valid_tests = list_tests()
         self.averages = {}
+        self.invalid_rows = []
 
         self.convert_database(filename)
 
@@ -68,6 +69,7 @@ class Elite_Class(object):
             for row in reader:
                 SID = row[STUDENT_ID_INDEX]
                 if not self.valid_row(row):
+                    self.invalid_rows.append(row)
                     continue
                 if SID not in self.students.keys():
                     self.students[SID] = User(SID, 'Elite')
@@ -135,6 +137,13 @@ class Elite_Class(object):
             graph_report(u)
             shutil.copy2('reports.html', 'Users/Elite/' + student)
 
+        array = []
+        with open('fuckup.txt', 'w') as f:
+            array.append(str(len(self.invalid_rows)) + endl)
+            for row in self.invalid_rows:
+                array.append(str(row) + endl)
+            f.writelines(array)
+            f.close()
 
             #break
     def valid_row(self, row):
@@ -213,7 +222,7 @@ class Elite_Class(object):
         elif attempt == float(answer):
             return "CORRECT"
         #print(attempt)
-        return "INCORRECT",attempt
+        return "INCORRECT",'?'
 
 
     def convert_grid(self, test_id, section_id):
