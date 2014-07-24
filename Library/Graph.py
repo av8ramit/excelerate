@@ -74,8 +74,8 @@ class Graph(object):
             lines.append("var plot1 = $.jqplot('chart" + str(self.index) + "', [line1, line2], {" + endl)
         else:
             lines.append("var labels = ['Your Performance', 'Class Average'];" + endl)
-            lines.append("var line2 = " + str(self.section_averages) + ";" + endl)
-            lines.append("var plot1 = $.jqplot('chart" + str(self.index) + "', [line1, line2], {" + endl)
+            #lines.append("var line2 = " + str(self.section_averages) + ";" + endl)
+            lines.append("var plot1 = $.jqplot('chart" + str(self.index) + "', [line1], {" + endl)
         lines.append("animate: true," + endl)
         lines.append("animateReplot:true," + endl)
         lines.append("title:'" + self.name + "'," + endl)

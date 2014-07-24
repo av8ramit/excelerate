@@ -138,7 +138,7 @@ class Elite_Class(object):
             shutil.copy2('reports.html', 'Users/Elite/' + student)
 
         array = []
-        with open('fuckup.txt', 'w') as f:
+        with open('runreport.txt', 'w') as f:
             array.append(str(len(self.invalid_rows)) + endl)
             for row in self.invalid_rows:
                 array.append(str(row) + endl)
