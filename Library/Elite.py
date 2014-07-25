@@ -89,7 +89,7 @@ class Elite_Class(object):
                 self.averages[test_date][WRITING_TYPE].append(int(row[WRITING_SCALED]))
                 self.averages[test_date][MATH_TYPE].append(int(row[MATH_SCALED]))
                 self.averages[test_date][READING_TYPE].append(int(row[READING_SCALED]))
-                if (is_int(row[ESSAY_INDEX])):
+                if (is_int(row[ESSAY_INDEX]) and int(row[ESSAY_INDEX]) > 0):
                     user_test.essay = row[ESSAY_INDEX]
                 else:
                     user_test.essay = 7
