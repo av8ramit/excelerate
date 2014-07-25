@@ -16,9 +16,9 @@ def convert_row(row, FORM_CODE):
     if row[TYPE_INDEX] == '1':
         section_type = 'M'
     if row[TYPE_INDEX] == '2':
-        section_type = 'W'
-    if row[TYPE_INDEX] == '3':
         section_type = 'R'
+    if row[TYPE_INDEX] == '3':
+        section_type = 'W'
     array.append("Number,Answer,Difficulty,Range,Type\n")
     f = open(FORM_CODE + '/' + 'Section ' + row[SECTION_INDEX] + '.csv', 'w')
 
@@ -67,13 +67,14 @@ with open(filename, 'rU') as f:
 
     array =[]
     for row in reader:
+        print(row)
         if row[9] != '':
             FORM_CODE = row[0]
             a = convert_row(row, FORM_CODE)
             if a != None:
                 target_math = a
         else:
-            array.append(row[14] + ',' + row[15] + ',' + row[16] + ',' + 'Y' + ',' + 'M')
+            array.append(row[14] + ',' + row[15] + ',' + row[16] + ',' + 'Y' + ',' + 'M' + '\n')
 
     add_fillin(FORM_CODE, array, target_math)
             
