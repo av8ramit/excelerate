@@ -23,23 +23,21 @@ def clear(n):
 
 
 def class_missed_qs_array(classname):
-    wqs = []
-    rqs = []
-    mqs = []
     X = []
     classnm = classname
     classwritingqs = []
     classreadingqs = []
     classmathqs = []
     section = []
-    hypcnt = 0
-    usernumber = 0
 
 
     for name in classnm.students:
         filename = user_filename(name, classnm.name)
         u = load_user(name, filename, classnm.name)
         index = 0
+        wqs = []
+        rqs = []
+        mqs = []
         for test in u.tests_taken:
             wqs.append(test.missed_questions[WRITING_TYPE])
             rqs.append(test.missed_questions[READING_TYPE])
@@ -51,39 +49,47 @@ def class_missed_qs_array(classname):
             classwritingqs.append(question) #add missed question object to class list
         
             
-        for q in rqs[index-1]:
+        for q in (rqs[index-1]):
             question, answer = q
             classreadingqs.append(question) #add missed question object to class list
             #print("r: " + question)
-        for q in mqs[index-1]:
+        for q in (mqs[index-1]):
             question, answer = q
             classmathqs.append(question) #add missed question object to class list    
             #print("m: " + question)
 
     for question in classwritingqs:
         frequency = classwritingqs.count(question)
-        #print(str(frequency) + " writing " + question) 
-        CLASS_MISSED_WRITING.append(Class_Question(question,frequency)) 
-        if frequency > 1:
-            for i in range(1,frequency):
-                classwritingqs.remove(question)
+        #print(str(frequency) + " writing " + question)
+        if question in CLASS_MISSED_WRITING:
+            pass
+        else:
+            CLASS_MISSED_WRITING.append(Class_Question(question,frequency)) 
+        for i in range(frequency):
+            classwritingqs.remove(question)
             
 
     for question in classreadingqs:
         frequency = classreadingqs.count(question)
         #print(str(frequency) + " r " + question)
-        if frequency > 1:  
-            for i in range(1,frequency):
-                classreadingqs.remove(question)
+        if question in CLASS_MISSED_READING:
+            pass
+        else:
             CLASS_MISSED_READING.append(Class_Question(question,frequency))
+        for i in range(frequency):
+            classreadingqs.remove(question)
+            
 
     for question in classmathqs:
         frequency = classmathqs.count(question)
-        #print(str(frequency) + " m " + question)  
-        if frequency > 1:
-            for i in range(1,frequency):
-                classmathqs.remove(question)
+        #print(str(frequency) + " m " + question) 
+        if question in CLASS_MISSED_MATH:
+            pass
+        else:
             CLASS_MISSED_MATH.append(Class_Question(question,frequency))
+        for i in range(frequency):
+            classmathqs.remove(question)
+            
 
 
     CLASS_MISSED_WRITING.sort(key=lambda question: question.frequency, reverse = True)

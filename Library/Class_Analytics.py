@@ -25,9 +25,12 @@ class Analytics(object):
         self.uw_frequency_dictm = {}  # weak question type: student frequency 
         self.uw_frequency_dictr = {}
         self.uw_frequency_dictw = {}
-        self.piechart_datam = []   #   ^^^ data formatted for piechart 
+        self.piechart_datam = []    #   ^^^ data formatted for piechart 
         self.piechart_datar = []
         self.piechart_dataw = []
+        self.bargraph_datam = []   #data formatted for bar graph
+        self.bargraph_datar = []
+        self.bargraph_dataw = []
         for username in users:
             filename = user_filename(username, self.c)
             user = load_user(username, filename, c)
@@ -118,29 +121,12 @@ class Analytics(object):
 
         #Class Analysis
         lines.append(endl)
-        lines.append("<h1>Overall Student Analysis</h1>" + endl)
         lines.append("<head>")
         lines.append("<style>")
         lines.append("table,th,td{border:1px solid black;border-collapse:collapse;}th,td{padding:5px;}th{text-align:left;}")
         lines.append("</style>")
         lines.append("</head>")
 
-        lines.append('<table style="width:500px">')
-        lines.append('<tr><th>Name</th><th>Weakest Math Section</th><th>Weakest Writing Section</th><th>Weakest Reading Section</th></tr>')
-
-        for user in self.user_weakpoints_dict:
-            lines.append('<tr>')
-            lines.append('<td>' + user + '</td>')
-            lines.append('<td>' + MATH_TYPE_DICT[self.user_weakpoints_dict[user].weakpoints[MATH_TYPE][0]] + '</td>')
-            lines.append('<td>' + WRITING_TYPE_DICT[self.user_weakpoints_dict[user].weakpoints[WRITING_TYPE][0]] + '</td>')
-            lines.append('<td>' + READING_TYPE_DICT[self.user_weakpoints_dict[user].weakpoints[READING_TYPE][0]] + '</td>')
-            lines.append('</tr>')
-
-
-        lines.append('</table>')
-
-
-        lines.append(endl)
         
         lines.append('<br><hr color="#4169EF" size="1" width="90%">'+ endl)
         lines.append("<h1>Class Math Question Type Weakness</h1>" + endl)
@@ -262,52 +248,154 @@ class Analytics(object):
 
         lines.append(endl)
         lines.append('<br><hr color="#4169EF" size="1" width="90%">'+ endl)
-        lines.append("<br><h1>Class Writing Questions Missed</h1>" + endl)
+        lines.append("<br><h1>Class Missed Writing Questions frequency</h1>" + endl)
 
-        lines.append('<br><table style="width:500px">')
-        lines.append('<tr><th>Section_Question</th><th> Number Of Students Incorrect</th></tr>')
+        #lines.append('<br><table style="width:500px">')
+        #lines.append('<tr><th>Section_Question</th><th> Number Of Students Incorrect</th></tr>')
         index = 0
         for q in CLASS_MISSED_WRITING:
-            lines.append('<tr>')
-            lines.append('<td>' + str(q.question) + '</td>')
-            lines.append('<td>' + str(q.frequency) + '</td>')
+            self.bargraph_dataw.append([str(q.question), q.frequency])
+            #lines.append('<tr>')
+            #lines.append('<td>' + str(q.question) + '</td>')
+            #lines.append('<td>' + str(q.frequency) + '</td>')
             index += 1
             if index == 10:
                 break
-        lines.append('</table>')
+        #lines.append('</table>')
+        lines.append('<div id="chart5" style="height:350px; width:500px;"></div>' + endl)
+        lines.append('<script class="code" type="text/javascript">' + endl)
+        lines.append('$(document).ready(function(){' + endl)
+        lines.append('$(' + "'" + '#chart5' + "'" + ').jqplot(['+ str(self.bargraph_dataw) + '], { ' + endl)
+        lines.append('seriesDefaults:{' + endl)
+        lines.append('renderer:$.jqplot.BarRenderer,' + endl)
+        lines.append('rendererOptions: {' + endl)
+        lines.append('varyBarColor: true' + endl)
+        lines.append('}' + endl)
+        lines.append('},' + endl)
+        lines.append('axes:{' + endl)
+        lines.append('xaxis:{' + endl)
+        lines.append('label:' + "'" + 'Missed Question' + "'" + ',' + endl)
+        lines.append('renderer: $.jqplot.CategoryAxisRenderer,' + endl)
+        lines.append('tickRenderer: $.jqplot.CanvasAxisTickRenderer,' + endl)
+        lines.append('tickOptions: {' + endl)
+        lines.append('angle: -80' + endl)
+        lines.append('}' + endl)
+        lines.append('},' + endl)
+        lines.append('yaxis:{' + endl)
+        lines.append('label: ' + "'" + 'Number of Students' + "'" + ',' + endl)
+        lines.append('labelRenderer: $.jqplot.CanvasAxisLabelRenderer' + endl)
+        lines.append('}' + endl)
+        lines.append('}' + endl)
+        lines.append('});' + endl)
+        lines.append('});' + endl)
+        lines.append('</script>')
 
 
         lines.append(endl)
         lines.append('<br><hr color="#4169EF" size="1" width="90%">'+ endl)
-        lines.append("<h1>Class Reading Questions Missed</h1>" + endl)
-        lines.append('<br><table style="width:500px">')
-        lines.append('<tr><th>Section_Question</th><th> Number Of Students Incorrect</th></tr>')
+        lines.append("<h1>Class Missed Reading Questions Frequency</h1>" + endl)
+        #lines.append('<br><table style="width:500px">')
+        #lines.append('<tr><th>Section_Question</th><th> Number Of Students Incorrect</th></tr>')
         index = 0
         for q in CLASS_MISSED_READING:
-            lines.append('<tr>')
-            lines.append('<td>' + str(q.question) + '</td>')
-            lines.append('<td>' + str(q.frequency) + '</td>')
+            self.bargraph_datar.append([str(q.question), q.frequency])
+            #lines.append('<tr>')
+            #lines.append('<td>' + str(q.question) + '</td>')
+            #lines.append('<td>' + str(q.frequency) + '</td>')
             index += 1
             if index == 10:
                 break
-        lines.append('</table>')
+        #lines.append('</table>')
+        lines.append('<div id="chart6" style="height:350px; width:500px;"></div>' + endl)
+        lines.append('<script class="code" type="text/javascript">' + endl)
+        lines.append('$(document).ready(function(){' + endl)
+        lines.append('$(' + "'" + '#chart6' + "'" + ').jqplot(['+ str(self.bargraph_datar) + '], { ' + endl)
+        lines.append('seriesDefaults:{' + endl)
+        lines.append('renderer:$.jqplot.BarRenderer,' + endl)
+        lines.append('rendererOptions: {' + endl)
+        lines.append('varyBarColor: true' + endl)
+        lines.append('}' + endl)
+        lines.append('},' + endl)
+        lines.append('axes:{' + endl)
+        lines.append('xaxis:{' + endl)
+        lines.append('label:' + "'" + 'Missed Question' + "'" + ',' + endl)
+        lines.append('renderer: $.jqplot.CategoryAxisRenderer,' + endl)
+        lines.append('tickRenderer: $.jqplot.CanvasAxisTickRenderer,' + endl)
+        lines.append('tickOptions: {' + endl)
+        lines.append('angle: -80' + endl)
+        lines.append('}' + endl)
+        lines.append('},' + endl)
+        lines.append('yaxis:{' + endl)
+        lines.append('label: ' + "'" + 'Number of Students' + "'" + ',' + endl)
+        lines.append('labelRenderer: $.jqplot.CanvasAxisLabelRenderer' + endl)
+        lines.append('}' + endl)
+        lines.append('}' + endl)
+        lines.append('});' + endl)
+        lines.append('});' + endl)
+        lines.append('</script>')
 
         lines.append(endl)
         lines.append('<br><hr color="#4169EF" size="1" width="90%">'+ endl)
-        lines.append("<br><h1>Class Math Questions Missed</h1>" + endl)
-        lines.append('<br><table style="width:500px">')
-        lines.append('<tr><th>Section_Question</th><th> Number Of Students Incorrect</th></tr>')
+        lines.append("<br><h1>Class Missed Math Questions Frequency</h1>" + endl)
+       #lines.append('<br><table style="width:500px">')
+        #lines.append('<tr><th>Section_Question</th><th> Number Of Students Incorrect</th></tr>')
         index = 0
         for q in CLASS_MISSED_MATH:
-            lines.append('<tr>')
-            lines.append('<td>' + str(q.question) + '</td>')
-            lines.append('<td>' + str(q.frequency) + '</td>')
+            self.bargraph_datam.append([str(q.question), q.frequency])
+            #lines.append('<tr>')
+            #lines.append('<td>' + str(q.question) + '</td>')
+           # lines.append('<td>' + str(q.frequency) + '</td>')
             index += 1
             if index == 10:
                 break
-        lines.append('</table>')
+        #lines.append('</table>')
+        lines.append('<div id="chart7" style="height:350px; width:500px;"></div>' + endl)
+        lines.append('<script class="code" type="text/javascript">' + endl)
+        lines.append('$(document).ready(function(){' + endl)
+        lines.append('$(' + "'" + '#chart7' + "'" + ').jqplot(['+ str(self.bargraph_datam) + '], { ' + endl)
+        lines.append('seriesDefaults:{' + endl)
+        lines.append('renderer:$.jqplot.BarRenderer,' + endl)
+        lines.append('rendererOptions: {' + endl)
+        lines.append('varyBarColor: true' + endl)
+        lines.append('}' + endl)
+        lines.append('},' + endl)
+        lines.append('axes:{' + endl)
+        lines.append('xaxis:{' + endl)
+        lines.append('label:' + "'" + 'Missed Question' + "'" + ',' + endl)
+        lines.append('renderer: $.jqplot.CategoryAxisRenderer,' + endl)
+        lines.append('tickRenderer: $.jqplot.CanvasAxisTickRenderer,' + endl)
+        lines.append('tickOptions: {' + endl)
+        lines.append('angle: -80' + endl)
+        lines.append('}' + endl)
+        lines.append('},' + endl)
+        lines.append('yaxis:{' + endl)
+        lines.append('label: ' + "'" + 'Number of Students' + "'" + ',' + endl)
+        lines.append('labelRenderer: $.jqplot.CanvasAxisLabelRenderer' + endl)
+        lines.append('}' + endl)
+        lines.append('}' + endl)
+        lines.append('});' + endl)
+        lines.append('});' + endl)
+        lines.append('</script>')
         
+        lines.append(endl)
+        lines.append('<br><hr color="#4169EF" size="1" width="90%">'+ endl)
+        lines.append("<br><h1>Overall Student Analysis</h1>" + endl)
+        lines.append('<table style="width:500px">')
+        lines.append('<tr><th>Name</th><th>Weakest Math Section</th><th>Weakest Writing Section</th><th>Weakest Reading Section</th></tr>')
 
+        for user in self.user_weakpoints_dict:
+            lines.append('<tr>')
+            lines.append('<td>' + user + '</td>')
+            lines.append('<td>' + MATH_TYPE_DICT[self.user_weakpoints_dict[user].weakpoints[MATH_TYPE][0]] + '</td>')
+            lines.append('<td>' + WRITING_TYPE_DICT[self.user_weakpoints_dict[user].weakpoints[WRITING_TYPE][0]] + '</td>')
+            lines.append('<td>' + READING_TYPE_DICT[self.user_weakpoints_dict[user].weakpoints[READING_TYPE][0]] + '</td>')
+            lines.append('</tr>')
+
+
+        lines.append('</table>')
+
+
+        lines.append(endl)
 
         #Footer
         lines.append('<br>' + endl)
@@ -331,6 +419,8 @@ class Analytics(object):
         lines.append('<script class="include" language="javascript" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.dateAxisRenderer.min.js"></script>' + endl)
         lines.append('<script class="include" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.canvasTextRenderer.min.js"></script>' + endl)
         lines.append('<script class="include" type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>' + endl)
+        lines.append('<script type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.canvasAxisTickRenderer.min.js"></script>' + endl)
+        lines.append('<script type="text/javascript" src="../plugins/jqplot.logAxisRenderer.min.js"></script>' + endl)
         lines.append('<script type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.highlighter.min.js"></script>' + endl)
         #lines.append('<script type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.cursor.min.js"></script>' + endl)
         lines.append('<script type="text/javascript" src="../../Graphs/examples/../plugins/jqplot.dateAxisRenderer.min.js"></script>' + endl)

@@ -178,12 +178,14 @@ class User(object):
             for i in range (1, len(section_type_dict(section_type)) + 1):
                 code = letter + str(i)
                 qs = self.data.data[section_type].stats[code]
-                new_point = div(qs.c, qs.t)
-                if new_point < current_min:
-                    current_min = new_point
-                    current_code = code
-                    percent = percentage(new_point)
+                if qs.t != 0:
+                    new_point = div(qs.c, qs.t)
+                    if new_point < current_min:
+                        current_min = new_point
+                        current_code = code
+                        percent = percentage(new_point)
             output[section_type] = (current_code, percent)
+            print( "current_code/Percent " +str(current_code) + str(percent))
         return output
 
     def positivecram(self):
