@@ -38,6 +38,9 @@ def class_missed_qs_array(classname):
         wqs = []
         rqs = []
         mqs = []
+        del CLASS_MISSED_WRITING[:]
+        del CLASS_MISSED_READING[:]
+        del CLASS_MISSED_MATH[:]
         for test in u.tests_taken:
             wqs.append(test.missed_questions[WRITING_TYPE])
             rqs.append(test.missed_questions[READING_TYPE])

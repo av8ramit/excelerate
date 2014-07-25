@@ -70,7 +70,7 @@ class Graph(object):
                 op.append(new_entry)
 
             lines.append("var line2 = " + str(op) + ";" + endl)
-            lines.append("var labels = ['Class Average', 'Your Performance'];" + endl)
+            lines.append("var labels = ['Your Performance', 'Class Average'];" + endl)
             lines.append("var plot1 = $.jqplot('chart" + str(self.index) + "', [line1, line2], {" + endl)
         elif self.section_averages != None:
                 lines.append("var labels = ['Your Performance', 'Class Average'];" + endl)
