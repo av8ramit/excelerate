@@ -185,7 +185,6 @@ class User(object):
                         current_code = code
                         percent = percentage(new_point)
             output[section_type] = (current_code, percent)
-            print( "current_code/Percent " +str(current_code) + str(percent))
         return output
 
     def positivecram(self):
