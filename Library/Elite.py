@@ -50,6 +50,16 @@ GRID_10 = 28
 MATH_SCALED = 38
 READING_SCALED = 39
 WRITING_SCALED = 40
+GRIGHT1 = 59
+GRIGHT2 = 60
+GRIGHT3 = 61
+GRIGHT4 = 62
+GRIGHT5 = 63
+GRIGHT6 = 64
+GRIGHT7 = 65
+GRIGHT8 = 66
+GRIGHT9 = 67
+GRIGHT10 = 68
 
 class Elite_Class(object):
 
@@ -57,6 +67,7 @@ class Elite_Class(object):
         self.students = {}
         self.valid_tests = list_tests()
         self.averages = {}
+        self.elite_scores = {}
         self.invalid_rows = []
 
         self.convert_database(filename)
@@ -66,13 +77,18 @@ class Elite_Class(object):
         #n = 0
         with open(filename, 'rU') as f:
             reader = csv.reader(f)
+            waive_array = [26, 555, 438, 564, 231, 228, 246, 265, 404]
             for row in reader:
                 SID = row[STUDENT_ID_INDEX]
                 if not self.valid_row(row):
                     self.invalid_rows.append(row)
                     continue
+                if int(row[0]) in waive_array:
+                    continue
                 if SID not in self.students.keys():
                     self.students[SID] = User(SID, 'Elite')
+                if SID not in self.elite_scores.keys():
+                    self.elite_scores[SID] = []
                 #n+=1
                 userid = row[STUDENT_ID_INDEX]
                 test_id = row[FORM_CODE]
@@ -92,7 +108,7 @@ class Elite_Class(object):
                 if (is_int(row[ESSAY_INDEX]) and int(row[ESSAY_INDEX]) > 0):
                     user_test.essay = row[ESSAY_INDEX]
                 else:
-                    user_test.essay = 7
+                    user_test.essay = 1
                 test_key = self.key_test(test_id)
                 for index in range(SECTION_1, SECTION_10 + 1):
                     array = self.convert_section(index, row[index], test_id, row)
@@ -104,6 +120,7 @@ class Elite_Class(object):
                         #print ('!!!')
                         user_test.missed_questions[test_key[index - DIFFERENCE]] += array
                 self.students[SID].tests_taken.append(user_test)
+                self.elite_scores[SID].append(self.enter_entry(row))
 
         for test in self.averages.keys():
             self.averages[test][WRITING_TYPE] = average_array(self.averages[test][WRITING_TYPE])
@@ -127,15 +144,59 @@ class Elite_Class(object):
             f.writelines(array)
             f.close()
 
+        DEBUG = True
+        REPORTS = False
+        error = 1
+        error_array = []
         for student in self.students.keys():
             new_user(student, 'Elite')
             self.students[student].save_user()
             u = load_user(student, user_filename(student,'Elite'), 'Elite')
-            simple_report(u)
-            advanced_report(u)
-            section_report(u)
-            graph_report(u)
-            shutil.copy2('reports.html', 'Users/Elite/' + student)
+            if DEBUG:
+                test_index = 0
+                for test in u.tests_taken:
+                    e = self.elite_scores[student][test_index]
+                    mistake = False
+
+                    if e.writing_raw_score == test.score_summary.writing_score:
+                        test.score_summary.section_scores[WRITING_TYPE] = e.writing_scaled_score
+
+                    if e.writing_scaled_score != test.score_summary.section_scores[WRITING_TYPE]:
+                        print("Writing score was incorrect for test " + student + " for test " + test.test_id)
+                        print("Elite: " + str(e.writing_scaled_score) + " Excelerate: " + str(test.score_summary.section_scores[WRITING_TYPE]))
+                        print("Elite: " + str(e.writing_raw_score) + " Excelerate: " + str(test.score_summary.writing_score))
+                        print ("Essay: " + str(test.essay))
+                        mistake = True
+
+                    if e.reading_scaled_score != test.score_summary.section_scores[READING_TYPE]:
+                        print("Reading score was incorrect for test " + student + " for test " + test.test_id)
+                        print("Elite: " + str(e.reading_scaled_score) + " Excelerate: " + str(test.score_summary.section_scores[READING_TYPE]))
+                        print("Elite: " + str(e.reading_raw_score) + " Excelerate: " + str(test.score_summary.reading_score))
+                        mistake = True
+
+                    if e.math_scaled_score != test.score_summary.section_scores[MATH_TYPE]:
+                        print("Math score was incorrect for test " + student + " for test " + test.test_id)
+                        print("Elite: " + str(e.math_scaled_score) + " Excelerate: " + str(test.score_summary.section_scores[MATH_TYPE]))
+                        print("Elite: " + str(e.math_raw_score) + " Excelerate: " + str(test.score_summary.math_score))
+                        mistake = True
+                    if mistake:
+                        print ("Row Number: " + str(e.number))
+                        error_array.append(int(e.number))
+                        print ("Error Index: " + str(error))
+                        error += 1
+                        print (endl)
+                    test_index += 1
+                    #if not mistake:
+                    #    print ("ALL CORRECT" + endl)
+
+            if (REPORTS):
+                simple_report(u)
+                advanced_report(u)
+                section_report(u)
+                graph_report(u)
+                shutil.copy2('reports.html', 'Users/Elite/' + student)
+        print(error_array)
+        print("Total Errors: " + str(len(error_array)))
 
         array = []
         with open('runreport.txt', 'w') as f:
@@ -171,13 +232,12 @@ class Elite_Class(object):
         if self.math_grid(test_id, section_number):
             answer_key = self.convert_grid(test_id, section_number)
             answer_array = []
-            for index in range(GRID_1, GRID_10 + 1):
-                answer = row[index]
-                result = self.translate_grid_answer(answer, answer_key[index-19])
+            for index in range(GRIGHT1, GRIGHT10 + 1):
+                result = row[index]
                 #print (result)
-                if result != "CORRECT":
+                if result != '+':
                     q_id = test_id + FIELD_SEP + str(section_number) + FIELD_SEP + str(len(results_string)+(index-18))
-                    entry = (q_id, result[1])
+                    entry = (q_id, '?')
                     missed_array.append(entry)                    
         return missed_array
 
@@ -222,7 +282,7 @@ class Elite_Class(object):
         elif attempt == float(answer):
             return "CORRECT"
         #print(attempt)
-        return "INCORRECT",'?'
+        return "INCORRECT",str(attempt)
 
 
     def convert_grid(self, test_id, section_id):
@@ -245,7 +305,68 @@ class Elite_Class(object):
                     test_dict[int(row[KEY_INDEX])] = int(row[KEY_TYPE])
         return test_dict
 
+    def enter_entry(self, row):
+        entry = Elite_Test_Entry(row[FORM_CODE])
+        entry.number = row[0]
+        entry.writing_raw_score = int(row[WRITING_INDEX])
+        entry.reading_raw_score = int(row[READING_INDEX])
+        entry.math_raw_score = int(row[MATH_INDEX])
+        entry.writing_scaled_score = int(row[WRITING_SCALED])
+        entry.reading_scaled_score = int(row[READING_SCALED])
+        entry.math_scaled_score = int(row[MATH_SCALED])
+        return entry
+
+
+
+
                 
+class Elite_Test_Entry(object):
+
+    def __init__(self, test_id):
+        self.id = test_id
+        self.number = 0
+        self.writing_raw_score = 0
+        self.reading_raw_score = 0
+        self.math_raw_score = 0
+        self.writing_scaled_score = 0
+        self.reading_scaled_score = 0
+        self.math_scaled_score = 0
+
+
+def translate_grid_answer(answer, key_answer):
+    attempt = None
+    if answer == '':
+        return 'BLANK','?'
+    try:
+        if '/' in answer:
+            num = answer.split('/')[0]
+            sub = answer.split('/')[1]
+            attempt = round(div(num, sub),3)
+        elif '.' in answer:
+            attempt = float(answer)
+        else:
+            attempt = int(answer)
+    except:
+        attempt = "A"
+
+    answer = key_answer
+    #print (attempt)
+    if '(' in answer and ')' in answer:
+        answer = answer.replace(' ','')
+        answer = answer.replace('(','')
+        answer = answer.replace(')','')
+        lower_limit = float(answer.split(',')[0])
+        upper_limit = float(answer.split(',')[1])
+        if attempt >= lower_limit and attempt <= upper_limit:
+            return "CORRECT"
+    elif attempt == float(answer):
+        return "CORRECT"
+    #print(attempt)
+    return "INCORRECT",attempt
+
+#translate_grid_answer()
+
+
 
 #convert_database('Elite/elite.csv')
 #key_test('GB30')
