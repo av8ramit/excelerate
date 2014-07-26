@@ -67,8 +67,9 @@ class Elite_Class(object):
         self.students = {}
         self.valid_tests = list_tests()
         self.averages = {}
-        self.elite_scores = {}
+        self.elite_scores = {} #debug dictionary
         self.invalid_rows = []
+        self.corrupted_rows = {}
 
         self.convert_database(filename)
 
@@ -81,10 +82,10 @@ class Elite_Class(object):
             waive_array = [26, 555, 438, 564, 231, 228, 246, 265, 404]
             for row in reader:
                 SID = row[STUDENT_ID_INDEX]
+                if SID not in self.corrupted_rows.keys():
+                    self.corrupted_rows[SID] = []
                 if not self.valid_row(row):
                     self.invalid_rows.append(row)
-                    continue
-                if int(row[0]) in waive_array:
                     continue
                 if SID not in self.students.keys():
                     self.students[SID] = User(SID, 'Elite')
@@ -102,11 +103,16 @@ class Elite_Class(object):
                     self.averages[test_date][READING_TYPE] = []
                     self.averages[test_date][WRITING_TYPE] = []
 
-                user_test = Scored_Test(test_id)
-                user_test.date = row[TEST_DATE_INDEX]
                 self.averages[test_date][WRITING_TYPE].append(int(row[WRITING_SCALED]))
                 self.averages[test_date][MATH_TYPE].append(int(row[MATH_SCALED]))
                 self.averages[test_date][READING_TYPE].append(int(row[READING_SCALED]))
+
+                if int(row[0]) in waive_array:
+                    self.corrupted_rows[SID].append(Corrupted_Entry(row))
+                    continue
+
+                user_test = Scored_Test(test_id)
+                user_test.date = row[TEST_DATE_INDEX]
                 if (is_int(row[ESSAY_INDEX]) and int(row[ESSAY_INDEX]) > 0):
                     user_test.essay = row[ESSAY_INDEX]
                 else:
@@ -192,6 +198,17 @@ class Elite_Class(object):
                         error += 1
                         print (endl)
                     test_index += 1
+
+
+            #Enter Corrupted Test Scores
+            if student in self.corrupted_rows.keys():
+                for entry in self.corrupted_rows[student]:
+                    u.tests_taken.append(entry.return_test())
+
+            #working on sanity testbench
+            #if SANITY:
+
+
 
             #print Reports
             if (REPORTS):
@@ -324,5 +341,39 @@ class Elite_Test_Entry(object):
         self.writing_scaled_score = 0
         self.reading_scaled_score = 0
         self.math_scaled_score = 0
+
+class Corrupted_Entry(object):
+
+    def __init__(self, row):
+        self.writing_scaled_score = int(row[WRITING_SCALED])
+        self.reading_scaled_score = int(row[READING_SCALED])
+        self.math_scaled_score = int(row[MATH_SCALED])
+        self.row = row
+
+    def return_test(self):
+        st = Scored_Test(self.row[FORM_CODE])
+        st.score_summary = Corrupted_Score_Summary(self)
+        if is_int(self.row[ESSAY_INDEX]):
+            st.essay = int(self.row[ESSAY_INDEX])
+        else:
+            st.essay = 7
+        st.date = self.row[TEST_DATE_INDEX]
+        return st
+
+class Corrupted_Score_Summary(object):
+
+    #Creates a Score summmary indexed by section based upon a test summary.
+    def __init__(self, CE):
+        self.id = CE.row[FORM_CODE]
+        self.section_scores = {}        
+        self.section_scores[WRITING_TYPE] = CE.writing_scaled_score
+        self.section_scores[READING_TYPE] = CE.reading_scaled_score
+        self.section_scores[MATH_TYPE] = CE.math_scaled_score
+
+    def total_score(self):
+        score = 0
+        for s in self.section_scores.values():
+            score += s
+        return score
 
 a = Elite_Class('Elite/Elite.csv')
