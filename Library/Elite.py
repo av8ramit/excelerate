@@ -61,6 +61,17 @@ GRIGHT8 = 66
 GRIGHT9 = 67
 GRIGHT10 = 68
 
+run = 2
+
+if run == 1:
+    DEBUG = True
+    REPORTS = False
+    SANITY = False
+elif run == 2:
+    DEBUG = True
+    REPORTS = True
+    SANITY = True
+
 class Elite_Class(object):
 
     def __init__(self, filename):
@@ -70,6 +81,7 @@ class Elite_Class(object):
         self.elite_scores = {} #debug dictionary
         self.invalid_rows = []
         self.corrupted_rows = {}
+        self.total_tests = 0
 
         self.convert_database(filename)
 
@@ -79,7 +91,7 @@ class Elite_Class(object):
         with open(filename, 'rU') as f:
             reader = csv.reader(f)
             #waive various line entries you know are bogus
-            waive_array = [26, 555, 438, 564, 231, 228, 246, 265, 404]
+            waive_array = [26, 231, 228, 555, 246, 404, 265, 438, 564]
             for row in reader:
                 SID = row[STUDENT_ID_INDEX]
                 if SID not in self.corrupted_rows.keys():
@@ -87,6 +99,7 @@ class Elite_Class(object):
                 if not self.valid_row(row):
                     self.invalid_rows.append(row)
                     continue
+                self.total_tests += 1
                 if SID not in self.students.keys():
                     self.students[SID] = User(SID, 'Elite')
                 if SID not in self.elite_scores.keys():
@@ -150,11 +163,10 @@ class Elite_Class(object):
 
 
         #Debug mode flag and Report print flags
-        DEBUG = True
-        REPORTS = True
 
         error = 1
         error_array = []
+        tests_entered = 0
 
         #Create students based on parsed analysis
         for student in self.students.keys():
@@ -166,6 +178,7 @@ class Elite_Class(object):
             if DEBUG:
                 test_index = 0
                 for test in u.tests_taken:
+                    tests_entered += 1
                     e = self.elite_scores[student][test_index]
                     mistake = False
 
@@ -203,12 +216,25 @@ class Elite_Class(object):
             #Enter Corrupted Test Scores
             if student in self.corrupted_rows.keys():
                 for entry in self.corrupted_rows[student]:
+                    tests_entered += 1
                     u.tests_taken.append(entry.return_test())
 
-            #working on sanity testbench
-            #if SANITY:
-
-
+            #Working on Sanity testbench
+            if SANITY:
+                for elite_test in self.elite_scores[student]:
+                    exists = False
+                    for test in u.tests_taken:
+                        writing_exists = False
+                        reading_exists = False
+                        math_exists = False
+                        if elite_test.writing_scaled_score == test.score_summary.section_scores[WRITING_TYPE]:
+                            writing_exists = True
+                        if elite_test.reading_scaled_score == test.score_summary.section_scores[READING_TYPE]:
+                            reading_exists = True
+                        if elite_test.math_scaled_score == test.score_summary.section_scores[MATH_TYPE]:
+                            math_exists = True
+                        exists = (writing_exists and reading_exists and math_exists) or exists #exists if this matches or has matched before
+                    assert (exists)
 
             #print Reports
             if (REPORTS):
@@ -218,8 +244,16 @@ class Elite_Class(object):
                 graph_report(u)
                 shutil.copy2('reports.html', 'Users/Elite/' + student)
 
-        print(error_array)
-        print("Total Errors: " + str(len(error_array)))
+        if len(error_array) != 0:
+            print(error_array)
+            print("Total Errors: " + str(len(error_array)))
+        else:
+            print("NO ERRORS WERE REPORTED!!!")
+
+        if SANITY:
+            print ("Tests Expected:" + str(self.total_tests))
+            print("Tests Seen: " + str(tests_entered))
+            print("SANITY TEST PASSED!!!")
 
         #Run report analysis with arrays that were not included
         array = []
