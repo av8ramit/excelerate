@@ -115,7 +115,7 @@ class Graph(object):
         '''
         lines.append('highlighter:{ show: true, sizeAdjust: 7.5},' + endl)
         lines.append('axes:{' + endl)
-        lines.append('xaxis:{' + 'label:' + "'Date of Test Taken'," + 'renderer:$.jqplot.DateAxisRenderer, tickInterval:' + "'" + '2 week' + "'}," + endl)
+        lines.append('xaxis:{' + 'label:' + "'Date of Test Taken'," + 'renderer:$.jqplot.DateAxisRenderer,' + "}," + endl)
         if SIMPLE_REP_FLAG or self.overallrep == True:
             lines.append("yaxis:{" 'min:0, max:2400,'+ 'label:' + "'Score'," + 'labelRenderer: $.jqplot.CanvasAxisLabelRenderer,' + '}' + endl)
         elif self.section_averages != None:
