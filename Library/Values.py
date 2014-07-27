@@ -174,7 +174,7 @@ pa1 = "Good Job!"
 pa2 = "Fantastic! Well done."
 pa3 = "You are performing well."
 pa4 = "Great work."
-pa5 = "You've been improving a lot."
+pa5 = "Great progress."
 positive = [pa1, pa2, pa3, pa4, pa5]
 p_thresh = 0.8
 

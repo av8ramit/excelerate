@@ -361,8 +361,10 @@ class User(object):
             data = []
             graph_index += 1
             for test in self.tests_taken:
-                data.append([date_converter(test.date),div(test.data.data[section_type].stats[key].c, test.data.data[section_type].stats[key].t) * 100])
-            graphs.append(Graph(type_dict[key], graph_index, data))
+                if test.data.data[section_type].stats[key].t != 0:
+                    data.append([date_converter(test.date),div(test.data.data[section_type].stats[key].c, test.data.data[section_type].stats[key].t) * 100])
+            if len(data) > 0:
+                graphs.append(Graph(type_dict[key], graph_index, data))
 
 
 
