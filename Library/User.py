@@ -440,6 +440,30 @@ class User(object):
     def advanced_HTML(self):
 
         FILE = open(user_directory(self.name, self.c) + DIR_SEP + "advanced_report" + ".html", "w")
+
+        s1 = []
+        writing_scores = []
+        reading_scores = []
+        math_scores = []
+        overall_score_difference = 0
+        writing_score_difference = 0
+        reading_score_difference = 0
+        math_score_difference = 0
+        if len(self.tests_taken) > 1:
+
+            for test in self.tests_taken:
+                s1.append([date_converter(test.date),test.score_summary.total_score()])
+                writing_scores.append([date_converter(test.date), test.score_summary.section_scores[WRITING_TYPE]])
+                reading_scores.append([date_converter(test.date), test.score_summary.section_scores[READING_TYPE]])
+                math_scores.append([date_converter(test.date), test.score_summary.section_scores[MATH_TYPE]])
+        if len(self.tests_taken) > 1:        
+            overall_score_difference = (s1[-1][1]) - (s1[0][1])
+            writing_score_difference = (writing_scores[-1][1]) - (writing_scores[0][1])
+            reading_score_difference = (reading_scores[-1][1]) - (reading_scores[0][1])
+            math_score_difference =  (math_scores[-1][1]) - (math_scores[0][1])
+
+
+
         lines = []
 
         scores = self.average_scores()
@@ -475,9 +499,12 @@ class User(object):
         lines.append('<p><b>Average Math Score:</b><font color = "' + qualitative_color(scores[3]) + '">  ' + str(scores[3]) + '/800</font></p>' + endl)
         lines.append('<p><b>Average Essay Score: </b>' + str(scores[4]) + '/12</p>' + endl)
         lines.append('<p><b>Tests Taken:</b> ' + str(len(self.tests_taken)) + '</p>' + endl)
+        if overall_score_difference > 0:
+            lines.append('You have gone from '+ str(s1[0][1]) + ' points on your first practice test to ' + str(s1[-1][1]) + ' points on your most recent test and improved your overall score by ' + str(overall_score_difference) + ' points' + endl)
+
+
         lines.append('<hr color="#BBBBBB" size="2" width="100%">' + endl)
-
-
+       
 
         #Section Analysis
         lines.append(endl)
@@ -486,7 +513,10 @@ class User(object):
         lines.append(endl)
 
         #Writing Analytics
-        lines.append("<h3><i>Writing Analytics:</i></h3>" + endl)
+        lines.append("<h3><i>Writing Analytics:</i></h3>" + endl + endl)
+        if writing_score_difference > 0:
+            lines.append('You have gone from '+ str(writing_scores[0][1]) + ' points since your first practice test to ' + str(writing_scores[-1][1]) + ' points on your most recent test and improved your writing score by ' + str(writing_score_difference) + ' points' + endl)
+
         for i in range(1, WRITING_TYPES + 1):
             if self.data.data[WRITING_TYPE].stats["W"+str(i)].t != 0:
                 lines.append('<p><b><font color = "' + self.data.data[WRITING_TYPE].stats["W"+str(i)].color() +'">' + WRITING_TYPE_DICT["W" + str(i)] + '</b> ' + str(self.data.data[WRITING_TYPE].stats["W"+str(i)]) + '</p>')
@@ -495,7 +525,9 @@ class User(object):
         lines.append("<br>" + endl)     
 
         #Reading Analytics
-        lines.append("<h3><i>Reading Analytics:</i></h3>" + endl)
+        lines.append("<h3><i>Reading Analytics:</i></h3>" + endl + endl)
+        if reading_score_difference > 0:
+            lines.append('You have gone from '+ str(reading_scores[0][1]) + ' points on your first practice test to ' + str(reading_scores[-1][1]) + ' points on your most recent test and improved your reading score by ' + str(reading_score_difference) + ' points' + endl)
         for i in range(1, READING_TYPES + 1):
             if self.data.data[READING_TYPE].stats["R"+str(i)].t != 0:
                 lines.append('<p><b><font color = "' + self.data.data[READING_TYPE].stats["R"+str(i)].color() +'">' + READING_TYPE_DICT["R" + str(i)] + "</b> " + str(self.data.data[READING_TYPE].stats["R"+str(i)]) + '</p>')
@@ -504,7 +536,9 @@ class User(object):
         lines.append("<br>" + endl)
 
         #Math Analytics
-        lines.append("<h3><i>Math Analytics:</i></h3>" + endl)
+        lines.append("<h3><i>Math Analytics:</i></h3>" + endl + endl)
+        if math_score_difference > 0:
+            lines.append('You have gone from '+ str(math_scores[0][1]) + ' points on your first practice test to ' + str(math_scores[-1][1]) + ' points on your most recent test and improved your math score by ' + str(math_score_difference) + ' points' + endl)
         for i in range(1, MATH_TYPES + 1):
             if self.data.data[MATH_TYPE].stats["M"+str(i)].t != 0:
                 lines.append('<p><b><font color = "' + self.data.data[MATH_TYPE].stats["M"+str(i)].color() +'">' + MATH_TYPE_DICT["M" + str(i)] + "</b> " + str(self.data.data[MATH_TYPE].stats["M"+str(i)]) + '</p>')

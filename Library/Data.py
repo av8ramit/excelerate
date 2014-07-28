@@ -120,15 +120,15 @@ class Question_Stats(object):
         if (f) < a_thresh:
             #poor
             advice = random_choice(negative)
-            advice += " You have missed " + missed_p + " of the total questions in this category."
+            advice += " You have missed an average of " + missed_p + " of the total questions in this category."
         elif (f) < p_thresh:
             #average
             advice = random_choice(average)
-            advice += " You have gotten " + correct_p + " correct which is acceptable but could use improvement."
+            advice += " You have gotten an average of " + correct_p + " correct which is acceptable but could use improvement."
         else:
             #good
             advice = random_choice(positive)
-            advice += " You have gotten " + correct_p + " of the questions in this category correct."
+            advice += " You have gotten an average of " + correct_p + " of the questions in this category correct."
 
         #Guess Check
 
