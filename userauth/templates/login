@@ -63,7 +63,7 @@
                   <label class="sr-only" for="password">password</label>
                   <input type="password" class="form-control" id="password" placeholder="Password"><br><br>
                   <input type="submit" value="Login" class="btn btn-primary"><br><br>
-                  Don't have a Username? <a href"#"><font color="#007be6">Register</font></a> now <!-- Link to register -->
+                  Don't have a Username? <a href="register"><font color="#007be6">Register</font></a> now <!-- Link to register -->
                 </div>
               </form>
             </p>
