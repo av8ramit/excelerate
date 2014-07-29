@@ -8,7 +8,7 @@ from django.core.urlresolvers import reverse
 
 
 def home(request):
-	return render(request, 'userauth/login.html')
+	return render(request, 'login')
 
 def register(request):
 	u_name = p_word = ''
