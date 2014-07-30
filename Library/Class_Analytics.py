@@ -31,10 +31,34 @@ class Analytics(object):
         self.bargraph_datam = []   #data formatted for bar graph
         self.bargraph_datar = []
         self.bargraph_dataw = []
+        self.overall_class_scores = [] # student,score on most recent test for ranking
+        self.math_class_scores = []
+        self.reading_class_scores = []
+        self.writing_class_scores = []
+        self.s1 = []     # student, score improvement btwn most recent test vs 1st test
+        self.writing_scores = []
+        self.reading_scores = []
+        self.math_scores = []
+        self.overall_score_difference = []
+        self.writing_score_difference = []
+        self.reading_score_difference = []
+        self.math_score_difference = []
+        self.overall_score_graph = []
         for username in users:
             filename = user_filename(username, self.c)
             user = load_user(username, filename, c)
             if len(user.tests_taken) != 0:
+                for test in user.tests_taken:
+                    self.s1.append([date_converter(test.date),test.score_summary.total_score(),test.score_summary.section_scores[WRITING_TYPE],test.score_summary.section_scores[READING_TYPE],test.score_summary.section_scores[MATH_TYPE]])
+                  
+                if len(user.tests_taken) == 1:
+                    self.overall_class_scores.append([user.name,self.s1[0][1:]])
+          
+                else:
+                    self.overall_class_scores.append([user.name,self.s1[-1][1:]])
+                
+
+
                 uw = User_Weakpoints(user.name)
                 for section_type in TYPE_ARRAY:
                     section_stats = user.data.data[section_type]
@@ -85,6 +109,25 @@ class Analytics(object):
             self.piechart_dataw.append([str(qtype),freq])
             for i in range(freq):
                 self.uw_frequencyw.remove(qtype) 
+        #sort class rankings
+        self.overall_class_scores.sort(key = lambda score: score[:][1], reverse = False)
+        index = 0
+        for item in self.overall_class_scores:
+            frequency = self.overall_class_scores.count(item)
+            self.overall_score_graph.append( [item[1][0], item[0] ] )
+            self.math_class_scores.append( [item[1][3], item[0] ] )
+            self.reading_class_scores.append( [item[1][2], item[0] ] )
+            self.writing_class_scores.append( [item[1][1], item[0] ] )
+            for i in range(frequency):
+                self.overall_class_scores.remove(item)
+
+        #print(str(self.overall_class_scores))
+       # print(str(self.math_class_scores))
+       # print(str(self.reading_class_scores))
+       # print(str(self.writing_class_scores))
+       # print("       MATH           " + str(self.math_class_scores))
+        #print("         READING        " + str(self.reading_class_scores))
+       # print("            WRITING   "   + str(self.writing_class_scores))
            
             
     
@@ -377,6 +420,48 @@ class Analytics(object):
         lines.append('});' + endl)
         lines.append('</script>')
         
+        lines.append(endl)
+        '''
+        length = len(self.overall_score_graph)
+        lines.append('<br><hr color="#4169EF" size="1" width="90%">' + endl)
+        lines.append('<br><h1>Ranked Student Preformance On Their Most Recent Test</h1>' + endl)
+        lines.append('<div id="chart8" style="height:' + str(length*110) +'px; width:500px;"></div>' + endl)
+        lines.append('<script class="code" type="text/javascript">' + endl)
+        lines.append('$(document).ready(function(){' + endl)
+        lines.append('var label = [' + "'" + 'Writing Score' +  "', '" + 'Reading Score' + "', '" + 'Math Score'  + "', '" + 'Overall Score'+ "'" + '];' + endl)
+        lines.append('var plot2 = $.jqplot(' + "'" + 'chart8' + "'" + ', [' + endl)
+        lines.append(str(self.writing_class_scores) + ',' +endl)
+        lines.append(str(self.reading_class_scores) + ',' +endl)
+        lines.append(str(self.math_class_scores) + ',' +endl)
+        lines.append(str(self.overall_score_graph) + '], {' +endl)
+        lines.append('seriesDefaults: {' + endl)
+        lines.append('renderer:$.jqplot.BarRenderer,' + endl)
+        lines.append('pointLabels: { show: true, location: ' + "'" + 'e' + "'" + '},' + endl)
+        lines.append('shadowAngle: 135, ' + endl)
+        lines.append('rendererOptions: { ' + endl)
+        lines.append('barDirection: ' + "'" + 'horizontal' + "'" + endl)
+        lines.append('}' + endl)
+        lines.append('},' + endl)
+        lines.append('legend: {show:true, renderer: $.jqplot.EnhancedLegendRenderer, ' + endl)
+        lines.append('rendererOptions: { ' + endl)
+        lines.append('numberRows: 4 ' + endl)
+        lines.append('},' + endl)
+        lines.append('placement: ' + "'" + 'insideGrid' + "'" + ',' + endl)
+        lines.append('labels: label, '+ endl)
+        lines.append('location: ' + "'" + 'ne' + "'" + '},' + endl)
+        lines.append('axes: { ' + endl)
+        #lines.append('xaxis:{ min:200, max:2400, renderer: $.jqplot.CategoryAxisRenderer,label:' + "'" + 'Test Score' + "'" + '},' + endl)
+        lines.append('yaxis: { ' + endl)
+        lines.append('renderer: $.jqplot.CategoryAxisRenderer, ' + endl)
+        lines.append('label: ' + "'" + 'Ranked Students' + "'" + ',' + endl)
+        lines.append('labelRenderer: $.jqplot.CanvasAxisLabelRenderer' + endl)
+        lines.append('}' + endl)
+        lines.append('}' + endl)
+        lines.append('});' + endl)
+        lines.append('});' + endl) 
+        lines.append('</script>' + endl)
+        
+        '''
         lines.append(endl)
         lines.append('<br><hr color="#4169EF" size="1" width="90%">'+ endl)
         lines.append("<br><h1>Overall Student Analysis</h1>" + endl)

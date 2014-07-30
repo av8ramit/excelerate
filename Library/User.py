@@ -220,10 +220,12 @@ class User(object):
         index = 1
         scores = self.average_scores()
         s1 = []
+        pointlabels = []  #form codes for graph points 
 
         #calculate all scores
         for test in self.tests_taken:
             s1.append([date_converter(test.date),test.score_summary.total_score()])
+            pointlabels.append(str(test.test_id))
             index += 1
 
         #graph js
@@ -286,7 +288,7 @@ class User(object):
 
         #Overall Graph
         lines.append('<h1>Previous Test History</h1>' + endl)
-        lines += g.html(False, False, True)
+        lines += g.html(False, False, True, pointlabels)
         lines.append('<br><hr color="#BBBBBB" size="2" width="100%">' + endl)
 
 
@@ -348,9 +350,11 @@ class User(object):
         scores = self.average_scores()
         s1 = []
         graphs = []
+        pointlabels = []
         #calculate all scores
         for test in self.tests_taken:
             s1.append([date_converter(test.date),test.score_summary.section_scores[section_type]])
+            pointlabels.append(str(test.test_id))
             index += 1
         
         g = Graph(section_type_name + " Score Performance", graph_index, s1)
@@ -400,7 +404,7 @@ class User(object):
 
 
         #Overall Graph
-        lines += g.html()
+        lines += g.html(True, True, False, pointlabels)
         lines.append("<p>This is your performance in the " + section_type_name + " section of the last " + str(len(self.tests_taken)) + " tests you have taken. The more comprehensive analysis of questions correct in each type is found below.</p>")
 
 
@@ -411,7 +415,7 @@ class User(object):
         #Print the type analysis as well
         i = 1
         for graph in graphs:
-            lines += graph.html(True)
+            lines += graph.html(True, True, False, pointlabels)
             lines.append('<p><b><font color = "' + self.data.data[section_type].stats[section_type_name[0] + str(i)].color() +'">' + type_dict[section_type_name[0] + str(i)] + "</b> " + str(self.data.data[section_type].stats[section_type_name[0]+str(i)]) + '</p>')
             i+=1 
             lines.append('<hr color="#4169EF" size="1" width="90%">' + endl)
@@ -579,12 +583,14 @@ class User(object):
         r = {} #reading " " "
         w = {} #writing " " "
         overall_rep_flag = True
+        pointlabels = []
         #calculate all scores
         for test in self.tests_taken:
             s1.append([date_converter(test.date),test.score_summary.total_score()])
             writing_scores.append([date_converter(test.date), test.score_summary.section_scores[WRITING_TYPE]])
             reading_scores.append([date_converter(test.date), test.score_summary.section_scores[READING_TYPE]])
             math_scores.append([date_converter(test.date), test.score_summary.section_scores[MATH_TYPE]])
+            pointlabels.append(str(test.test_id))
             index += 1
 
         # calculate class averages for each of the 4 graphs Overall, M W R Sections
@@ -682,7 +688,7 @@ class User(object):
         index = 0
         #Graph js
         for graph in graphs:
-            lines += graph.html()
+            lines += graph.html(False, True, False, pointlabels)
             index += 1
 
             if index == 2:

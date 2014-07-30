@@ -28,7 +28,7 @@ class Graph(object):
         return lines
 
 
-    def html(self, percent=False, space = True, SIMPLE_REP_FLAG = False):
+    def html(self, percent=False, space = True, SIMPLE_REP_FLAG = False, pointLabels = None):
         lines = []
         if space:
             lines.append('<br>')
@@ -36,7 +36,7 @@ class Graph(object):
         lines.append('<script class="code" type="text/javascript">' + endl)
         lines.append('$(document).ready(function(){' + endl)
         #if SIMPLE_REP_FLAG:
-         #   lines.append("var labels = ['Class Average', 'Your Performance'];" + endl)
+        #lines.append("var labels = ['Class Average', 'Your Performance'];" + endl)
         lines.append('var line1 = ' + str(self.data) + ';' + endl)
         if SIMPLE_REP_FLAG :
             filename = class_directory('Elite') + DIR_SEP + "average.txt"
@@ -69,13 +69,13 @@ class Graph(object):
                 new_entry = [entry[0], l[entry[0]]]
                 op.append(new_entry)
 
-            lines.append("var line2 = " + str(op) + ";" + endl)
+            #lines.append("var line2 = " + str(op) + ";" + endl)
             lines.append("var labels = ['Your Performance', 'Class Average'];" + endl)
-            lines.append("var plot1 = $.jqplot('chart" + str(self.index) + "', [line1, line2], {" + endl)
+            lines.append("var plot1 = $.jqplot('chart" + str(self.index) + "', [line1], {" + endl)
         elif self.section_averages != None:
                 lines.append("var labels = ['Your Performance', 'Class Average'];" + endl)
-                lines.append("var line2 = " + str(self.section_averages) + ";" + endl)
-                lines.append("var plot1 = $.jqplot('chart" + str(self.index) + "', [line1, line2], {" + endl)
+                #lines.append("var line2 = " + str(self.section_averages) + ";" + endl)
+                lines.append("var plot1 = $.jqplot('chart" + str(self.index) + "', [line1], {" + endl)
 
         else:
             lines.append("var labels = ['Your Performance', 'Class Average'];" + endl)
@@ -86,8 +86,10 @@ class Graph(object):
         lines.append("title:'" + self.name + "'," + endl)
         lines.append('seriesDefaults: {' + endl)
         lines.append('showMarker:true,' + endl)
-        lines.append('pointLabels: { show:false } ' + endl)
+        if pointLabels != None: 
+            lines.append('pointLabels: { show: true, location: '+ "'" + 'n' + "'" +', labels: ' +  str(pointLabels) + ' } ' + endl)
         lines.append('},' + endl)
+
         if SIMPLE_REP_FLAG or self.section_averages != None:
 
             lines.append("legend: {" + endl)
