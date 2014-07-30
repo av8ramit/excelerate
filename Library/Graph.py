@@ -12,12 +12,13 @@ from Values import *
 from User import *
 class Graph(object):
 
-    def __init__(self, name, index, points, averages = None, overallreport = None):
+    def __init__(self, name, index, points, averages = None, overallreport = None, pointLabels = None):
         self.name = name
         self.index = index
         self.data = points
         self.section_averages = averages
         self.overallrep = overallreport
+        self.data_point_labels = pointLabels
     def head(self):
         lines = []
         lines.append('<link class="include" rel="stylesheet" type="text/css" href="../../../Graphs/examples/../jquery.jqplot.min.css" />' + endl)
@@ -28,7 +29,7 @@ class Graph(object):
         return lines
 
 
-    def html(self, percent=False, space = True, SIMPLE_REP_FLAG = False, pointLabels = None):
+    def html(self, percent=False, space = True, SIMPLE_REP_FLAG = False):
         lines = []
         if space:
             lines.append('<br>')
@@ -78,7 +79,7 @@ class Graph(object):
                 lines.append("var plot1 = $.jqplot('chart" + str(self.index) + "', [line1], {" + endl)
 
         else:
-            lines.append("var labels = ['Your Performance', 'Class Average'];" + endl)
+            #lines.append("var labels = ['Your Performance', 'Class Average'];" + endl)
             #lines.append("var line2 = " + str(self.section_averages) + ";" + endl)
             lines.append("var plot1 = $.jqplot('chart" + str(self.index) + "', [line1], {" + endl)
         lines.append("animate: true," + endl)
@@ -86,8 +87,17 @@ class Graph(object):
         lines.append("title:'" + self.name + "'," + endl)
         lines.append('seriesDefaults: {' + endl)
         lines.append('showMarker:true,' + endl)
-        if pointLabels != None: 
-            lines.append('pointLabels: { show: true, location: '+ "'" + 'n' + "'" +', labels: ' +  str(pointLabels) + ' } ' + endl)
+        
+        if self.data_point_labels != None: 
+            #self.pointcount = 0
+            #for item in self.data:
+               # print(str(item[0]))
+                #print(str(self.pointcount))
+                #print("LABEL" + str(label))
+                #print(" label "+ str(label[3]))
+                #print(" self.data " +str(self.data[3][0]))
+                #self.pointcount = self.pointcount + 1
+            lines.append('pointLabels: { show: true, location: '+ "'" + 's' + "'" +', labels: ' +  str(self.data_point_labels) + ' } ' + endl)
         lines.append('},' + endl)
 
         if SIMPLE_REP_FLAG or self.section_averages != None:

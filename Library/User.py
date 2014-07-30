@@ -229,7 +229,7 @@ class User(object):
             index += 1
 
         #graph js
-        g = Graph("Overall Score Performance", 1, s1)
+        g = Graph("Overall Score Performance", 1, s1, None, None, pointlabels)
 
         #HTML opener
         lines.append('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">' + endl)
@@ -271,7 +271,7 @@ class User(object):
         lines.append('<p><b>Average Writing Score:</b><font color = "' + qualitative_color(scores[2]) + '">  ' + str(scores[2]) + '/800</font></p>' + endl)
         lines.append('<p><b>Average Reading Score:</b><font color = "' + qualitative_color(scores[1]) + '">  ' + str(scores[1]) + '/800</font></p>' + endl)
         lines.append('<p><b>Average Math Score:</b><font color = "' + qualitative_color(scores[3]) + '">  ' + str(scores[3]) + '/800</font></p>' + endl)
-        lines.append('<p><b>Average Essay Score: </b>' + str(scores[4]) + '/12</p>' + endl)
+        #lines.append('<p><b>Average Essay Score: </b>' + str(scores[4]) + '/12</p>' + endl)
         lines.append('<p><b>Tests Taken:</b> ' + str(len(self.tests_taken)) + '</p>' + endl)
         lines.append('<hr color="#BBBBBB" size="2" width="100%">' + endl)
 
@@ -288,7 +288,7 @@ class User(object):
 
         #Overall Graph
         lines.append('<h1>Previous Test History</h1>' + endl)
-        lines += g.html(False, False, True, pointlabels)
+        lines += g.html(False, False, True)
         lines.append('<br><hr color="#BBBBBB" size="2" width="100%">' + endl)
 
 
@@ -356,10 +356,10 @@ class User(object):
             s1.append([date_converter(test.date),test.score_summary.section_scores[section_type]])
             pointlabels.append(str(test.test_id))
             index += 1
-        
-        g = Graph(section_type_name + " Score Performance", graph_index, s1)
-        type_dict = section_type_dict(section_type)
 
+        g = Graph(section_type_name + " Score Performance", graph_index, s1, None, None, str(pointlabels))
+        type_dict = section_type_dict(section_type)
+        del pointlabels[:]
         for i in range(1, len(type_dict) + 1):
             key = section_type_name[0] + str(i)
             data = []
@@ -367,8 +367,10 @@ class User(object):
             for test in self.tests_taken:
                 if test.data.data[section_type].stats[key].t != 0:
                     data.append([date_converter(test.date),div(test.data.data[section_type].stats[key].c, test.data.data[section_type].stats[key].t) * 100])
+                    pointlabels.append(str(test.test_id))
             if len(data) > 0:
-                graphs.append(Graph(type_dict[key], graph_index, data))
+                graphs.append(Graph(type_dict[key], graph_index, data,None, None, str(pointlabels)))
+                del pointlabels[:]
 
 
 
@@ -404,7 +406,7 @@ class User(object):
 
 
         #Overall Graph
-        lines += g.html(True, True, False, pointlabels)
+        lines += g.html(False, True, False)
         lines.append("<p>This is your performance in the " + section_type_name + " section of the last " + str(len(self.tests_taken)) + " tests you have taken. The more comprehensive analysis of questions correct in each type is found below.</p>")
 
 
@@ -415,7 +417,7 @@ class User(object):
         #Print the type analysis as well
         i = 1
         for graph in graphs:
-            lines += graph.html(True, True, False, pointlabels)
+            lines += graph.html(True, True, False)
             lines.append('<p><b><font color = "' + self.data.data[section_type].stats[section_type_name[0] + str(i)].color() +'">' + type_dict[section_type_name[0] + str(i)] + "</b> " + str(self.data.data[section_type].stats[section_type_name[0]+str(i)]) + '</p>')
             i+=1 
             lines.append('<hr color="#4169EF" size="1" width="90%">' + endl)
@@ -501,7 +503,7 @@ class User(object):
         lines.append('<p><b>Average Writing Score:</b><font color = "' + qualitative_color(scores[2]) + '">  ' + str(scores[2]) + '/800</font></p>' + endl)
         lines.append('<p><b>Average Reading Score:</b><font color = "' + qualitative_color(scores[1]) + '">  ' + str(scores[1]) + '/800</font></p>' + endl)
         lines.append('<p><b>Average Math Score:</b><font color = "' + qualitative_color(scores[3]) + '">  ' + str(scores[3]) + '/800</font></p>' + endl)
-        lines.append('<p><b>Average Essay Score: </b>' + str(scores[4]) + '/12</p>' + endl)
+        #lines.append('<p><b>Average Essay Score: </b>' + str(scores[4]) + '/12</p>' + endl)
         lines.append('<p><b>Tests Taken:</b> ' + str(len(self.tests_taken)) + '</p>' + endl)
         if overall_score_difference > 0:
             lines.append('You have gone from '+ str(s1[0][1]) + ' points on your first practice test to ' + str(s1[-1][1]) + ' points on your most recent test and improved your overall score by ' + str(overall_score_difference) + ' points' + endl)
@@ -637,13 +639,13 @@ class User(object):
             writing_class_average.append(writing_new_entry)
 
         #graph js
-        g = Graph("Overall Score Performance", graph_index, s1, op, overall_rep_flag)
+        g = Graph("Overall Score Performance", graph_index, s1, op, overall_rep_flag, pointlabels)
         graph_index += 1
-        wg = Graph("Writing Score Performance", graph_index, writing_scores, writing_class_average)
+        wg = Graph("Writing Score Performance", graph_index, writing_scores, writing_class_average, None, pointlabels)
         graph_index += 1
-        rg = Graph("Reading Score Performance", graph_index, reading_scores, reading_class_average)
+        rg = Graph("Reading Score Performance", graph_index, reading_scores, reading_class_average, None, pointlabels)
         graph_index += 1
-        mg = Graph("Math Score Performance", graph_index, math_scores, math_class_average)
+        mg = Graph("Math Score Performance", graph_index, math_scores, math_class_average, None, pointlabels)
         graph_index += 1
         graphs.append(g)
         graphs.append(wg)
@@ -688,7 +690,7 @@ class User(object):
         index = 0
         #Graph js
         for graph in graphs:
-            lines += graph.html(False, True, False, pointlabels)
+            lines += graph.html(False, True, False)
             index += 1
 
             if index == 2:
