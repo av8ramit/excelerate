@@ -54,14 +54,24 @@
           <div class="inner cover">
             <a href="http://www.eliteprep.com/" target="_blank"><img class="img-circle" src="http://www.eliteprep.com/storage/Elite%20Logo%20Only%20Black%20Large.png" style="width: 140px; height: 140px;"></a>
             <!-- <h1 class="cover-heading">Score Report Login</h1> -->
-            <p class="lead">Enter a Username and Password</p>
+            <p class="lead">Please register with your Elite student ID</p>
             <p class="lead">
               <form class="form-inline" role="form" action="/register/" method = "post">
                 <div class="form-group">
+                  <label class="sr-only" for="fname">First Name</label>
+                  <input type="text" class="form-control" name="fname" id="fname" placeholder="First Name">
+                  <label class="sr-only" for="lname">Last Name</label>
+                  <input type="text" class="form-control" name="lname" id="lname" placeholder="Last Name"><br><br>
+                  <label class="sr-only" for="email">E-mail</label>
+                  <input type="email" class="form-control" name="email" id="email" placeholder="E-mail">
+                  <label class="sr-only" for="studentid">Student ID</label>
+                  <input type="text" class="form-control" name="studentid" id="studentid" placeholder="Elite Student ID"><br><br>
                   <label class="sr-only" for="username">Username</label>
-                  <input type="text" class="form-control" id="username" placeholder="Username"><br><br>
-                  <label class="sr-only" for="password">password</label>
-                  <input type="text" class="form-control" id="password" placeholder="Password"><br><br>
+                  <input type="text" class="form-control" name="username" id="username" placeholder="Username"><br><br>
+                  <label class="sr-only" for="password">Password</label>
+                  <input type="password" class="form-control" name="password" id="password" placeholder="Password"><br><br>
+                  <label class="sr-only" for="retypepassword">Re-type Password</label>
+                  <input type="password" class="form-control" name="retypepassword" id="retypepassword" placeholder="Re-Type Password"><br><br>
                   <input type="submit" value="Register" class="btn btn-success"><br><br>
                 </div>
               </form>
