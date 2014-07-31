@@ -1,3 +1,7 @@
 *.pyc
 
 Users/*
+runreport.txt
+Report.txt
+Elite/*
+EliteSJ/*
