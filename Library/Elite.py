@@ -91,7 +91,7 @@ class Elite_Class(object):
         with open(filename, 'rU') as f:
             reader = csv.reader(f)
             #waive various line entries you know are bogus
-            waive_array = [26, 231, 228, 555, 246, 404, 265, 438, 564]
+            waive_array = [246, 555, 726, 438, 564, 228, 786, 265, 26, 231, 404, 744]
             for row in reader:
                 SID = row[STUDENT_ID_INDEX]
                 if SID not in self.corrupted_rows.keys():
@@ -217,7 +217,12 @@ class Elite_Class(object):
             if student in self.corrupted_rows.keys():
                 for entry in self.corrupted_rows[student]:
                     tests_entered += 1
-                    u.tests_taken.append(entry.return_test())
+                    variable = 0
+                    for t in u.tests_taken:
+                        if date_after(entry.row[TEST_DATE_INDEX], t.date):
+                            break
+                        variable +=1
+                    u.tests_taken.insert(variable, entry.return_test()) #in case last test is shadow test
 
             #Working on Sanity testbench
             if SANITY:

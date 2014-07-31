@@ -387,6 +387,26 @@ def average_array(array):
 def index_exists(dictionary, key):
   return key in dictionary.keys()
 
+def date_after(date1, date2):
+  date1 = date1.split('/')
+  date2 = date2.split('/')
+  if int(date2[2]) > int(date1[2]):
+    return True
+  if int(date2[0]) > int(date1[0]):
+    return True
+  if int(date2[1]) > int(date1[1]):
+    return True
+  return False
+
+assert (date_after('06/25/2014','05/24/2015'))
+assert (not date_after('06/25/2016','05/24/2015'))
+
+assert (date_after('05/25/2015','07/23/2015'))
+assert (not date_after('08/25/2015','07/23/2015'))
+
+assert (date_after('08/10/2015','08/23/2015'))
+assert (not date_after('04/25/2015','04/21/2015'))
+
 #Vars to hold a colleges Overall, Math, Reading, Writing, and Name - passed to graph obj in user.py as args
 dict_bgcolor = {'Harvard': 'rgb(255,255,255)', 'UC Berkeley':'rgb(253, 181, 21)', 'MIT':'rgb(138, 139, 140)', 'Stanford':'rgb(140,21,21)', 'UCLA':'rgb(83, 104, 149)', 'Princeton':'rgb(216,100,44)', 'Yale':'rgb(15, 77,146)', 'Caltech':'rgb(255,255,255)', 'Johns Hopkins': 'rgb(28,72,130)', 'USC':'rgb(153,0,0)', 'Carnegie Mellon':'rgb(153,0,0)' }
 dict_colors ={'Harvard': 'rgb(165,28,48)', 'UC Berkeley':'rgb(0,50,98)', 'MIT':'rgb(161, 31, 52)', 'Stanford':'rgb(243,239,215)', 'UCLA':'rgb(255, 215, 0)', 'Princeton':'rgb(46,42,43)', 'Yale':'rgb(255, 255, 255)', 'Caltech':'rgb(255,102,0)', 'Johns Hopkins': 'rgb(207,181,59)', 'USC':'rgb(255,204,0)', 'Carnegie Mellon':'rgb(212,212,212)' }
