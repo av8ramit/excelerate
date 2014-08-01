@@ -59,9 +59,14 @@
               <form class="form-inline" role="form" action="/login/" method="post">
                 <div class="form-group">
                   <label class="sr-only" for="username">username</label>
-                  <input type="text" class="form-control" id="username" placeholder="Username"><br><br>
+                  <input required type="text" id="username" placeholder="Username"><br><br>
                   <label class="sr-only" for="password">password</label>
-                  <input type="password" class="form-control" id="password" placeholder="Password"><br><br>
+                  <input required type="password" id="password" placeholder="Password"><br><br>
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" id=" remember-me" value="remember-me"> Remember me
+                    </label>
+                  </div>&nbsp;
                   <input type="submit" value="Login" class="btn btn-primary"><br><br>
                   Don't have a Username? <a href="register"><font color="#007be6">Register</font></a> now <!-- Link to register -->
                 </div>
@@ -80,11 +85,11 @@
           <div class="mastfoot">
             <div class="inner">
            		<!--img src="HTML/mini.png" width="20%" alt="Excelerate" -->
-             	<p>Score reports and Analysis Provided by <a href="http://www.exceleratetestprep.com/">Excelerate Test Prep &copy;</a>.</p>
+             	<p><FONT color="white">Score reports and Analysis Provided by <a href="http://www.exceleratetestprep.com/"><font color="#007be6">Excelerate Test Prep &copy;</a>.</p>
                 <center>
-          			<a href="http://www.exceleratetestprep.com/#!about/cgvz">About Us</a> |
-          			<a href="http://www.exceleratetestprep.com/#!support/c3vn">Contact Us</a> |
-          			<a href="http://www.exceleratetestprep.com/#!services/c1739">Services</a>
+          			<a href="http://www.exceleratetestprep.com/#!about/cgvz"><font color="#007be6">About Us</a> <FONT color="white">|
+          			<a href="http://www.exceleratetestprep.com/#!support/c3vn"><font color="#007be6">Contact Us</a> <FONT color="white">|
+          			<a href="http://www.exceleratetestprep.com/#!services/c1739"><font color="#007be6">Services</a>
           		<p><FONT color="white" size="2" >Excelerate Test Prep © 2014</FONT></p>
         		</center>
             </div>
