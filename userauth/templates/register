@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,15 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+    <link rel="icon" href="#">
 
     <title>Register for ExcelerateLive</title>
 
     <!-- Bootstrap core CSS -->
     <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="http://getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="http://getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
@@ -31,6 +27,7 @@
 
     <style> 
 
+      html,
       body {
         margin:0;
         padding:0;
@@ -42,16 +39,19 @@
       #wrapper {
         min-height:100%;
         position:relative;
-        /*-webkit-box-shadow: inset 0 0 100px rgba(0,0,0,.5);
-        box-shadow: inset 0 0 100px rgba(0,0,0,.5);*/
+        -webkit-box-shadow: inset 0 0 100px rgba(0,0,0,.5);
+        box-shadow: inset 0 0 100px rgba(0,0,0,.5);
       }
       #head {
         padding-top: 30px;
+        padding-left:10px;
+        padding-right:10px;
         text-align: center;
       }
       #formarea {
-/*        padding:10px;*/
-        padding-bottom:150px;   /* Height of the footer element */
+        padding-left:10px;
+        padding-right:10px;
+        padding-bottom:100px;   /* Height of the footer element */
       }
       #foot {
         width:100%;
@@ -70,8 +70,7 @@
       <div id="wrapper">
 
         <div id="head">
-          <h2 class="lead" style="color:#fff"><a href="http://www.eliteprep.com/" target="_blank"><img class="img-circle" src="http://www.eliteprep.com/storage/Elite%20Logo%20Only%20Black%20Large.png" style="width: 140px; height: 140px;"></a><br>
-          Please register with a your given ID number</h2>
+          <h2 class="lead" style="color:#fff">Please register with a your given ID number</h2>
         </div> <!-- end of head -->
 
         <div id="formarea">
@@ -91,19 +90,19 @@
                   <td align="right"><input required type="text" name="school" id="school" placeholder="School Name"></td><br>
                 </tr>
                 <tr>
-                  <td align="left"><label style="color:#fff" for="email">E-mail  &nbsp;&nbsp;</label></td>
+                  <td align="left"><label style="color:#fff" for="email">E-mail:  &nbsp;&nbsp;</label></td>
                   <td align="right"><input required type="email" name="email" id="email" placeholder="E-mail"><br></td>
                 </tr>
                 <tr>
-                  <td align="left"><label style="color:#fff" for="studentid">Student ID  &nbsp;&nbsp;</label></td>
+                  <td align="left"><label style="color:#fff" for="studentid">Student ID:  &nbsp;&nbsp;</label></td>
                   <td align="right"><input required type="text" name="studentid" id="studentid" placeholder="Elite Student ID"><br></td>
                 </tr>
                 <tr>
-                  <td align="left"><label style="color:#fff" for="username">Username  &nbsp;&nbsp;</label></td>
+                  <td align="left"><label style="color:#fff" for="username">Username:  &nbsp;&nbsp;</label></td>
                   <td align="right"><input required type="text" name="username" id="username" placeholder="Username"><br></td>
                 </tr>
                 <tr>
-                  <td align="left"><label style="color:#fff" for="password">Password  &nbsp;&nbsp;</label></td>
+                  <td align="left"><label style="color:#fff" for="password">Password:  &nbsp;&nbsp;</label></td>
                   <td align="right"><input required type="password" name="password" id="password" placeholder="Password"><br></td>
                 </tr>          
                 <tr>
@@ -111,7 +110,8 @@
                   <td align="right"><input required type="password" name="retypepassword" id="retypepassword" placeholder="Confirm Password" onblur="confirmPass()"/><br></tr>
                 </tr>
               </table>
-              <br><button style="text-align:center" class="btn btn-sm btn-success" type="submit">Register</button>
+              <br><p id="message"><font color="red"></p>
+              <br><button style="text-align:center" class="btn btn-sm btn-success" type="submit" id="submit">Register</button>
             </form>
           </center>
         </div> <!-- end of formarea -->
@@ -136,7 +136,8 @@
         var pass = document.getElementById("password")
         var rePass = document.getElementById("retypepassword")
         if(pass.value !== rePass.value) {
-            alert('Passwords do not match!');
+            document.getElementById("message").innerHTML = "passwords do not match!";
+            // document.getElementById("submit").disabled=true;
         }
       }
     </script>
