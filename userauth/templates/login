@@ -79,21 +79,17 @@
             <a href="http://www.eliteprep.com/" target="_blank"><img class="img-circle" src="http://www.eliteprep.com/storage/Elite%20Logo%20Only%20Black%20Large.png" style="width: 140px; height: 140px;"></a>
             <!-- <h1 class="cover-heading">Score Report Login</h1> -->
             <p class="lead">Enter your Username and Password to access score reports</p><br>
-            <form class="form-inline" role="form" action="/login/" method="post">
-                <div class="form-group">
-                  <label class="sr-only" for="username">username</label>
-                  <input required style="color:black" type="text" id="username" placeholder="Username"><br><br>
-                  <label class="sr-only" for="password">password</label>
-                  <input required style="color:black" type="password" id="password" placeholder="Password"><br><br>
-                  <div class="checkbox">
-                    <label>
-                      <input type="checkbox" id=" remember-me" value="remember-me"> Remember me
-                    </label>
-                  </div>&nbsp;
-                  <input type="submit" value="Login" class="btn btn-primary"><br><br>
-                  Don't have a Username? <a href="register"><font color="#007be6">Register</font></a> now<!-- Link to register -->
-                </div>
-              </form>
+            <form class="form-inline" role="form" action="login/auth/" method="post"> {% csrf_token %}
+              <div class="form-group">
+                <label class="sr-only" for="username">username</label>
+                <input required style="color:black" type="text" id="username" name="username" placeholder="Username"><br><br>
+                <label class="sr-only" for="password">password</label>
+                <input required style="color:black" type="password" id="password" name ="password" placeholder="Password"><br><br>
+                <input type="checkbox" id=" remember-me" name="remember-me" value="remember-me"> Remember me &nbsp;
+                <input type="submit" value="Login" class="btn btn-primary"><br><br>
+              </div>
+            </form>
+            Don't have a Username? <a href="login/register"><font color="#007be6">Register</font></a> now<!-- Link to register -->
           </center>
         </div> <!-- end of formarea -->
         <br>

@@ -75,7 +75,7 @@
 
         <div id="formarea">
           <center>
-            <form role="form" action="/register/" method="post">
+            <form role="form" action="/login/sendregister/" method="post">{% csrf_token %}
               <table>
                 <tr>
                   <td align="left"><label style="color:#fff" for="fname">First Name: &nbsp;&nbsp;</label></td>
