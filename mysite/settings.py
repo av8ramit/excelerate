@@ -28,6 +28,18 @@ ALLOWED_HOSTS = []
 
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 
+"""
+Custom Added
+"""
+
+AUTH_PROFILE_MODULE='accounts.UserProfile'
+
+
+"""
+End Custom
+"""
+
+
 # Application definition
 
 INSTALLED_APPS = (
