@@ -28,6 +28,18 @@ ALLOWED_HOSTS = []
 
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 
+"""
+Custom Added
+"""
+
+#AUTH_PROFILE_MODULE='accounts.UserProfile'
+AUTH_USER_MODEL = 'userauth.Student'
+
+"""
+End Custom
+"""
+
+
 # Application definition
 
 INSTALLED_APPS = (
@@ -37,6 +49,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'userauth',
 )
 
 MIDDLEWARE_CLASSES = (
