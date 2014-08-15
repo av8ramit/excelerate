@@ -8,6 +8,8 @@ from django.core.context_processors import csrf
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
+import re
+
 
 
 def home(request):
@@ -17,18 +19,31 @@ def register(request):
 	return render(request, 'userauth/register_site.html')
 
 def send(request):
+
 	u_name = p_word = ''
 	if request.POST:
 		c = {}
 		c.update(csrf(request))
 		u_name = request.POST.get('username')
 		p_word = request.POST.get('password')
+		re_pass = request.POST.get('retypepassword')
 		fname = request.POST.get('fname')
 		lname = request.POST.get('lname')
 		school = request.POST.get('school')
 		email = request.POST.get('email')
 		studentid = request.POST.get('studentid')
-		#user = User.objects.create_user(username=u_name, password=p_word)
+
+		if not p_word == re_pass:
+			error_message = "Passwords do not match"
+			context = #whatevs
+		regex = re.compile(".+?@.+?\..+")
+		if not regex.search(email):
+			error_message = "Incorrect Email Format"
+			context = #bitchs
+		if not studentid.isdigit():
+			error_message = "Please put a valid student id"
+			context = #peace
+
 		user = Student.objects.create_user(username=u_name, password=p_word,
 									first_name=fname, last_name=lname,
 									school_name=school, email=email,
