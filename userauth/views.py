@@ -14,7 +14,7 @@ def home(request):
 	return render(request, 'userauth/login.html')
 
 def register(request):
-	return render(request, 'userauth/register.html')
+	return render(request, 'userauth/register_site.html')
 
 def send(request):
 	u_name = p_word = ''
@@ -43,8 +43,8 @@ def login(request):
 	if request.POST:
 		u_name = request.POST.get('username')
 		p_word = request.POST.get('password')
-		print u_name
-		print p_word
+		# print u_name
+		# print p_word
 		#remember = request.POST.get('remember-me', False)
 		user = authenticate(username=u_name, password=p_word)
 		if user is not None:

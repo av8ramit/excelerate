@@ -48,6 +48,10 @@
         padding-right:10px;
         text-align: center;
       }
+
+      #chains{
+        color:red;
+      }
       #formarea {
         padding-left:10px;
         padding-right:10px;
@@ -72,6 +76,10 @@
         <div id="head">
           <h2 class="lead" style="color:#fff">Please register with a your given ID number</h2>
         </div> <!-- end of head -->
+
+        <div id="chains">
+          <center><h1>{% block blurb %}{% endblock %}</hi></center>
+        </div>
 
         <div id="formarea">
           <center>
@@ -131,7 +139,7 @@
       </div> <!-- end of wrapper -->
 
 
-    <!-- 
+
       <script>
       function confirmPass() {
         var pass = document.getElementById("password")
@@ -141,8 +149,8 @@
             // document.getElementById("submit").disabled=true;
         }
       }
-    </script> 
-    -->
+      </script> 
+
 
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
