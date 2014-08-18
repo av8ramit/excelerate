@@ -49,9 +49,6 @@
         text-align: center;
       }
 
-      #chains{
-        color:red;
-      }
       #formarea {
         padding-left:10px;
         padding-right:10px;
@@ -74,15 +71,12 @@
       <div id="wrapper">
 
         <div id="head">
-          <h2 class="lead" style="color:#fff">Please register with a your given ID number</h2>
+          <h2 class="lead" style="color:#fff">Please register with your given ID number</h2>
         </div> <!-- end of head -->
-
-        <div id="chains">
-          <center><h1>{% block blurb %}{% endblock %}</hi></center>
-        </div>
 
         <div id="formarea">
           <center>
+            <p><FONT color="red">{% block errormsg %}{% endblock %}</FONT></p>
             <form role="form" action="/login/sendregister/" method="post">{% csrf_token %}
               <table>
                 <tr>

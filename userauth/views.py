@@ -33,9 +33,11 @@ def send(request):
 		email = request.POST.get('email')
 		studentid = request.POST.get('studentid')
 
-		# if not p_word == re_pass:
-		# 	error_message = "Passwords do not match"
-		# 	context = #whatevs
+		if not p_word == re_pass:
+			error_message = "Passwords do not match"
+			return render(request, 'userauth/register_site.html', {
+				'username': u_name, 'fname':fname, 'lname':lname, 'school':school, 'email':email, 'studentid':studentid, 'errormsg':error_message
+				})
 		# regex = re.compile(".+?@.+?\..+")
 		# if not regex.search(email):
 		# 	error_message = "Incorrect Email Format"
@@ -49,7 +51,7 @@ def send(request):
 									school_name=school, email=email,
 									student_id=studentid)
 		user.save()
-		return HttpResponse("Thank you for registering!")
+		return render(request, 'userauth/postregister.html')
 	else:
 		return HttpResponse("Sorry something went wrong")
 
