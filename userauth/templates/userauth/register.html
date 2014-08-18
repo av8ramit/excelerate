@@ -87,35 +87,35 @@
               <table>
                 <tr>
                   <td align="left"><label style="color:#fff" for="fname">First Name: &nbsp;&nbsp;</label></td>
-                  <td align="right"><input required type="text" name="fname" id="fname" placeholder="First Name"></td><br>
+                  <td align="right"><input required type="text" name="fname" id="fname" value="{% block fname %}{% endblock %}" placeholder="First Name"></td><br>
                 </tr>
                 <tr>
                   <td align="left"><label style="color:#fff" for="lname">Last Name:  &nbsp;&nbsp;</label></td>
-                  <td align="right"><input required type="text" name="lname" id="lname" placeholder="Last Name"><br></td>
+                  <td align="right"><input required type="text" name="lname" id="lname" value="{% block lname %}{% endblock %}" placeholder="Last Name"><br></td>
                 </tr>
                 <tr>
                   <td align="left"><label style="color:#fff" for="school">School Name:  &nbsp;&nbsp;</label></td>
-                  <td align="right"><input required type="text" name="school" id="school" placeholder="School Name"></td><br>
+                  <td align="right"><input required type="text" name="school" id="school" value="{% block school %}{% endblock %}" placeholder="School Name"></td><br>
                 </tr>
                 <tr>
                   <td align="left"><label style="color:#fff" for="email">E-mail:  &nbsp;&nbsp;</label></td>
-                  <td align="right"><input required type="email" name="email" id="email" placeholder="E-mail"><br></td>
+                  <td align="right"><input required type="email" name="email" id="email" value="{% block email %}{% endblock %}" placeholder="E-mail"><br></td>
                 </tr>
                 <tr>
                   <td align="left"><label style="color:#fff" for="studentid">Student ID:  &nbsp;&nbsp;</label></td>
-                  <td align="right"><input required type="text" name="studentid" id="studentid" placeholder="Elite Student ID"><br></td>
+                  <td align="right"><input required type="text" name="studentid" id="studentid" value="{% block studentid %}{% endblock %}" placeholder="Elite Student ID"><br></td>
                 </tr>
                 <tr>
                   <td align="left"><label style="color:#fff" for="username">Username:  &nbsp;&nbsp;</label></td>
-                  <td align="right"><input required type="text" name="username" id="username" placeholder="Username"><br></td>
+                  <td align="right"><input required type="text" name="username" id="username" value="{% block username %}{% endblock %}" placeholder="Username"><br></td>
                 </tr>
                 <tr>
                   <td align="left"><label style="color:#fff" for="password">Password:  &nbsp;&nbsp;</label></td>
-                  <td align="right"><input required type="password" name="password" id="password" placeholder="Password"><br></td>
+                  <td align="right"><input required type="password" name="password" id="password" value="{% block password %}{% endblock %}" placeholder="Password"><br></td>
                 </tr>          
                 <tr>
                   <td align="left"><label style="color:#fff" for="retypepassword">Confirm Password: &nbsp;&nbsp;</label></td>
-                  <td align="right"><input required type="password" name="retypepassword" id="retypepassword" placeholder="Confirm Password" onblur="confirmPass()"/><br></tr>
+                  <td align="right"><input required type="password" name="retypepassword" id="retypepassword" value="{% block retypepassword %}{% endblock %}" placeholder="Confirm Password" onblur="confirmPass()"/><br></tr>
                 </tr>
               </table>
               <br><button style="text-align:center" class="btn btn-sm btn-success" type="submit" id="submit">Register</button>
