@@ -55,6 +55,13 @@ def send(request):
 	else:
 		return HttpResponse("Sorry something went wrong")
 
+def postregister(request):
+	if request.POST:
+		c = {}
+		c.update(csrf(request))
+		u_name = request.POST.get('username')
+		return render(request, 'userauth/login.html', { 'username': u_name })
+
 def login(request):
 	u_name = p_word = ''
 	if request.POST:
