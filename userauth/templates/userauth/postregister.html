@@ -63,6 +63,14 @@
         text-align: center;
       }
 
+      .submitlink {
+      background-color: transparent;
+      text-decoration: underline;
+      border: none;
+      color: blue;
+      cursor: pointer;
+      }
+
 
     </style>
 
@@ -72,7 +80,10 @@
 
         <div id="head">
           Thank you for registering!
-          <p> return to <a href="userauth/login.html">login</a> page</p>
+          <form action='userauth/postregister/' method="POST">
+            <input hidden name="username" id="username" value="{{ username }}">
+            <p> return to <input type='submit' class="submitlink" value="login">page</p>
+          </form>
         </div> <!-- end of head -->
 
         <div id="mainbody" class="inner cover">
