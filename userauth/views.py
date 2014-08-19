@@ -60,7 +60,7 @@ def postregister(request):
 		c = {}
 		c.update(csrf(request))
 		u_name = request.POST.get('username')
-		return render(request, 'userauth/login.html', { 'username': u_name })
+		return render(request, 'userauth/login_post.html', { 'username': u_name })
 
 def login(request):
 	u_name = p_word = ''

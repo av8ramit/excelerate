@@ -80,7 +80,7 @@
 
         <div id="head">
           Thank you for registering!
-          <form action='postregister/' method="POST"> {% csrf_token %}
+          <form action="{% url 'login:front' %}" method="POST"> {% csrf_token %}
             <input hidden name="username" id="username" value="{{ username }}">
             <p> return to <input type='submit' class="submitlink" value="login">page</p>
           </form>
