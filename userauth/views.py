@@ -51,7 +51,7 @@ def send(request):
 									school_name=school, email=email,
 									student_id=studentid)
 		user.save()
-		return render(request, 'userauth/postregister.html')
+		return render(request, 'userauth/postregister.html', {'username':u_name})
 	else:
 		return HttpResponse("Sorry something went wrong")
 
