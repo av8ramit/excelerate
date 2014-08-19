@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="#">
+    <link rel="icon" href="#"> <!-- TODO: add favicon -->
 
-    <title>Register for ExcelerateLive</title>
+    <title>ExcelerateLive Score Report Login</title>
 
     <!-- Bootstrap core CSS -->
     <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -33,7 +33,7 @@
         padding:0;
         height:100%;
         background-color: #333;
-        /*color: #fff;*/
+        color: #fff;
         text-shadow: 0 1px 3px rgba(0,0,0,.5);
       }
       #wrapper {
@@ -49,6 +49,7 @@
         text-align: center;
       }
       #formarea {
+        padding-top: 100px;
         padding-left:10px;
         padding-right:10px;
         padding-bottom:100px;   /* Height of the footer element */
@@ -70,53 +71,30 @@
       <div id="wrapper">
 
         <div id="head">
-          <h2 class="lead" style="color:#fff">Please register with a your given ID number</h2>
+          <!-- empty for now -->
         </div> <!-- end of head -->
 
-        <div id="formarea">
+        <div id="formarea" class="inner cover">
           <center>
-            <form role="form" action="/register/" method="post">
-              <table>
-                <tr>
-                  <td align="left"><label style="color:#fff" for="fname">First Name: &nbsp;&nbsp;</label></td>
-                  <td align="right"><input required type="text" name="fname" id="fname" placeholder="First Name"></td><br>
-                </tr>
-                <tr>
-                  <td align="left"><label style="color:#fff" for="lname">Last Name:  &nbsp;&nbsp;</label></td>
-                  <td align="right"><input required type="text" name="lname" id="lname" placeholder="Last Name"><br></td>
-                </tr>
-                <tr>
-                  <td align="left"><label style="color:#fff" for="school">School Name:  &nbsp;&nbsp;</label></td>
-                  <td align="right"><input required type="text" name="school" id="school" placeholder="School Name"></td><br>
-                </tr>
-                <tr>
-                  <td align="left"><label style="color:#fff" for="email">E-mail:  &nbsp;&nbsp;</label></td>
-                  <td align="right"><input required type="email" name="email" id="email" placeholder="E-mail"><br></td>
-                </tr>
-                <tr>
-                  <td align="left"><label style="color:#fff" for="studentid">Student ID:  &nbsp;&nbsp;</label></td>
-                  <td align="right"><input required type="text" name="studentid" id="studentid" placeholder="Elite Student ID"><br></td>
-                </tr>
-                <tr>
-                  <td align="left"><label style="color:#fff" for="username">Username:  &nbsp;&nbsp;</label></td>
-                  <td align="right"><input required type="text" name="username" id="username" placeholder="Username"><br></td>
-                </tr>
-                <tr>
-                  <td align="left"><label style="color:#fff" for="password">Password:  &nbsp;&nbsp;</label></td>
-                  <td align="right"><input required type="password" name="password" id="password" placeholder="Password"><br></td>
-                </tr>          
-                <tr>
-                  <td align="left"><label style="color:#fff" for="retypepassword">Confirm Password: &nbsp;&nbsp;</label></td>
-                  <td align="right"><input required type="password" name="retypepassword" id="retypepassword" placeholder="Confirm Password"><br></tr>
-                </tr>
-              </table>
-              <p id="message"><font color="red"> Your passwords did not match, please try again.</p>
-              <br><button style="text-align:center" class="btn btn-sm btn-success" type="submit" id="submit">Register</button>
+            <a href="http://www.eliteprep.com/" target="_blank"><img class="img-circle" src="http://www.eliteprep.com/storage/Elite%20Logo%20Only%20Black%20Large.png" style="width: 140px; height: 140px;"></a>
+            <!-- <h1 class="cover-heading">Score Report Login</h1> -->
+            <p class="lead">Enter your Username and Password to access score reports</p><br>
+            <form class="form-inline" role="form" action="{% url 'login:auth' %}" method="post"> {% csrf_token %}
+              <div class="form-group">
+                <label class="sr-only" for="username">username</label>
+                <input required style="color:black" type="text" id="username" name="username" value='{% block username %}{% endblock %}' placeholder="Username"><br><br>
+                <label class="sr-only" for="password">password</label>
+                <input required style="color:black" type="password" id="password" name ="password" placeholder="Password"><br><br>
+                <input type="checkbox" id=" remember-me" name="remember-me" value="remember-me"> Remember me &nbsp;
+                <input type="submit" value="Login" class="btn btn-primary"><br><br>
+              </div>
             </form>
+            <p><FONT color="red">{% block errormsg%}{% endblock %}</FONT></p>
+            Don't have a Username? <a href="{% url 'login:register' %}"><font color="#007be6">Register</font></a> now<!-- Link to register -->
           </center>
         </div> <!-- end of formarea -->
         <br>
-        
+
         <div id="foot">
            <footer>
             <center>
@@ -131,7 +109,7 @@
 
       </div> <!-- end of wrapper -->
 
-    <script>
+      <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)

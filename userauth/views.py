@@ -13,13 +13,30 @@ import re
 
 
 def home(request):
-	return render(request, 'userauth/login.html')
+	"""
+	Goes to home page - checks to see if it is sent a post (from postregister page) with the username. If it was, then pre-fill the username field
+	"""
+	if request.POST:
+		c = {}
+		c.update(csrf(request))
+		u_name = request.POST.get('username')
+		return render(request, 'userauth/login.html', { 'username': u_name })
+	else:
+		return render(request, 'userauth/login.html')
 
 def register(request):
-	return render(request, 'userauth/register_site.html')
+	"""
+	Simply sends user to the register page
+	"""
+	return render(request, 'userauth/register.html')
 
 def send(request):
-
+	"""
+	Called after submitting a register form
+	Collects all the post information, checks for matching passwords, and does one of two things:
+	1. If passwords do not match, reload register form with error message and pre-filled fields
+	2. If everything is valid, create user object and send to postregister page with username variable
+	""" 
 	u_name = p_word = ''
 	if request.POST:
 		c = {}
@@ -35,7 +52,7 @@ def send(request):
 
 		if not p_word == re_pass:
 			error_message = "Passwords do not match"
-			return render(request, 'userauth/register_site.html', {
+			return render(request, 'userauth/register.html', {
 				'username': u_name, 'fname':fname, 'lname':lname, 'school':school, 'email':email, 'studentid':studentid, 'errormsg':error_message
 				})
 		# regex = re.compile(".+?@.+?\..+")
@@ -51,37 +68,39 @@ def send(request):
 									school_name=school, email=email,
 									student_id=studentid)
 		user.save()
-		return render(request, 'userauth/postregister.html', {'username':u_name})
+		return render(request, 'userauth/postregister_base.html', {'username':u_name})
 	else:
 		return HttpResponse("Sorry something went wrong")
 
-def postregister(request):
-	if request.POST:
-		c = {}
-		c.update(csrf(request))
-		u_name = request.POST.get('username')
-		return render(request, 'userauth/login_post.html', { 'username': u_name })
+# shouldn't need this - handled in home now
+# def postregister(request):
+# 	if request.POST:
+# 		c = {}
+# 		c.update(csrf(request))
+# 		u_name = request.POST.get('username')
+# 		return render(request, 'userauth/login_post.html', { 'username': u_name })
 
 def login(request):
+	"""
+	Called from login page
+	Authenticates username and password
+	Loads user page or displays appropriate error
+	"""
 	u_name = p_word = ''
 	if request.POST:
 		u_name = request.POST.get('username')
 		p_word = request.POST.get('password')
-		# print u_name
-		# print p_word
 		remember = request.POST.get('remember-me', False)
 		user = authenticate(username=u_name, password=p_word)
 		if user is not None:
 			# the password verified
 			if user.is_active:
-				# Change later
-				#login(request, user)
-				school = user.school_name
-				# return HttpResponse(u_name + " from " + school + " succesfully logged in!")
 				return render(request, 'userauth/userpage.html', {'user':user})
 			else:
 				# User account has been disabled
-				return HttpResponse("Sorry, user has been disabled")
+				error_message = "Sorry, this user has been disabled"
+				return render(request, 'userauth/login.html', {'errormsg':error_message})
 		else:
 			# Username and password combination was not verified
-			return HttpResponse("Username and password incorrect")
+			error_message = "Incorrect username or password"
+			return render(request, 'userauth/login.html', {'errormsg':error_message})
