@@ -15,6 +15,7 @@ from Answer import *
 from User import *
 from Class import *
 from Scored import *
+import datetime
 
 def clear(n):
     for i in range(0,n):
@@ -191,6 +192,8 @@ def make_answer_sheet(u, test_id):
     label_vector = "Number:,Answer:" + endl
     lines.append(test_id + " Answer Sheet" + endl)
     lines.append("Name:," + u.name + endl)
+    lines.append("Date:," + datetime_converter(str(datetime.date.today())) + endl)
+    lines.append("Essay:,7" + endl)
     lines.append(label_vector)
     with open(test_directory(filename) + DIR_SEP + KEYFILE, 'rU') as f:
         reader = csv.reader(f)
@@ -220,6 +223,10 @@ def parse_answers(filename):
                 continue
             elif row[0] == "Name:":
                 test.add_name(row[1])
+            elif row[0] == "Date:":
+                test.add_date(row[1])
+            elif row[0] == "Essay:":
+                test.add_essay(int(row[1]))
             elif row[0] == "": #blanks
                 continue
             elif not id_set:

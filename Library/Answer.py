@@ -14,11 +14,21 @@ class Answered_Test(object):
     def __init__(self, test_id):
         self.id = test_id
         self.name = None
+        self.essay = None
+        self.date = None
         self.sections = {}
 
     #This method adds the name to the answer sheet.
     def add_name(self, name):
         self.name = name
+
+    #This method adds the essay to the answer sheet.
+    def add_essay(self, essay):
+        self.essay = essay
+
+    #This method adds the date to the answer sheet.
+    def add_date(self, date):
+        self.date = date    
 
     #This method adds a constructed section to the Answered_Test object.
     def add_section(self, section):

@@ -12,6 +12,13 @@ def date_converter(datestring):
   datestring = datestring.split('/')
   return (datestring[2] + '-' + datestring[0] + '-' + datestring[1])
 
+def datetime_converter(datestring):
+  year = 0
+  month = 1
+  day = 2
+  datestring = datestring.split('-')
+  return datestring[month] + '/' + datestring[day] + '/' + datestring[year]
+
 #Question Value
 PARSED_ARRAY_SIZE = 5
 

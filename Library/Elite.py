@@ -91,7 +91,8 @@ class Elite_Class(object):
         with open(filename, 'rU') as f:
             reader = csv.reader(f)
             #waive various line entries you know are bogus
-            waive_array = [246, 555, 726, 438, 564, 228, 786, 265, 26, 231, 404, 744]
+            waive_array = [555, 1045, 823, 726, 231, 404, 744, 980, 265, 438, 564, 246]
+            # 231, 26, 228, 555, 246, 438, 564, 265, 404, 744, 786, 726
             for row in reader:
                 SID = row[STUDENT_ID_INDEX]
                 if SID not in self.corrupted_rows.keys():
@@ -180,10 +181,20 @@ class Elite_Class(object):
                 for test in u.tests_taken:
                     tests_entered += 1
                     e = self.elite_scores[student][test_index]
+                    assert (e.row[TEST_DATE_INDEX] == test.date) #verifies date and form code
+                    assert (e.row[FORM_CODE] == test.test_id)
                     mistake = False
 
+
+                    #Score injection if raw scores match
                     if e.writing_raw_score == test.score_summary.writing_score:
                         test.score_summary.section_scores[WRITING_TYPE] = e.writing_scaled_score
+
+                    if e.reading_raw_score == test.score_summary.reading_score:
+                        test.score_summary.section_scores[READING_TYPE] = e.reading_scaled_score
+
+                    if e.math_raw_score == test.score_summary.math_score:
+                        test.score_summary.section_scores[MATH_TYPE] = e.math_scaled_score
 
                     if e.writing_scaled_score != test.score_summary.section_scores[WRITING_TYPE]:
                         print("Writing score was incorrect for test " + student + " for test " + test.test_id)
@@ -258,7 +269,11 @@ class Elite_Class(object):
         if SANITY:
             print ("Tests Expected:" + str(self.total_tests))
             print("Tests Seen: " + str(tests_entered))
+            print("Students Analyzed: " + str(len(self.students.keys())))
             print("SANITY TEST PASSED!!!")
+
+        #if run == 1:
+        #    print("Invalid Rows: " + str(self.invalid_rows))
 
         #Run report analysis with arrays that were not included
         array = []
@@ -277,6 +292,10 @@ class Elite_Class(object):
             return False
         if row[MATH_INDEX] == '-100' or row[MATH_INDEX] == '0':
             return False
+        a = [MATH_INDEX, WRITING_INDEX, READING_INDEX]
+        for index in a:
+            if int(row[index]) <= 0:
+                return False
         return True
 
     #convert a section into answers and a score
@@ -357,7 +376,7 @@ class Elite_Class(object):
 
     #take a row and make an Excelerate entry
     def enter_entry(self, row):
-        entry = Elite_Test_Entry(row[FORM_CODE])
+        entry = Elite_Test_Entry(row[FORM_CODE], row)
         entry.number = row[0]
         entry.writing_raw_score = int(row[WRITING_INDEX])
         entry.reading_raw_score = int(row[READING_INDEX])
@@ -371,9 +390,10 @@ class Elite_Class(object):
 class Elite_Test_Entry(object):
 
     #initialize Elite Test Entry
-    def __init__(self, test_id):
+    def __init__(self, test_id, row):
         self.id = test_id
         self.number = 0
+        self.row = row
         self.writing_raw_score = 0
         self.reading_raw_score = 0
         self.math_raw_score = 0
@@ -415,4 +435,4 @@ class Corrupted_Score_Summary(object):
             score += s
         return score
 
-a = Elite_Class('Elite/Elite.csv')
+a = Elite_Class('Elite/Elite806.csv')

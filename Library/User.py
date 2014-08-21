@@ -43,6 +43,8 @@ class User(object):
         sections[READING_TYPE] = ts.reports[READING_TYPE].incorrect_questions
         st = Scored_Test(answers.id)
         st.recreate(sections)
+        st.date = answers.date
+        st.essay = answers.essay
         #put the scored test in the history page after it has been graded
         self.tests_taken.append(st)
         #add this new test to data sections
@@ -628,7 +630,8 @@ class User(object):
         reading_class_average = []
         writing_class_average = []
 
-        for entry in s1:
+        #CLASS AVERAGE GRAPH
+        """for entry in s1:
             new_entry = [entry[0], l[entry[0]]]
             math_new_entry = [entry[0], m[entry[0]]] # get math class average for test on that date
             reading_new_entry = [entry[0], r[entry[0]]]
@@ -636,7 +639,7 @@ class User(object):
             op.append(new_entry)
             math_class_average.append(math_new_entry)
             reading_class_average.append(reading_new_entry)
-            writing_class_average.append(writing_new_entry)
+            writing_class_average.append(writing_new_entry)"""
 
         #graph js
         g = Graph("Overall Score Performance", graph_index, s1, op, overall_rep_flag, pointlabels)

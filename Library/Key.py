@@ -85,6 +85,8 @@ class Test(object):
     def grade(self, answered_test):
         report = Test_Summary(self.get_id())
         assert (answered_test.id == self.get_id())
+        self.essay = answered_test.essay
+        self.date = answered_test.date
         for i in range(1,11):
             answered_section = answered_test.sections[i]
             answer_key = self.get_section(i)

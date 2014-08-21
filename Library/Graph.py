@@ -40,7 +40,8 @@ class Graph(object):
         #lines.append("var labels = ['Class Average', 'Your Performance'];" + endl)
         lines.append('var line1 = ' + str(self.data) + ';' + endl)
         if SIMPLE_REP_FLAG :
-            filename = class_directory('Elite') + DIR_SEP + "average.txt"
+            #REMOVE CLASS AVERAGE FEATURE
+            """filename = class_directory('Elite') + DIR_SEP + "average.txt"
             with open(filename) as f:
                 array = f.readlines()
                 l = {}
@@ -68,7 +69,7 @@ class Graph(object):
             op= []
             for entry in self.data:
                 new_entry = [entry[0], l[entry[0]]]
-                op.append(new_entry)
+                op.append(new_entry)"""
 
             #lines.append("var line2 = " + str(op) + ";" + endl)
             lines.append("var labels = ['Your Performance', 'Class Average'];" + endl)
