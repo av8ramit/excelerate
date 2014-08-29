@@ -12,7 +12,7 @@ from Values import *
 from Scored import *
 from Commands import *
 from User import *
-from os import *
+import os
 import csv
 import shutil
 
@@ -91,7 +91,8 @@ class Elite_Class(object):
         with open(filename, 'rU') as f:
             reader = csv.reader(f)
             #waive various line entries you know are bogus
-            waive_array = [555, 1045, 823, 726, 231, 404, 744, 980, 265, 438, 564, 246]
+            waive_array = [246, 726, 438, 564, 555, 1125, 404, 744, 980, 231, 1045, 823, 265]
+            #[555, 1045, 823, 726, 231, 404, 744, 980, 265, 438, 564, 246]
             # 231, 26, 228, 555, 246, 438, 564, 265, 404, 744, 786, 726
             for row in reader:
                 SID = row[STUDENT_ID_INDEX]
@@ -435,4 +436,4 @@ class Corrupted_Score_Summary(object):
             score += s
         return score
 
-a = Elite_Class('Elite/Elite806.csv')
+a = Elite_Class('Elite/Elite828.csv')
