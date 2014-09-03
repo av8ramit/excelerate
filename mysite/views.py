@@ -4,6 +4,7 @@ from Library.Console import *
 from Library.Values import *
 from django.core.context_processors import csrf
 
+c = Console()
 
 def index(request):
 	return render(request, 'mysite/index_base.html')
@@ -34,14 +35,22 @@ def extest(request):
 	return render(request, 'mysite/tester.html', {'response': response})
 
 def formtest(request):
+	"""
+	Successfully using the form to input commands as if they were entered through the shell
+	"""
 	if request.POST:
 		context = {}
 		context.update(csrf(request))
 		cmd = request.POST.get('cmd')
+		print("hello try")
 		try:
-			c = Console()
-			c.process_commands(cmd)
-			response = "Successfully called excelerate function: " + cmd
+			print (cmd)
+			c.process_commands(str(cmd))
+			print "hello final"
+			if c.error != None:
+				response = "Error:" + c.error
+			else:
+				response = "Successfully called excelerate function: " + cmd
 			return render(request, 'mysite/tester.html', {'response':response})
 		except Exception as e:
 			response = 'Something went wrong with command:' + cmd + ". Exception outputted: "

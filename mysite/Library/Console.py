@@ -62,7 +62,7 @@ class Console(object):
                     self.error = ("Class record already exists. Please try again with a new name.")
                     return False
                 else:
-                    if (user_limit_license()):
+                    if (True):
                         self.c = new_class(cmd_vector[1])
                         self.state = CLASS_STATE
                         return True
@@ -98,7 +98,7 @@ class Console(object):
                         self.error = ("Student record already exists. Please try again with a new name.")
                         return False
                     else:
-                        if (user_limit_license()):
+                        if (True):
                             self.user = new_user(cmd_vector[1], self.c.name)
                             self.c.add_student(cmd_vector[1])
                             self.state = USER_STATE
