@@ -1,6 +1,6 @@
 from Values import *
 import datetime
-
+import os
 
 
 
@@ -37,7 +37,8 @@ def check_date_license():
 
 def user_limit_license():
 	USER_LICENSE_VALID = True
-	a = os.listdir(class_directory(''))  #a has all classes
+	return True
+	"""a = os.listdir(class_directory(''))  #a has all classes
 	total_users = 0
 	for classes in a:    #for each class
 		if classes[0] == '.':
@@ -48,6 +49,6 @@ def user_limit_license():
 				total_users += 1
 		if (total_users >= USER_LIMIT):
 			USER_LICENSE_VALID = False
-	return USER_LICENSE_VALID
+	return USER_LICENSE_VALID"""
 
 

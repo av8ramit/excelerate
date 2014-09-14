@@ -385,10 +385,7 @@ def section_name(section_type):
     return 0
 
 def average_array(array):
-  average = 0
-  for element in array:
-    average+=element
-  return average // len(array)
+  return sum(array) // len(array)
 
 
 def index_exists(dictionary, key):
@@ -413,6 +410,10 @@ assert (not date_after('08/25/2015','07/23/2015'))
 
 assert (date_after('08/10/2015','08/23/2015'))
 assert (not date_after('04/25/2015','04/21/2015'))
+
+#Inconsistency Standard Deviation Metric
+INCONSISTENCY_BAR = 50
+
 
 #Vars to hold a colleges Overall, Math, Reading, Writing, and Name - passed to graph obj in user.py as args
 dict_bgcolor = {'Harvard': 'rgb(255,255,255)', 'UC Berkeley':'rgb(253, 181, 21)', 'MIT':'rgb(138, 139, 140)', 'Stanford':'rgb(140,21,21)', 'UCLA':'rgb(83, 104, 149)', 'Princeton':'rgb(216,100,44)', 'Yale':'rgb(15, 77,146)', 'Caltech':'rgb(255,255,255)', 'Johns Hopkins': 'rgb(28,72,130)', 'USC':'rgb(153,0,0)', 'Carnegie Mellon':'rgb(153,0,0)' }
