@@ -40,7 +40,7 @@ QUESTION_CONVERTER['1D'] = 'M4'
 
 
 filename = 'answer_key.csv'
-testcode = 'GV60'
+testcode = 'GE34'
 FORM_CODE = 0
 SECTION_INDEX = 1
 SECTION_TYPE_INDEX = 2
