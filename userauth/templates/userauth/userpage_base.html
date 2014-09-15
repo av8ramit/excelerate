@@ -76,11 +76,29 @@
 
         <div id="mainbody" class="inner cover">
           <center>
-            <h3>{% block fname %}fname{% endblock fname %} {%block lname %}lname{% endblock lname %}</h3>
-            <p>{% block username %}username{% endblock username %}</p>
-            <p>{% block school %}school{% endblock school %}</p>
-            <p>{% block studentid %}studentid{% endblock studentid %}</p>
-          </center>
+            <font color="black">
+              <h3>{% block fname %}fname{% endblock fname %} {%block lname %}lname{% endblock lname %}</h3>
+              <p>{% block username %}username{% endblock username %}</p>
+              <p>{% block school %}school{% endblock school %}</p>
+              <p>{% block studentid %}studentid{% endblock studentid %}</p>
+              <p>{% block extester %}{% endblock extester %}</p><!-- Function call test -->
+            </font>
+            <form role='form' action="{% url 'login:formtest2' %}" method='post'>{% csrf_token %}
+              <input hidden type="text" name="cmd" id="cmd" value="answer_sheet">
+              <button class="btn btn-sm btn-success" type="submit" id="submit">Answer Sheet</button>
+              <input hidden type="text" name="cmd" id="cmd" value="grade">
+              <button class="btn btn-sm btn-success" type="submit" id="submit">Grade</button>
+              <input hidden type="text" name="cmd" id="cmd" value="save">
+              <button class="btn btn-sm btn-success" type="submit" id="submit">Save</button>
+              <input hidden type="text" name="cmd" id="cmd" value="simple_report">
+              <button class="btn btn-sm btn-success" type="submit" id="submit">Simple Report</button>
+              <input hidden type="text" name="cmd" id="cmd" value="advance_report">
+              <button class="btn btn-sm btn-success" type="submit" id="submit">Advance Report</button>
+              <input hidden type="text" name="cmd" id="cmd" value="section_report">
+              <button class="btn btn-sm btn-success" type="submit" id="submit">Section Report</button>
+            </form>
+            </center>
+
         </div> <!-- end of mainbody -->
         <br>
 

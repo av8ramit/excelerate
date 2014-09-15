@@ -4,13 +4,15 @@ from django.shortcuts import render, get_object_or_404, render_to_response
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.core.context_processors import csrf
+from Library.Console import *
+from Library.Values import *
 
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
 import re
 
-
+c = Console()
 
 def home(request):
 	"""
@@ -104,3 +106,28 @@ def login(request):
 			# Username and password combination was not verified
 			error_message = "Incorrect username or password"
 			return render(request, 'userauth/login.html', {'errormsg':error_message})
+
+def formtest2(request):
+	"""
+	Successfully using the form to input commands as if they were entered through the shell
+	"""
+	if request.POST:
+		context = {}
+		context.update(csrf(request))
+		cmd = request.POST.get('cmd')
+		print("hello try")
+		try:
+			print (cmd)
+			c.process_commands(str(cmd))
+			print "hello final"
+			if c.error != None:
+				response = "Error:" + c.error
+			else:
+				response = "Successfully called excelerate function: " + cmd
+			return render(request, 'userauth/userpage.html', {'response':response})
+		except Exception as e:
+			response = 'Something went wrong with command:' + cmd + ". Exception outputted: "
+			return render(request, 'userauth/userpage.html', {'response':response, 'message':e})
+	else:
+		response = 'Something wrong with post'
+		return render(request, 'userauth/userpage.html', {'response':response})

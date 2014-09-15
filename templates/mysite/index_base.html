@@ -66,6 +66,7 @@
 
     </style>
 
+    <!-- new_student, load_class, new_class, load_student, answer_sheet, grade, save -->
 
 
       <div id="wrapper">
@@ -81,9 +82,28 @@
             <p><a href="{% url 'extest' %}">Tester</a></p> <!-- Function call test -->
             <div>
               <form role='form' action="{% url 'formtest' %}" method='post'>{% csrf_token %}
-                <label>Input Command</label>
-                <input type="text" name="cmd" id="cmd" value='cmd' style="color:black">
-                <button class="btn btn-sm btn-success" type="submit" id="submit">Submit</button>
+
+                <input hidden type="text" name="cmd" id="cmd" value="new_class" style="color:black">
+                <button class="btn btn-sm btn-success" type="submit" id="submit">New Class</button>
+                <input hidden type="text" name="cmd" id="cmd" value="load_class" style="color:black">
+                <button class="btn btn-sm btn-success" type="submit" id="submit">Load Class</button>
+                <input hidden type="text" name="cmd" id="cmd" value="new_student" style="color:black">
+                <button class="btn btn-sm btn-success" type="submit" id="submit">New Student</button>
+                <input hidden type="text" name="cmd" id="cmd" value="load_student">
+                <button class="btn btn-sm btn-success" type="submit" id="submit">Load Student</button>
+                <input hidden type="text" name="cmd" id="cmd" value="answer_sheet">
+                <button class="btn btn-sm btn-success" type="submit" id="submit">Answer Sheet</button>
+                <input hidden type="text" name="cmd" id="cmd" value="grade">
+                <button class="btn btn-sm btn-success" type="submit" id="submit">Grade</button>
+                <input hidden type="text" name="cmd" id="cmd" value="save">
+                <button class="btn btn-sm btn-success" type="submit" id="submit">Save</button>
+                <input hidden type="text" name="cmd" id="cmd" value="simple_report">
+                <button class="btn btn-sm btn-success" type="submit" id="submit">Simple Report</button>
+                <input hidden type="text" name="cmd" id="cmd" value="advance_report">
+                <button class="btn btn-sm btn-success" type="submit" id="submit">Advance Report</button>
+                <input hidden type="text" name="cmd" id="cmd" value="section_report">
+                <button class="btn btn-sm btn-success" type="submit" id="submit">Section Report</button>
+
               </form>
           </center>
         </div> <!-- end of formarea -->
