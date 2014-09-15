@@ -95,6 +95,8 @@ def login(request):
 		remember = request.POST.get('remember-me', False)
 		user = authenticate(username=u_name, password=p_word)
 		if user is not None:
+			# adding user cookie getting ERROR when I try to store this cookie
+			request.session['user'] = user 
 			# the password verified
 			if user.is_active:
 				return render(request, 'userauth/userpage.html', {'user':user})
@@ -115,6 +117,9 @@ def formtest2(request):
 		context = {}
 		context.update(csrf(request))
 		cmd = request.POST.get('cmd')
+		# try to get the cookie
+		if 'user' in request.session:
+			user = request.session['user']
 		print("hello try")
 		try:
 			print (cmd)
@@ -124,10 +129,10 @@ def formtest2(request):
 				response = "Error:" + c.error
 			else:
 				response = "Successfully called excelerate function: " + cmd
-			return render(request, 'userauth/userpage.html', {'response':response})
+			return render(request, 'userauth/userpage.html', {'response':response, 'user':user})
 		except Exception as e:
 			response = 'Something went wrong with command:' + cmd + ". Exception outputted: "
-			return render(request, 'userauth/userpage.html', {'response':response, 'message':e})
+			return render(request, 'userauth/userpage.html', {'response':response, 'message':e, 'user':user})
 	else:
 		response = 'Something wrong with post'
-		return render(request, 'userauth/userpage.html', {'response':response})
+		return render(request, 'userauth/userpage.html', {'response':response, 'user':user})

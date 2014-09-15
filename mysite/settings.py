@@ -35,6 +35,9 @@ Custom Added
 #AUTH_PROFILE_MODULE='accounts.UserProfile'
 AUTH_USER_MODEL = 'userauth.Student'
 
+#cookie based session
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
+
 """
 End Custom
 """
