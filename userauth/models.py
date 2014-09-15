@@ -2,36 +2,19 @@ from django.db import models
 from django.contrib.auth.models import User, AbstractBaseUser, BaseUserManager
 from django.db.models import signals
 
-"""
-
-class UserProfile(models.Model):
-	user = models.OneToOneField(User, unique=True)
-	first_name = models.CharField(max_length=30, null=False, blank=False)
-	last_name = models.CharField(max_length=30, null=False, blank=False)
-	school_name = models.CharField(max_length=50, null=True, blank=True)
-	email = models.EmailField(max_length=60, null=True, blank=True)
-	student_id = models.BigIntegerField(null=True, blank=True)
-
-def create_profile(sender, instance, created, **kwargs):
-	if created:
-		profile, created = UserProfile.\
-			objects.get_or_create(user=instance)
-
-signals.post_save.connect(create_profile, sender=User)
-
-"""
-
-#User.profile = property(lambda u: UserProfile.objects.get_or_create(user=u)[0])
 
 class MyUserManager(BaseUserManager):
 
-    def create_user(self, username, email, first_name, last_name, school_name, student_id, password=None):
+    def create_user(self, username, email, first_name, last_name, school_name, student_id=None, password=None):
         """
         Creates and saves a User with the given email, date of
         birth and password.
         """
         if not username:
             raise ValueError('Users must have an username')
+
+        if not student_id:
+            student_id = get_hash(username)
 
         user = self.model(
         	username=username,
@@ -58,6 +41,13 @@ class MyUserManager(BaseUserManager):
         u.is_admin = True
         u.save(using=self._db)
         return u
+
+    def get_hash(string):
+        """
+        A method to convert a text string to a numerical student id value 
+        """
+        buff = ''.join(str(ord(c)) for c in string)
+        return int(buff)
 
 
 class Student(AbstractBaseUser):
