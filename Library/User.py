@@ -212,7 +212,59 @@ class User(object):
             output[section_type] = (current_code, percent)
         return output
 
+    def score_improvement(self):
+        s1 = []
+        writing_scores = []
+        reading_scores = []
+        math_scores = []
+        overall_score_difference = 0
+        writing_score_difference = 0
+        reading_score_difference = 0
+        math_score_difference = 0
+        if len(self.tests_taken) > 1:
 
+            for test in self.tests_taken:
+                s1.append([date_converter(test.date),test.score_summary.total_score()])
+                writing_scores.append([date_converter(test.date), test.score_summary.section_scores[WRITING_TYPE]])
+                reading_scores.append([date_converter(test.date), test.score_summary.section_scores[READING_TYPE]])
+                math_scores.append([date_converter(test.date), test.score_summary.section_scores[MATH_TYPE]])
+        if len(self.tests_taken) > 1:        
+            overall_score_difference = (s1[-1][1]) - (s1[0][1])
+            writing_score_difference = (writing_scores[-1][1]) - (writing_scores[0][1])
+            reading_score_difference = (reading_scores[-1][1]) - (reading_scores[0][1])
+            math_score_difference =  (math_scores[-1][1]) - (math_scores[0][1])
+        return(overall_score_difference,writing_score_difference,reading_score_difference,math_score_difference)
+
+    def latest_test_scores(self):
+        s1 = []
+        writing_scores = []
+        reading_scores = []
+        math_scores = []
+        avg_overall_score = 0
+        avg_writing_score = 0
+        avg_reading_score = 0
+        avg_math_score = 0
+        if len(self.tests_taken) > 0:
+
+            for test in self.tests_taken:
+                s1.append(test.score_summary.total_score())
+                writing_scores.append(test.score_summary.section_scores[WRITING_TYPE])
+                reading_scores.append(test.score_summary.section_scores[READING_TYPE])
+                math_scores.append(test.score_summary.section_scores[MATH_TYPE])
+
+
+        if len(self.tests_taken) > 1:        
+            avg_overall_score = (s1[-1]) 
+            avg_writing_score = (writing_scores[-1])
+            avg_reading_score = (reading_scores[-1])
+            avg_math_score =  (math_scores[-1])
+            return(avg_overall_score, avg_math_score, avg_reading_score, avg_writing_score)
+        else:
+            avg_overall_score = (s1[0]) 
+            avg_writing_score = (writing_scores[0])
+            avg_reading_score = (reading_scores[0])
+            avg_math_score =  (math_scores[0])
+            return(avg_overall_score, avg_math_score, avg_reading_score, avg_writing_score)
 
 
 
