@@ -2,7 +2,7 @@ from models import Student, MyUserManager
 
 from django.shortcuts import render, get_object_or_404, render_to_response
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login
 from django.core.context_processors import csrf
 from Library.Console import *
 from Library.Values import *
@@ -82,7 +82,7 @@ def send(request):
 # 		u_name = request.POST.get('username')
 # 		return render(request, 'userauth/login_post.html', { 'username': u_name })
 
-def login(request):
+def login_user(request):
 	"""
 	Called from login page
 	Authenticates username and password
@@ -96,9 +96,10 @@ def login(request):
 		user = authenticate(username=u_name, password=p_word)
 		if user is not None:
 			# adding user cookie getting ERROR when I try to store this cookie
-			request.session['user'] = user 
+			# request.session['user'] = user 
 			# the password verified
 			if user.is_active:
+				login(request, user) #use this for sessions (built in)
 				return render(request, 'userauth/userpage.html', {'user':user})
 			else:
 				# User account has been disabled
@@ -118,9 +119,11 @@ def formtest2(request):
 		context.update(csrf(request))
 		cmd = request.POST.get('cmd')
 		# try to get the cookie
-		if 'user' in request.session:
-			user = request.session['user']
-		print("hello try")
+		# if 'user' in request.session:
+		# 	user = request.session['user']
+		user = request.user
+		print('printing school name')
+		print(user.school_name)
 		try:
 			print (cmd)
 			c.process_commands(str(cmd))
