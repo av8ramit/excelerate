@@ -21,6 +21,12 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script>
+      function to_report() {
+        window.location.href="Users/web/klin/simple_report.html";
+      }
+    </script>
+
   </head>
 
   <body>
@@ -84,16 +90,26 @@
               <p>{% block extester %}{% endblock extester %}</p><!-- Function call test -->
             </font>
             <form role='form' action="{% url 'login:formtest2' %}" method='post'>{% csrf_token %}
-              <input hidden type="text" name="cmd" id="cmd" value="answer_sheet">
+              <input type="text" name="cmd" id="cmd" value="answer_sheet ">
               <button class="btn btn-sm btn-success" type="submit" id="submit">Answer Sheet</button>
-              <input hidden type="text" name="cmd" id="cmd" value="grade">
+            </form><br>
+            <form role='form' action="{% url 'login:formtest2' %}" method='post'>{% csrf_token %}
+              <input type="text" name="cmd" id="cmd" value="grade ">
               <button class="btn btn-sm btn-success" type="submit" id="submit">Grade</button>
+            </form><br>
+            <form role='form' action="{% url 'login:formtest2' %}" method='post'>{% csrf_token %}
               <input hidden type="text" name="cmd" id="cmd" value="save">
               <button class="btn btn-sm btn-success" type="submit" id="submit">Save</button>
+            </form><br>
+            <form role='form' action="{% url 'login:formtest2' %}" method='post'>{% csrf_token %}
               <input hidden type="text" name="cmd" id="cmd" value="simple_report">
-              <button class="btn btn-sm btn-success" type="submit" id="submit">Simple Report</button>
+              <button class="btn btn-sm btn-success" type="submit" onclick="window.location ='Users/web/klin/simple_report.html'" id="submit">Simple Report</button>
+            </form><br>
+            <form role='form' action="{% url 'login:formtest2' %}" method='post'>{% csrf_token %}
               <input hidden type="text" name="cmd" id="cmd" value="advance_report">
               <button class="btn btn-sm btn-success" type="submit" id="submit">Advance Report</button>
+            </form><br>
+            <form role='form' action="{% url 'login:formtest2' %}" method='post'>{% csrf_token %}
               <input hidden type="text" name="cmd" id="cmd" value="section_report">
               <button class="btn btn-sm btn-success" type="submit" id="submit">Section Report</button>
             </form>

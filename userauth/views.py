@@ -12,7 +12,7 @@ from django.core.urlresolvers import reverse
 
 import re
 
-c = Console()
+console = Console()
 
 def home(request):
 	"""
@@ -70,6 +70,8 @@ def send(request):
 									school_name=school, email=email,
 									student_id=studentid)
 		user.save()
+		console.process_commands("load_class web")
+		console.process_commands("new_student " + u_name)
 		return render(request, 'userauth/postregister_base.html', {'username':u_name})
 	else:
 		return HttpResponse("Sorry something went wrong")
@@ -100,6 +102,10 @@ def login_user(request):
 			# the password verified
 			if user.is_active:
 				login(request, user) #use this for sessions (built in)
+				console.process_commands("load_class web")
+				print (console.error)
+				console.process_commands("load_student " + u_name)
+				print (console.error)
 				return render(request, 'userauth/userpage.html', {'user':user})
 			else:
 				# User account has been disabled
@@ -126,10 +132,10 @@ def formtest2(request):
 		print(user.school_name)
 		try:
 			print (cmd)
-			c.process_commands(str(cmd))
+			console.process_commands(str(cmd))
 			print "hello final"
-			if c.error != None:
-				response = "Error:" + c.error
+			if console.error != None:
+				response = console.error
 			else:
 				response = "Successfully called excelerate function: " + cmd
 			return render(request, 'userauth/userpage.html', {'response':response, 'user':user})
