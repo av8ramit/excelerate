@@ -88,6 +88,7 @@
               <p>{% block school %}school{% endblock school %}</p>
               <p>{% block studentid %}studentid{% endblock studentid %}</p>
               <p>{% block extester %}{% endblock extester %}</p><!-- Function call test -->
+              <p><a href={% url 'reports' %}>Kim's Simple</a></p>
             </font>
             <form role='form' action="{% url 'login:formtest2' %}" method='post'>{% csrf_token %}
               <input type="text" name="cmd" id="cmd" value="answer_sheet ">

@@ -34,6 +34,9 @@ def extest(request):
 		response = 'Successfully called excelerate function'
 	return render(request, 'mysite/tester.html', {'response': response})
 
+def reports(request):
+	return render(request, 'web/klin/simple_report.html')
+
 def formtest(request):
 	"""
 	Successfully using the form to input commands as if they were entered through the shell
