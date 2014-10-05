@@ -131,9 +131,11 @@ def formtest2(request):
 		print('printing school name')
 		print(user.school_name)
 		try:
-			print (cmd)
 			console.process_commands(str(cmd))
-			print "hello final"
+			if (cmd == 'simple_report'):
+				return render(request, 'web/' + user.username + '/simple_report.html')
+			if (cmd == 'advanced_report'):
+				return render(request, 'web/' + user.username + '/advanced_report.html')
 			if console.error != None:
 				response = console.error
 			else:
@@ -145,3 +147,4 @@ def formtest2(request):
 	else:
 		response = 'Something wrong with post'
 		return render(request, 'userauth/userpage.html', {'response':response, 'user':user})
+

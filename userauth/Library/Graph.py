@@ -21,11 +21,11 @@ class Graph(object):
         self.data_point_labels = pointLabels
     def head(self):
         lines = []
-        lines.append('<link class="include" rel="stylesheet" type="text/css" href="../../../Graphs/examples/../jquery.jqplot.min.css" />' + endl)
+        lines.append('<link class="include" rel="stylesheet" type="text/css" href=' + '"' + "{% static 'examples/../jquery.jqplot.min.css' %}" + '"/>' + endl)
         #lines.append('<link rel="stylesheet" type="text/css" href="../../Graphs/examples/examples.min.css" />' + endl)
-        lines.append('<link type="text/css" rel="stylesheet" href="../../../Graphs/examples/syntaxhighlighter/styles/shCoreDefault.min.css" />' + endl)
-        lines.append('<link type="text/css" rel="stylesheet" href="../../../Graphs/examples/syntaxhighlighter/styles/shThemejqPlot.min.css" />' + endl)
-        lines.append('<script class="include" type="text/javascript" src="../../../Graphs/jquery.min.js"></script>' + endl)
+        lines.append('<link type="text/css" rel="stylesheet" href=' + '"' + "{% static 'examples/syntaxhighlighter/styles/shCoreDefault.min.css' %}" + '"/>' + endl)
+        lines.append('<link type="text/css" rel="stylesheet" href=' + '"' + "{% static 'examples/syntaxhighlighter/styles/shThemejqPlot.min.css' %}" + '"/>' + endl)
+        lines.append('<script class="include" type="text/javascript" src=' + '"' + "{% static 'jquery.min.js' %}" + '""></script>' + endl)
         return lines
 
 
@@ -149,20 +149,20 @@ class Graph(object):
 
     def body(self):
         lines = []
-        lines.append('<script class="include" type="text/javascript" src="../../../Graphs/examples/../jquery.jqplot.min.js"></script>' + endl)
-        lines.append('<script type="text/javascript" src="../../../Graphs/examples/syntaxhighlighter/scripts/shCore.min.js"></script>' + endl)
-        lines.append('<script type="text/javascript" src="../../../Graphs/examples/syntaxhighlighter/scripts/shBrushJScript.min.js"></script>' + endl)
-        lines.append('<script type="text/javascript" src="../../../Graphs/examples/syntaxhighlighter/scripts/shBrushXml.min.js"></script>' + endl)
-        lines.append('<script class="include" language="javascript" type="text/javascript" src="../../../Graphs/examples/../plugins/jqplot.barRenderer.min.js"></script>' + endl)
-        lines.append('<script class="include" language="javascript" type="text/javascript" src="../../../Graphs/examples/../plugins/jqplot.categoryAxisRenderer.min.js"></script>' + endl)
-        lines.append('<script class="include" language="javascript" type="text/javascript" src="../../../Graphs/examples/../plugins/jqplot.pointLabels.min.js"></script>' + endl)
-        lines.append('<script class="include" language="javascript" type="text/javascript" src="../../../Graphs/examples/../plugins/jqplot.dateAxisRenderer.min.js"></script>' + endl)
-        lines.append('<script class="include" type="text/javascript" src="../../../Graphs/examples/../plugins/jqplot.canvasTextRenderer.min.js"></script>' + endl)
-        lines.append('<script class="include" type="text/javascript" src="../../../Graphs/examples/../plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>' + endl)
-        lines.append('<script type="text/javascript" src="../../../Graphs/examples/../plugins/jqplot.highlighter.min.js"></script>' + endl)
-        lines.append('<script type="text/javascript" src="../../../Graphs/examples/../plugins/jqplot.cursor.min.js"></script>' + endl)
-        lines.append('<script type="text/javascript" src="../../../Graphs/examples/../plugins/jqplot.dateAxisRenderer.min.js"></script>' + endl)
-        lines.append('<script type="text/javascript" src="../../../Graphs/examples/../plugins/jqplot.enhancedLegendRenderer.min.js"></script>' + endl)
+        lines.append('<script class="include" type="text/javascript" src=' + '"' + "{% static 'examples/../jquery.jqplot.min.js' %}" +'""> </script>' + endl)
+        lines.append('<script type="text/javascript" src=' + '"' + "{% static 'examples/syntaxhighlighter/scripts/shCore.min.js' %}" +'""> </script>' + endl)
+        lines.append('<script type="text/javascript" src=' + '"' + "{% static 'examples/syntaxhighlighter/scripts/shBrushJScript.min.js' %}" +'""> </script>' + endl)
+        lines.append('<script type="text/javascript" src=' + '"' + "{% static 'examples/syntaxhighlighter/scripts/shBrushXml.min.js' %}" +'""> </script>' + endl)
+        lines.append('<script class="include" language="javascript" type="text/javascript" src=' + '"' + "{% static 'examples/../plugins/jqplot.barRenderer.min.js' %}" +'""> </script>' + endl)
+        lines.append('<script class="include" language="javascript" type="text/javascript" src=' + '"' + "{% static 'examples/../plugins/jqplot.categoryAxisRenderer.min.js' %}" +'""> </script>' + endl)
+        lines.append('<script class="include" language="javascript" type="text/javascript" src=' + '"' + "{% static 'examples/../plugins/jqplot.pointLabels.min.js' %}" +'""> </script>' + endl)
+        lines.append('<script class="include" language="javascript" type="text/javascript" src=' + '"' + "{% static 'examples/../plugins/jqplot.dateAxisRenderer.min.js' %}" +'""> </script>' + endl)
+        lines.append('<script class="include" type="text/javascript" src=' + '"' + "{% static 'examples/../plugins/jqplot.canvasTextRenderer.min.js' %}" +'""> </script>' + endl)
+        lines.append('<script class="include" type="text/javascript" src=' + '"' + "{% static 'examples/../plugins/jqplot.canvasAxisLabelRenderer.min.js' %}" +'""> </script>' + endl)
+        lines.append('<script type="text/javascript" src=' + '"' + "{% static 'examples/../plugins/jqplot.highlighter.min.js' %}" +'""> </script>' + endl)
+        lines.append('<script type="text/javascript" src=' + '"' + "{% static 'examples/../plugins/jqplot.cursor.min.js' %}" +'""> </script>' + endl)
+        lines.append('<script type="text/javascript" src=' + '"' + "{% static 'examples/../plugins/jqplot.dateAxisRenderer.min.js' %}" +'""> </script>' + endl)
+        lines.append('<script type="text/javascript" src=' + '"' + "{% static 'examples/../plugins/jqplot.enhancedLegendRenderer.min.js' %}" +'""> </script>' + endl)
         return lines
 
 

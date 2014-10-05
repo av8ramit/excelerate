@@ -26,7 +26,12 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
-TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates'), os.path.join(BASE_DIR, 'Users')]
+TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates'), os.path.join(BASE_DIR, 'Users'),]
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "HTML"),
+    os.path.join(BASE_DIR, "Graphs"),
+)
 
 """
 Custom Added
