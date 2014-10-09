@@ -35,6 +35,7 @@ from Console import *
 from Commands import *
 from Values import *
 from Class_Analytics import *
+from Director_Analytics import * 
 from Graph import *
 import csv
 from Summary import *
@@ -47,7 +48,7 @@ c = Console()
 root = Tk()
 
 #set window size
-root.geometry("835x338")
+root.geometry("835x468")
 
 #set window title
 root.title("Excelerate")
@@ -81,6 +82,7 @@ ClassAnly = PhotoImage(file = "./GUI/CollegeA.gif")
 LoadClass = PhotoImage(file = "./GUI/LdCls.gif")
 NewClass = PhotoImage(file = "./GUI/NwCls.gif")
 ChngClass = PhotoImage(file = "./GUI/ChCls.gif")
+DirRep = PhotoImage(file = "./GUI/DirectorReport.gif")
 ################### Functions ##########################
 def help_usage():
     os.system('open ' + './Documents/Usage_v1.pdf' )
@@ -111,6 +113,7 @@ def simple_report():
         name = c.user.name 
         dirc = user_directory(name, c.c.name) 
         fname = os.path.basename(dirc)
+    
         if (dirc != None):
             os.system('open ' + dirc + DIR_SEP + 'simple_report.html' ) 
 def advance_report():
@@ -265,6 +268,11 @@ def class_analyze():
   else:
       messagebox.showwarning("Error", 'Please Load Or Create A Student First')
 
+def director_analyze():
+  
+    D = Director('/Users/Neel/Desktop/Elite/Users/TestEliteBranch')
+    D.report()
+    os.system('open Users/DirectorAnalytics.html')
 
 def college_profile():
     schoolname = []
@@ -720,6 +728,8 @@ if (c.state is CLASS_STATE or c.state is USER_STATE or c.state is LAUNCH_STATE):
   Button( root, image = AutoGrdr,  width = 130, height = 130, pady = 0, command = auto_gdr ).grid( row = 4, column = 3, sticky = (W))#, columnspan = 2, rowspan = 2,sticky = W)
 
   Button( root, image = ClassAnly, width = 131, height = 131, pady = 0, command = class_analyze ).grid( row = 4, column = 4, sticky = (W))#, columnspan = 2, rowspan = 2, sticky =W)
+  
+  Button( root, image = DirRep, width = 130, height = 130, pady = 0, command = director_analyze). grid(row = 5, column = 0, sticky = (W))
   ## Reports Submenu Button
 
   mb = Menubutton( root, image = Rptimg, width = 136, height = 136)
