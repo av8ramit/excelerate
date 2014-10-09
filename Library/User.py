@@ -14,7 +14,7 @@ from Scored import *
 from Summary import *
 from Data import *
 from Graph import *
-from Analysis import *
+#from Analysis import *
 import csv
 
 #Base User Class

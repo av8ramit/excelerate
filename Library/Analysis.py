@@ -70,7 +70,22 @@ class Drop(object):
 class Fatigue(object):
 
     def __init__(self):
-        self.value = False
+        self.value = {}
+        self.sections = {}
+        for qtype in TYPE_ARRAY:
+            self.value[qtype] = []
+            self.sections[qtype] = []
+
+
+    def calculate():
+        last_score = 1
+        for qtype in TYPE_ARRAY:
+            fatigue_test = True
+            for value in self.sections:
+                if value < last_score:
+        
+        self.value[qtype] = True
+
 
 class Test_Fatigue(object):
 
@@ -92,6 +107,7 @@ class Test_Fatigue(object):
         for qtype in TYPE_ARRAY:
             for question in test_taken.missed_questions[qtype]:
                 print ("hi")
+
 
                 
 

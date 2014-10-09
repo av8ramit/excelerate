@@ -94,7 +94,7 @@ class Elite_Class(object):
         with open(filename, 'rU') as f:
             reader = csv.reader(f)
             #waive various line entries you know are bogus
-            waive_array = [1125, 555, 231, 438, 564, 823, 265, 404, 744, 980, 726, 246, 1045]
+            waive_array = [555, 823, 231, 404, 744, 1045, 246, 265, 1359, 980, 1125, 726, 438, 564]
             #[555, 1045, 823, 726, 231, 404, 744, 980, 265, 438, 564, 246]
             # 231, 26, 228, 555, 246, 438, 564, 265, 404, 744, 786, 726
             for row in reader:
@@ -439,4 +439,4 @@ class Corrupted_Score_Summary(object):
             score += s
         return score
 
-a = Elite_Class('Elite/Elite912.csv')
+a = Elite_Class('Elite/Elite108.csv')

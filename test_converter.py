@@ -40,7 +40,7 @@ QUESTION_CONVERTER['1D'] = 'M4'
 
 
 filename = 'answer_key.csv'
-testcode = 'GE34'
+testcode = 'RC02'
 FORM_CODE = 0
 SECTION_INDEX = 1
 SECTION_TYPE_INDEX = 2
@@ -86,7 +86,11 @@ def convert():
                 types = row[TYPE_INDEX]
                 answers = row[ANSWER_INDEX]
                 for i in range (0, len(answers)):
-                    flines.append(str(i+1) + ',' + answers[i] + ',' + difficulty[i] + ',' + 'N,' + QUESTION_CONVERTER[row[SECTION_TYPE_INDEX] + types[i]] + '\n')
+                    if difficulty == '':
+                        diff = '3'
+                    else:
+                        diff = difficulty[i]
+                    flines.append(str(i+1) + ',' + answers[i] + ',' + diff + ',' + 'N,' + QUESTION_CONVERTER[row[SECTION_TYPE_INDEX] + types[i]] + '\n')
                 f.writelines(flines)
                 f.close()
 
