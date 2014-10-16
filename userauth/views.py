@@ -10,6 +10,8 @@ from Library.Values import *
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
+from .forms import UploadFileForm
+
 import re
 
 console = Console()
@@ -147,4 +149,21 @@ def formtest2(request):
 	else:
 		response = 'Something wrong with post'
 		return render(request, 'userauth/userpage.html', {'response':response, 'user':user})
+
+def handle_uploaded_file(user, f):
+    with open('Users/web/' + user.username + '/uploaded_file.csv', 'wb+') as dest:
+        for chunk in f.chunks():
+            dest.write(chunk)
+
+def upload_file(request):
+    if request.method == 'POST':
+    	data = {'title':"data title"}
+        # form = UploadFileForm(request.POST, request.FILES)
+        form = UploadFileForm(data, request.FILES)
+        if form.is_valid():
+            handle_uploaded_file(request.user, request.FILES['file'])
+            return HttpResponse("form is valid")
+        else:
+            form = UploadFileForm()
+        return HttpResponse('YAY')
 
