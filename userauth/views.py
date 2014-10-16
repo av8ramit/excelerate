@@ -11,6 +11,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
 from .forms import UploadFileForm
+import csv
 
 import re
 
@@ -166,4 +167,15 @@ def upload_file(request):
         else:
             form = UploadFileForm()
         return HttpResponse('YAY')
+
+def download_file(request):
+	with open('Users/web/' + request.user.username + '/uploaded_file.csv', 'rb') as f:
+		response = HttpResponse(content_type='text/csv')
+		response['Content-Disposition'] = 'attachment; filename="downloaded_file.csv"'
+		reader = csv.reader(f, delimiter=',')
+		writer = csv.writer(response)
+		for row in reader:
+			writer.writerow(row)
+		return response
+	return HttpResponse('File did not open')
 
