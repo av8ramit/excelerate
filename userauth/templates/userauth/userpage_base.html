@@ -113,6 +113,10 @@
               <input hidden type="text" name="cmd" id="cmd" value="section_report">
               <button class="btn btn-sm btn-success" type="submit" id="submit">Section Report</button>
             </form>
+            <form method="post" action="{% url 'login:upload' %}" name="submit" enctype="multipart/form-data">{% csrf_token %}
+              <input type="file" name="file"><br /><br />
+              <input type="submit" class="btn btn-sm btn-success" id="submit" name="submit" value="Submit">
+            </form>
             </center>
 
         </div> <!-- end of mainbody -->

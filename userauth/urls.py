@@ -8,6 +8,7 @@ urlpatterns = patterns('',
 		url(r'^auth/$', 'userauth.views.login_user', name='auth'),
 		url(r'^sendregister/$', 'userauth.views.send', name='send'),
 		url(r'^formtest2/$', 'userauth.views.formtest2', name='formtest2'),
+		url(r'^upload/$', 'userauth.views.upload_file', name='upload'),
 		# url(r'^sendregister/postregister/$', 'userauth.views.postregister', name='send_post'),
 		)
 
