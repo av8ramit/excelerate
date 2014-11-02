@@ -31,6 +31,7 @@ TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates'), os.path.join(BASE_DIR, 'Us
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "HTML"),
     os.path.join(BASE_DIR, "Graphs"),
+    os.path.join(BASE_DIR, "neel"),
 )
 
 """
