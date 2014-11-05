@@ -4,18 +4,18 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
-// (function() {
+(function() {
 
-// 	skel.init({
-// 		reset: 'full',
-// 		breakpoints: {
-// 			'global': { range: '*', href: 'css/style.css', viewport: { scalable: false } },
-// 			'wide': { range: '-1680', href: 'css/style-wide.css' },
-// 			'normal': { range: '-1280', href: 'css/style-normal.css' },
-// 			'mobile': { range: '-736', href: 'css/style-mobile.css' },
-// 			'mobilep': { range: '-480', href: 'css/style-mobilep.css' }
-// 		}
-// 	});
+ 	skel.init({
+ 		reset: 'full',
+ 		breakpoints: {
+ 			'global': { range: '*', href: '../css/style.css', viewport: { scalable: false } },
+ 			'wide': { range: '-1680', href: '../css/style-wide.css' },
+ 			'normal': { range: '-1280', href: '../css/style-normal.css' },
+ 			'mobile': { range: '-736', href: '../css/style-mobile.css' },
+ 			'mobilep': { range: '-480', href: '../css/style-mobilep.css' }
+ 		}
+ 	});
 
 	// Events (JS).
 		

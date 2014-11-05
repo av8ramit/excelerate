@@ -12,8 +12,8 @@
     <meta name="description" content="" />
     <meta name="keywords" content="" />
     <!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
-    <script src="{% static 'mysite/js/skel.min.js' %}"></script>
-    <script src="{% static 'mysite/js/init.js' %}"></script>
+    <script type="text/javascript" src="{% static 'mysite/js/skel.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'mysite/js/init.js' %}"></script>
     <link rel="stylesheet" href="{% static 'mysite/css/skel.css' %}" />
     <link rel="stylesheet" href="{% static 'mysite/css/style.css' %}" />
     <link rel="stylesheet" href="{% static 'mysite/css/style-wide.css' %}" />
@@ -36,8 +36,8 @@
                 <li style = "color: #348cb2"><img src="{% static 'mysite/css/images/AboutUs.png' %}" alt="About Us" height="90" width="90" onmouseout = "this.src = '{% static 'mysite/css/images/AboutUs.png' %}' " onmouseover = "this.src = '{% static 'mysite/css/images/A.png' %}'"></img></li>
                 <li style = "color: #348cb2"><img src="{% static 'mysite/css/images/HowItWorks.png' %}" alt="How It Works" height="90" width="90" onmouseout = "this.src = '{% static 'mysite/css/images/HowItWorks.png' %}' " onmouseover = "this.src = '{% static 'mysite/css/images/B.png' %}'"></img></li>
                 <li style = "color: #348cb2"><img src="{% static 'mysite/css/images/WhyItWorks.png' %}" alt="Why It Works" height="90" width="90" onmouseout = "this.src = '{% static 'mysite/css/images/WhyItWorks.png' %}' " onmouseover = "this.src = '{% static 'mysite/css/images/C.png' %}'"></img></li>
-                <li style = "color: #348cb2"><img src="{% static 'mysite/css/images/SignUp.png' %}" alt="Sign Up" height="90" width="90" onmouseout = "this.src = '{% static 'mysite/css/images/SignUp.png' %}' " onmouseover = "this.src = '{% static 'mysite/css/images/D.png' %}'"></img></li>
-                <li style = "color: #348cb2"><img src="{% static 'mysite/css/images/Login.png' %}" alt="Login" height="90" width="90" onmouseout = "this.src = '{% static 'mysite/css/images/Login.png' %}' " onmouseover = "this.src = '{% static 'mysite/css/images/E.png' %}'"></img></li>
+                <a href="{% url 'login:register' %}"><li style = "color: #348cb2"><img src="{% static 'mysite/css/images/SignUp.png' %}" alt="Sign Up" height="90" width="90" onmouseout = "this.src = '{% static 'mysite/css/images/SignUp.png' %}' " onmouseover = "this.src = '{% static 'mysite/css/images/D.png' %}'"></img></li></a>
+                <a href="{% url 'login:front' %}"><li style = "color: #348cb2" ><img src="{% static 'mysite/css/images/Login.png' %}" alt="Login" height="90" width="90" onmouseout = "this.src = '{% static 'mysite/css/images/Login.png' %}' " onmouseover = "this.src = '{% static 'mysite/css/images/E.png' %}'"></img></li></a>
               </ul>
             </nav>
           </header>
@@ -51,3 +51,4 @@
     </div>
   </body>
 </html>
+
