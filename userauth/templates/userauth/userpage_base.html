@@ -10,8 +10,14 @@
 
     <title>Excelerate User Page</title>
 
+    {% load staticfiles %}
     <!-- Bootstrap core CSS -->
     <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="{% static 'mysite/js/bootstrap.min.js' %}"></script>
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="http://getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
@@ -87,6 +93,7 @@
               <p>{% block username %}username{% endblock username %}</p>
               <p>{% block school %}school{% endblock school %}</p>
               <p>{% block studentid %}studentid{% endblock studentid %}</p>
+              <p>{%block test_list %}test_list{% endblock test_list %}</p>
               <p>{% block extester %}{% endblock extester %}</p><!-- Function call test -->
             </font>
             <form role='form' action="{% url 'login:formtest2' %}" method='post'>{% csrf_token %}
@@ -118,7 +125,25 @@
               <input type="submit" class="btn btn-sm btn-success" id="submit" name="submit" value="Submit">
             </form>
             <br><button onclick="window.location.href='{% url 'login:download' %}'" class="btn btn-sm btn-success">Download File</button>
+            
+
+            <form action="{% url 'login:downloadtest' %}" method="post">{% csrf_token %}
+              <div class="dropdown">
+                <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                  Answer Sheets
+                  <span class="caret"></span>
+                </button>
+                  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                  {% for item in test_list %}
+                    <li roll="presentation"><button class="btn btn-large btn-block" role="menuitem" name="test" id="test" value="{{ item }}">{{ item }}</button></li>
+                  {% endfor %}
+                  </ul>
+              </div>
+            </form>
+            
             </center>
+
+
 
         </div> <!-- end of mainbody -->
         <br>
