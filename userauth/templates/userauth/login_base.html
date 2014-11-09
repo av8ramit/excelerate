@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    {% load staticfiles %}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -32,15 +33,16 @@
         margin:0;
         padding:0;
         height:100%;
-        background-color: #333;
         color: #fff;
         text-shadow: 0 1px 3px rgba(0,0,0,.5);
+        background-image: url("{% static 'mysite/css/images/overlay-pattern.png' %}"), url("{% static 'mysite/css/images/overlay.svg' %}");
+        background-position: top left, center center;
+        background-repeat: repeat, no-repeat;
+        background-size: auto, cover;
       }
       #wrapper {
         min-height:100%;
         position:relative;
-        -webkit-box-shadow: inset 0 0 100px rgba(0,0,0,.5);
-        box-shadow: inset 0 0 100px rgba(0,0,0,.5);
       }
       #head {
         padding-top: 30px;
@@ -76,7 +78,7 @@
 
         <div id="formarea" class="inner cover">
           <center>
-            <a href="http://www.eliteprep.com/" target="_blank"><img class="img-circle" src="http://www.eliteprep.com/storage/Elite%20Logo%20Only%20Black%20Large.png" style="width: 140px; height: 140px;"></a>
+            <a href="" target="_blank"><img class="img" width="200" src="{% static 'ml.png' %} "></a>
             <!-- <h1 class="cover-heading">Score Report Login</h1> -->
             <p class="lead">Enter your Username and Password to access score reports</p><br>
             <form class="form-inline" role="form" action="{% url 'login:auth' %}" method="post"> {% csrf_token %}

@@ -154,7 +154,7 @@ def formtest2(request):
 		return render(request, 'userauth/userpage.html', {'response':response, 'user':user})
 
 def handle_uploaded_file(user, f):
-    with open('Users/web/' + user.username + '/uploaded_file.csv', 'wb+') as dest:
+    with open('Users/web/' + user.username + '/' + f.name, 'wb+') as dest:
         for chunk in f.chunks():
             dest.write(chunk)
 
@@ -165,7 +165,7 @@ def upload_file(request):
         form = UploadFileForm(data, request.FILES)
         if form.is_valid():
             handle_uploaded_file(request.user, request.FILES['file'])
-            return HttpResponse("form is valid")
+            console.process_commands('grade ' + request.FILES['file'].name)
         else:
             form = UploadFileForm()
         return HttpResponse('YAY')
