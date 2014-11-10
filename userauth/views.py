@@ -109,8 +109,8 @@ def login_user(request):
 				print (console.error)
 				console.process_commands("load_student " + u_name)
 				print (console.error)
-				#test_list = console.process_commands("list_test")
-				test_list = ["GE29", "GE30", "GE31", "GE32"]
+				test_list = console.process_commands("list_tests")
+				#test_list = ["GE29", "GE30", "GE31", "GE32"]
 				return render(request, 'userauth/userpage.html', {'user':user, 'test_list':test_list})
 			else:
 				# User account has been disabled

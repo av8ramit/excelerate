@@ -94,13 +94,9 @@
               <p>{% block username %}username{% endblock username %}</p>
               <p>{% block school %}school{% endblock school %}</p>
               <p>{% block studentid %}studentid{% endblock studentid %}</p>
-              <p>{%block test_list %}test_list{% endblock test_list %}</p>
               <p>{% block extester %}{% endblock extester %}</p><!-- Function call test -->
             </font>
-            <form role='form' action="{% url 'login:formtest2' %}" method='post'>{% csrf_token %}
-              <input type="text" name="cmd" id="cmd" value="answer_sheet ">
-              <button class="btn btn-sm btn-success" type="submit" id="submit">Answer Sheet</button>
-            </form><br>
+
             <form role='form' action="{% url 'login:formtest2' %}" method='post'>{% csrf_token %}
               <input hidden type="text" name="cmd" id="cmd" value="save">
               <button class="btn btn-sm btn-success" type="submit" id="submit">Save</button>
@@ -122,7 +118,7 @@
               <input type="file" class="btn btn-sm btn-success" name="file"><br />
               <input type="submit" class="btn btn-sm btn-success" id="submit" name="submit" value="Grade File">
             </form>
-            <br><button onclick="window.location.href='{% url 'login:download' %}'" class="btn btn-sm btn-success">Download File</button>
+            <br>
             
 
             <form action="{% url 'login:downloadtest' %}" method="post">{% csrf_token %}

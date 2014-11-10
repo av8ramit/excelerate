@@ -7,8 +7,8 @@ from django.core.context_processors import csrf
 c = Console()
 
 def index(request):
-	return render(request, 'mysite/index_base.html')
-	#return render(request, 'mysite/index.html')
+	#return render(request, 'mysite/index_base.html')
+	return render(request, 'mysite/index.html')
 
 def extest(request):
 	"""

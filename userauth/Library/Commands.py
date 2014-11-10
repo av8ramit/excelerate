@@ -161,7 +161,7 @@ def list_classes(): # function that returns an array of class names - used in GU
     return array                     #return array of class names 
 
 def list_tests():
-    a = os.listdir('..' + DIR_SEP + '..' + DIR_SEP + test_directory(''))
+    a = os.listdir(test_directory(''))
     array = []
     #print ("Here are the available test_ids:")
     for i in a:
