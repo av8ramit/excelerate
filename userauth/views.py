@@ -161,7 +161,9 @@ def login_user(request):
 				print (console.error)
 				console.process_commands("load_student " + u_name)
 				print (console.error)
-				return render(request, 'userauth/userpage.html', {'user':user})
+				test_list = console.process_commands("list_tests")
+				#test_list = ["GE29", "GE30", "GE31", "GE32"]
+				return render(request, 'userauth/userpage.html', {'user':user, 'test_list':test_list})
 			else:
 				# User account has been disabled
 				error_message = "Sorry, this user has been disabled"
@@ -224,6 +226,21 @@ def download_file(request):
 	with open('Users/web/' + request.user.username + '/uploaded_file.csv', 'rb') as f:
 		response = HttpResponse(content_type='text/csv')
 		response['Content-Disposition'] = 'attachment; filename="downloaded_file.csv"'
+		reader = csv.reader(f, delimiter=',')
+		writer = csv.writer(response)
+		for row in reader:
+			writer.writerow(row)
+		return response
+	return HttpResponse('File did not open')
+
+def download_test(request):
+	if request.POST:
+		test_number = request.POST.get('test')
+		cmd = "answer_sheet " + test_number
+		console.process_commands(cmd)
+	with open('Users/web/' + request.user.username + '/' + test_number + '.csv', 'rb') as f:
+		response = HttpResponse(content_type='text/csv')
+		response['Content-Disposition'] = 'attachment; filename=' + test_number + '.csv'
 		reader = csv.reader(f, delimiter=',')
 		writer = csv.writer(response)
 		for row in reader:
