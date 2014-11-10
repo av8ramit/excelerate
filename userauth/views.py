@@ -44,10 +44,6 @@ def fields_check(u_name, p_word, fname, lname, school, email, studentid):
     if not (u_name and p_word and fname and lname and email):
         error_message += "Required field was left blank\n"
 
-    u_name_check = type(u_name) == str and len(u_name) <= 30
-    fname_check = type(f_name) == str and len(fname) <= 30
-    lname_check = type(f_name) == str and len(lname) <= 30
-    name_check = u_name_check and fname_check and lname_check # Clean up code
     names = [u_name, fname, lname]
     for name in names:
         if len(name) > 30:
