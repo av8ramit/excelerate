@@ -53,21 +53,17 @@ def fields_check(u_name, p_word, fname, lname, school, email, studentid):
                 error_message += "First name must be less than 30 characters\n"
             else:
                 error_message += "Last name must be less than 30 characters\n"
-        if type(name) != str:
-            error_message = "Please use alphanumeric characters in the name fields\n"
 
     school_check = type(school) == str and len(school) <= 50
     if len(school) > 50:
         error_message += "School must be less than 50 characters\n"
-    if type(school) != str:
-        error_message += "Please use alphanumeric characters in the school field\n"
     if studentid:
-        if type(studentid) != int:
+        if not str(studentid).isdigit():
             error_message += "Please provide a numeric student id"
 
     reg = re.compile(".+@.+\\..+")
     email_check = False
-    if type(email) != str or not reg.match(email) or len(email) > 100:
+    if not reg.match(email) or len(email) > 100:
         error_message += "Email incorrectly formatted. Please use valid email format that is under 100 characters."
     if error_message == "":
         return None
