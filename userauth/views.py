@@ -99,7 +99,7 @@ def send(request):
 		email = request.POST.get('email')
 		studentid = request.POST.get('studentid')
 
-        error_fields = fields_check(u_name, p_word, re_pass, fname, lname, school, email, studentid)
+        error_fields = fields_check(u_name, p_word, fname, lname, school, email, studentid)
 
 		if not p_word == re_pass:
 			error_message = "Passwords do not match"
