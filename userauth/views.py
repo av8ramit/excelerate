@@ -35,6 +35,50 @@ def register(request):
 	"""
 	return render(request, 'userauth/register.html')
 
+def fields_check(u_name, p_word, fname, lname, school, email, studentid):
+    """
+    Check if fields are valid. Returns None if valid. Else will return
+    a string describing the error
+    """
+    error_message = ""
+    if not (u_name and p_word and fname and lname and email):
+        error_message += "Required field was left blank\n"
+
+    u_name_check = type(u_name) == str and len(u_name) <= 30
+    fname_check = type(f_name) == str and len(fname) <= 30
+    lname_check = type(f_name) == str and len(lname) <= 30
+    name_check = u_name_check and fname_check and lname_check # Clean up code
+    names = [u_name, fname, lname]
+    for name in names:
+        if len(name) > 30:
+            if name == u_name:
+                error_message += "Username must be less than 30 characters\n"
+            elif name == fname:
+                error_message += "First name must be less than 30 characters\n"
+            else:
+                error_message += "Last name must be less than 30 characters\n"
+        if type(name) != str:
+            error_message = "Please use alphanumeric characters in the name fields\n"
+
+    school_check = type(school) == str and len(school) <= 50
+    if len(school) > 50:
+        error_message += "School must be less than 50 characters\n"
+    if type(school) != str:
+        error_message += "Please use alphanumeric characters in the school field\n"
+    if studentid:
+        if type(studentid) != int:
+            error_message += "Please provide a numeric student id"
+
+    reg = re.compile(".+@.+\\..+")
+    email_check = False
+    if type(email) != str or not reg.match(email) or len(email) > 100:
+        error_message += "Email incorrectly formatted. Please use valid email format that is under 100 characters."
+    if error_message == "":
+        return None
+    else:
+        return error_message
+
+
 def send(request):
 	"""
 	Called after submitting a register form
@@ -55,11 +99,19 @@ def send(request):
 		email = request.POST.get('email')
 		studentid = request.POST.get('studentid')
 
+        error_fields = fields_check(u_name, p_word, re_pass, fname, lname, school, email, studentid)
+
 		if not p_word == re_pass:
 			error_message = "Passwords do not match"
 			return render(request, 'userauth/register.html', {
 				'username': u_name, 'fname':fname, 'lname':lname, 'school':school, 'email':email, 'studentid':studentid, 'errormsg':error_message
 				})
+        if error_fields:
+            error_message = error_fields
+            return render(request, 'userauth/register.html', {
+                'username': u_name, 'fname':fname, 'lname':lname, 'school':school, 'email':email, 'studentid':studentid, 'errormsg':error_message
+                })
+
 		# regex = re.compile(".+?@.+?\..+")
 		# if not regex.search(email):
 		# 	error_message = "Incorrect Email Format"
