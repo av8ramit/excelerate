@@ -35,8 +35,7 @@
         padding:0;
         height:100%;
 /*        background-color: #333;
-        color: #fff;*/
-        text-shadow: 0 1px 3px rgba(0,0,0,.5);
+        color: #000;*/
         background-image: url("{% static 'mysite/css/images/overlay.svg' %}");
         background-size: 100%;
       }
@@ -73,7 +72,7 @@
       <div id="wrapper">
 
         <div id="head">
-          <h2 class="lead" style="color:#fff">Please register with your given ID number</h2>
+          <h2 class="lead" style="color:#000">Please register with your given ID number</h2>
         </div> <!-- end of head -->
 
         <div id="formarea">
@@ -82,41 +81,41 @@
             <form role="form" action="{% url 'login:send' %}" method="post">{% csrf_token %}
               <table>
                 <tr>
-                  <td align="left"><label style="color:#fff" for="fname">First Name: &nbsp;&nbsp;</label></td>
+                  <td align="left"><label style="color:#000" for="fname">First Name: &nbsp;&nbsp;</label></td>
                   <td align="right"><input required type="text" name="fname" id="fname" value="{% block fname %}{% endblock %}" placeholder="First Name"></td><br>
                 </tr>
                 <tr>
-                  <td align="left"><label style="color:#fff" for="lname">Last Name:  &nbsp;&nbsp;</label></td>
+                  <td align="left"><label style="color:#000" for="lname">Last Name:  &nbsp;&nbsp;</label></td>
                   <td align="right"><input required type="text" name="lname" id="lname" value="{% block lname %}{% endblock %}" placeholder="Last Name"><br></td>
                 </tr>
                 <tr>
-                  <td align="left"><label style="color:#fff" for="school">School Name:  &nbsp;&nbsp;</label></td>
+                  <td align="left"><label style="color:#000" for="school">School Name:  &nbsp;&nbsp;</label></td>
                   <td align="right"><input required type="text" name="school" id="school" value="{% block school %}{% endblock %}" placeholder="School Name"></td><br>
                 </tr>
                 <tr>
-                  <td align="left"><label style="color:#fff" for="email">E-mail:  &nbsp;&nbsp;</label></td>
+                  <td align="left"><label style="color:#000" for="email">E-mail:  &nbsp;&nbsp;</label></td>
                   <td align="right"><input required type="email" name="email" id="email" value="{% block email %}{% endblock %}" placeholder="E-mail"><br></td>
                 </tr>
                 <tr>
-                  <td align="left"><label style="color:#fff" for="studentid">Student ID:  &nbsp;&nbsp;</label></td>
+                  <td align="left"><label style="color:#000" for="studentid">Student ID:  &nbsp;&nbsp;</label></td>
                   <td align="right"><input required type="text" name="studentid" id="studentid" value="{% block studentid %}{% endblock %}" placeholder="Elite Student ID"><br></td>
                 </tr>
                 <tr>
-                  <td align="left"><label style="color:#fff" for="username">Username:  &nbsp;&nbsp;</label></td>
+                  <td align="left"><label style="color:#000" for="username">Username:  &nbsp;&nbsp;</label></td>
                   <td align="right"><input required type="text" name="username" id="username" value="{% block username %}{% endblock %}" placeholder="Username"><br></td>
                 </tr>
                 <tr>
-                  <td align="left"><label style="color:#fff" for="password">Password:  &nbsp;&nbsp;</label></td>
+                  <td align="left"><label style="color:#000" for="password">Password:  &nbsp;&nbsp;</label></td>
                   <td align="right"><input required type="password" name="password" id="password" value="{% block password %}{% endblock %}" placeholder="Password"><br></td>
                 </tr>          
                 <tr>
-                  <td align="left"><label style="color:#fff" for="retypepassword">Confirm Password: &nbsp;&nbsp;</label></td>
+                  <td align="left"><label style="color:#000" for="retypepassword">Confirm Password: &nbsp;&nbsp;</label></td>
                   <td align="right"><input required type="password" name="retypepassword" id="retypepassword" value="{% block retypepassword %}{% endblock %}" placeholder="Confirm Password" onblur="confirmPass()"/><br></tr>
                 </tr>
               </table>
               <br><button style="text-align:center" class="btn btn-sm btn-success" type="submit" id="submit">Register</button>
             </form>
-            <br><p><font color="#fff">Go back to <a href="{% url 'login:front' %}">login</a> page</font></p>
+            <br><p><font color="#000">Go back to <a href="{% url 'login:front' %}">login</a> page</font></p>
           </center>
         </div> <!-- end of formarea -->
         <br>
@@ -124,11 +123,11 @@
         <div id="foot">
            <footer>
             <center>
-              <p><FONT size="3" color="#fff">Score reports and Analysis Provided by <a href="http://www.exceleratetestprep.com/">Excelerate Test Prep &copy;</a>.</p>
+              <p><FONT size="3" color="#000">Score reports and Analysis Provided by <a href="http://www.exceleratetestprep.com/">Excelerate Test Prep &copy;</a>.</p>
                 <a href="http://www.exceleratetestprep.com/#!about/cgvz">About Us</a> |
                 <a href="http://www.exceleratetestprep.com/#!support/c3vn">Contact Us</a> |
                 <a href="http://www.exceleratetestprep.com/#!services/c1739">Services</a>
-              <p><FONT color="white" size="2" >Excelerate Test Prep © 2014</FONT></p>
+              <p><FONT color="#000" size="2" >Excelerate Test Prep © 2014</FONT></p>
             </center>
           </footer>
         </div><!-- end of foot -->
