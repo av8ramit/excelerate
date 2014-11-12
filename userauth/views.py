@@ -210,9 +210,11 @@ def upload_file(request):
         if form.is_valid():
             handle_uploaded_file(request.user, request.FILES['file'])
             console.process_commands('grade ' + request.FILES['file'].name)
+            console.process_commands('save')
+            return render(request, 'web/' + request.user.username + '/grade.html')
         else:
             form = UploadFileForm()
-        return HttpResponse('YAY')
+        return response
 
 def download_file(request):
     with open('Users/web/' + request.user.username + '/uploaded_file.csv', 'rb') as f:
@@ -239,4 +241,13 @@ def download_test(request):
             writer.writerow(row)
         return response
     return HttpResponse('File did not open')
+
+def simple_report(request):
+    console.process_commands("simple_report")
+    return render(request, 'web/' + request.user.username + '/simple_report.html')
+
+
+def advanced_report(request):
+    console.process_commands("advanced_report")
+    return render(request, 'web/' + request.user.username + '/advanced_report.html')
 
